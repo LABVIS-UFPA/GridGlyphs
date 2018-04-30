@@ -5,19 +5,12 @@
  */
 package doutorado.tese.visualizacao.glyph;
 
+import java.awt.Graphics;
+
 /**
  *
  * @author Anderson Soares
  */
-public class Glyph {
-     
-    private Glyph glyph;
-
-    public Glyph getGlyph() {
-        return glyph;
-    }
-
-    public void setGlyph(Glyph glyph) {
-        this.glyph = glyph;
-    }
+public abstract class Glyph {
+    public abstract void paint(Graphics g);
 }

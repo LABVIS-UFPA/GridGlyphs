@@ -217,6 +217,7 @@ public class MainGrid extends javax.swing.JFrame {
                 new MainGrid().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

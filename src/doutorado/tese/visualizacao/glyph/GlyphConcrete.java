@@ -3,14 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package doutorado.tese.visualizacao.glyph.shape;
+package doutorado.tese.visualizacao.glyph;
 
-import doutorado.tese.visualizacao.glyph.Glyph;
+import java.awt.Graphics;
 
 /**
  *
  * @author Anderson Soares
  */
-public class FormaGeometrica extends Glyph{
-    
+public class GlyphConcrete extends Glyph{
+     
+    @Override
+    public void paint(Graphics g) {
+        System.out.println("Desenhar Glyph.");
+    }
 }

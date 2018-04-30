@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package doutorado.tese.visualizacao.glyph.texture;
+package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture;
 
 import doutorado.tese.visualizacao.glyph.Glyph;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.VariavelVisual_Decorator;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -17,19 +18,43 @@ import net.bouthier.treemapAWT.TMPatternFactory;
  *
  * @author Anderson Soares
  */
-public class Textura extends Glyph{
+public class Textura extends VariavelVisual_Decorator {
+
     private int[] xPoints;
     private int[] yPoints;
     private Rectangle rect;
     private String nome;
     TMPatternFactory textura;
 
-    public Textura(Rectangle r, String nome) {
-        this.rect = r;
-        setBounds(this.rect);
-        this.nome = nome;
-        montarRetangulo();
+    public Textura(Glyph absGlyph) {
+        super(absGlyph);
+//        montarRetangulo();
         textura = TMPatternFactory.getInstance();
+    }
+
+//    public Textura(Rectangle r, String nome) {
+//        this.rect = r;
+//        setBounds(this.rect);
+//        this.nome = nome;
+//        montarRetangulo();
+//        textura = TMPatternFactory.getInstance();
+//    }
+    @Override
+    public void paint(Graphics g) {
+        drawTextura(g);
+        glyph.paint(g);
+    }
+
+    private void drawTextura(Graphics g) {
+        System.out.println("Desenhando textura.");
+//        Graphics2D g2d = (Graphics2D) g;
+//
+//        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//        g2d.setPaint(textura.get(nome));
+//
+//        g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
+//        g2d.setColor(Color.BLACK);
+//        g2d.drawRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
     }
 
     public void setBounds(Rectangle rect) {
@@ -42,18 +67,6 @@ public class Textura extends Glyph{
 
     public int getArea() {
         return xPoints[1] * yPoints[1];
-    }
-
-    public void paint(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        g2d.setPaint(textura.get(nome));
-        
-        g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
-        g2d.setColor(Color.BLACK);
-        g2d.drawRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
     }
 
     private void verificarRetangulo(int[] point) {

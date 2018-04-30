@@ -5,6 +5,13 @@
  */
 package doutorado.tese.visualizacao.grid;
 
+import doutorado.tese.visualizacao.glyph.Glyph;
+import doutorado.tese.visualizacao.glyph.GlyphConcrete;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.numbers.Numeral;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -25,7 +32,6 @@ public class Grid extends JPanel {
     private int quantHoriz;
 
     public Grid() {
-//        setOpaque(false);
         addHierarchyBoundsListener(new HierarchyBoundsAdapter() {
             @Override
             public void ancestorResized(HierarchyEvent e) {
@@ -39,17 +45,25 @@ public class Grid extends JPanel {
     }
 
     public Grid(Rectangle rect) {
-        this.rect = rect; 
-       setLayout(new GroupLayout(this));
+        this.rect = rect;
+        setLayout(new GroupLayout(this));
         setBounds(this.rect);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
-        System.out.println(this.getParent().getPreferredSize());
+        super.paintComponent(g);
         this.setPreferredSize(this.getParent().getPreferredSize());
         this.setSize(this.getParent().getSize());
+        //testeando patter decorator
+        Glyph glyph = new Textura(new FormaGeometrica(new Cor(new Letra(new Numeral(new GlyphConcrete()))), null, GeometryFactory.FORMAS.GLYPH_FORMAS.HEXAGONO));
+        glyph.paint(g);
+
+        Glyph glyph2 = new Cor(new FormaGeometrica(new GlyphConcrete(), null, GeometryFactory.FORMAS.GLYPH_FORMAS.CRUZ));
+        glyph2.paint(g);
+
+        Glyph glyph3 = new FormaGeometrica(new Textura(new Cor(new GlyphConcrete())), rect, GeometryFactory.FORMAS.GLYPH_FORMAS.LOSANGO);
+        glyph3.paint(g);
     }
 
     @Override
@@ -57,8 +71,10 @@ public class Grid extends JPanel {
         super.paint(g);
 
 //        System.out.println("quantHoriz: " + getQuantHoriz());
-        if (getSize().width == 0 || getSize().height == 0 || getQuantVert() == 0) return;
-        
+        if (getSize().width == 0 || getSize().height == 0 || getQuantVert() == 0) {
+            return;
+        }
+
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setColor(Color.decode("#f0f8ff"));
         g2d.fillRect(0, 0, getSize().width, getSize().height);
