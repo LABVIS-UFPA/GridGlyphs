@@ -70,7 +70,6 @@ public class Grid extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
 
-//        System.out.println("quantHoriz: " + getQuantHoriz());
         if (getSize().width == 0 || getSize().height == 0 || getQuantVert() == 0) {
             return;
         }
