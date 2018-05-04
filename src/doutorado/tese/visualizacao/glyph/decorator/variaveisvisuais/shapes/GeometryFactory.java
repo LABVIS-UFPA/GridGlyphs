@@ -13,54 +13,54 @@ import java.awt.Rectangle;
  * @author Gustavo
  */
 public class GeometryFactory {
-    
-    public static final class FORMAS{
-        
-        public enum GLYPH_FORMAS{
-            CRUZ        ("CRUZ"),
-            ELLIPSE     ("ELLIPSE"),
-            HEXAGONO    ("HEXAGONO"),
-            LOSANGO     ("LOSANGO"),
-            PENTAGONO   ("PENTAGONO"),
-            TRAPEZIO    ("TRAPEZIO"),
-            RETANGULO   ("RETANGULO"),
-            CIRCULO     ("CIRCULO");
-            
+
+    public static final class FORMAS {
+
+        public enum GLYPH_FORMAS {
+            CRUZ("CRUZ"),
+            ELLIPSE("ELLIPSE"),
+            HEXAGONO("HEXAGONO"),
+            LOSANGO("LOSANGO"),
+            PENTAGONO("PENTAGONO"),
+            TRAPEZIO("TRAPEZIO"),
+            RETANGULO("RETANGULO"),
+            CIRCULO("CIRCULO");
+
             private final String nome;
-            
-            GLYPH_FORMAS(String nome){
+
+            GLYPH_FORMAS(String nome) {
                 this.nome = nome;
             }
-            
-            private String nome(){
+
+            private String nome() {
                 return nome;
             }
-        }        
+        }
     }
 
     private GeometryFactory() {
     }
-    
-    public static FormaGeometrica create(Glyph absGlyph, Rectangle bounds, FORMAS.GLYPH_FORMAS forma){
+
+    public static DrawBehavior create(Glyph absGlyph, Rectangle bounds, FORMAS.GLYPH_FORMAS forma) {
         switch (forma) {
             case RETANGULO:
-                return new Retangulo(absGlyph, bounds);
+                return new Retangulo(bounds);
             case CRUZ:
-                return new Cruz(absGlyph, bounds);
+                return new Cruz(bounds);
             case ELLIPSE:
-                return new Ellipse(absGlyph, bounds);
+                return new Ellipse(bounds);
             case CIRCULO:
-                return new Circulo(absGlyph, bounds);
+                return new Circulo(bounds);
             case HEXAGONO:
-                return new Hexagono(absGlyph, bounds);
+                return new Hexagono(bounds);
             case LOSANGO:
-                return new Losango(absGlyph, bounds);
+                return new Losango(bounds);
             case PENTAGONO:
-                return new Pentagono(absGlyph, bounds);
+                return new Pentagono(bounds);
             case TRAPEZIO:
-                return new Trapezio(absGlyph, bounds);
+                return new Trapezio(bounds);
             default:
                 return null;
         }
-    }    
+    }
 }

@@ -1,6 +1,5 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
-import doutorado.tese.visualizacao.glyph.Glyph;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -12,33 +11,36 @@ import java.awt.RenderingHints;
  * 
  * @author Anderson Soares
  */
-public class Circulo extends FormaGeometrica{
+public class Circulo implements DrawBehavior{
 
     private int[] xPoints;
     private int[] yPoints;
     private int numberColor;
     private Color cor;
+    private Rectangle bounds;
 
-    public Circulo(Glyph absGlyph, Rectangle r) {
-        super(absGlyph, r, GeometryFactory.FORMAS.GLYPH_FORMAS.CIRCULO);
+    public Circulo(Rectangle bounds) {
+//        super(r, GeometryFactory.FORMAS.GLYPH_FORMAS.CIRCULO);
 //        this.cor = cor;
-//        montarCirculo();
+        this.bounds = bounds;
+        montarCirculo();
     }
 
+    @Override
     public void paint(Graphics g) {
         drawFormaGeometrica(g);
-        glyph.paint(g);
+//        glyphChild.paint(g);
     }
     
     private void drawFormaGeometrica(Graphics g) {
         System.out.println("Desenhando forma geometrica = CIRCULO");
-//        Graphics2D g2d = (Graphics2D) g;
-//        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//        
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        
 //        g2d.setColor(cor);
-//        g2d.fillOval(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
-//        g2d.setColor(Color.BLACK);
-//        g2d.drawOval(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
+        g2d.fillOval(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
+        g2d.setColor(Color.BLACK);
+        g2d.drawOval(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
     }
 
     //função para deixar os glyphs quadrados
@@ -76,6 +78,10 @@ public class Circulo extends FormaGeometrica{
         yPoints[1] = (int) (height);
     }
 
+    public Rectangle getBounds(){
+        return this.bounds;
+    }
+    
     @Override
     public int getArea() {
         return xPoints[1]*yPoints[1];

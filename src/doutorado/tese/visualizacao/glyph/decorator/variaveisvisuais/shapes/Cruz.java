@@ -5,7 +5,6 @@
  */
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
-import doutorado.tese.visualizacao.glyph.Glyph;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -13,34 +12,36 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 
-public class Cruz extends FormaGeometrica {
+public class Cruz implements DrawBehavior {
 
     private int[] xPoints;
     private int[] yPoints;
     private Polygon p;
+    private Rectangle bounds;
 
-    public Cruz(Glyph absGlyph, Rectangle r) {
-        super(absGlyph, r, GeometryFactory.FORMAS.GLYPH_FORMAS.CRUZ);
-//        montarCruz();
+    public Cruz(Rectangle bounds) {
+//        super(r, GeometryFactory.FORMAS.GLYPH_FORMAS.CRUZ);
+        montarCruz();
+        this.bounds = bounds;
     }
 
     @Override
     public void paint(Graphics g) {
         drawFormaGeometrica(g);
-        glyph.paint(g);
+//        glyphChild.paint(g);
     }
 
     private void drawFormaGeometrica(Graphics g) {
         System.out.println("Desenhando forma geometrica = Cruz");
-//        Graphics2D g2d = (Graphics2D) g;
-//        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//
-//        g2d.setPaint(Color.BLACK);
-//
-//        g2d.setColor(Color.white);
-//        g2d.fillPolygon(p);
-//        g2d.setColor(Color.BLACK);
-//        g2d.drawPolygon(p);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        g2d.setPaint(Color.BLACK);
+
+        g2d.setColor(Color.white);
+        g2d.fillPolygon(p);
+        g2d.setColor(Color.BLACK);
+        g2d.drawPolygon(p);
     }
 
     //função para deixar os glyphs quadrados
@@ -132,7 +133,11 @@ public class Cruz extends FormaGeometrica {
         p.addPoint(xPoints[11], yPoints[11]);
 
     }
-
+    
+    public Rectangle getBounds(){
+        return this.bounds;
+    }
+    
     @Override
     public int getArea() {
         return (xPoints[8] - xPoints[2]) * (yPoints[5] - yPoints[0]);

@@ -5,57 +5,60 @@
  */
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
-import doutorado.tese.visualizacao.glyph.Glyph;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 
-public class Hexagono extends FormaGeometrica{
+public class Hexagono implements DrawBehavior {
 
     private int[] xPoints;
     private int[] yPoints;
     private Polygon p;
-   
-    public Hexagono(Glyph absGlyph, Rectangle r) {
-        super(absGlyph, r, GeometryFactory.FORMAS.GLYPH_FORMAS.HEXAGONO);
-//        montarHexagono();
+    private Rectangle bounds;
+
+    public Hexagono(Rectangle bounds) {
+//        super(r, GeometryFactory.FORMAS.GLYPH_FORMAS.HEXAGONO);
+        this.bounds = bounds;
+        montarHexagono();
     }
 
     @Override
     public void paint(Graphics g) {
         drawFormaGeometrica(g);
-        glyph.paint(g);
+//        glyphChild.paint(g);
     }
 
     private void drawFormaGeometrica(Graphics g) {
         System.out.println("Desenhando forma geometrica = Hexagono");
-//        Graphics2D g2d = (Graphics2D) g;
-//        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//        g2d.setPaint(Color.BLACK);        
-//
-//        g2d.setColor(Color.white);
-//        g2d.fillPolygon(p);
-//        g2d.setColor(Color.BLACK);
-//        g2d.drawPolygon(p);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setPaint(Color.BLACK);
+
+        g2d.setColor(Color.white);
+        g2d.fillPolygon(p);
+        g2d.setColor(Color.BLACK);
+        g2d.drawPolygon(p);
     }
-    
-    private int[] verificarRetangulo(int [] point){
-        if(point[0] > point[1]){
+
+    private int[] verificarRetangulo(int[] point) {
+        if (point[0] > point[1]) {
             point[0] = point[1];
-           return point;
-        }
-        else if(point[0] < point[1]){
+            return point;
+        } else if (point[0] < point[1]) {
             point[1] = point[0];
-           return point;
+            return point;
         }
         return null;
     }
-    
+
     private void montarHexagono() {
         int[] points = new int[2];
 
         Rectangle rect = getBounds();
-        
+
         points[0] = rect.width;
         points[1] = rect.height;
 
@@ -69,31 +72,30 @@ public class Hexagono extends FormaGeometrica{
         int innerWidth = width / 4;
         int innerHeight = height / 4;
 
-        halfWidth += rect.x + rect.width/2 - width/2;
-        halfHeight += rect.y + rect.height/2 - height/2;
+        halfWidth += rect.x + rect.width / 2 - width / 2;
+        halfHeight += rect.y + rect.height / 2 - height / 2;
 
-       
         xPoints = new int[6];
         yPoints = new int[6];
 
         xPoints[0] = halfWidth;
-        yPoints[0] = (int) Math.round(rect.y + rect.height/2 - height/2);
+        yPoints[0] = (int) Math.round(rect.y + rect.height / 2 - height / 2);
 
-        xPoints[1] = (int) Math.round(rect.x + rect.width/2 - width/2);
+        xPoints[1] = (int) Math.round(rect.x + rect.width / 2 - width / 2);
         yPoints[1] = halfHeight - innerHeight;
 
-        xPoints[2] = (int) Math.round(rect.x + rect.width/2 - width/2);
+        xPoints[2] = (int) Math.round(rect.x + rect.width / 2 - width / 2);
         yPoints[2] = halfHeight + innerHeight;
 
         xPoints[3] = halfWidth;
-        yPoints[3] = height + (int) Math.round(rect.y + rect.height/2 - height/2);
+        yPoints[3] = height + (int) Math.round(rect.y + rect.height / 2 - height / 2);
 
-        xPoints[4] = width + (int) Math.round(rect.x + rect.width/2 - width/2);
+        xPoints[4] = width + (int) Math.round(rect.x + rect.width / 2 - width / 2);
         yPoints[4] = halfHeight + innerHeight;
 
-        xPoints[5] = width + (int) Math.round(rect.x + rect.width/2 - width/2);
+        xPoints[5] = width + (int) Math.round(rect.x + rect.width / 2 - width / 2);
         yPoints[5] = halfHeight - innerHeight;
-        
+
         p = new Polygon();
 
         p.addPoint(xPoints[0], yPoints[0]);
@@ -104,8 +106,12 @@ public class Hexagono extends FormaGeometrica{
         p.addPoint(xPoints[5], yPoints[5]);
     }
 
+    public Rectangle getBounds() {
+        return this.bounds;
+    }
+
     @Override
     public int getArea() {
-        return (xPoints[4]-xPoints[1])*(yPoints[3]-yPoints[0]);
+        return (xPoints[4] - xPoints[1]) * (yPoints[3] - yPoints[0]);
     }
 }

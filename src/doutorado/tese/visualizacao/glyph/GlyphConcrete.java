@@ -6,15 +6,28 @@
 package doutorado.tese.visualizacao.glyph;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 /**
  *
  * @author Anderson Soares
  */
-public class GlyphConcrete extends Glyph{
-     
+public class GlyphConcrete extends Glyph {
+
+    private Rectangle bounds;
+
     @Override
-    public void paint(Graphics g) {
-        System.out.println("Desenhar Glyph.");
+    public void setBounds(Rectangle bounds) {
+        this.bounds = bounds;
+        if (this.glyphChild != null) {
+            this.glyphChild.setBounds(new Rectangle(bounds));
+        }
     }
+
+    @Override
+    public Rectangle getBounds() {
+        return bounds;
+    }
+
+
 }

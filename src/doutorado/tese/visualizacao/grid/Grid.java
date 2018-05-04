@@ -10,14 +10,15 @@ import doutorado.tese.visualizacao.glyph.GlyphConcrete;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.numbers.Numeral;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.FormaGeometrica;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.HierarchyBoundsAdapter;
 import java.awt.event.HierarchyEvent;
+import java.util.ArrayList;
 import javax.swing.GroupLayout;
 import javax.swing.JPanel;
 
@@ -30,6 +31,7 @@ public class Grid extends JPanel {
     private Rectangle rect;
     private int quantVert;
     private int quantHoriz;
+    private Glyph[][] matrizGlyph;
 
     public Grid() {
         addHierarchyBoundsListener(new HierarchyBoundsAdapter() {
@@ -55,15 +57,6 @@ public class Grid extends JPanel {
         super.paintComponent(g);
         this.setPreferredSize(this.getParent().getPreferredSize());
         this.setSize(this.getParent().getSize());
-        //testeando patter decorator
-        Glyph glyph = new Textura(new FormaGeometrica(new Cor(new Letra(new Numeral(new GlyphConcrete()))), null, GeometryFactory.FORMAS.GLYPH_FORMAS.HEXAGONO));
-        glyph.paint(g);
-
-        Glyph glyph2 = new Cor(new FormaGeometrica(new GlyphConcrete(), null, GeometryFactory.FORMAS.GLYPH_FORMAS.CRUZ));
-        glyph2.paint(g);
-
-        Glyph glyph3 = new FormaGeometrica(new Textura(new Cor(new GlyphConcrete())), rect, GeometryFactory.FORMAS.GLYPH_FORMAS.LOSANGO);
-        glyph3.paint(g);
     }
 
     @Override
@@ -73,21 +66,34 @@ public class Grid extends JPanel {
         if (getSize().width == 0 || getSize().height == 0 || getQuantVert() == 0) {
             return;
         }
-
+        
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setColor(Color.decode("#f0f8ff"));
         g2d.fillRect(0, 0, getSize().width, getSize().height);
 
         g2d.setColor(Color.red);
+        matrizGlyph = loadMatrizGlyphs();
+        
         int size = Math.min(getWidth() - 4, getHeight() - 4) / getQuantVert();
-//        System.out.println("size:" + size);
 
-        for (int x = 0; x < getQuantHoriz() * size; x += size) {
-            for (int y = 0; y < getQuantVert() * size; y += size) {
+        for (int i = 0; i < getQuantHoriz(); i++) {
+            for (int j = 0; j < getQuantVert(); j++) {
+                int x = i * size;
+                int y = j * size;
                 g2d.drawRect(x, y, size, size);
+                matrizGlyph[i][j].setBounds(new Rectangle(x, y, size, size));
             }
         }
-//        System.out.println("size:" + size);
+        
+//        for (int x = 0; x < getQuantHoriz(); x++) {
+//            for (int y = 0; y < getQuantVert(); y++) {
+//                matrizGlyph[x][y].paint(g);
+//                ArrayList<Glyph> list = new ArrayList<>();
+//                matrizGlyph[x][y].getChildren(list);
+//                System.out.println("++++++++++" + list);
+//            }
+//        }
+
         g2d.dispose();
     }
 
@@ -107,4 +113,69 @@ public class Grid extends JPanel {
         this.quantHoriz = quantHoriz;
     }
 
+    public void setCofig(String[] itensHierarquia) {
+        for (int i = 0; i < getQuantHoriz(); i++) {
+            for (int j = 0; j < getQuantVert(); j++) {
+                matrizGlyph[i][j].killAllChild();
+                for (String itensHierarquia1 : itensHierarquia) {
+                    matrizGlyph[i][j].appendChild(configLayers(itensHierarquia1));
+                    ArrayList<Glyph> list = new ArrayList<>();
+                    matrizGlyph[i][j].getChildren(list);
+                    System.out.println("++++++++++" + list);
+                }
+                matrizGlyph[i][j].setBounds(matrizGlyph[i][j].getBounds());
+            }
+        }
+    }
+
+    public Glyph configLayers(String classe) {
+        Glyph glyph = null;
+        switch (classe) {
+            case "Color":
+                glyph = new Cor();
+//                System.out.println("criou cor");
+                break;
+            case "Letter":
+                glyph = new Letra();
+//                System.out.println("criou letra");
+                break;
+            case "Number":
+                glyph = new Numeral();
+//                System.out.println("criou numero");
+                break;
+            case "Shape":
+                glyph = new FormaGeometrica();
+//                System.out.println("criou forma");
+                break;
+            case "Texture":
+                glyph = new Textura();
+                break;
+            default:
+                throw new AssertionError();
+        }
+        return glyph;
+    }
+
+    public void putGlyphs() {
+        Graphics2D g2d = (Graphics2D) this.getGraphics().create();
+                
+        for (int x = 0; x < getQuantHoriz(); x++) {
+            for (int y = 0; y < getQuantVert(); y++) {
+                matrizGlyph[x][y].paint(g2d);
+                ArrayList<Glyph> list = new ArrayList<>();
+                matrizGlyph[x][y].getChildren(list);
+                System.out.println("++++++++++" + list);
+            }
+        }
+    }
+
+    private Glyph[][] loadMatrizGlyphs() {
+        matrizGlyph = new Glyph[getQuantHoriz()][getQuantVert()];
+        for (int i = 0; i < getQuantHoriz(); i++) {
+            for (int j = 0; j < getQuantVert(); j++) {
+                matrizGlyph[i][j] = new GlyphConcrete();
+            }
+        }
+        return matrizGlyph;
+    }
 }

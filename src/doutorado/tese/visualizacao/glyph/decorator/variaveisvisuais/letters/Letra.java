@@ -6,26 +6,21 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters;
 
 import doutorado.tese.visualizacao.glyph.Glyph;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.VariavelVisual_Decorator;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.RenderingHints;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineMetrics;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
 
 /**
  * O objeto Letra ocupa 20% do item do treemap
  *
  * @author Anderson Soares
  */
-public class Letra extends VariavelVisual_Decorator {
+public class Letra extends Glyph {
 
 //    private int[] xPoints;
 //    private int[] yPoints;
@@ -37,14 +32,10 @@ public class Letra extends VariavelVisual_Decorator {
     private boolean legenda;
     private boolean ativo;
 
-    public Letra(Glyph absGlyph) {
-        super(absGlyph);
-    }
-
     @Override
     public void paint(Graphics g) {
         drawLetra(g);
-        glyph.paint(g);
+        glyphChild.paint(g);
     }
 
     private void drawLetra(Graphics g) {

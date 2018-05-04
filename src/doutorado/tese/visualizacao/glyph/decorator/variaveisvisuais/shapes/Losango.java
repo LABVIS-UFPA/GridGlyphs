@@ -13,50 +13,49 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 
-
-public class Losango extends FormaGeometrica{
+public class Losango implements DrawBehavior {
 
     private int[] xPoints;
     private int[] yPoints;
+    private Rectangle bounds;
 
-
-    public Losango(Glyph absGlyph, Rectangle r) {
-        super(absGlyph, r, GeometryFactory.FORMAS.GLYPH_FORMAS.LOSANGO);
-//        montarLosango();
+    public Losango(Rectangle bounds) {
+//        super(r, GeometryFactory.FORMAS.GLYPH_FORMAS.LOSANGO);
+        this.bounds = bounds;
+        montarLosango();
     }
 
     @Override
     public void paint(Graphics g) {
         drawFormaGeometrica(g);
-        glyph.paint(g);
+//        glyphChild.paint(g);
     }
-    
+
     private void drawFormaGeometrica(Graphics g) {
         System.out.println("Desenhando forma geometrica = Pentagono");
-//        Graphics2D g2d = (Graphics2D) g;
-//        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);        
-//        g2d.setPaint(Color.BLACK);
-//        
-//        Polygon p = new Polygon();        
-//        p.addPoint(xPoints[0], yPoints[0]);
-//        p.addPoint(xPoints[1], yPoints[1]);
-//        p.addPoint(xPoints[2], yPoints[2]);
-//        p.addPoint(xPoints[3], yPoints[3]);
-//
-//        g2d.setColor(Color.white);
-//        g2d.fillPolygon(p);
-//        g2d.setColor(Color.BLACK);
-//        g2d.drawPolygon(p);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);        
+        g2d.setPaint(Color.BLACK);
+        
+        Polygon p = new Polygon();        
+        p.addPoint(xPoints[0], yPoints[0]);
+        p.addPoint(xPoints[1], yPoints[1]);
+        p.addPoint(xPoints[2], yPoints[2]);
+        p.addPoint(xPoints[3], yPoints[3]);
+
+        g2d.setColor(Color.white);
+        g2d.fillPolygon(p);
+        g2d.setColor(Color.BLACK);
+        g2d.drawPolygon(p);
     }
-    
-    private int[] verificarRetangulo(int [] point){
-        if(point[0] > point[1]){
+
+    private int[] verificarRetangulo(int[] point) {
+        if (point[0] > point[1]) {
             point[0] = point[1];
-           return point;
-        }
-        else if(point[0] < point[1]){
+            return point;
+        } else if (point[0] < point[1]) {
             point[1] = point[0];
-           return point;
+            return point;
         }
         return null;
     }
@@ -95,15 +94,14 @@ public class Losango extends FormaGeometrica{
 
         xPoints[3] = halfWidth + innerWidth;
         yPoints[3] = halfHeight;
-
-        
-
-     
-
     }
-
+    
+    public Rectangle getBounds(){
+        return this.bounds;
+    }
+    
     @Override
     public int getArea() {
-        return (yPoints[2]-yPoints[0])*(xPoints[3]-xPoints[1]);
+        return (yPoints[2] - yPoints[0]) * (xPoints[3] - xPoints[1]);
     }
 }

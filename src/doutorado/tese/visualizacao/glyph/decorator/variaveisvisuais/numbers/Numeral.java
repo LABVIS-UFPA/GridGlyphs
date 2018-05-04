@@ -6,25 +6,20 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.numbers;
 
 import doutorado.tese.visualizacao.glyph.Glyph;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.VariavelVisual_Decorator;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.RenderingHints;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineMetrics;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
 
 /**
  * O objeto Numeral ocupa 20% do item do treemap
  * @author Anderson Soares
  */
-public class Numeral extends VariavelVisual_Decorator{
+public class Numeral extends Glyph{
 
     private int[] xPoints;
     private int[] yPoints;
@@ -36,15 +31,11 @@ public class Numeral extends VariavelVisual_Decorator{
     
     private int trueHeight;
     private int trueWidth;
-
-    public Numeral(Glyph absGlyph) {
-        super(absGlyph);
-    }
-
+    
     @Override
     public void paint(Graphics g) {
         drawNumero(g);
-        glyph.paint(g);
+        glyphChild.paint(g);
     }
     
     private void drawNumero(Graphics g){

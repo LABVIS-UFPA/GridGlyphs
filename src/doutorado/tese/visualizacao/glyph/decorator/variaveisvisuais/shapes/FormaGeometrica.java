@@ -6,7 +6,6 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
 import doutorado.tese.visualizacao.glyph.Glyph;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.VariavelVisual_Decorator;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -15,23 +14,30 @@ import java.awt.Rectangle;
  *
  * @author Anderson Soares
  */
-public class FormaGeometrica extends VariavelVisual_Decorator {
+public class FormaGeometrica extends Glyph {
 
     private Rectangle bounds;
     private GeometryFactory.FORMAS.GLYPH_FORMAS name;
     private Color cor;
+    private DrawBehavior drawBehavior;
 
-    public FormaGeometrica(Glyph absGlyph, Rectangle bounds, GeometryFactory.FORMAS.GLYPH_FORMAS nomeForma) {
-        super(absGlyph);
-        this.bounds = bounds;
-        this.name = nomeForma;
-    }
+    public FormaGeometrica() {
+        this.drawBehavior = new DrawBehavior() {
+            @Override
+            public void paint(Graphics g) {
+                
+            }
 
+            @Override
+            public int getArea() {
+                return 0;
+            }
+        };
+    }    
+    
     @Override
     public void paint(Graphics g) {
-        System.out.print("Desenhando forma geometrica ...");
-        FormaGeometrica forma = GeometryFactory.create(glyph, bounds, name);
-        forma.paint(g);
+        drawBehavior.paint(g);
     }
 
     public void setColor(Color cor) {
@@ -42,6 +48,7 @@ public class FormaGeometrica extends VariavelVisual_Decorator {
         return bounds;
     }
 
+    @Override
     public void setBounds(Rectangle bounds) {
         this.bounds = bounds;
     }
@@ -49,7 +56,13 @@ public class FormaGeometrica extends VariavelVisual_Decorator {
     public int getArea() {
         return 0;
     }
+    
+    public DrawBehavior getDrawBehavior() {
+        return drawBehavior;
+    }
 
-//    @Override
-//    public abstract void paint(Graphics g);
+    public void setDrawBehavior(DrawBehavior drawBehavior) {
+        this.drawBehavior = drawBehavior;
+    }
+
 }

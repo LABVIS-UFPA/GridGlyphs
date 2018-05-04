@@ -6,7 +6,6 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture;
 
 import doutorado.tese.visualizacao.glyph.Glyph;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.VariavelVisual_Decorator;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -18,20 +17,16 @@ import net.bouthier.treemapAWT.TMPatternFactory;
  *
  * @author Anderson Soares
  */
-public class Textura extends VariavelVisual_Decorator {
+public class Textura extends Glyph {
 
     private int[] xPoints;
     private int[] yPoints;
-    private Rectangle rect;
     private String nome;
     TMPatternFactory textura;
 
-    public Textura(Glyph absGlyph) {
-        super(absGlyph);
-//        montarRetangulo();
+    public Textura() {
         textura = TMPatternFactory.getInstance();
     }
-
 //    public Textura(Rectangle r, String nome) {
 //        this.rect = r;
 //        setBounds(this.rect);
@@ -42,27 +37,25 @@ public class Textura extends VariavelVisual_Decorator {
     @Override
     public void paint(Graphics g) {
         drawTextura(g);
-        glyph.paint(g);
+        super.paint(g);
     }
 
     private void drawTextura(Graphics g) {
         System.out.println("Desenhando textura.");
-//        Graphics2D g2d = (Graphics2D) g;
-//
-//        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//        g2d.setPaint(textura.get(nome));
-//
-//        g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
-//        g2d.setColor(Color.BLACK);
-//        g2d.drawRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
+        Graphics2D g2d = (Graphics2D) g;
+
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setPaint(textura.get("PATTERN_HORIZONTAL"));
+
+        g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
+        g2d.setColor(Color.BLACK);
+        g2d.drawRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
     }
 
+    @Override
     public void setBounds(Rectangle rect) {
-        this.rect = rect;
-    }
-
-    public Rectangle getBounds() {
-        return rect;
+        super.setBounds(rect);
+        montarRetangulo();
     }
 
     public int getArea() {
@@ -80,8 +73,8 @@ public class Textura extends VariavelVisual_Decorator {
     private void montarRetangulo() {
         int[] points = new int[2];
 
-        points[0] = rect.width;
-        points[1] = rect.height;
+        points[0] = getBounds().width;
+        points[1] = getBounds().height;
 
         verificarRetangulo(points);
 
@@ -91,8 +84,8 @@ public class Textura extends VariavelVisual_Decorator {
         xPoints = new int[2];
         yPoints = new int[2];
 
-        xPoints[0] = rect.x + rect.width / 2 - width / 2;
-        yPoints[0] = rect.y + rect.height / 2 - height / 2;
+        xPoints[0] = getBounds().x + getBounds().width / 2 - width / 2;
+        yPoints[0] = getBounds().y + getBounds().height / 2 - height / 2;
 
         xPoints[1] = width;
         yPoints[1] = height;

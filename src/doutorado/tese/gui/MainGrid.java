@@ -5,6 +5,14 @@
  */
 package doutorado.tese.gui;
 
+import doutorado.tese.visualizacao.glyph.Glyph;
+import doutorado.tese.visualizacao.glyph.GlyphConcrete;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.numbers.Numeral;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.FormaGeometrica;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.GeometryFactory;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
 import doutorado.tese.visualizacao.grid.Grid;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -108,7 +116,7 @@ public class MainGrid extends javax.swing.JFrame {
         painelEsquerda.setLayout(painelEsquerdaLayout);
         painelEsquerdaLayout.setHorizontalGroup(
             painelEsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1164, Short.MAX_VALUE)
+            .addGap(0, 958, Short.MAX_VALUE)
         );
         painelEsquerdaLayout.setVerticalGroup(
             painelEsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -478,7 +486,7 @@ public class MainGrid extends javax.swing.JFrame {
                 }
             }
         }
-        loadVariaveisEscolhidasList(novaLista.toArray(), varVisuaisEscolidasList);        
+        loadVariaveisEscolhidasList(novaLista.toArray(), varVisuaisEscolidasList);
     }//GEN-LAST:event_cimaButtonActionPerformed
 
     private void baixoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_baixoButtonActionPerformed
@@ -505,6 +513,12 @@ public class MainGrid extends javax.swing.JFrame {
 
     private void botaoConfiVarVisuaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfiVarVisuaisActionPerformed
         String[] itensHierarquia = parseListString2Array(varVisuaisEscolidasList.getModel());
+
+        gridPanel.setCofig(itensHierarquia);
+        
+        gridPanel.putGlyphs();
+        
+//        gridPanel.repaint();
         System.out.println(Arrays.toString(itensHierarquia));
     }//GEN-LAST:event_botaoConfiVarVisuaisActionPerformed
 
@@ -541,7 +555,7 @@ public class MainGrid extends javax.swing.JFrame {
                 new MainGrid().setVisible(true);
             }
         });
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -597,18 +611,18 @@ public class MainGrid extends javax.swing.JFrame {
         }
         gridPanel.repaint();
     }
-    
+
     private void loadVariaveisEscolhidasList(Object[] objs, JList<String> jList) {
         DefaultComboBoxModel model = new DefaultComboBoxModel(objs);
         jList.setModel(model);
     }
-    
+
     private void loadItensVarVisuais(Object[] objs) {
         DefaultComboBoxModel model = new DefaultComboBoxModel(objs);
         varVisuaisList.setModel(model);
         varVisuaisList.setEnabled(true);
     }
-    
+
     public String[] parseListString2Array(ListModel<String> lista) {
         String[] convertida = new String[lista.getSize()];
         for (int i = 0; i < convertida.length; i++) {
