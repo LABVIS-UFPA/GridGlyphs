@@ -72,13 +72,13 @@ public class Grid extends JPanel {
         g2d.fillRect(0, 0, getSize().width, getSize().height);
 
         g2d.setColor(Color.red);
-        matrizGlyph = loadMatrizGlyphs();
         
         int size = Math.min(getWidth() - 4, getHeight() - 4) / getQuantVert();
 
         for (int i = 0; i < getQuantHoriz(); i++) {
             for (int j = 0; j < getQuantVert(); j++) {
                 int x = i * size;
+                
                 int y = j * size;
                 g2d.drawRect(x, y, size, size);
                 matrizGlyph[i][j].setBounds(new Rectangle(x, y, size, size));
@@ -167,7 +167,7 @@ public class Grid extends JPanel {
         }
     }
 
-    private Glyph[][] loadMatrizGlyphs() {
+    public Glyph[][] loadMatrizGlyphs() {
         matrizGlyph = new Glyph[getQuantHoriz()][getQuantVert()];
         for (int i = 0; i < getQuantHoriz(); i++) {
             for (int j = 0; j < getQuantVert(); j++) {

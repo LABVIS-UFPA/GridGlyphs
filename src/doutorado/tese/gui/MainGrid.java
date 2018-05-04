@@ -610,6 +610,7 @@ public class MainGrid extends javax.swing.JFrame {
             gridPanel.setQuantVert(5);
             gridPanel.setQuantHoriz(10);
         }
+        gridPanel.loadMatrizGlyphs();
         gridPanel.repaint();
     }
 
