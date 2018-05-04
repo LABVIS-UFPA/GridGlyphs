@@ -54,6 +54,7 @@ public class MainGrid extends javax.swing.JFrame {
 //        painelEsquerda.add(layerPane);
         gridPanel = new Grid();
         painelEsquerda.add(gridPanel);
+        gridPanel.setDoubleBuffered(true);
 
 //        gridPanel = new Grid(painelEsquerda.getBounds());
 //        painelEsquerda.add(gridPanel);

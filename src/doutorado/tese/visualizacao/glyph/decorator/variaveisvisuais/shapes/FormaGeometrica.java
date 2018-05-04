@@ -38,6 +38,7 @@ public class FormaGeometrica extends Glyph {
     @Override
     public void paint(Graphics g) {
         drawBehavior.paint(g);
+        super.paint(g);
     }
 
     public void setColor(Color cor) {

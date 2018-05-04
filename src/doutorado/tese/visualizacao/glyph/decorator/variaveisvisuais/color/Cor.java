@@ -6,8 +6,11 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color;
 
 import doutorado.tese.visualizacao.glyph.Glyph;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 
 /**
  *
@@ -24,7 +27,11 @@ public class Cor extends Glyph{
     }
     
     private void drawCor(Graphics g){
-        System.out.println("Desenhando cor.");
+        Graphics2D g2d = (Graphics2D) g;
+
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setColor(Color.GREEN);
+        g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
     }
     
     @Override

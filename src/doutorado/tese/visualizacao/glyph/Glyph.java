@@ -20,7 +20,6 @@ public abstract class Glyph {
     private float pectSobreposicao = 0.8f;
 
     public void paint(Graphics g){
-        System.out.println("aqui agora" + glyphChild);
         if(glyphChild != null){
             glyphChild.paint(g);
         }

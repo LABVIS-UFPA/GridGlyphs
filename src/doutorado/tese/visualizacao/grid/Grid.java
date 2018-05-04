@@ -121,7 +121,6 @@ public class Grid extends JPanel {
                     matrizGlyph[i][j].appendChild(configLayers(itensHierarquia1));
                     ArrayList<Glyph> list = new ArrayList<>();
                     matrizGlyph[i][j].getChildren(list);
-                    System.out.println("++++++++++" + list);
                 }
                 matrizGlyph[i][j].setBounds(matrizGlyph[i][j].getBounds());
             }
@@ -164,7 +163,6 @@ public class Grid extends JPanel {
                 matrizGlyph[x][y].paint(g2d);
                 ArrayList<Glyph> list = new ArrayList<>();
                 matrizGlyph[x][y].getChildren(list);
-                System.out.println("++++++++++" + list);
             }
         }
     }

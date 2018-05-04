@@ -41,7 +41,6 @@ public class Textura extends Glyph {
     }
 
     private void drawTextura(Graphics g) {
-        System.out.println("Desenhando textura.");
         Graphics2D g2d = (Graphics2D) g;
 
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
