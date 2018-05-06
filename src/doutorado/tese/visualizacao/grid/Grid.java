@@ -77,23 +77,12 @@ public class Grid extends JPanel {
 
         for (int i = 0; i < getQuantHoriz(); i++) {
             for (int j = 0; j < getQuantVert(); j++) {
-                int x = i * size;
-                
+                int x = i * size;                
                 int y = j * size;
                 g2d.drawRect(x, y, size, size);
                 matrizGlyph[i][j].setBounds(new Rectangle(x, y, size, size));
             }
         }
-        
-//        for (int x = 0; x < getQuantHoriz(); x++) {
-//            for (int y = 0; y < getQuantVert(); y++) {
-//                matrizGlyph[x][y].paint(g);
-//                ArrayList<Glyph> list = new ArrayList<>();
-//                matrizGlyph[x][y].getChildren(list);
-//                System.out.println("++++++++++" + list);
-//            }
-//        }
-
         g2d.dispose();
     }
 
@@ -139,7 +128,7 @@ public class Grid extends JPanel {
 //                System.out.println("criou letra");
                 break;
             case "Number":
-                glyph = new Numeral();
+//                glyph = new Numeral();
 //                System.out.println("criou numero");
                 break;
             case "Shape":

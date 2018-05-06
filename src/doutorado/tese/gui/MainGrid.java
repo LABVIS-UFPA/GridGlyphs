@@ -407,20 +407,14 @@ public class MainGrid extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void radio24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio24ActionPerformed
-//        radio28.setSelected(false);
-//        radio32.setSelected(false);
         chamaGrid();
     }//GEN-LAST:event_radio24ActionPerformed
 
     private void radio28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio28ActionPerformed
-//        radio24.setSelected(false);
-//        radio32.setSelected(false);
         chamaGrid();
     }//GEN-LAST:event_radio28ActionPerformed
 
     private void radio32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio32ActionPerformed
-//        radio24.setSelected(false);
-//        radio28.setSelected(false);
         chamaGrid();
     }//GEN-LAST:event_radio32ActionPerformed
 
@@ -516,9 +510,9 @@ public class MainGrid extends javax.swing.JFrame {
         String[] itensHierarquia = parseListString2Array(varVisuaisEscolidasList.getModel());
 
         gridPanel.setCofig(itensHierarquia);
-        
+
         gridPanel.putGlyphs();
-        
+
 //        gridPanel.repaint();
         System.out.println(Arrays.toString(itensHierarquia));
     }//GEN-LAST:event_botaoConfiVarVisuaisActionPerformed

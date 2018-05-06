@@ -48,8 +48,8 @@ public class Cor extends Glyph{
 
         verificarRetangulo(points);
 
-        int width = Math.round(points[0] * 0.8f);
-        int height = Math.round(points[1] * 0.8f);
+        int width = Math.round(points[0] * 0.95f);
+        int height = Math.round(points[1] * 0.95f);
 
         xPoints = new int[2];
         yPoints = new int[2];

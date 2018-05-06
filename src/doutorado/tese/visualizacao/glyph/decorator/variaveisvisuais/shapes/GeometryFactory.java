@@ -46,7 +46,7 @@ public class GeometryFactory {
             case RETANGULO:
                 return new Retangulo(bounds);
             case CRUZ:
-                return new Cruz(bounds);
+                return new Cruz();
             case ELLIPSE:
                 return new Ellipse(bounds);
             case CIRCULO:

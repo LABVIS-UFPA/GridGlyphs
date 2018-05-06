@@ -6,14 +6,18 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.numbers;
 
 import doutorado.tese.visualizacao.glyph.Glyph;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineMetrics;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 
 /**
  * O objeto Numeral ocupa 20% do item do treemap
@@ -35,82 +39,85 @@ public class Numeral extends Glyph{
     @Override
     public void paint(Graphics g) {
         drawNumero(g);
-        glyphChild.paint(g);
+        super.paint(g);
     }
     
     private void drawNumero(Graphics g){
         System.out.println("Desenhando Numero");
-//        Graphics2D g2d = (Graphics2D) g;
-//
-//        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//
-//        montarRetangulo();
-//               
-//        int[] points = new int[2];
-//        points[0] = rect.width;
-//        points[1] = rect.height;
-//
-//        verificarRetangulo(points);
-//
-//        int width = points[0];
-//        int height = points[1];
-//        width = width / 13;
-//        height = height / 13;
-//        int area = width + height;
-//
-//        //verificação para não desenhar letras muito pequenas
-//        //if (area > 5) {
-//            g2d.setFont(getFonte());
-//            //calculode centro das letras
-//            Point p = calcularFontMetrics(g);
-//            int x = p.x;
-//            int y = p.y;
-//
-//            FontMetrics fm = g.getFontMetrics();
-//            Rectangle2D rect = fm.getStringBounds(getNumero(), g);
-//
-//            g.setColor(Color.white);
-//            g.fillRect(x, y - fm.getAscent(), (int) rect.getWidth(), (int) rect.getHeight());
-//            g2d.setColor(Color.black);
-//            if (!legenda) {
-//                g.drawRect(x, y - fm.getAscent(), (int) rect.getWidth(), (int) rect.getHeight());
-//            }
-//
-//            g2d.drawString(getNumero(), x, y);
-//        //}
-//        if (legenda) {
-//            montarRetangulo();
-//            g2d.setColor(Color.black);
-//            g2d.setFont(getFonte());
-//            g2d.drawString(getNumero(), p.x, p.y);
-//        }
-    }
-//    public Numeral(Rectangle r, String numero, boolean legenda) {
-//        this.rect = r;
-//        setBounds(this.rect);
-//        this.numero = numero;
-//        this.legenda = legenda;
-//        //verifica o quadrado interno
-//        int[] points = new int[2];
-//        points[0] = rect.width;
-//        points[1] = rect.height;
-//
-//        verificarRetangulo(points);
-//
-//        int width = points[0];
-//        int height = points[1];
-//        width = width / 13;
-//        height = height / 13;
-//        int area = width + height;
-//
-//        fonte = new Font("Arial black", Font.PLAIN, area);
-//        calcularFontMetrics(fonte);
-//    }
+        Graphics2D g2d = (Graphics2D) g;
 
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        montarRetangulo();
+               
+        int[] points = new int[2];
+        points[0] = rect.width;
+        points[1] = rect.height;
+
+        verificarRetangulo(points);
+
+        int width = points[0];
+        int height = points[1];
+        width = width / 13;
+        height = height / 13;
+        int area = width + height;
+
+        //verificação para não desenhar letras muito pequenas
+        //if (area > 5) {
+            g2d.setFont(getFonte());
+            //calculode centro das letras
+            Point p = calcularFontMetrics(g);
+            int x = p.x;
+            int y = p.y;
+
+            FontMetrics fm = g.getFontMetrics();
+            Rectangle2D rect = fm.getStringBounds(getNumero(), g);
+
+            g.setColor(Color.white);
+            g.fillRect(x, y - fm.getAscent(), (int) rect.getWidth(), (int) rect.getHeight());
+            g2d.setColor(Color.black);
+            if (!legenda) {
+                g.drawRect(x, y - fm.getAscent(), (int) rect.getWidth(), (int) rect.getHeight());
+            }
+
+            g2d.drawString(getNumero(), x, y);
+        //}
+        if (legenda) {
+            montarRetangulo();
+            g2d.setColor(Color.black);
+            g2d.setFont(getFonte());
+            g2d.drawString(getNumero(), p.x, p.y);
+        }
+    }
+    public Numeral(Rectangle r, String numero, boolean legenda) {
+        this.rect = r;
+        setBounds(this.rect);
+        this.numero = numero;
+        this.legenda = legenda;
+        //verifica o quadrado interno
+        int[] points = new int[2];
+        points[0] = rect.width;
+        points[1] = rect.height;
+
+        verificarRetangulo(points);
+
+        int width = points[0];
+        int height = points[1];
+        width = width / 13;
+        height = height / 13;
+        int area = width + height;
+
+        fonte = new Font("Arial black", Font.PLAIN, area);
+        calcularFontMetrics(fonte);
+    }
+
+    @Override
     public void setBounds(Rectangle rect) {
-        this.rect = rect;
+        super.setBounds(rect);
+        montarRetangulo();
     }
 
+    @Override
     public Rectangle getBounds() {
         return rect;
     }
@@ -171,8 +178,8 @@ public class Numeral extends Glyph{
 
         verificarRetangulo(points);
 
-        int width = (int) Math.round(points[0] * 0.2);
-        int height = (int) Math.round(points[1] * 0.2);
+        int width = (int) Math.round(points[0] * 0.95);
+        int height = (int) Math.round(points[1] * 0.95);
 
         xPoints = new int[2];
         yPoints = new int[2];

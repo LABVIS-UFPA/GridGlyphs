@@ -22,17 +22,18 @@ public class FormaGeometrica extends Glyph {
     private DrawBehavior drawBehavior;
 
     public FormaGeometrica() {
-        this.drawBehavior = new DrawBehavior() {
-            @Override
-            public void paint(Graphics g) {
-                
-            }
-
-            @Override
-            public int getArea() {
-                return 0;
-            }
-        };
+//        this.drawBehavior = new DrawBehavior() {
+//            @Override
+//            public void paint(Graphics g) {
+//                
+//            }
+//
+//            @Override
+//            public int getArea() {
+//                return 0;
+//            }
+//        };
+        this.drawBehavior = new Cruz();
     }    
     
     @Override
@@ -45,13 +46,15 @@ public class FormaGeometrica extends Glyph {
         this.cor = cor;
     }
 
+    @Override
     public Rectangle getBounds() {
         return bounds;
     }
 
     @Override
     public void setBounds(Rectangle bounds) {
-        this.bounds = bounds;
+        super.setBounds(bounds);
+        ((Cruz)drawBehavior).setBounds(bounds);
     }
 
     public int getArea() {

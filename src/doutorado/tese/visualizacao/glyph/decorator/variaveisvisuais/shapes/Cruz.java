@@ -19,10 +19,10 @@ public class Cruz implements DrawBehavior {
     private Polygon p;
     private Rectangle bounds;
 
-    public Cruz(Rectangle bounds) {
+    public Cruz() {
 //        super(r, GeometryFactory.FORMAS.GLYPH_FORMAS.CRUZ);
-        montarCruz();
-        this.bounds = bounds;
+        
+//        this.bounds = bounds;
     }
 
     @Override
@@ -62,13 +62,13 @@ public class Cruz implements DrawBehavior {
 
         Rectangle rect = getBounds();
 
-        points[0] = rect.width;
-        points[1] = rect.height;
+        points[0] = getBounds().width;
+        points[1] = getBounds().height;
 
         verificarRetangulo(points);
 
-        int width = (int) Math.round(points[0] * 0.5);
-        int height = (int) Math.round(points[1] * 0.5);
+        int width = (int) Math.round(points[0] * 0.95f);
+        int height = (int) Math.round(points[1] * 0.95f);
 
         int halfWidth = width / 2;
         int halfHeight = height / 2;
@@ -136,6 +136,11 @@ public class Cruz implements DrawBehavior {
     
     public Rectangle getBounds(){
         return this.bounds;
+    }
+    
+    public void setBounds(Rectangle bounds){
+        this.bounds = bounds;
+        montarCruz();
     }
     
     @Override
