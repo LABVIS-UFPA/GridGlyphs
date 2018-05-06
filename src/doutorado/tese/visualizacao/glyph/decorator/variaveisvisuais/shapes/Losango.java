@@ -19,20 +19,15 @@ public class Losango implements DrawBehavior {
     private int[] yPoints;
     private Rectangle bounds;
 
-    public Losango(Rectangle bounds) {
-//        super(r, GeometryFactory.FORMAS.GLYPH_FORMAS.LOSANGO);
-        this.bounds = bounds;
-        montarLosango();
+    public Losango() {
     }
 
     @Override
     public void paint(Graphics g) {
         drawFormaGeometrica(g);
-//        glyphChild.paint(g);
     }
 
     private void drawFormaGeometrica(Graphics g) {
-        System.out.println("Desenhando forma geometrica = Pentagono");
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);        
         g2d.setPaint(Color.BLACK);
@@ -66,10 +61,10 @@ public class Losango implements DrawBehavior {
         points[0] = getBounds().width;
         points[1] = getBounds().height;
 
-        verificarRetangulo(points);
+//        verificarRetangulo(points);
 
-        int width = (int) Math.round(points[0] * 0.5);
-        int height = (int) Math.round(points[1] * 0.5);
+        int width = (int) Math.round(points[0] * 0.95);
+        int height = (int) Math.round(points[1] * 0.95);
 
 
         int halfWidth = width / 2;
@@ -98,6 +93,12 @@ public class Losango implements DrawBehavior {
     
     public Rectangle getBounds(){
         return this.bounds;
+    }
+    
+    @Override
+    public void setBounds(Rectangle bounds){
+        this.bounds = bounds;
+        montarLosango();
     }
     
     @Override

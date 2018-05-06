@@ -20,26 +20,20 @@ public class Pentagono implements DrawBehavior {
     private Polygon p;
     private Rectangle bounds;
 
-    public Pentagono(Rectangle bounds) {
-//        super(r, GeometryFactory.FORMAS.GLYPH_FORMAS.PENTAGONO);
-        this.bounds = bounds;
-        montarPentagono();
+    public Pentagono() {
     }
 
     @Override
     public void paint(Graphics g) {
         drawFormaGeometrica(g);
-//        glyphChild.paint(g);
     }
 
     private void drawFormaGeometrica(Graphics g) {
-        System.out.println("Desenhando forma geometrica = Pentagono");
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2d.setPaint(Color.BLACK);
 
-        //p.translate(xy[0], xy[1]);
         g2d.setColor(Color.white);
         g2d.fillPolygon(p);
         g2d.setColor(Color.BLACK);
@@ -65,10 +59,10 @@ public class Pentagono implements DrawBehavior {
         points[0] = rect.width;
         points[1] = rect.height;
 
-        verificarRetangulo(points);
+//        verificarRetangulo(points);
 
-        int width = (int) Math.round(points[0] * 0.5);
-        int height = (int) Math.round(points[1] * 0.5);
+        int width = (int) Math.round(points[0] * 0.95);
+        int height = (int) Math.round(points[1] * 0.95);
 
         int halfWidth = width / 2;
         int halfHeight = height / 2;
@@ -105,8 +99,14 @@ public class Pentagono implements DrawBehavior {
         p.addPoint(xPoints[4], yPoints[4]);
     }
 
-    public Rectangle getBounds() {
+    public Rectangle getBounds(){
         return this.bounds;
+    }
+    
+    @Override
+    public void setBounds(Rectangle bounds){
+        this.bounds = bounds;
+        montarPentagono();
     }
 
     @Override

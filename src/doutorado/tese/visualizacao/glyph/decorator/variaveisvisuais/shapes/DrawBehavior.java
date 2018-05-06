@@ -6,6 +6,7 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 /**
  *
@@ -15,4 +16,6 @@ public interface DrawBehavior {
     public void paint(Graphics g);
     
     public int getArea();
+
+    public void setBounds(Rectangle bounds);
 }

@@ -19,25 +19,19 @@ public class Circulo implements DrawBehavior{
     private Color cor;
     private Rectangle bounds;
 
-    public Circulo(Rectangle bounds) {
-//        super(r, GeometryFactory.FORMAS.GLYPH_FORMAS.CIRCULO);
-//        this.cor = cor;
-        this.bounds = bounds;
-        montarCirculo();
+    public Circulo() {
     }
 
     @Override
     public void paint(Graphics g) {
         drawFormaGeometrica(g);
-//        glyphChild.paint(g);
     }
     
     private void drawFormaGeometrica(Graphics g) {
-        System.out.println("Desenhando forma geometrica = CIRCULO");
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
-//        g2d.setColor(cor);
+        g2d.setColor(Color.WHITE);
         g2d.fillOval(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
         g2d.setColor(Color.BLACK);
         g2d.drawOval(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
@@ -63,10 +57,10 @@ public class Circulo implements DrawBehavior{
         points[0] = rect.width;
         points[1] = rect.height;
 
-        verificarRetangulo(points);
+//        verificarRetangulo(points);
 
-        int width = (int) Math.round(points[0] * 0.65);
-        int height = (int) Math.round(points[1] * 0.65);
+        int width = (int) Math.round(points[0] * 0.95);
+        int height = (int) Math.round(points[1] * 0.95);
 
         xPoints = new int[2];
         yPoints = new int[2];
@@ -80,6 +74,12 @@ public class Circulo implements DrawBehavior{
 
     public Rectangle getBounds(){
         return this.bounds;
+    }
+    
+    @Override
+    public void setBounds(Rectangle bounds){
+        this.bounds = bounds;
+        montarCirculo();
     }
     
     @Override

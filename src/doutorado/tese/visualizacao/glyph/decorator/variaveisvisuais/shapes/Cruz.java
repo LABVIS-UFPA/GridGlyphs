@@ -28,11 +28,9 @@ public class Cruz implements DrawBehavior {
     @Override
     public void paint(Graphics g) {
         drawFormaGeometrica(g);
-//        glyphChild.paint(g);
     }
 
     private void drawFormaGeometrica(Graphics g) {
-        System.out.println("Desenhando forma geometrica = Cruz");
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -65,7 +63,7 @@ public class Cruz implements DrawBehavior {
         points[0] = getBounds().width;
         points[1] = getBounds().height;
 
-        verificarRetangulo(points);
+//        verificarRetangulo(points);
 
         int width = (int) Math.round(points[0] * 0.95f);
         int height = (int) Math.round(points[1] * 0.95f);
@@ -138,6 +136,7 @@ public class Cruz implements DrawBehavior {
         return this.bounds;
     }
     
+    @Override
     public void setBounds(Rectangle bounds){
         this.bounds = bounds;
         montarCruz();

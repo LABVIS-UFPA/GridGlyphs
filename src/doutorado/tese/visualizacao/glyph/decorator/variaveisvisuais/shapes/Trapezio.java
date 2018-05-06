@@ -20,23 +20,15 @@ public class Trapezio implements DrawBehavior {
     private int[] yPoints;
     private Rectangle bounds;
 
-    public Trapezio(Rectangle bounds) {
-//        super(r, GeometryFactory.FORMAS.GLYPH_FORMAS.TRAPEZIO);
-        this.bounds = bounds;
-        montarTrapezio();
+    public Trapezio() {
     }
 
-//    public Trapezio(Rectangle r) {
-//        super(r, "TRAPEZIO");
-//    }
     @Override
     public void paint(Graphics g) {
         drawFormaGeometrica(g);
-//        glyphChild.paint(g);
     }
 
     private void drawFormaGeometrica(Graphics g) {
-        System.out.println("Desenhando forma geometrica = Trapezio");
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -72,10 +64,10 @@ public class Trapezio implements DrawBehavior {
         points[0] = getBounds().width;
         points[1] = getBounds().height;
 
-        verificarRetangulo(points);
+//        verificarRetangulo(points);
 
-        int width = (int) Math.round(points[0] * 0.46);
-        int height = (int) Math.round(points[1] * 0.46);
+        int width = (int) Math.round(points[0] * 0.95);
+        int height = (int) Math.round(points[1] * 0.95);
 
         int halfWidth = width / 2;
         int halfHeight = height / 2;
@@ -102,8 +94,14 @@ public class Trapezio implements DrawBehavior {
 
     }
 
-    public Rectangle getBounds() {
+    public Rectangle getBounds(){
         return this.bounds;
+    }
+    
+    @Override
+    public void setBounds(Rectangle bounds){
+        this.bounds = bounds;
+        montarTrapezio();
     }
 
     @Override

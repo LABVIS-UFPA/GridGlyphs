@@ -10,7 +10,11 @@ import doutorado.tese.visualizacao.glyph.GlyphConcrete;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.numbers.Numeral;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Circulo;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Cruz;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Ellipse;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.FormaGeometrica;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Trapezio;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -133,6 +137,10 @@ public class Grid extends JPanel {
                 break;
             case "Shape":
                 glyph = new FormaGeometrica();
+                FormaGeometrica forma = (FormaGeometrica) glyph;
+//                forma.setDrawBehavior(new Cruz());
+//                forma.setDrawBehavior(new Ellipse());
+                forma.setDrawBehavior(new Trapezio());
 //                System.out.println("criou forma");
                 break;
             case "Texture":
@@ -154,6 +162,7 @@ public class Grid extends JPanel {
                 matrizGlyph[x][y].getChildren(list);
             }
         }
+        g2d.dispose();
     }
 
     public Glyph[][] loadMatrizGlyphs() {

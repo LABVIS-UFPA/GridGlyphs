@@ -12,20 +12,15 @@ public class Ellipse implements DrawBehavior {
     private int[] yPoints;
     private Rectangle bounds;
 
-    public Ellipse(Rectangle bounds) {
-//        super(r, GeometryFactory.FORMAS.GLYPH_FORMAS.ELLIPSE);
-        this.bounds = bounds;
-        montarEllipse();
+    public Ellipse() {
     }
 
     @Override
     public void paint(Graphics g) {
         drawFormaGeometrica(g);
-//        glyphChild.paint(g);
     }
 
     private void drawFormaGeometrica(Graphics g) {
-        System.out.println("Desenhando forma geometrica = Ellipse");
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                
@@ -53,11 +48,10 @@ public class Ellipse implements DrawBehavior {
         points[0] = getBounds().width;
         points[1] = getBounds().height;
 
-        verificarRetangulo(points);
+//        verificarRetangulo(points);
 
-        int width = (int) Math.round(points[0] * 0.65);
-        int height = (int) Math.round(points[1] * 0.4);
-
+        int width = (int) Math.round(points[0] * 0.95);
+        int height = (int) Math.round(points[1] * 0.5);
 
         xPoints = new int[2];
         yPoints = new int[2];
@@ -71,6 +65,12 @@ public class Ellipse implements DrawBehavior {
     
     public Rectangle getBounds(){
         return this.bounds;
+    }
+    
+    @Override
+    public void setBounds(Rectangle bounds){
+        this.bounds = bounds;
+        montarEllipse();
     }
     
     @Override

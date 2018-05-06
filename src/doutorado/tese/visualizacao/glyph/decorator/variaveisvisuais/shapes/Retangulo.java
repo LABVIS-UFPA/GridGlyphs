@@ -13,21 +13,15 @@ public class Retangulo implements DrawBehavior {
     private Color cor;
     private Rectangle bounds;
 
-    public Retangulo(Rectangle bounds) {
-//        super(r, GeometryFactory.FORMAS.GLYPH_FORMAS.RETANGULO);
-//        this.cor = cor;
-        this.bounds = bounds;
-        montarRetangulo();
+    public Retangulo() {
     }
 
-//    @Override
+    @Override
     public void paint(Graphics g) {
         drawFormaGeometrica(g);
-//        glyphChild.paint(g);
     }
 
     private void drawFormaGeometrica(Graphics g) {
-        System.out.println("Desenhando forma geometrica = Retangulo");
         Graphics2D g2d = (Graphics2D) g;
 
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -60,10 +54,10 @@ public class Retangulo implements DrawBehavior {
         points[0] = rect.width;
         points[1] = rect.height;
 
-        verificarRetangulo(points);
+//        verificarRetangulo(points);
 
-        int width = (int) Math.round(points[0] * 0.4);
-        int height = (int) Math.round(points[1] * 0.4);
+        int width = (int) Math.round(points[0] * 0.95);
+        int height = (int) Math.round(points[1] * 0.95);
         
         xPoints = new int[2];
         yPoints = new int[2];
@@ -77,6 +71,12 @@ public class Retangulo implements DrawBehavior {
     
     public Rectangle getBounds(){
         return this.bounds;
+    }
+    
+    @Override
+    public void setBounds(Rectangle bounds){
+        this.bounds = bounds;
+        montarRetangulo();
     }
     
     @Override

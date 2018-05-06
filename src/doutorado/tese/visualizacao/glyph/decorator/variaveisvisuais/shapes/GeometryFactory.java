@@ -44,21 +44,21 @@ public class GeometryFactory {
     public static DrawBehavior create(Glyph absGlyph, Rectangle bounds, FORMAS.GLYPH_FORMAS forma) {
         switch (forma) {
             case RETANGULO:
-                return new Retangulo(bounds);
+                return new Retangulo();
             case CRUZ:
                 return new Cruz();
             case ELLIPSE:
-                return new Ellipse(bounds);
+                return new Ellipse();
             case CIRCULO:
-                return new Circulo(bounds);
+                return new Circulo();
             case HEXAGONO:
-                return new Hexagono(bounds);
+                return new Hexagono();
             case LOSANGO:
-                return new Losango(bounds);
+                return new Losango();
             case PENTAGONO:
-                return new Pentagono(bounds);
+                return new Pentagono();
             case TRAPEZIO:
-                return new Trapezio(bounds);
+                return new Trapezio();
             default:
                 return null;
         }
