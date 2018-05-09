@@ -20,6 +20,8 @@ import java.awt.Rectangle;
 import java.awt.event.HierarchyBoundsAdapter;
 import java.awt.event.HierarchyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import javax.swing.JPanel;
 
 /**
@@ -32,8 +34,20 @@ public class Grid extends JPanel {
     private int quantVert;
     private int quantHoriz;
     private Glyph[][] matrizGlyph;
+    private Letra letra;
+    private Numeral numero;
+    private boolean decision = false;
+
+    private HashMap<String, Boolean> ativeMap;
 
     public Grid() {
+        ativeMap = new HashMap<>();
+        ativeMap.put("Texture", false);
+        ativeMap.put("Color", false);
+        ativeMap.put("Number", false);
+        ativeMap.put("Letter", false);
+        ativeMap.put("Shape", false);
+        
         addHierarchyBoundsListener(new HierarchyBoundsAdapter() {
             @Override
             public void ancestorResized(HierarchyEvent e) {
@@ -96,11 +110,25 @@ public class Grid extends JPanel {
     }
 
     public void setCofig(String[] itensHierarquia) {
+        ativeMap.put("Number",false);
+        ativeMap.put("Letter",false);
+        ativeMap.put("Shape",false);
+        ativeMap.put("Color",false);
+        ativeMap.put("Texture",false);
+
+        for (String i : itensHierarquia) {
+            ativeMap.put(i, true);
+        }
+                    
         for (int i = 0; i < getQuantHoriz(); i++) {
             for (int j = 0; j < getQuantVert(); j++) {
                 matrizGlyph[i][j].killAllChild();
                 for (String itensHierarquia1 : itensHierarquia) {
-                    matrizGlyph[i][j].appendChild(configLayers(itensHierarquia1));
+                    Glyph configLayers = configLayers(itensHierarquia1);
+
+
+                    matrizGlyph[i][j].appendChild(configLayers);
+
                     ArrayList<Glyph> list = new ArrayList<>();
                     matrizGlyph[i][j].getChildren(list);
                 }
@@ -111,7 +139,6 @@ public class Grid extends JPanel {
 
     public Glyph configLayers(String classe) {
         Glyph glyph = null;
-        
         switch (classe) {
             case "Color":
                 glyph = new Cor();
@@ -120,14 +147,28 @@ public class Grid extends JPanel {
                 break;
             case "Letter":
                 glyph = new Letra();
-                Letra letra = (Letra) glyph;
-                letra.setLetra("A");
-                letra.setAtivo(true);
+                letra = (Letra) glyph;
+                if (numero != null && ativeMap.get("Number")) {
+                    System.out.println((numero != null) + "&" + (numero.isLetraAtiva()));
+                    System.out.println("numero ativo");
+                    letra.setLetra("3A");
+                } else {
+                    letra.setLetra("A");
+        
+                }
                 break;
             case "Number":
                 glyph = new Numeral();
-                Numeral numero = (Numeral) glyph;
-                numero.setNumero("A3");
+                numero = (Numeral) glyph;
+                if (letra != null && ativeMap.get("Letter")) {
+                    System.out.println((letra != null) + "&" + (letra.isAtivo()));
+                    System.out.println("letra ativa");
+                    numero.setNumero("A3");
+                   
+                } else {
+                    numero.setNumero("3");
+               
+                }
                 break;
             case "Shape":
                 glyph = new FormaGeometrica();
@@ -145,6 +186,7 @@ public class Grid extends JPanel {
             default:
                 throw new AssertionError();
         }
+
         return glyph;
     }
 
@@ -167,4 +209,5 @@ public class Grid extends JPanel {
         return matrizGlyph;
     }
 
+ 
 }

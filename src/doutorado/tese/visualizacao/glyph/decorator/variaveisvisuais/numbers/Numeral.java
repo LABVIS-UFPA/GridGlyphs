@@ -25,7 +25,7 @@ public class Numeral extends Glyph {
     private int[] yPoints;
     private String numero;
     private String letra;
-    private boolean letraAtiva;
+    private boolean letraAtiva = false;
     private Font fonte;
     private boolean legenda;
     private int heightNumero;

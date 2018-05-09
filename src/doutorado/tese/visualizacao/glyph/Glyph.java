@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author Anderson Soares
  */
 public abstract class Glyph {
-
+    
     protected Glyph glyphChild;
     private Rectangle bounds;
     private float pectSobreposicao = 0.8f;

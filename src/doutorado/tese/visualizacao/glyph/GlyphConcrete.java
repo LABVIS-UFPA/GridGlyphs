@@ -6,6 +6,7 @@
 package doutorado.tese.visualizacao.glyph;
 
 import java.awt.Rectangle;
+import java.util.HashMap;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.awt.Rectangle;
 public class GlyphConcrete extends Glyph {
 
     private Rectangle bounds;
-
+        
     @Override
     public void setBounds(Rectangle bounds) {
         this.bounds = bounds;

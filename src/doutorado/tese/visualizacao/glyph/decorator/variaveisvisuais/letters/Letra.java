@@ -29,7 +29,7 @@ public class Letra extends Glyph {
     private String letra;
     private Font fonte;
     private boolean legenda;
-    private boolean ativo;
+    private boolean ativo = false;
 
     public Letra() {
     }
