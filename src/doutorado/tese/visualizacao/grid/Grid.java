@@ -111,7 +111,7 @@ public class Grid extends JPanel {
 
     public Glyph configLayers(String classe) {
         Glyph glyph = null;
-        Letra letra = null;
+        
         switch (classe) {
             case "Color":
                 glyph = new Cor();
@@ -120,7 +120,7 @@ public class Grid extends JPanel {
                 break;
             case "Letter":
                 glyph = new Letra();
-                letra = (Letra) glyph;
+                Letra letra = (Letra) glyph;
                 letra.setLetra("A");
                 letra.setAtivo(true);
                 break;

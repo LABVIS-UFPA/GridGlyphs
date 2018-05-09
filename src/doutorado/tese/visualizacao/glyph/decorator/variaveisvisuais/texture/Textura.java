@@ -11,7 +11,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import net.bouthier.treemapAWT.TMPatternFactory;
 
 /**
  *
@@ -27,13 +26,7 @@ public class Textura extends Glyph {
     public Textura() {
         textura = TMPatternFactory.getInstance();
     }
-//    public Textura(Rectangle r, String nome) {
-//        this.rect = r;
-//        setBounds(this.rect);
-//        this.nome = nome;
-//        montarRetangulo();
-//        textura = TMPatternFactory.getInstance();
-//    }
+
     @Override
     public void paint(Graphics g) {
         drawTextura(g);

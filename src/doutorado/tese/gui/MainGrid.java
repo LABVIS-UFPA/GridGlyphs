@@ -5,30 +5,45 @@
  */
 package doutorado.tese.gui;
 
+import doutorado.tese.util.Constantes;
+import doutorado.tese.util.Metadados;
+import doutorado.tese.util.coluna.Coluna;
+import doutorado.tese.util.io.ManipuladorArquivo;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.GeometryFactory;
 import doutorado.tese.visualizacao.grid.Grid;
 import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
+import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
  * @author Anderson Soares
  */
-public class MainGrid extends javax.swing.JFrame {
+public class MainGrid extends javax.swing.JFrame implements PropertyChangeListener {
 
+    private static final Logger LOGGER = LogManager.getLogger(MainGrid.class);
     private Grid gridPanel;
-//    private final JLayeredPane layerPane;
+    private Task task;
+    private ManipuladorArquivo manipulador;
+    private File selectedFile;
 
     /**
      * Creates new form MainGrid
@@ -37,7 +52,8 @@ public class MainGrid extends javax.swing.JFrame {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(MainGrid.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(MainGrid.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.info(Main.class.getName());
         }
         initComponents();
         gridPanel = new Grid();
@@ -55,6 +71,8 @@ public class MainGrid extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        progressBarDialog = new javax.swing.JDialog();
+        progressoBarra = new javax.swing.JProgressBar();
         painelEsquerda = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -80,12 +98,12 @@ public class MainGrid extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jButton6 = new javax.swing.JButton();
+        texturaComboBox = new javax.swing.JComboBox<>();
+        corComboBox = new javax.swing.JComboBox<>();
+        formaComboBox = new javax.swing.JComboBox<>();
+        letraComboBox = new javax.swing.JComboBox<>();
+        numeroComboBox = new javax.swing.JComboBox<>();
+        viewGlyphsButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -95,6 +113,29 @@ public class MainGrid extends javax.swing.JFrame {
         buttonGroup1.add(radio5x10);
         buttonGroup1.add(radio10x20);
         buttonGroup1.add(radio15x24);
+
+        progressBarDialog.setTitle("Please wait..."
+        );
+        progressBarDialog.setResizable(false);
+
+        progressoBarra.setStringPainted(true);
+
+        javax.swing.GroupLayout progressBarDialogLayout = new javax.swing.GroupLayout(progressBarDialog.getContentPane());
+        progressBarDialog.getContentPane().setLayout(progressBarDialogLayout);
+        progressBarDialogLayout.setHorizontalGroup(
+            progressBarDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(progressBarDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(progressoBarra, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        progressBarDialogLayout.setVerticalGroup(
+            progressBarDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(progressBarDialogLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(progressoBarra, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -279,20 +320,20 @@ public class MainGrid extends javax.swing.JFrame {
 
         jLabel7.setText("Number:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
+        texturaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
+        corComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
+        formaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
+        letraComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
+        numeroComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
 
-        jButton6.setText("View Glyphs");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        viewGlyphsButton.setText("View Glyphs");
+        viewGlyphsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                viewGlyphsButtonActionPerformed(evt);
             }
         });
 
@@ -304,7 +345,7 @@ public class MainGrid extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(viewGlyphsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,17 +354,17 @@ public class MainGrid extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, 0, 79, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, 0, 79, Short.MAX_VALUE)
-                            .addComponent(jComboBox3, 0, 79, Short.MAX_VALUE))
+                            .addComponent(texturaComboBox, 0, 79, Short.MAX_VALUE)
+                            .addComponent(corComboBox, 0, 79, Short.MAX_VALUE)
+                            .addComponent(formaComboBox, 0, 79, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(letraComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(numeroComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -332,21 +373,21 @@ public class MainGrid extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(texturaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(letraComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(corComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(numeroComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(formaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton6)
+                .addComponent(viewGlyphsButton)
                 .addContainerGap(52, Short.MAX_VALUE))
         );
 
@@ -554,24 +595,27 @@ public class MainGrid extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
 //            limparResquiciosBasesAnteriores();
 //            checkGlyph.setEnabled(false);
-//            selectedFile = chooser.getSelectedFile();
+            selectedFile = chooser.getSelectedFile();
 //            progressoBarra.setVisible(true);
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 //            logger.info("Arquivo selecionado: " + selectedFile);
             //Instances of javax.swing.SwingWorker are not reusuable, so
             //we create new instances as needed.
-//            task = new Task();
-//            task.addPropertyChangeListener(this);
-//            task.execute();
+            progressBarDialog.setVisible(true);
+            progressBarDialog.setSize(new Dimension(400, 115));
+            progressBarDialog.setLocationRelativeTo(null);
+            task = new Task();
+            task.addPropertyChangeListener(this);
+            task.execute();
         } else {
             JOptionPane.showMessageDialog(null, "The file type can not be read.", "Erro!", JOptionPane.ERROR_MESSAGE);
 //            logger.error("The file type can not be read. - Did it again!");
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void viewGlyphsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewGlyphsButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_viewGlyphsButtonActionPerformed
 
     private void radio5x10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio5x10ActionPerformed
         configGrid();
@@ -629,13 +673,9 @@ public class MainGrid extends javax.swing.JFrame {
     private javax.swing.JButton botaoConfiVarVisuais;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton cimaButton;
+    private javax.swing.JComboBox<String> corComboBox;
+    private javax.swing.JComboBox<String> formaComboBox;
     private javax.swing.JButton inserirButton;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -655,13 +695,19 @@ public class MainGrid extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JComboBox<String> letraComboBox;
+    private javax.swing.JComboBox<String> numeroComboBox;
     private javax.swing.JPanel painelEsquerda;
+    private javax.swing.JDialog progressBarDialog;
+    private javax.swing.JProgressBar progressoBarra;
     private javax.swing.JRadioButton radio10x20;
     private javax.swing.JRadioButton radio15x24;
     private javax.swing.JRadioButton radio5x10;
     private javax.swing.JButton removerButton;
+    private javax.swing.JComboBox<String> texturaComboBox;
     private javax.swing.JList<String> varVisuaisEscolidasList;
     private javax.swing.JList<String> varVisuaisList;
+    private javax.swing.JButton viewGlyphsButton;
     // End of variables declaration//GEN-END:variables
 
     public void configGrid() {
@@ -699,5 +745,222 @@ public class MainGrid extends javax.swing.JFrame {
     private void limparPainelEsquerda() {
         painelEsquerda.removeAll();
         painelEsquerda.repaint();
+    }
+
+    private void loadVariaveisGlyph(Object[] objs, JComboBox<String> atributo) {
+        DefaultComboBoxModel model = new DefaultComboBoxModel(objs);
+        atributo.setModel(model);
+    }
+    
+    /**
+     * Metodo usado para carregar os atributos categoricos nas listas de glyphs
+     *
+     * @param nivel
+     * @return um array contendo os atributos que serao exibidos nas listas dos
+     * glyphs
+     */
+    private Object[] getListaAtributosCategoricos(Constantes.NivelGlyph nivel, boolean glyph) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add(0, "---");
+        list.addAll(analisarAtributosCategoricos(nivel, glyph));
+        return list.toArray();
+    }
+    
+    private List<String> analisarAtributosCategoricos(Constantes.NivelGlyph nivel, boolean glyph) {
+        ArrayList<String> list = new ArrayList<>();
+        switch (nivel) {
+            case NIVEL_1:
+                analisarQuantAtributosCategoricos(list, Constantes.TIPO_TEXTURA);
+                break;
+            case NIVEL_2:
+                if (glyph) {
+                    analisarQuantAtributosCategoricos(list, Constantes.getCorGlyphs());
+                } else {
+                    analisarQuantAtributosCategoricos(list, Constantes.getCor());
+                }
+                break;
+            case NIVEL_3:
+                GeometryFactory.FORMAS.GLYPH_FORMAS[] formas = new GeometryFactory.FORMAS.GLYPH_FORMAS[GeometryFactory.FORMAS.GLYPH_FORMAS.values().length - 1];
+                for (int i = 0; i < formas.length; i++) {
+                    formas[i] = GeometryFactory.FORMAS.GLYPH_FORMAS.values()[i];
+                }
+                analisarQuantAtributosCategoricos(list, formas);
+                break;
+            case NIVEL_4:
+                analisarQuantAtributosCategoricos(list, Constantes.LETRAS_ALFABETO);
+                break;
+            case NIVEL_5:
+                analisarQuantAtributosCategoricos(list, Constantes.NUMEROS);
+                break;
+            default:
+                System.err.println("Nao foi carregar atributos para a dimensão.");
+        }
+        return list;
+    }
+    
+    private List<String> analisarQuantAtributosCategoricos(List<String> list, Object[] obj) {
+        for (String colunasCategorica : getColunasCategoricas()) {
+            Coluna c = ManipuladorArquivo.getColuna(colunasCategorica);
+            int quantDadosDistintos = c.getDadosDistintos().size();
+            if (quantDadosDistintos <= obj.length) {
+                list.add(c.getName());
+            }
+        }
+        return list;
+    }
+    
+    private List<String> getColunasCategoricas() {
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < manipulador.getColunas().length - 1; i++) {
+            Coluna c = manipulador.getColunas()[i];
+            System.out.println("nome: "+c.getName()+"\t desc: "+c.getDescription());
+            if (c.getDescription().equals(Metadados.Descricao.CATEGORICAL)) {
+                list.add(c.getName());
+            }
+        }
+        return list;
+    }
+    
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (Constantes.PROGRESS == evt.getPropertyName()) {
+            int progress = (Integer) evt.getNewValue();
+            progressoBarra.setValue(progress);
+        }
+    }
+
+    class Task extends SwingWorker<Void, Void> {
+
+        /*
+         * Main task. Executed in background thread.
+         */
+        @Override
+        public Void doInBackground() {
+            int progress = 0;
+            //Initialize progress property.
+            setProgress(0);
+            int ordem = 0;
+            while (progress < 100) {
+                //Sleep for up to one second.
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ignore) {
+                    ignore.printStackTrace();
+                }
+                //Make progress.     
+                ordem++;
+                progress = executaTarefas(ordem, progress);
+                setProgress(Math.min(progress, 100));
+            }
+            return null;
+        }
+
+        /*
+         * Executed in event dispatching thread
+         */
+        @Override
+        public void done() {
+            Toolkit.getDefaultToolkit().beep();
+            setCursor(null); //turn off the wait cursor
+            progressBarDialog.dispose();
+        }
+    }
+
+    private int executaTarefas(int ordem, int porcentagem) {
+        int tarefas = 5;
+        switch (ordem) {
+            case 1:
+                LOGGER.info("Leitura do arquivo.");
+                progressoBarra.setToolTipText("Tratando arquivo.");
+                manipulador = new ManipuladorArquivo();
+                manipulador.lerArquivo(selectedFile);
+                porcentagem = (ordem * 100) / tarefas;
+                break;
+            case 2:
+                try {
+                    LOGGER.info("Montando Objetos coluna.");
+                    manipulador.montarColunas(manipulador.getCabecalho(), manipulador.getTipos());
+                    progressoBarra.setToolTipText("Montando colunas.");
+                } catch (Exception e) {
+                    LOGGER.error("Erro montar objetos COLUNA. \n", e);
+                    e.printStackTrace();
+                }
+                porcentagem = (ordem * 100) / tarefas;
+                break;
+            case 3:
+                try {
+                    LOGGER.info("Carregando itens no Grid.");
+                    progressoBarra.setToolTipText("Carregando itens no Grid.");
+                    manipulador.carregarItensGrid();
+                } catch (Throwable e) {
+                    LOGGER.error("Erro ao carregar itens no grid. \n", e);
+                    e.printStackTrace();
+                }
+                porcentagem = (ordem * 100) / tarefas;
+                break;
+            case 4:
+                try {
+                    LOGGER.info("Definindo a descrição das colunas.");
+                    progressoBarra.setToolTipText("Definindo a descrição das colunas.");
+                    for (int i = 0; i < manipulador.getColunas().length; i++) {
+                        Coluna c = manipulador.getColunas()[i];
+                        c.configurarDescricao(manipulador.getDadosColuna(manipulador.getCabecalho()[i]));
+                    }
+                } catch (Exception e) {
+                    LOGGER.error("Erro ao definir a descrição das colunas. \n", e);
+                    e.printStackTrace();
+                }
+                porcentagem = (ordem * 100) / tarefas;
+                break;
+            case 5:
+                LOGGER.info("Preparando variáveis glyphs.");
+                progressoBarra.setToolTipText("Preparando valores para as variáveis glyph.");
+                loadVariaveisGlyph(getListaAtributosCategoricos(Constantes.NivelGlyph.NIVEL_1, true), texturaComboBox);
+                loadVariaveisGlyph(getListaAtributosCategoricos(Constantes.NivelGlyph.NIVEL_2, true), corComboBox);
+                loadVariaveisGlyph(getListaAtributosCategoricos(Constantes.NivelGlyph.NIVEL_3, true), formaComboBox);
+                loadVariaveisGlyph(getListaAtributosCategoricos(Constantes.NivelGlyph.NIVEL_4, true), letraComboBox);
+                loadVariaveisGlyph(getListaAtributosCategoricos(Constantes.NivelGlyph.NIVEL_5, true), numeroComboBox);
+                porcentagem = (ordem * 100) / tarefas;
+                break;
+            case 6:
+//                LOGGER.info("Preparando lista legenda para o treemap.");
+//                loadItensLegendaTreemap();
+//                porcentagem = (ordem * 100) / tarefas;
+//                progressoBarra.setToolTipText("Preparando lista legenda: " + porcentagem + "%");
+                break;
+            case 7:
+                //                LOGGER.info("Preparando lista tamanho para o treemap.");
+//                loadItensTamanhoTreemap();
+//                porcentagem = (ordem * 100) / tarefas;
+//                progressoBarra.setToolTipText("Preparando lista tamanho: " + porcentagem + "%");
+                break;
+            case 8:
+//                LOGGER.info("Preparando variáveis hierarquia para o treemap.");
+//                loadItensHierarquiaTreemap(getColunasCategoricas().toArray());
+//                porcentagem = (ordem * 100) / tarefas;
+//                progressoBarra.setToolTipText("Carregando variáveis hierarquia Treemap: " + porcentagem + "%");
+                break;
+            case 9:
+//                LOGGER.info("Preparando variáveis Cores para o treemap.");
+////                loadItensCoresTreemap(getListaAtributosCategoricos(Constantes.NivelGlyph.NIVEL_2, false));
+//                List<String> coresTreemap = new ArrayList<>();
+//                coresTreemap.add("---");
+//                for (String cabecalho : manipulador.getCabecalho()) {
+//                    coresTreemap.add(cabecalho);
+//                }
+//                loadItensCoresTreemap(coresTreemap.toArray());
+//                porcentagem = (ordem * 100) / tarefas;
+//                progressoBarra.setToolTipText("Carregando variáveis cores Treemap: " + porcentagem + "%");
+                break;
+            case 10:
+//                LOGGER.info("Preparando variáveis para Detalhes sob Demanda para o treemap.");
+//                loadAtributosDetalhes();
+//                porcentagem = (ordem * 100) / tarefas;
+//                progressoBarra.setToolTipText("Carregando variáveis para Detalhes sob Demanda: " + porcentagem + "%");
+                break;
+            default:
+                throw new AssertionError();
+        }
+        return porcentagem;
     }
 }
