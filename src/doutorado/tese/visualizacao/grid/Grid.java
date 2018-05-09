@@ -9,10 +9,6 @@ import doutorado.tese.visualizacao.glyph.Glyph;
 import doutorado.tese.visualizacao.glyph.GlyphConcrete;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.numbers.Numeral;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Circulo;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Cruz;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Ellipse;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.FormaGeometrica;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Trapezio;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
@@ -50,12 +46,6 @@ public class Grid extends JPanel {
         this.rect = new Rectangle(0, 0, 0, 0);
     }
 
-    public Grid(Rectangle rect) {
-        this.rect = rect;
-        setLayout(new GroupLayout(this));
-        setBounds(this.rect);
-    }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -66,25 +56,24 @@ public class Grid extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-
         if (getSize().width == 0 || getSize().height == 0 || getQuantVert() == 0) {
             return;
         }
-        
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setColor(Color.decode("#f0f8ff"));
         g2d.fillRect(0, 0, getSize().width, getSize().height);
-
-        g2d.setColor(Color.red);
-        
-        int size = Math.min(getWidth() - 4, getHeight() - 4) / getQuantVert();
-
+        g2d.setColor(Color.BLACK);        
         for (int i = 0; i < getQuantHoriz(); i++) {
             for (int j = 0; j < getQuantVert(); j++) {
-                int x = i * size;                
-                int y = j * size;
-                g2d.drawRect(x, y, size, size);
-                matrizGlyph[i][j].setBounds(new Rectangle(x, y, size, size));
+                int x = matrizGlyph[i][j].getBounds().x;
+                int y = matrizGlyph[i][j].getBounds().y;
+                int w = matrizGlyph[i][j].getBounds().width;
+                int h = matrizGlyph[i][j].getBounds().height;
+                g2d.drawRect(x, y, w, h);
+                
+                ArrayList<Glyph> list = new ArrayList<>();
+                matrizGlyph[i][j].paint(g2d);
+                matrizGlyph[i][j].getChildren(list);
             }
         }
         g2d.dispose();
@@ -152,26 +141,22 @@ public class Grid extends JPanel {
         return glyph;
     }
 
-    public void putGlyphs() {
-        Graphics2D g2d = (Graphics2D) this.getGraphics().create();
-                
-        for (int x = 0; x < getQuantHoriz(); x++) {
-            for (int y = 0; y < getQuantVert(); y++) {
-                matrizGlyph[x][y].paint(g2d);
-                ArrayList<Glyph> list = new ArrayList<>();
-                matrizGlyph[x][y].getChildren(list);
-            }
-        }
-        g2d.dispose();
-    }
-
+    /**
+     * Metodo que cria a matriz de glyphs e define o tamanho (bounds) dos glyphs
+     * @return matriz de glyphs
+     */
     public Glyph[][] loadMatrizGlyphs() {
+        int size = Math.min(getWidth() - 4, getHeight() - 4) / getQuantVert();
         matrizGlyph = new Glyph[getQuantHoriz()][getQuantVert()];
         for (int i = 0; i < getQuantHoriz(); i++) {
             for (int j = 0; j < getQuantVert(); j++) {
                 matrizGlyph[i][j] = new GlyphConcrete();
+                int x = i * size;
+                int y = j * size;
+                matrizGlyph[i][j].setBounds(new Rectangle(x, y, size, size));
             }
         }
         return matrizGlyph;
     }
+    
 }

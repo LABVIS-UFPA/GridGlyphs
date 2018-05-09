@@ -5,7 +5,6 @@
  */
 package doutorado.tese.visualizacao.glyph;
 
-import java.awt.Graphics;
 import java.awt.Rectangle;
 
 /**
