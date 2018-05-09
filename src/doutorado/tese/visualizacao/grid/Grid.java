@@ -9,6 +9,7 @@ import doutorado.tese.visualizacao.glyph.Glyph;
 import doutorado.tese.visualizacao.glyph.GlyphConcrete;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.numbers.Numeral;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.FormaGeometrica;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Trapezio;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
@@ -19,7 +20,6 @@ import java.awt.Rectangle;
 import java.awt.event.HierarchyBoundsAdapter;
 import java.awt.event.HierarchyEvent;
 import java.util.ArrayList;
-import javax.swing.GroupLayout;
 import javax.swing.JPanel;
 
 /**
@@ -62,7 +62,7 @@ public class Grid extends JPanel {
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setColor(Color.decode("#f0f8ff"));
         g2d.fillRect(0, 0, getSize().width, getSize().height);
-        g2d.setColor(Color.BLACK);        
+        g2d.setColor(Color.BLACK);
         for (int i = 0; i < getQuantHoriz(); i++) {
             for (int j = 0; j < getQuantVert(); j++) {
                 int x = matrizGlyph[i][j].getBounds().x;
@@ -70,7 +70,7 @@ public class Grid extends JPanel {
                 int w = matrizGlyph[i][j].getBounds().width;
                 int h = matrizGlyph[i][j].getBounds().height;
                 g2d.drawRect(x, y, w, h);
-                
+
                 ArrayList<Glyph> list = new ArrayList<>();
                 matrizGlyph[i][j].paint(g2d);
                 matrizGlyph[i][j].getChildren(list);
@@ -111,18 +111,23 @@ public class Grid extends JPanel {
 
     public Glyph configLayers(String classe) {
         Glyph glyph = null;
+        Letra letra = null;
         switch (classe) {
             case "Color":
                 glyph = new Cor();
-//                System.out.println("criou cor");
+                Cor cor = (Cor) glyph;
+                cor.setCor(Color.decode("#3366cc"));
                 break;
             case "Letter":
                 glyph = new Letra();
-//                System.out.println("criou letra");
+                letra = (Letra) glyph;
+                letra.setLetra("A");
+                letra.setAtivo(true);
                 break;
             case "Number":
-//                glyph = new Numeral();
-//                System.out.println("criou numero");
+                glyph = new Numeral();
+                Numeral numero = (Numeral) glyph;
+                numero.setNumero("A3");
                 break;
             case "Shape":
                 glyph = new FormaGeometrica();
@@ -134,6 +139,8 @@ public class Grid extends JPanel {
                 break;
             case "Texture":
                 glyph = new Textura();
+                Textura textura = (Textura) glyph;
+                textura.setNomeTextura("PATTERN_HORIZONTAL");
                 break;
             default:
                 throw new AssertionError();
@@ -143,6 +150,7 @@ public class Grid extends JPanel {
 
     /**
      * Metodo que cria a matriz de glyphs e define o tamanho (bounds) dos glyphs
+     *
      * @return matriz de glyphs
      */
     public Glyph[][] loadMatrizGlyphs() {
@@ -158,5 +166,5 @@ public class Grid extends JPanel {
         }
         return matrizGlyph;
     }
-    
+
 }

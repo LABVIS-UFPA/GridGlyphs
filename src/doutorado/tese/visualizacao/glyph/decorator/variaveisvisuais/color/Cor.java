@@ -19,6 +19,7 @@ import java.awt.RenderingHints;
 public class Cor extends Glyph{
     private int[] xPoints;
     private int[] yPoints;
+    private Color cor;
     
     @Override
     public void paint(Graphics g) {
@@ -30,7 +31,7 @@ public class Cor extends Glyph{
         Graphics2D g2d = (Graphics2D) g;
 
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setColor(Color.GREEN);
+        g2d.setColor(getCor());
         g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
     }
     
@@ -46,8 +47,6 @@ public class Cor extends Glyph{
         points[0] = getBounds().width;
         points[1] = getBounds().height;
 
-        verificarRetangulo(points);
-
         int width = Math.round(points[0] * 0.95f);
         int height = Math.round(points[1] * 0.95f);
 
@@ -60,11 +59,19 @@ public class Cor extends Glyph{
         xPoints[1] = width;
         yPoints[1] = height;
     }
-    private void verificarRetangulo(int[] point) {
-        if (point[0] > point[1]) {
-            point[0] = point[1];
-        } else if (point[0] < point[1]) {
-            point[1] = point[0];
-        }
+
+    /**
+     * @return the cor
+     */
+    public Color getCor() {
+        return cor;
     }
+
+    /**
+     * @param cor the cor to set
+     */
+    public void setCor(Color cor) {
+        this.cor = cor;
+    }
+    
 }

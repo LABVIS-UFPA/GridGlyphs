@@ -21,7 +21,7 @@ public class Textura extends Glyph {
 
     private int[] xPoints;
     private int[] yPoints;
-    private String nome;
+    private String nomeTextura;
     TMPatternFactory textura;
 
     public Textura() {
@@ -44,7 +44,7 @@ public class Textura extends Glyph {
         Graphics2D g2d = (Graphics2D) g;
 
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setPaint(textura.get("PATTERN_HORIZONTAL"));
+        g2d.setPaint(textura.get(getNomeTextura()));
 
         g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
         g2d.setColor(Color.BLACK);
@@ -61,21 +61,11 @@ public class Textura extends Glyph {
         return xPoints[1] * yPoints[1];
     }
 
-    private void verificarRetangulo(int[] point) {
-        if (point[0] > point[1]) {
-            point[0] = point[1];
-        } else if (point[0] < point[1]) {
-            point[1] = point[0];
-        }
-    }
-
     private void montarRetangulo() {
         int[] points = new int[2];
 
         points[0] = getBounds().width;
         points[1] = getBounds().height;
-
-        verificarRetangulo(points);
 
         int width = Math.round(points[0] * 0.95f);
         int height = Math.round(points[1] * 0.95f);
@@ -88,5 +78,19 @@ public class Textura extends Glyph {
 
         xPoints[1] = width;
         yPoints[1] = height;
+    }
+
+    /**
+     * @return the nomeTextura
+     */
+    public String getNomeTextura() {
+        return nomeTextura;
+    }
+
+    /**
+     * @param nomeTextura the nomeTextura to set
+     */
+    public void setNomeTextura(String nomeTextura) {
+        this.nomeTextura = nomeTextura;
     }
 }

@@ -14,112 +14,57 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import java.awt.font.FontRenderContext;
-import java.awt.font.LineMetrics;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
 
 /**
- * O objeto Numeral ocupa 20% do item do treemap
+ *
  * @author Anderson Soares
  */
-public class Numeral extends Glyph{
+public class Numeral extends Glyph {
 
     private int[] xPoints;
     private int[] yPoints;
-    private Rectangle rect;
     private String numero;
+    private String letra;
+    private boolean letraAtiva;
     private Font fonte;
     private boolean legenda;
-    private boolean ativo;
-    
-    private int trueHeight;
-    private int trueWidth;
-    
+    private int heightNumero;
+    private int widthNumero;
+
+    public Numeral() {
+    }
+
     @Override
     public void paint(Graphics g) {
+        int area = getBounds().height * getBounds().width;
+        int fontSize = Math.round(getBounds().width * 0.7f);
+        setFonte(new Font("Arial black", Font.PLAIN, fontSize));
         drawNumero(g);
         super.paint(g);
     }
-    
-    private void drawNumero(Graphics g){
-        System.out.println("Desenhando Numero");
+
+    private void drawNumero(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        montarRetangulo();
-               
-        int[] points = new int[2];
-        points[0] = rect.width;
-        points[1] = rect.height;
+        g2d.setFont(getFonte());
 
-        verificarRetangulo(points);
+        //calculode centro das letras
+        Point centroLetra = calcularFontMetrics(g);
+        int x = centroLetra.x;
+        int y = centroLetra.y;
 
-        int width = points[0];
-        int height = points[1];
-        width = width / 13;
-        height = height / 13;
-        int area = width + height;
+        g.setColor(Color.white);
+        g.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
+        g2d.setColor(Color.black);
+        g2d.drawString(getNumero(), x, y);
 
-        //verificação para não desenhar letras muito pequenas
-        //if (area > 5) {
-            g2d.setFont(getFonte());
-            //calculode centro das letras
-            Point p = calcularFontMetrics(g);
-            int x = p.x;
-            int y = p.y;
-
-            FontMetrics fm = g.getFontMetrics();
-            Rectangle2D rect = fm.getStringBounds(getNumero(), g);
-
-            g.setColor(Color.white);
-            g.fillRect(x, y - fm.getAscent(), (int) rect.getWidth(), (int) rect.getHeight());
-            g2d.setColor(Color.black);
-            if (!legenda) {
-                g.drawRect(x, y - fm.getAscent(), (int) rect.getWidth(), (int) rect.getHeight());
-            }
-
-            g2d.drawString(getNumero(), x, y);
-        //}
         if (legenda) {
-            montarRetangulo();
             g2d.setColor(Color.black);
             g2d.setFont(getFonte());
-            g2d.drawString(getNumero(), p.x, p.y);
+            g2d.drawString(getNumero(), calcularFontMetrics(g).x, calcularFontMetrics(g).y);
         }
-    }
-    public Numeral(Rectangle r, String numero, boolean legenda) {
-        this.rect = r;
-        setBounds(this.rect);
-        this.numero = numero;
-        this.legenda = legenda;
-        //verifica o quadrado interno
-        int[] points = new int[2];
-        points[0] = rect.width;
-        points[1] = rect.height;
-
-        verificarRetangulo(points);
-
-        int width = points[0];
-        int height = points[1];
-        width = width / 13;
-        height = height / 13;
-        int area = width + height;
-
-        fonte = new Font("Arial black", Font.PLAIN, area);
-        calcularFontMetrics(fonte);
-    }
-
-    @Override
-    public void setBounds(Rectangle rect) {
-        super.setBounds(rect);
-        montarRetangulo();
-    }
-
-    @Override
-    public Rectangle getBounds() {
-        return rect;
     }
 
     /**
@@ -129,63 +74,36 @@ public class Numeral extends Glyph{
      */
     private Point calcularFontMetrics(Graphics g) {
         FontMetrics metrics = g.getFontMetrics(getFonte());
-        
-        trueHeight = metrics.getHeight();
-        trueWidth =  metrics.stringWidth(getNumero());
-        
-        int pX = rect.x + (rect.width - trueWidth) / 2;
-        int pY = rect.y + ((rect.height - trueHeight) / 2) + metrics.getAscent();
+
+        heightNumero = metrics.getHeight();
+        widthNumero = metrics.stringWidth(getNumero());
+
+        int pX = getBounds().x + (getBounds().width - widthNumero) / 2;
+        int pY = getBounds().y + ((getBounds().height - heightNumero) / 2) + metrics.getAscent();
 
         return new Point(pX, pY);
     }
     
-    private Point calcularFontMetrics(Font fonte) {
-        LineMetrics metrics = fonte.getLineMetrics(numero, new FontRenderContext(new AffineTransform(), true, true));
-        
-        trueHeight = Math.round(metrics.getHeight());
-        trueWidth = (int)Math.round(fonte.getStringBounds(numero, new FontRenderContext(new AffineTransform(), true, true)).getWidth());
-        
-        int pX = rect.x + (rect.width - trueWidth) / 2;
-        int pY = rect.y + ((rect.height - trueHeight) / 2) + Math.round(metrics.getAscent());
-        
-        return new Point(pX, pY);
-    }
-
-    /**
-     * Função para deixar os glyphs quadrados
-     *
-     * @param width
-     * @param height
-     * @return
-     */
-    private int[] verificarRetangulo(int[] point) {
-        if (point[0] > point[1]) {
-            point[0] = point[1];
-            return point;
-        } else if (point[0] < point[1]) {
-            point[1] = point[0];
-            return point;
-        }
-        return null;
+    @Override
+    public void setBounds(Rectangle rect) {
+        super.setBounds(rect);
+        montarRetangulo();
     }
 
     private void montarRetangulo() {
-
         int[] points = new int[2];
 
-        points[0] = rect.width;
-        points[1] = rect.height;
+        points[0] = getBounds().width;
+        points[1] = getBounds().height;
 
-        verificarRetangulo(points);
-
-        int width = (int) Math.round(points[0] * 0.95);
-        int height = (int) Math.round(points[1] * 0.95);
+        int width = Math.round(points[0] * 0.95f);
+        int height = Math.round(points[1] * 0.95f);
 
         xPoints = new int[2];
         yPoints = new int[2];
 
-        xPoints[0] = (int) (rect.x + (rect.x / 2) - width / 2);
-        yPoints[0] = (int) (rect.y + (rect.y / 2) - height / 2);
+        xPoints[0] = getBounds().x + getBounds().width / 2 - width / 2;
+        yPoints[0] = getBounds().y + getBounds().height / 2 - height / 2;
 
         xPoints[1] = width;
         yPoints[1] = height;
@@ -209,25 +127,53 @@ public class Numeral extends Glyph{
         return numero;
     }
 
-    public void setLetra(String numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
     /**
      * @return the ativo
      */
-    public boolean isAtivo() {
-        return ativo;
-    }
+//    public boolean isAtivo() {
+//        return ativo;
+//    }
 
     /**
      * @param ativo the ativo to set
      */
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
+//    public void setAtivo(boolean ativo) {
+//        this.ativo = ativo;
+//    }
+
+    public int getArea() {
+        return heightNumero * widthNumero;
     }
-    
-    public int getArea(){
-        return trueHeight*trueWidth;
+
+    /**
+     * @return the letra
+     */
+    public String getLetra() {
+        return letra;
+    }
+
+    /**
+     * @param letra the letra to set
+     */
+    public void setLetra(String letra) {
+        this.letra = letra;
+    }
+
+    /**
+     * @return the letraAtiva
+     */
+    public boolean isLetraAtiva() {
+        return letraAtiva;
+    }
+
+    /**
+     * @param letraAtiva the letraAtiva to set
+     */
+    public void setLetraAtiva(boolean letraAtiva) {
+        this.letraAtiva = letraAtiva;
     }
 }

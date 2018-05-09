@@ -5,18 +5,9 @@
  */
 package doutorado.tese.gui;
 
-import doutorado.tese.visualizacao.glyph.Glyph;
-import doutorado.tese.visualizacao.glyph.GlyphConcrete;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.numbers.Numeral;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.FormaGeometrica;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.GeometryFactory;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
 import doutorado.tese.visualizacao.grid.Grid;
 import java.awt.Cursor;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -427,6 +418,7 @@ public class MainGrid extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void removerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerButtonActionPerformed
@@ -626,7 +618,6 @@ public class MainGrid extends javax.swing.JFrame {
                 JFrame mainFrame = new MainGrid();
                 mainFrame.setVisible(true);
                 mainFrame.setExtendedState(java.awt.Frame.MAXIMIZED_HORIZ);
-                mainFrame.setLocationRelativeTo(null);
 //                new MainGrid().setVisible(true);
             }
         });

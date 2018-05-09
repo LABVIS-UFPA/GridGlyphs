@@ -5,7 +5,6 @@
  */
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
-import doutorado.tese.visualizacao.glyph.Glyph;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -47,17 +46,6 @@ public class Trapezio implements DrawBehavior {
         g2d.drawPolygon(p);
     }
 
-    private int[] verificarRetangulo(int[] point) {
-        if (point[0] > point[1]) {
-            point[0] = point[1];
-            return point;
-        } else if (point[0] < point[1]) {
-            point[1] = point[0];
-            return point;
-        }
-        return null;
-    }
-
     private void montarTrapezio() {
         int[] points = new int[2];
 
@@ -65,7 +53,6 @@ public class Trapezio implements DrawBehavior {
         points[1] = getBounds().height;
 
 //        verificarRetangulo(points);
-
         int width = (int) Math.round(points[0] * 0.95);
         int height = (int) Math.round(points[1] * 0.95);
 
@@ -94,12 +81,12 @@ public class Trapezio implements DrawBehavior {
 
     }
 
-    public Rectangle getBounds(){
+    public Rectangle getBounds() {
         return this.bounds;
     }
-    
+
     @Override
-    public void setBounds(Rectangle bounds){
+    public void setBounds(Rectangle bounds) {
         this.bounds = bounds;
         montarTrapezio();
     }
