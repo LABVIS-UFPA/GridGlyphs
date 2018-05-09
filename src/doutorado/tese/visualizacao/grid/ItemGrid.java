@@ -6,6 +6,7 @@
 package doutorado.tese.visualizacao.grid;
 
 import doutorado.tese.util.coluna.Coluna;
+import doutorado.tese.visualizacao.glyph.Glyph;
 import java.util.HashMap;
 
 /**
@@ -15,6 +16,7 @@ import java.util.HashMap;
 public class ItemGrid {
 
     protected HashMap<Coluna, String> mapaDadosItem;
+    private Glyph glyph;
     
     public ItemGrid() {
         mapaDadosItem = new HashMap<>();
@@ -32,5 +34,19 @@ public class ItemGrid {
      */
     public void setMapaDadosItem(HashMap<Coluna, String> mapaDadosItem) {
         this.mapaDadosItem = mapaDadosItem;
+    }
+
+    /**
+     * @return the glyph
+     */
+    public Glyph getGlyph() {
+        return glyph;
+    }
+
+    /**
+     * @param glyph the glyph to set
+     */
+    public void setGlyph(Glyph glyph) {
+        this.glyph = glyph;
     }
 }

@@ -50,12 +50,12 @@
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="openFileMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Open File"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openFileMenuItemActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -172,11 +172,6 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="botaoConfiVarVisuais" min="-2" pref="302" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabel8" min="-2" pref="41" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="radio5x10" min="-2" max="-2" attributes="0"/>
@@ -187,30 +182,38 @@
                                   <EmptySpace min="-2" pref="250" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jScrollPane3" min="-2" pref="77" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="inserirButton" min="-2" pref="52" max="-2" attributes="0"/>
-                                              <Component id="removerButton" pref="0" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Component id="jLabel1" max="32767" attributes="0"/>
+                                  <Component id="jLabel1" max="32767" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="botaoConfiVarVisuais" alignment="1" min="-2" pref="77" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane3" min="-2" pref="77" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel2" min="-2" pref="114" max="-2" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Component id="jScrollPane2" min="-2" pref="104" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="msgFeedback" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="cimaButton" min="-2" pref="42" max="-2" attributes="0"/>
-                                              <Component id="baixoButton" pref="0" max="32767" attributes="0"/>
+                                              <Component id="removerButton" min="-2" pref="43" max="-2" attributes="0"/>
+                                              <Component id="inserirButton" pref="0" max="32767" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel2" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="jScrollPane2" min="-2" pref="92" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="cimaButton" min="-2" pref="42" max="-2" attributes="0"/>
+                                                      <Component id="baixoButton" min="-2" pref="42" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -247,7 +250,10 @@
                               <Component id="jScrollPane2" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="botaoConfiVarVisuais" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="botaoConfiVarVisuais" max="32767" attributes="0"/>
+                              <Component id="msgFeedback" max="32767" attributes="0"/>
+                          </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -295,6 +301,7 @@
                             <StringItem index="4" value="Number"/>
                           </StringArray>
                         </Property>
+                        <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
                         <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="varVisuaisListValueChanged"/>
@@ -362,6 +369,7 @@
                 <Component class="javax.swing.JButton" name="botaoConfiVarVisuais">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="OK"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoConfiVarVisuaisActionPerformed"/>
@@ -375,6 +383,7 @@
                 <Component class="javax.swing.JRadioButton" name="radio5x10">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="5x10"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radio5x10ActionPerformed"/>
@@ -383,6 +392,7 @@
                 <Component class="javax.swing.JRadioButton" name="radio10x20">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="10x20"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radio10x20ActionPerformed"/>
@@ -391,10 +401,19 @@
                 <Component class="javax.swing.JRadioButton" name="radio15x24">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="15x24"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radio15x24ActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="msgFeedback">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="99" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Glyphs successfully configured!"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

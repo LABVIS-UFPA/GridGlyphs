@@ -44,6 +44,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private Task task;
     private ManipuladorArquivo manipulador;
     private File selectedFile;
+    private String[] itensHierarquia;
 
     /**
      * Creates new form MainGrid
@@ -59,6 +60,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         gridPanel = new Grid();
         painelEsquerda.add(gridPanel);
         gridPanel.setDoubleBuffered(true);
+        msgFeedback.setVisible(false);
     }
 
     /**
@@ -92,6 +94,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         radio5x10 = new javax.swing.JRadioButton();
         radio10x20 = new javax.swing.JRadioButton();
         radio15x24 = new javax.swing.JRadioButton();
+        msgFeedback = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -108,7 +111,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         jPanel3 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        openFileMenuItem = new javax.swing.JMenuItem();
 
         buttonGroup1.add(radio5x10);
         buttonGroup1.add(radio10x20);
@@ -165,6 +168,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        varVisuaisList.setEnabled(false);
         varVisuaisList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 varVisuaisListValueChanged(evt);
@@ -209,6 +213,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         });
 
         botaoConfiVarVisuais.setText("OK");
+        botaoConfiVarVisuais.setEnabled(false);
         botaoConfiVarVisuais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoConfiVarVisuaisActionPerformed(evt);
@@ -218,6 +223,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         jLabel8.setText("Grid:");
 
         radio5x10.setText("5x10");
+        radio5x10.setEnabled(false);
         radio5x10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radio5x10ActionPerformed(evt);
@@ -225,6 +231,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         });
 
         radio10x20.setText("10x20");
+        radio10x20.setEnabled(false);
         radio10x20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radio10x20ActionPerformed(evt);
@@ -232,11 +239,15 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         });
 
         radio15x24.setText("15x24");
+        radio15x24.setEnabled(false);
         radio15x24.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radio15x24ActionPerformed(evt);
             }
         });
+
+        msgFeedback.setForeground(new java.awt.Color(0, 153, 0));
+        msgFeedback.setText("Glyphs successfully configured!");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -245,10 +256,6 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(botaoConfiVarVisuais, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(154, 154, 154))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -259,24 +266,30 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                         .addComponent(radio15x24)
                         .addGap(250, 250, 250))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(inserirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(removerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(botaoConfiVarVisuais, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(msgFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cimaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(baixoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                .addGap(151, 151, 151))))))
+                                    .addComponent(removerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inserirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(cimaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(baixoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(151, 151, 151))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,7 +317,9 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoConfiVarVisuais)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(botaoConfiVarVisuais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(msgFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -425,13 +440,13 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 
         jMenu1.setText("File");
 
-        jMenuItem1.setText("Open File");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        openFileMenuItem.setText("Open File");
+        openFileMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                openFileMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(openFileMenuItem);
 
         jMenuBar1.add(jMenu1);
 
@@ -551,11 +566,10 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     }//GEN-LAST:event_baixoButtonActionPerformed
 
     private void botaoConfiVarVisuaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfiVarVisuaisActionPerformed
-        String[] itensHierarquia = parseListString2Array(varVisuaisEscolidasList.getModel());
+        itensHierarquia = parseListString2Array(varVisuaisEscolidasList.getModel());
 
-        gridPanel.loadMatrizGlyphs();
-        gridPanel.setCofig(itensHierarquia);
-        gridPanel.repaint();
+        gridPanel.loadMatrizGlyphs(manipulador.getItens());
+        msgFeedback.setVisible(true);
     }//GEN-LAST:event_botaoConfiVarVisuaisActionPerformed
 
     private void varVisuaisEscolidasListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_varVisuaisEscolidasListValueChanged
@@ -575,6 +589,13 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
             removerButton.setEnabled(false);
             cimaButton.setEnabled(false);
             baixoButton.setEnabled(false);
+            botaoConfiVarVisuais.setEnabled(false);
+            msgFeedback.setVisible(false);
+        }
+        if (varVisuaisEscolidasList.getModel().getSize() >= 1) {
+            botaoConfiVarVisuais.setEnabled(true);
+        } else {
+            botaoConfiVarVisuais.setEnabled(false);
         }
     }//GEN-LAST:event_varVisuaisEscolidasListValueChanged
 
@@ -586,7 +607,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         }
     }//GEN-LAST:event_varVisuaisListValueChanged
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void openFileMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileMenuItemActionPerformed
         JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "TXT & CSV Files", "txt", "csv");
@@ -596,14 +617,14 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 //            limparResquiciosBasesAnteriores();
 //            checkGlyph.setEnabled(false);
             selectedFile = chooser.getSelectedFile();
-//            progressoBarra.setVisible(true);
+
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-//            logger.info("Arquivo selecionado: " + selectedFile);
-            //Instances of javax.swing.SwingWorker are not reusuable, so
-            //we create new instances as needed.
+            LOGGER.info("Arquivo selecionado: " + selectedFile);
+
             progressBarDialog.setVisible(true);
             progressBarDialog.setSize(new Dimension(400, 115));
             progressBarDialog.setLocationRelativeTo(null);
+
             task = new Task();
             task.addPropertyChangeListener(this);
             task.execute();
@@ -611,10 +632,12 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
             JOptionPane.showMessageDialog(null, "The file type can not be read.", "Erro!", JOptionPane.ERROR_MESSAGE);
 //            logger.error("The file type can not be read. - Did it again!");
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_openFileMenuItemActionPerformed
 
     private void viewGlyphsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewGlyphsButtonActionPerformed
-        // TODO add your handling code here:
+        gridPanel.setCofig(itensHierarquia);
+
+        gridPanel.repaint();
     }//GEN-LAST:event_viewGlyphsButtonActionPerformed
 
     private void radio5x10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio5x10ActionPerformed
@@ -686,7 +709,6 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -696,7 +718,9 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JComboBox<String> letraComboBox;
+    private javax.swing.JLabel msgFeedback;
     private javax.swing.JComboBox<String> numeroComboBox;
+    private javax.swing.JMenuItem openFileMenuItem;
     private javax.swing.JPanel painelEsquerda;
     private javax.swing.JDialog progressBarDialog;
     private javax.swing.JProgressBar progressoBarra;
@@ -720,6 +744,12 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         } else {
             gridPanel.setQuantVert(5);
             gridPanel.setQuantHoriz(10);
+        }
+        if (!varVisuaisList.isEnabled()) {
+            varVisuaisList.setEnabled(true);
+            if (varVisuaisEscolidasList.getModel().getSize() >= 1) {
+                botaoConfiVarVisuais.setEnabled(true);
+            }
         }
     }
 
@@ -751,7 +781,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         DefaultComboBoxModel model = new DefaultComboBoxModel(objs);
         atributo.setModel(model);
     }
-    
+
     /**
      * Metodo usado para carregar os atributos categoricos nas listas de glyphs
      *
@@ -765,7 +795,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         list.addAll(analisarAtributosCategoricos(nivel, glyph));
         return list.toArray();
     }
-    
+
     private List<String> analisarAtributosCategoricos(Constantes.NivelGlyph nivel, boolean glyph) {
         ArrayList<String> list = new ArrayList<>();
         switch (nivel) {
@@ -797,7 +827,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         }
         return list;
     }
-    
+
     private List<String> analisarQuantAtributosCategoricos(List<String> list, Object[] obj) {
         for (String colunasCategorica : getColunasCategoricas()) {
             Coluna c = ManipuladorArquivo.getColuna(colunasCategorica);
@@ -808,19 +838,24 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         }
         return list;
     }
-    
+
     private List<String> getColunasCategoricas() {
         List<String> list = new ArrayList<>();
-        for (int i = 0; i < manipulador.getColunas().length - 1; i++) {
+        for (int i = 0; i < manipulador.getColunas().length; i++) {
             Coluna c = manipulador.getColunas()[i];
-            System.out.println("nome: "+c.getName()+"\t desc: "+c.getDescription());
             if (c.getDescription().equals(Metadados.Descricao.CATEGORICAL)) {
                 list.add(c.getName());
             }
         }
         return list;
     }
-    
+
+    private void habilitarRadiosOpcoesGrid(boolean ativador) {
+        radio5x10.setEnabled(ativador);
+        radio10x20.setEnabled(ativador);
+        radio15x24.setEnabled(ativador);
+    }
+
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (Constantes.PROGRESS == evt.getPropertyName()) {
@@ -860,10 +895,14 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
          */
         @Override
         public void done() {
-            Toolkit.getDefaultToolkit().beep();
-            setCursor(null); //turn off the wait cursor
-            progressBarDialog.dispose();
+            if (getProgress() == 100) {
+                Toolkit.getDefaultToolkit().beep();
+                setCursor(null); //turn off the wait cursor
+                habilitarRadiosOpcoesGrid(true);
+                progressBarDialog.dispose();
+            }
         }
+
     }
 
     private int executaTarefas(int ordem, int porcentagem) {

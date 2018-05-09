@@ -66,10 +66,8 @@ public class ManipuladorArquivo {
                     tipos = desvendarTiposDados(line);
                     montarMapaCabecalhoTipos(getCabecalho(), tipos);
                 }
-//                montarColunas(cabecalho, tipos);
-                if (numLinha <= 1) {
-                    bufferArquivo.append(line).append("\n");
-                } 
+
+                bufferArquivo.append(line).append("\n");
                 numLinha++;
             }
             linhas = bufferArquivo.toString().split("\n");
@@ -250,14 +248,14 @@ public class ManipuladorArquivo {
         itens = new ItemGrid[totalItens];
         for (int linha = 0; linha < totalItens; linha++) {
             String[] dadosLinha = getDadosLinha(linha + 2);
-            ItemGrid itemLocal = new ItemGrid();   
-            
-            System.out.print("linha:" + linha);
+            ItemGrid itemLocal = new ItemGrid();
+
+//            System.out.print("linha:" + linha);
             for (int coluna = 0; coluna < dadosLinha.length; coluna++) {
-                System.out.print("\t[" + coluna + "]: " + dadosLinha[coluna]);
+//                System.out.print("\t[" + coluna + "]: " + dadosLinha[coluna]);
                 itemLocal.getMapaDadosItem().put(getColunas()[coluna], dadosLinha[coluna]);
             }
-            System.out.println("");
+//            System.out.println("");
             itens[linha] = itemLocal;
         }
     }
@@ -272,8 +270,8 @@ public class ManipuladorArquivo {
 
     /**
      * Responsavel por fazer a analise do tipo do dado. Essa analise e
-     * importante para que o DataModel que sera enviado ao grid possa
-     * carregar o grid corretamente.
+     * importante para que o DataModel que sera enviado ao grid possa carregar o
+     * grid corretamente.
      *
      * @param dado
      * @param type
@@ -307,6 +305,13 @@ public class ManipuladorArquivo {
             }
         }
         return data;
+    }
+
+    /**
+     * @return the itens
+     */
+    public ItemGrid[] getItens() {
+        return itens;
     }
 
 }
