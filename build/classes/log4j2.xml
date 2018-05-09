@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="info" name="XMLConfigTest" packages="org.apache.logging.log4j.test">
     <Properties>
-        <Property name="filename">logTreemapGlyphs.log</Property>
+        <Property name="filename">logGridGlyphs.log</Property>
     </Properties>
     <ThresholdFilter level="trace"/>
  

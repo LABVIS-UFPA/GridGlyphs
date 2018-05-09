@@ -95,6 +95,14 @@ public class Grid extends JPanel {
         this.quantHoriz = quantHoriz;
     }
 
+    /**
+     * Metodo responsavel por configurar os glyphs do grid. Varre a matriz de
+     * glyphs, mata todos os filhos antigos, e adiciona os novos filhos de
+     * acordo com a hierarquia passada através do itensHierarquia. Por fim, é
+     * definido o tamanho de cada item do grid.
+     *
+     * @param itensHierarquia
+     */
     public void setCofig(String[] itensHierarquia) {
         for (int i = 0; i < getQuantHoriz(); i++) {
             for (int j = 0; j < getQuantVert(); j++) {
@@ -111,7 +119,7 @@ public class Grid extends JPanel {
 
     public Glyph configLayers(String classe) {
         Glyph glyph = null;
-        
+
         switch (classe) {
             case "Color":
                 glyph = new Cor();
@@ -149,19 +157,24 @@ public class Grid extends JPanel {
     }
 
     /**
-     * Metodo que cria a matriz de glyphs e define o tamanho (bounds) dos glyphs
+     * Metodo que cria a matriz de glyphs e relaciona cada item do grid com a
+     * matriz. Por fim, define o tamanho (bounds) dos glyphs
      *
+     * @param itensGrid vetor de itens do grid
      * @return matriz de glyphs
      */
-    public Glyph[][] loadMatrizGlyphs() {
+    public Glyph[][] loadMatrizGlyphs(ItemGrid[] itensGrid) {
         int size = Math.min(getWidth() - 4, getHeight() - 4) / getQuantVert();
         matrizGlyph = new Glyph[getQuantHoriz()][getQuantVert()];
-        for (int i = 0; i < getQuantHoriz(); i++) {
-            for (int j = 0; j < getQuantVert(); j++) {
-                matrizGlyph[i][j] = new GlyphConcrete();
-                int x = i * size;
-                int y = j * size;
-                matrizGlyph[i][j].setBounds(new Rectangle(x, y, size, size));
+        for (int g = 0; g < itensGrid.length; g++) {
+            for (int i = 0; i < getQuantHoriz(); i++) {
+                for (int j = 0; j < getQuantVert(); j++) {
+                    matrizGlyph[i][j] = new GlyphConcrete();
+                    int x = i * size;
+                    int y = j * size;
+                    matrizGlyph[i][j].setBounds(new Rectangle(x, y, size, size));
+                    itensGrid[g].setGlyph(matrizGlyph[i][j]);
+                }
             }
         }
         return matrizGlyph;
