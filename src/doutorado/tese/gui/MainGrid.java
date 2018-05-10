@@ -51,7 +51,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private Task task;
     private ManipuladorArquivo manipulador;
     private File selectedFile;
-    private String[] itensHierarquia;
+    private String[] variaveisVisuaisEscolhidas;
 
     /**
      * Creates new form MainGrid
@@ -573,9 +573,10 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     }//GEN-LAST:event_baixoButtonActionPerformed
 
     private void botaoConfiVarVisuaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfiVarVisuaisActionPerformed
-        itensHierarquia = parseListString2Array(varVisuaisEscolidasList.getModel());
-
-        gridPanel.loadMatrizGlyphs(manipulador.getItens());
+        variaveisVisuaisEscolhidas = parseListString2Array(varVisuaisEscolidasList.getModel());
+        gridPanel.setItensGrid(manipulador.getItens());
+        gridPanel.setVariaveisVisuaisEscolhidas(variaveisVisuaisEscolhidas);
+        gridPanel.loadMatrizGlyphs();
         configComboBoxVarVisuais();
                 
         msgFeedback.setVisible(true);
@@ -647,7 +648,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         ArrayList<Object> atributosEscolhidosGlyph = getAtributosEscolhidosGlyph();
         gridPanel.setAtributosEscolhidos(atributosEscolhidosGlyph);
         
-        gridPanel.setCofig(itensHierarquia);
+        gridPanel.setCofig();
         gridPanel.repaint();
         
 //        atualizarLegendaGlyphs(atributosEscolhidosGlyph);
@@ -874,7 +875,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         formaComboBox.setEnabled(false);
         letraComboBox.setEnabled(false);
         numeroComboBox.setEnabled(false);
-        for (String classe : itensHierarquia) {
+        for (String classe : variaveisVisuaisEscolhidas) {
             switch (classe) {
             case "Color":
                 corComboBox.setEnabled(true);
@@ -904,6 +905,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         atributosEscolhidosGlyph.add(numeroComboBox.getSelectedItem());
         return atributosEscolhidosGlyph;
     }
+    
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (Constantes.PROGRESS == evt.getPropertyName()) {

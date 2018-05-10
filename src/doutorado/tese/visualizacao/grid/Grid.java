@@ -5,14 +5,12 @@
  */
 package doutorado.tese.visualizacao.grid;
 
+import doutorado.tese.util.io.ManipuladorArquivo;
 import doutorado.tese.visualizacao.glyph.Glyph;
 import doutorado.tese.visualizacao.glyph.GlyphConcrete;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
+import doutorado.tese.visualizacao.glyph.GlyphManager;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.numbers.Numeral;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.FormaGeometrica;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Trapezio;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -20,7 +18,6 @@ import java.awt.Rectangle;
 import java.awt.event.HierarchyBoundsAdapter;
 import java.awt.event.HierarchyEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.JPanel;
@@ -35,16 +32,14 @@ public class Grid extends JPanel {
     private int quantVert;
     private int quantHoriz;
     private Glyph[][] matrizGlyph;
-    private Letra letra;
-    private Numeral numero;
     private boolean decision = false;
-
-    private HashMap<String, Boolean> activeLayers;
+    private ItemGrid[] itensGrid;
+    private final GlyphManager glyphManager;
+    private String[] variaveisVisuaisEscolhidas;
 
     public Grid() {
-        activeLayers = new HashMap<>();
-        resetActiveLayers();
-        
+        glyphManager = new GlyphManager();
+
         addHierarchyBoundsListener(new HierarchyBoundsAdapter() {
             @Override
             public void ancestorResized(HierarchyEvent e) {
@@ -74,6 +69,7 @@ public class Grid extends JPanel {
         g2d.setColor(Color.decode("#f0f8ff"));
         g2d.fillRect(0, 0, getSize().width, getSize().height);
         g2d.setColor(Color.BLACK);
+
         for (int i = 0; i < getQuantHoriz(); i++) {
             for (int j = 0; j < getQuantVert(); j++) {
                 int x = matrizGlyph[i][j].getBounds().x;
@@ -88,6 +84,54 @@ public class Grid extends JPanel {
             }
         }
         g2d.dispose();
+    }
+
+    /**
+     * Metodo responsavel por configurar os glyphs do grid. Varre a matriz de
+     * glyphs, mata todos os filhos antigos, e adiciona os novos filhos de
+     * acordo com a hierarquia passada através do variaveisVisuaisEscolhidas.
+     * Por fim, é definido o tamanho de cada item do grid.
+     *
+     * @param itensHierarquia
+     */
+    public void setCofig() {
+        glyphManager.setVariaveisVisuaisEscolhidas(getVariaveisVisuaisEscolhidas());
+        glyphManager.analyseLayers();
+        for (ItemGrid itensGrid : getItensGrid()) {
+            glyphManager.configLayers(itensGrid);
+        }
+    }
+
+    /**
+     * Metodo que cria a matriz de glyphs e relaciona cada item do grid com a
+     * matriz. Por fim, define o tamanho (bounds) dos glyphs
+     *
+     * @param itensGrid vetor de itens do grid
+     * @return matriz de glyphs
+     */
+    public Glyph[][] loadMatrizGlyphs() {
+        int size = Math.min(getWidth() - 4, getHeight() - 4) / getQuantVert();
+        matrizGlyph = new Glyph[getQuantHoriz()][getQuantVert()];
+        int g = 0;
+        for (int i = 0; i < getQuantHoriz(); i++) {
+            for (int j = 0; j < getQuantVert(); j++) {
+                for (; g < itensGrid.length; ) {
+                    matrizGlyph[i][j] = new GlyphConcrete();
+                    int x = i * size;
+                    int y = j * size;
+                    matrizGlyph[i][j].setBounds(new Rectangle(x, y, size, size));
+                    itensGrid[g].setGlyph(matrizGlyph[i][j]);
+//                    System.out.println("Montando matrix=z: " + itensGrid[g].getGlyph().getBounds());
+                    break;
+                }
+                g++;
+            }
+        }
+        return matrizGlyph;
+    }
+
+    public void setAtributosEscolhidos(List<Object> atributosEscolhidos) {
+
     }
 
     public int getQuantVert() {
@@ -106,114 +150,31 @@ public class Grid extends JPanel {
         this.quantHoriz = quantHoriz;
     }
 
-    public void resetActiveLayers(){
-        activeLayers.put("Number",false);
-        activeLayers.put("Letter",false);
-        activeLayers.put("Shape",false);
-        activeLayers.put("Color",false);
-        activeLayers.put("Texture",false);
-    }
-    
     /**
-     * Metodo responsavel por configurar os glyphs do grid. Varre a matriz de
-     * glyphs, mata todos os filhos antigos, e adiciona os novos filhos de
-     * acordo com a hierarquia passada através do itensHierarquia. Por fim, é
-     * definido o tamanho de cada item do grid.
-     *
-     * @param itensHierarquia
+     * @return the itensGrid
      */
-    public void setCofig(String[] itensHierarquia) {
-        resetActiveLayers();
-        for (String i : itensHierarquia) {
-            activeLayers.put(i, true);
-        }
-        for (int i = 0; i < getQuantHoriz(); i++) {
-            for (int j = 0; j < getQuantVert(); j++) {
-                matrizGlyph[i][j].killAllChild();
-                for (String itensHierarquia1 : itensHierarquia) {
-                    matrizGlyph[i][j].appendChild(configLayers(itensHierarquia1));
-                    ArrayList<Glyph> list = new ArrayList<>();
-                    matrizGlyph[i][j].getChildren(list);
-                }
-                matrizGlyph[i][j].setBounds(matrizGlyph[i][j].getBounds());
-            }
-        }
+    public ItemGrid[] getItensGrid() {
+        return itensGrid;
     }
 
-    public Glyph configLayers(String classe) {
-        Glyph glyph = null;
-
-        switch (classe) {
-            case "Color":
-                glyph = new Cor();
-                Cor cor = (Cor) glyph;
-                cor.setCor(Color.decode("#3366cc"));
-                break;
-            case "Letter":
-                glyph = new Letra();
-                letra = (Letra) glyph;
-                if (activeLayers.get("Number")) {
-                    letra.setLetra("3A");
-                } else {
-                    letra.setLetra("A");        
-                }
-                break;
-            case "Number":
-                glyph = new Numeral();
-                numero = (Numeral) glyph;
-                if (activeLayers.get("Letter")) {
-                    numero.setNumero("A3");                   
-                } else {
-                    numero.setNumero("3");               
-                }
-                break;
-            case "Shape":
-                glyph = new FormaGeometrica();
-                FormaGeometrica forma = (FormaGeometrica) glyph;
-//                forma.setDrawBehavior(new Cruz());
-//                forma.setDrawBehavior(new Ellipse());
-                forma.setDrawBehavior(new Trapezio());
-//                System.out.println("criou forma");
-                break;
-            case "Texture":
-                glyph = new Textura();
-                Textura textura = (Textura) glyph;
-                textura.setNomeTextura("PATTERN_HORIZONTAL");
-                break;
-            default:
-                throw new AssertionError();
-        }
-
-        return glyph;
-    }
-
-    public void setAtributosEscolhidos(List<Object> atributosEscolhidos) {
-        
-    }
-    
     /**
-     * Metodo que cria a matriz de glyphs e relaciona cada item do grid com a
-     * matriz. Por fim, define o tamanho (bounds) dos glyphs
-     *
-     * @param itensGrid vetor de itens do grid
-     * @return matriz de glyphs
+     * @param itensGrid the itensGrid to set
      */
-    public Glyph[][] loadMatrizGlyphs(ItemGrid[] itensGrid) {
-        int size = Math.min(getWidth() - 4, getHeight() - 4) / getQuantVert();
-        matrizGlyph = new Glyph[getQuantHoriz()][getQuantVert()];
-        for (int g = 0; g < itensGrid.length; g++) {
-            for (int i = 0; i < getQuantHoriz(); i++) {
-                for (int j = 0; j < getQuantVert(); j++) {
-                    matrizGlyph[i][j] = new GlyphConcrete();
-                    int x = i * size;
-                    int y = j * size;
-                    matrizGlyph[i][j].setBounds(new Rectangle(x, y, size, size));
-                    itensGrid[g].setGlyph(matrizGlyph[i][j]);
-                }
-            }
-        }
-        return matrizGlyph;
+    public void setItensGrid(ItemGrid[] itensGrid) {
+        this.itensGrid = itensGrid;
     }
 
- 
+    /**
+     * @return the variaveisVisuaisEscolhidas
+     */
+    public String[] getVariaveisVisuaisEscolhidas() {
+        return variaveisVisuaisEscolhidas;
+    }
+
+    /**
+     * @param variaveisVisuaisEscolhidas the variaveisVisuaisEscolhidas to set
+     */
+    public void setVariaveisVisuaisEscolhidas(String[] variaveisVisuaisEscolhidas) {
+        this.variaveisVisuaisEscolhidas = variaveisVisuaisEscolhidas;
+    }
 }
