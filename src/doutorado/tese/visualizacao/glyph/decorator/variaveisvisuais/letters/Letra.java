@@ -36,7 +36,7 @@ public class Letra extends Glyph {
 
     @Override
     public void paint(Graphics g) {
-        int fontSize = Math.round(getBounds().height * 0.99f);
+        int fontSize = Math.round(getBounds().height * 0.7f);
         setFonte(new Font("Arial black", Font.PLAIN, fontSize));
         drawLetra(g);
         super.paint(g);

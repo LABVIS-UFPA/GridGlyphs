@@ -9,8 +9,15 @@ import doutorado.tese.util.Constantes;
 import doutorado.tese.util.Metadados;
 import doutorado.tese.util.coluna.Coluna;
 import doutorado.tese.util.io.ManipuladorArquivo;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.numbers.Numeral;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.FormaGeometrica;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.GeometryFactory;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Trapezio;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
 import doutorado.tese.visualizacao.grid.Grid;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -569,6 +576,8 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         itensHierarquia = parseListString2Array(varVisuaisEscolidasList.getModel());
 
         gridPanel.loadMatrizGlyphs(manipulador.getItens());
+        configComboBoxVarVisuais();
+                
         msgFeedback.setVisible(true);
     }//GEN-LAST:event_botaoConfiVarVisuaisActionPerformed
 
@@ -635,9 +644,13 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     }//GEN-LAST:event_openFileMenuItemActionPerformed
 
     private void viewGlyphsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewGlyphsButtonActionPerformed
+        ArrayList<Object> atributosEscolhidosGlyph = getAtributosEscolhidosGlyph();
+        gridPanel.setAtributosEscolhidos(atributosEscolhidosGlyph);
+        
         gridPanel.setCofig(itensHierarquia);
-
         gridPanel.repaint();
+        
+//        atualizarLegendaGlyphs(atributosEscolhidosGlyph);
     }//GEN-LAST:event_viewGlyphsButtonActionPerformed
 
     private void radio5x10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio5x10ActionPerformed
@@ -841,8 +854,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 
     private List<String> getColunasCategoricas() {
         List<String> list = new ArrayList<>();
-        for (int i = 0; i < manipulador.getColunas().length; i++) {
-            Coluna c = manipulador.getColunas()[i];
+        for (Coluna c : manipulador.getColunas()) {
             if (c.getDescription().equals(Metadados.Descricao.CATEGORICAL)) {
                 list.add(c.getName());
             }
@@ -856,6 +868,42 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         radio15x24.setEnabled(ativador);
     }
 
+    private void configComboBoxVarVisuais() {
+        texturaComboBox.setEnabled(false);
+        corComboBox.setEnabled(false);
+        formaComboBox.setEnabled(false);
+        letraComboBox.setEnabled(false);
+        numeroComboBox.setEnabled(false);
+        for (String classe : itensHierarquia) {
+            switch (classe) {
+            case "Color":
+                corComboBox.setEnabled(true);
+                break;
+            case "Letter":
+                letraComboBox.setEnabled(true);
+                break;
+            case "Number":
+                numeroComboBox.setEnabled(true);
+                break;
+            case "Shape":
+                formaComboBox.setEnabled(true);
+                break;
+            case "Texture":
+                texturaComboBox.setEnabled(true);
+                break;
+            }
+        }
+    }
+    
+    private ArrayList<Object> getAtributosEscolhidosGlyph() {
+        ArrayList<Object> atributosEscolhidosGlyph = new ArrayList<>();
+        atributosEscolhidosGlyph.add(texturaComboBox.getSelectedItem());
+        atributosEscolhidosGlyph.add(corComboBox.getSelectedItem());
+        atributosEscolhidosGlyph.add(formaComboBox.getSelectedItem());
+        atributosEscolhidosGlyph.add(letraComboBox.getSelectedItem());
+        atributosEscolhidosGlyph.add(numeroComboBox.getSelectedItem());
+        return atributosEscolhidosGlyph;
+    }
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (Constantes.PROGRESS == evt.getPropertyName()) {

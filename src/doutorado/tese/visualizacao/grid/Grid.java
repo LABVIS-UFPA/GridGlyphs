@@ -22,6 +22,7 @@ import java.awt.event.HierarchyEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -38,15 +39,11 @@ public class Grid extends JPanel {
     private Numeral numero;
     private boolean decision = false;
 
-    private HashMap<String, Boolean> ativeMap;
+    private HashMap<String, Boolean> activeLayers;
 
     public Grid() {
-        ativeMap = new HashMap<>();
-        ativeMap.put("Texture", false);
-        ativeMap.put("Color", false);
-        ativeMap.put("Number", false);
-        ativeMap.put("Letter", false);
-        ativeMap.put("Shape", false);
+        activeLayers = new HashMap<>();
+        resetActiveLayers();
         
         addHierarchyBoundsListener(new HierarchyBoundsAdapter() {
             @Override
@@ -109,6 +106,14 @@ public class Grid extends JPanel {
         this.quantHoriz = quantHoriz;
     }
 
+    public void resetActiveLayers(){
+        activeLayers.put("Number",false);
+        activeLayers.put("Letter",false);
+        activeLayers.put("Shape",false);
+        activeLayers.put("Color",false);
+        activeLayers.put("Texture",false);
+    }
+    
     /**
      * Metodo responsavel por configurar os glyphs do grid. Varre a matriz de
      * glyphs, mata todos os filhos antigos, e adiciona os novos filhos de
@@ -118,25 +123,15 @@ public class Grid extends JPanel {
      * @param itensHierarquia
      */
     public void setCofig(String[] itensHierarquia) {
-        ativeMap.put("Number",false);
-        ativeMap.put("Letter",false);
-        ativeMap.put("Shape",false);
-        ativeMap.put("Color",false);
-        ativeMap.put("Texture",false);
-
+        resetActiveLayers();
         for (String i : itensHierarquia) {
-            ativeMap.put(i, true);
+            activeLayers.put(i, true);
         }
-                    
         for (int i = 0; i < getQuantHoriz(); i++) {
             for (int j = 0; j < getQuantVert(); j++) {
                 matrizGlyph[i][j].killAllChild();
                 for (String itensHierarquia1 : itensHierarquia) {
-                    Glyph configLayers = configLayers(itensHierarquia1);
-
-
-                    matrizGlyph[i][j].appendChild(configLayers);
-
+                    matrizGlyph[i][j].appendChild(configLayers(itensHierarquia1));
                     ArrayList<Glyph> list = new ArrayList<>();
                     matrizGlyph[i][j].getChildren(list);
                 }
@@ -157,26 +152,19 @@ public class Grid extends JPanel {
             case "Letter":
                 glyph = new Letra();
                 letra = (Letra) glyph;
-                if (numero != null && ativeMap.get("Number")) {
-                    System.out.println((numero != null) + "&" + (numero.isLetraAtiva()));
-                    System.out.println("numero ativo");
+                if (activeLayers.get("Number")) {
                     letra.setLetra("3A");
                 } else {
-                    letra.setLetra("A");
-        
+                    letra.setLetra("A");        
                 }
                 break;
             case "Number":
                 glyph = new Numeral();
                 numero = (Numeral) glyph;
-                if (letra != null && ativeMap.get("Letter")) {
-                    System.out.println((letra != null) + "&" + (letra.isAtivo()));
-                    System.out.println("letra ativa");
-                    numero.setNumero("A3");
-                   
+                if (activeLayers.get("Letter")) {
+                    numero.setNumero("A3");                   
                 } else {
-                    numero.setNumero("3");
-               
+                    numero.setNumero("3");               
                 }
                 break;
             case "Shape":
@@ -199,6 +187,10 @@ public class Grid extends JPanel {
         return glyph;
     }
 
+    public void setAtributosEscolhidos(List<Object> atributosEscolhidos) {
+        
+    }
+    
     /**
      * Metodo que cria a matriz de glyphs e relaciona cada item do grid com a
      * matriz. Por fim, define o tamanho (bounds) dos glyphs

@@ -36,7 +36,6 @@ public class Numeral extends Glyph {
 
     @Override
     public void paint(Graphics g) {
-        int area = getBounds().height * getBounds().width;
         int fontSize = Math.round(getBounds().width * 0.7f);
         setFonte(new Font("Arial black", Font.PLAIN, fontSize));
         drawNumero(g);
