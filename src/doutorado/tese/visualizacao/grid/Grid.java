@@ -81,6 +81,7 @@ public class Grid extends JPanel {
                 ArrayList<Glyph> list = new ArrayList<>();
                 matrizGlyph[i][j].paint(g2d);
                 matrizGlyph[i][j].getChildren(list);
+                g2d.setClip(0, 0, getSize().width, getSize().height);
             }
         }
         g2d.dispose();

@@ -5,8 +5,9 @@
  */
 package doutorado.tese.visualizacao.glyph;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.Shape;
 import java.util.ArrayList;
 
 /**
@@ -14,14 +15,17 @@ import java.util.ArrayList;
  * @author Anderson Soares
  */
 public abstract class Glyph {
-    
+
     protected Glyph glyphChild;
     private Rectangle bounds;
-    private float pectSobreposicao = 0.8f;
+    private float pectSobreposicao = 1f;
 
-    public void paint(Graphics g){
-        if(glyphChild != null){
-            glyphChild.paint(g);
+    public void paint(Graphics2D g2d) {
+        if (glyphChild != null) {
+            if (getClipShape() != null) {
+                g2d.clip(getClipShape());
+            }
+            glyphChild.paint(g2d);
         }
     }
 
@@ -45,18 +49,20 @@ public abstract class Glyph {
             this.glyphChild = glyphChild;
         }
     }
-    
-    public void getChildren(ArrayList<Glyph> children){
+
+    public void getChildren(ArrayList<Glyph> children) {
         children.add(this);
         if (this.glyphChild != null) {
             this.glyphChild.getChildren(children);
         }
     }
 
-    public void killAllChild(){
+    public void killAllChild() {
         this.glyphChild = null;
     }
-    
+
+    public abstract Shape getClipShape();
+
     public float getPectSobreposicao() {
         return pectSobreposicao;
     }

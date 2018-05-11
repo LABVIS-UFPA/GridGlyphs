@@ -53,13 +53,17 @@ public class TMPatternFactory {
     // Singleton design pattern
 
     private HashMap<String, Object> textures = null;// set of patterns 
+    private Color textureColor;
+    private Color backgroungColor;
 
     /* --- Constructor --- */
     /**
      * Constructor.
      */
-    public TMPatternFactory() {
+    public TMPatternFactory(Color color, Color backgroundColor) {
         textures = new HashMap<>();
+        textureColor = color;
+        this.backgroungColor = backgroundColor;
         buildPatternHorizontal();
         buildPatternVertical();
         buildPatternDiag_Right2Left();
@@ -85,11 +89,12 @@ public class TMPatternFactory {
     /**
      * Returns the running instance of TMPatternFactory.
      *
+     * @param color the texture color 
      * @return the running instance of TMPatternFactory
      */
-    public static TMPatternFactory getInstance() {
+    public static TMPatternFactory getInstance(Color color, Color backgroundColor) {
         if (instance == null) {
-            instance = new TMPatternFactory();
+            instance = new TMPatternFactory(color, backgroundColor);
         }
         return instance;
     }
@@ -109,6 +114,19 @@ public class TMPatternFactory {
 //        Paint pattern = (Paint) patterns.get(patternName);
         Paint pattern = (Paint) textures.get(patternName);
         return pattern;
+    }
+
+    /**
+     * @param aBackgroungColor the backgroungColor to set
+     */
+    public Color setBackgroungColor(Color aBackgroungColor) {
+        backgroungColor = aBackgroungColor;
+        return backgroungColor;
+    }
+
+    public Color setTextureColor(Color color) {
+        textureColor = color;
+        return textureColor;
     }
 
     /**
@@ -144,7 +162,7 @@ public class TMPatternFactory {
             }
         });
 
-        TMPatternFactory TM = TMPatternFactory.getInstance();
+        TMPatternFactory TM = TMPatternFactory.getInstance(Color.BLACK, Color.WHITE);
 
         for (String textureName : TM.getTexturesNames()) {
             System.out.println(textureName);
@@ -179,12 +197,13 @@ public class TMPatternFactory {
      * Builds and adds the PATTERN_HORIZONTAL in patterns.
      */
     private void buildPatternHorizontal() {
-        BufferedImage image = new BufferedImage(16, 16, BufferedImage.TYPE_INT_RGB);
+        BufferedImage image = new BufferedImage(16, 16, BufferedImage.TYPE_4BYTE_ABGR);
         Graphics2D g = image.createGraphics();
         g.setStroke(new BasicStroke(3f));
-        g.setColor(Color.white);
+        g.setColor(backgroungColor);
         g.fillRect(0, 0, 16, 16);
-        g.setColor(Color.black);
+        g.setColor(textureColor);
+        System.out.println(textureColor);
 //        g.drawLine(0, 1, 16, 1);
         g.drawLine(0, 6, 16, 6);
 //        g.drawLine(0, 8, 16, 8);
@@ -203,9 +222,9 @@ public class TMPatternFactory {
                 = new BufferedImage(16, 16, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = image.createGraphics();
         g.setStroke(new BasicStroke(3f));
-        g.setColor(Color.white);
+        g.setColor(backgroungColor);
         g.fillRect(0, 0, 16, 16);
-        g.setColor(Color.black);
+        g.setColor(textureColor);
         g.drawLine(8, 0, 16, 8);
 //        g.drawLine(0, 0, 16, 16);
         g.drawLine(0, 8, 8, 16);
@@ -222,9 +241,9 @@ public class TMPatternFactory {
         BufferedImage image
                 = new BufferedImage(16, 16, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = image.createGraphics();
-        g.setColor(Color.white);
+        g.setColor(backgroungColor);
         g.fillRect(0, 0, 16, 16);
-        g.setColor(Color.black);
+        g.setColor(textureColor);
         g.drawLine(0, 4, 16, 4);
         g.drawLine(0, 9, 16, 9);
         g.drawLine(0, 14, 16, 14);

@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 
 /**
  *
@@ -22,30 +23,30 @@ public class Textura extends Glyph {
     private int[] yPoints;
     private String nomeTextura;
     TMPatternFactory textura;
+    private Color cor;
+    private Color backgroundColor;
 
     public Textura() {
-        textura = TMPatternFactory.getInstance();
+        textura = TMPatternFactory.getInstance(Color.BLACK, Color.WHITE);
+    }    
+    
+    public Textura(Color cor, Color backgroundColor) {
+        textura = TMPatternFactory.getInstance(cor, backgroundColor);
     }
 
     @Override
-    public void paint(Graphics g) {
-        drawTextura(g);
-        super.paint(g);
+    public void paint(Graphics2D g2d) {
+        drawTextura(g2d);
+        super.paint(g2d);
     }
 
-    private void drawTextura(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-
+    private void drawTextura(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setPaint(textura.get(getNomeTextura()));
 
         g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
         g2d.setColor(Color.BLACK);
         g2d.drawRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
-//        g2d.fillOval(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
-//        g2d.setColor(Color.BLACK);
-//        g2d.drawOval(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
-
     }
 
     @Override
@@ -90,4 +91,27 @@ public class Textura extends Glyph {
     public void setNomeTextura(String nomeTextura) {
         this.nomeTextura = nomeTextura;
     }
+
+    public Color getCor() {
+        return cor;
+    }
+
+    public void setCor(Color cor) {
+        this.cor = cor;
+    }
+
+    public Color getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    @Override
+    public Shape getClipShape() {
+        return getBounds();
+    }
+    
+    
 }

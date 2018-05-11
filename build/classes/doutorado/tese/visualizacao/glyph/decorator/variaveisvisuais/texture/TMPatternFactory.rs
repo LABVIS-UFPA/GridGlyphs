@@ -1,2 +1,0 @@
-doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.JPatternPanel
-doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.TMPatternFactory

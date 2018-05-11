@@ -11,6 +11,7 @@ import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 
 public class Cruz implements DrawBehavior {
 
@@ -26,12 +27,7 @@ public class Cruz implements DrawBehavior {
     }
 
     @Override
-    public void paint(Graphics g) {
-        drawFormaGeometrica(g);
-    }
-
-    private void drawFormaGeometrica(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
+    public void paint(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2d.setPaint(Color.BLACK);
@@ -55,7 +51,6 @@ public class Cruz implements DrawBehavior {
     }
 
     private void montarCruz() {
-
         int[] points = new int[2];
 
         Rectangle rect = getBounds();
@@ -116,7 +111,6 @@ public class Cruz implements DrawBehavior {
         yPoints[11] = (int) Math.round(rect.y + rect.height / 2 - height / 2);
 
         p = new Polygon();
-
         p.addPoint(xPoints[0], yPoints[0]);
         p.addPoint(xPoints[1], yPoints[1]);
         p.addPoint(xPoints[2], yPoints[2]);
@@ -129,7 +123,6 @@ public class Cruz implements DrawBehavior {
         p.addPoint(xPoints[9], yPoints[9]);
         p.addPoint(xPoints[10], yPoints[10]);
         p.addPoint(xPoints[11], yPoints[11]);
-
     }
     
     public Rectangle getBounds(){
@@ -145,5 +138,10 @@ public class Cruz implements DrawBehavior {
     @Override
     public int getArea() {
         return (xPoints[8] - xPoints[2]) * (yPoints[5] - yPoints[0]);
+    }
+
+    @Override
+    public Shape getClipShape() {
+        return p;
     }
 }

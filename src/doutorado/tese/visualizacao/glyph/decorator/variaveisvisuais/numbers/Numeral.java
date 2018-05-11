@@ -14,6 +14,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 
 /**
  *
@@ -35,34 +36,32 @@ public class Numeral extends Glyph {
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paint(Graphics2D g) {
         int fontSize = Math.round(getBounds().width * 0.7f);
         setFonte(new Font("Arial black", Font.PLAIN, fontSize));
         drawNumero(g);
         super.paint(g);
     }
 
-    private void drawNumero(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-
+    private void drawNumero(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2d.setFont(getFonte());
 
         //calculode centro das letras
-        Point centroLetra = calcularFontMetrics(g);
+        Point centroLetra = calcularFontMetrics(g2d);
         int x = centroLetra.x;
         int y = centroLetra.y;
 
-        g.setColor(Color.white);
-        g.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
+        g2d.setColor(Color.white);
+        g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
         g2d.setColor(Color.black);
         g2d.drawString(getNumero(), x, y);
 
         if (legenda) {
             g2d.setColor(Color.black);
             g2d.setFont(getFonte());
-            g2d.drawString(getNumero(), calcularFontMetrics(g).x, calcularFontMetrics(g).y);
+            g2d.drawString(getNumero(), calcularFontMetrics(g2d).x, calcularFontMetrics(g2d).y);
         }
     }
 
@@ -71,8 +70,8 @@ public class Numeral extends Glyph {
      *
      * @return
      */
-    private Point calcularFontMetrics(Graphics g) {
-        FontMetrics metrics = g.getFontMetrics(getFonte());
+    private Point calcularFontMetrics(Graphics2D g2d) {
+        FontMetrics metrics = g2d.getFontMetrics(getFonte());
 
         heightNumero = metrics.getHeight();
         widthNumero = metrics.stringWidth(getNumero());
@@ -174,5 +173,10 @@ public class Numeral extends Glyph {
      */
     public void setLetraAtiva(boolean letraAtiva) {
         this.letraAtiva = letraAtiva;
+    }
+
+    @Override
+    public Shape getClipShape() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

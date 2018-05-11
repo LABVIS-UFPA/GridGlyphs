@@ -5,17 +5,20 @@
  */
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.Shape;
 
 /**
  *
  * @author Anderson Soares
  */
 public interface DrawBehavior {
-    public void paint(Graphics g);
+    public void paint(Graphics2D g2d);
     
     public int getArea();
 
     public void setBounds(Rectangle bounds);
+    
+    public Shape getClipShape();
 }

@@ -9,14 +9,13 @@ import doutorado.tese.visualizacao.glyph.Glyph;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 import java.awt.font.FontRenderContext;
-import java.awt.font.TextLayout;
-import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -38,33 +37,27 @@ public class Letra extends Glyph {
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paint(Graphics2D g2d) {
         int fontSize = Math.round(getBounds().height * 1.2f);
         setFonte(new Font("Arial black", Font.PLAIN, fontSize));
-        drawLetra(g);
-        super.paint(g);
+        drawLetra(g2d);
+
+        super.paint(g2d);
     }
 
-    private void drawLetra(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-
+    private void drawLetra(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2d.setFont(getFonte());
         //calculode centro das letras
-        Point centroLetra = calcularFontMetrics(g);
+        Point centroLetra = calcularFontMetrics(g2d);
         int x = centroLetra.x;
         int y = centroLetra.y;
-                
-        g.setColor(new Color(0, 255, 0, 0));
-        g.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
+        
+        g2d.setColor(new Color(0, 255, 0, 0));
+        g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
         g2d.setColor(Color.black);
         g2d.drawString(getLetra(), x, y);
-        if (legenda) {
-            g2d.setColor(Color.black);
-            g2d.setFont(getFonte());
-            g2d.drawString(getLetra(), calcularFontMetrics(g).x, calcularFontMetrics(g).y);
-        }
     }
 
     /**
@@ -72,15 +65,12 @@ public class Letra extends Glyph {
      *
      * @return
      */
-    private Point calcularFontMetrics(Graphics g) {
-        FontMetrics metrics = g.getFontMetrics(getFonte());
-
+    private Point calcularFontMetrics(Graphics2D g2d) {
+        FontMetrics metrics = g2d.getFontMetrics(getFonte());
         heightLetra = metrics.getHeight();
         widthLetra = metrics.stringWidth(getLetra());
-
         int pX = Math.round(getBounds().x + (getBounds().width - widthLetra) / 2);
         int pY = Math.round(getBounds().y + ((getBounds().height - heightLetra) / 2) + metrics.getAscent());
-
         return new Point(pX, pY);
     }
 
@@ -147,6 +137,20 @@ public class Letra extends Glyph {
 
     public int getArea() {
         return heightLetra * widthLetra;
+    }
+
+    @Override
+    public Shape getClipShape() {
+        BufferedImage textImage = new BufferedImage(
+                getBounds().width,
+                getBounds().height,
+                BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = textImage.createGraphics();
+        FontRenderContext frc = g2d.getFontRenderContext();
+        Point centroLetra = calcularFontMetrics(g2d);
+        int x = centroLetra.x;
+        int y = centroLetra.y;
+        return getFonte().createGlyphVector(frc, letra).getOutline(x, y);
     }
 
 }

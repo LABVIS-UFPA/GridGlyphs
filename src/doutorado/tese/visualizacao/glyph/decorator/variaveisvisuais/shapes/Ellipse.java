@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 
 public class Ellipse implements DrawBehavior {
 
@@ -16,12 +17,7 @@ public class Ellipse implements DrawBehavior {
     }
 
     @Override
-    public void paint(Graphics g) {
-        drawFormaGeometrica(g);
-    }
-
-    private void drawFormaGeometrica(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
+    public void paint(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                
         g2d.setColor(Color.white);
@@ -76,6 +72,11 @@ public class Ellipse implements DrawBehavior {
     @Override
     public int getArea() {
         return xPoints[1] * yPoints[1];
+    }
+
+    @Override
+    public Shape getClipShape() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

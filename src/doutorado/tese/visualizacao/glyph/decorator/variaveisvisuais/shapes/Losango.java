@@ -12,6 +12,7 @@ import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 
 public class Losango implements DrawBehavior {
 
@@ -23,12 +24,7 @@ public class Losango implements DrawBehavior {
     }
 
     @Override
-    public void paint(Graphics g) {
-        drawFormaGeometrica(g);
-    }
-
-    private void drawFormaGeometrica(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
+    public void paint(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);        
         g2d.setPaint(Color.BLACK);
         
@@ -104,5 +100,10 @@ public class Losango implements DrawBehavior {
     @Override
     public int getArea() {
         return (yPoints[2] - yPoints[0]) * (xPoints[3] - xPoints[1]);
+    }
+
+    @Override
+    public Shape getClipShape() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

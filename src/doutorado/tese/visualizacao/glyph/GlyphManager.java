@@ -46,9 +46,9 @@ public class GlyphManager {
                 glyph = new Letra();
                 letra = (Letra) glyph;
                 if (activeLayers.get("Number")) {
-                    letra.setLetra("A");
+                    letra.setLetra("I");
                 } else {
-                    letra.setLetra("A");
+                    letra.setLetra("I");
                 }
                 break;
             case "Number":
@@ -69,8 +69,8 @@ public class GlyphManager {
 //                System.out.println("criou forma");
                 break;
             case "Texture":
-                glyph = new Textura();
-                Textura textura = (Textura) glyph;
+                glyph = new Textura(Color.GRAY, new Color(255, 0, 0, 0));
+                Textura textura = (Textura) glyph;                
                 textura.setNomeTextura("PATTERN_HORIZONTAL");
                 break;
             default:

@@ -8,7 +8,10 @@ package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 import doutorado.tese.visualizacao.glyph.Glyph;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Polygon;
 import java.awt.Rectangle;
+import java.awt.Shape;
 
 /**
  *
@@ -24,7 +27,7 @@ public class FormaGeometrica extends Glyph {
     public FormaGeometrica() {
         this.drawBehavior = new DrawBehavior() {
             @Override
-            public void paint(Graphics g) {
+            public void paint(Graphics2D g) {
                 
             }
 
@@ -37,13 +40,18 @@ public class FormaGeometrica extends Glyph {
             public void setBounds(Rectangle bounds) {
                 
             }
+
+            @Override
+            public Shape getClipShape() {
+                return new Polygon();
+            }
         };
     }    
     
     @Override
-    public void paint(Graphics g) {
-        drawBehavior.paint(g);
-        super.paint(g);
+    public void paint(Graphics2D g2d) {
+        drawBehavior.paint(g2d);
+        super.paint(g2d);
     }
 
     public void setColor(Color cor) {
@@ -72,5 +80,10 @@ public class FormaGeometrica extends Glyph {
 
     public int getArea() {
         return 0;
+    }
+
+    @Override
+    public Shape getClipShape() {
+        return this.drawBehavior.getClipShape();
     }
 }

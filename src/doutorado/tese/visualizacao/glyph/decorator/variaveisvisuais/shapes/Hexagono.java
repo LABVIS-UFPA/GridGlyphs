@@ -11,6 +11,7 @@ import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 
 public class Hexagono implements DrawBehavior {
 
@@ -23,12 +24,7 @@ public class Hexagono implements DrawBehavior {
     }
 
     @Override
-    public void paint(Graphics g) {
-        drawFormaGeometrica(g);
-    }
-
-    private void drawFormaGeometrica(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
+    public void paint(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setPaint(Color.BLACK);
 
@@ -114,5 +110,10 @@ public class Hexagono implements DrawBehavior {
     @Override
     public int getArea() {
         return (xPoints[4] - xPoints[1]) * (yPoints[3] - yPoints[0]);
+    }
+
+    @Override
+    public Shape getClipShape() {
+        return p;
     }
 }
