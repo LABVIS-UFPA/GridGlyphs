@@ -46,7 +46,7 @@ public class GlyphManager {
                 glyph = new Letra();
                 letra = (Letra) glyph;
                 if (activeLayers.get("Number")) {
-                    letra.setLetra("3A");
+                    letra.setLetra("A");
                 } else {
                     letra.setLetra("A");
                 }
@@ -55,7 +55,7 @@ public class GlyphManager {
                 glyph = new Numeral();
                 numero = (Numeral) glyph;
                 if (activeLayers.get("Letter")) {
-                    numero.setNumero("A3");
+                    numero.setNumero("3");
                 } else {
                     numero.setNumero("3");
                 }

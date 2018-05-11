@@ -115,7 +115,7 @@ public class Grid extends JPanel {
         int g = 0;
         for (int i = 0; i < getQuantHoriz(); i++) {
             for (int j = 0; j < getQuantVert(); j++) {
-                for (; g < itensGrid.length; ) {
+                while (g < itensGrid.length) {
                     matrizGlyph[i][j] = new GlyphConcrete();
                     int x = i * size;
                     int y = j * size;
@@ -131,9 +131,18 @@ public class Grid extends JPanel {
     }
 
     public void setAtributosEscolhidos(List<Object> atributosEscolhidos) {
-
+        //TODO
     }
 
+    public ItemGrid[] criarItens(){
+        int totalItens = getQuantHoriz() * getQuantVert();
+        setItensGrid(new ItemGrid[totalItens]);
+        for (int i = 0; i < getItensGrid().length; i++) {
+            getItensGrid()[i] = new ItemGrid();
+        }
+        return getItensGrid();
+    }
+    
     public int getQuantVert() {
         return quantVert;
     }

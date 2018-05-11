@@ -14,6 +14,9 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
+import java.awt.geom.Rectangle2D;
 
 /**
  *
@@ -36,7 +39,7 @@ public class Letra extends Glyph {
 
     @Override
     public void paint(Graphics g) {
-        int fontSize = Math.round(getBounds().height * 0.7f);
+        int fontSize = Math.round(getBounds().height * 1.2f);
         setFonte(new Font("Arial black", Font.PLAIN, fontSize));
         drawLetra(g);
         super.paint(g);
@@ -52,10 +55,8 @@ public class Letra extends Glyph {
         Point centroLetra = calcularFontMetrics(g);
         int x = centroLetra.x;
         int y = centroLetra.y;
-//        if (!legenda) {
-//            g.drawRect(x, y - fm.getAscent(), (int) rect.getWidth(), (int) rect.getHeight());
-//        }
-        g.setColor(Color.white);
+                
+        g.setColor(new Color(0, 255, 0, 0));
         g.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
         g2d.setColor(Color.black);
         g2d.drawString(getLetra(), x, y);
@@ -77,8 +78,8 @@ public class Letra extends Glyph {
         heightLetra = metrics.getHeight();
         widthLetra = metrics.stringWidth(getLetra());
 
-        int pX = getBounds().x + (getBounds().width - widthLetra) / 2;
-        int pY = getBounds().y + ((getBounds().height - heightLetra) / 2) + metrics.getAscent();
+        int pX = Math.round(getBounds().x + (getBounds().width - widthLetra) / 2);
+        int pY = Math.round(getBounds().y + ((getBounds().height - heightLetra) / 2) + metrics.getAscent());
 
         return new Point(pX, pY);
     }
@@ -136,13 +137,14 @@ public class Letra extends Glyph {
     public boolean isAtivo() {
         return ativo;
     }
+
     /**
      * @param ativo the ativo to set
      */
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
-    
+
     public int getArea() {
         return heightLetra * widthLetra;
     }

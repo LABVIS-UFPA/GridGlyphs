@@ -42,6 +42,10 @@ public class Textura extends Glyph {
         g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
         g2d.setColor(Color.BLACK);
         g2d.drawRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
+//        g2d.fillOval(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
+//        g2d.setColor(Color.BLACK);
+//        g2d.drawOval(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
+
     }
 
     @Override

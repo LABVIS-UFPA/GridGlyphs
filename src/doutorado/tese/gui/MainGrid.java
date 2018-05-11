@@ -17,6 +17,7 @@ import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Geome
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Trapezio;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
 import doutorado.tese.visualizacao.grid.Grid;
+import doutorado.tese.visualizacao.grid.ItemGrid;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -67,6 +68,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         gridPanel = new Grid();
         painelEsquerda.add(gridPanel);
         gridPanel.setDoubleBuffered(true);
+        habilitarRadiosOpcoesGrid(true);
         msgFeedback.setVisible(false);
     }
 
@@ -574,12 +576,13 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 
     private void botaoConfiVarVisuaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfiVarVisuaisActionPerformed
         variaveisVisuaisEscolhidas = parseListString2Array(varVisuaisEscolidasList.getModel());
-        gridPanel.setItensGrid(manipulador.getItens());
+        gridPanel.criarItens();
         gridPanel.setVariaveisVisuaisEscolhidas(variaveisVisuaisEscolhidas);
         gridPanel.loadMatrizGlyphs();
-        configComboBoxVarVisuais();
-                
+//        configComboBoxVarVisuais();                
         msgFeedback.setVisible(true);
+        gridPanel.setCofig();
+        gridPanel.repaint();
     }//GEN-LAST:event_botaoConfiVarVisuaisActionPerformed
 
     private void varVisuaisEscolidasListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_varVisuaisEscolidasListValueChanged
@@ -648,8 +651,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         ArrayList<Object> atributosEscolhidosGlyph = getAtributosEscolhidosGlyph();
         gridPanel.setAtributosEscolhidos(atributosEscolhidosGlyph);
         
-        gridPanel.setCofig();
-        gridPanel.repaint();
+        
         
 //        atualizarLegendaGlyphs(atributosEscolhidosGlyph);
     }//GEN-LAST:event_viewGlyphsButtonActionPerformed
@@ -786,11 +788,6 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         return convertida;
     }
 
-    private void limparPainelEsquerda() {
-        painelEsquerda.removeAll();
-        painelEsquerda.repaint();
-    }
-
     private void loadVariaveisGlyph(Object[] objs, JComboBox<String> atributo) {
         DefaultComboBoxModel model = new DefaultComboBoxModel(objs);
         atributo.setModel(model);
@@ -905,7 +902,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         atributosEscolhidosGlyph.add(numeroComboBox.getSelectedItem());
         return atributosEscolhidosGlyph;
     }
-    
+        
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (Constantes.PROGRESS == evt.getPropertyName()) {
