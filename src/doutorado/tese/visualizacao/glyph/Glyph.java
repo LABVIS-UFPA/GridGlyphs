@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.util.ArrayList;
+import javax.swing.JMenuBar;
 
 /**
  *
@@ -18,7 +19,7 @@ public abstract class Glyph {
 
     protected Glyph glyphChild;
     private Rectangle bounds;
-    private float pectSobreposicao = 1f;
+    public float pectSobreposicao = 1f;
 
     public void paint(Graphics2D g2d) {
         if (glyphChild != null) {

@@ -10,6 +10,8 @@ import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.numbers.Numeral;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.FormaGeometrica;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Overlap;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Retangulo;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Trapezio;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
 import doutorado.tese.visualizacao.grid.ItemGrid;
@@ -27,14 +29,17 @@ public class GlyphManager {
     private Numeral numero;
     private final HashMap<String, Boolean> activeLayers;
     private String[] variaveisVisuaisEscolhidas;
+    private float porcetagem;    
 
     public GlyphManager() {
         activeLayers = new HashMap<>();
         resetActiveLayers();
+            
     }
 
     public Glyph setLayerInGlyph(String varVisual) {
         Glyph glyph = null;
+      
 
         switch (varVisual) {
             case "Color":
@@ -73,6 +78,12 @@ public class GlyphManager {
                 Textura textura = (Textura) glyph;                
                 textura.setNomeTextura("PATTERN_HORIZONTAL");
                 break;
+            case "Overlap":
+                glyph = new FormaGeometrica();
+                glyph.setPectSobreposicao(porcetagem);
+                FormaGeometrica overlap = (FormaGeometrica) glyph;               
+                overlap.setDrawBehavior(new Overlap());
+                break;
             default:
                 throw new AssertionError();
         }
@@ -104,6 +115,8 @@ public class GlyphManager {
         activeLayers.put("Shape", false);
         activeLayers.put("Color", false);
         activeLayers.put("Texture", false);
+        activeLayers.put("Overlap", false);
+
     }
 
     /**
@@ -118,5 +131,13 @@ public class GlyphManager {
      */
     public void setVariaveisVisuaisEscolhidas(String[] variaveisVisuaisEscolhidas) {
         this.variaveisVisuaisEscolhidas = variaveisVisuaisEscolhidas;
+    }
+    
+    public float getPorcetagem() {
+        return porcetagem;
+    }
+
+    public void setPorcetagem(float porcetagem) {
+        this.porcetagem = porcetagem;
     }
 }

@@ -36,9 +36,11 @@ public class Grid extends JPanel {
     private ItemGrid[] itensGrid;
     private final GlyphManager glyphManager;
     private String[] variaveisVisuaisEscolhidas;
+    private float porcetagem;
 
     public Grid() {
         glyphManager = new GlyphManager();
+        glyphManager.setPorcetagem(porcetagem);
 
         addHierarchyBoundsListener(new HierarchyBoundsAdapter() {
             @Override
@@ -187,4 +189,14 @@ public class Grid extends JPanel {
     public void setVariaveisVisuaisEscolhidas(String[] variaveisVisuaisEscolhidas) {
         this.variaveisVisuaisEscolhidas = variaveisVisuaisEscolhidas;
     }
+
+    public float getPorcetagem() {
+        return porcetagem;
+    }
+
+    public void setPorcetagem(float porcetagem) {
+        this.porcetagem = porcetagem;
+    }
+    
+    
 }
