@@ -29,7 +29,7 @@ public class GlyphManager {
     private Numeral numero;
     private final HashMap<String, Boolean> activeLayers;
     private String[] variaveisVisuaisEscolhidas;
-    private float porcetagem;    
+    private float porcetagem;
 
     public GlyphManager() {
         activeLayers = new HashMap<>();
@@ -90,7 +90,7 @@ public class GlyphManager {
 
         return glyph;
     }
-
+    
     public void configLayers(ItemGrid item) {
         Glyph glyph = item.getGlyph();
         glyph.killAllChild();
