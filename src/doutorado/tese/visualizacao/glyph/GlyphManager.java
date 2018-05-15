@@ -78,7 +78,7 @@ public class GlyphManager {
 
         return glyph;
     }
-
+    
     public void configLayers(ItemGrid item) {
         Glyph glyph = item.getGlyph();
         glyph.killAllChild();

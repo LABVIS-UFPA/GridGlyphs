@@ -67,7 +67,7 @@ public abstract class Glyph {
     public float getPectSobreposicao() {
         return pectSobreposicao;
     }
-
+    
     public void setPectSobreposicao(float pectSobreposicao) {
         this.pectSobreposicao = pectSobreposicao;
     }

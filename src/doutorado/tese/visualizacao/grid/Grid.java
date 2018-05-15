@@ -9,14 +9,18 @@ import doutorado.tese.util.io.ManipuladorArquivo;
 import doutorado.tese.visualizacao.glyph.Glyph;
 import doutorado.tese.visualizacao.glyph.GlyphConcrete;
 import doutorado.tese.visualizacao.glyph.GlyphManager;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.numbers.Numeral;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.HierarchyBoundsAdapter;
 import java.awt.event.HierarchyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +44,41 @@ public class Grid extends JPanel {
     private float quantOlverlap;
 
     public Grid() {
+         this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                System.out.println(e.getX() + " ," + e.getY());
+
+                int g = 0;
+                int size = Math.min(getWidth() - 4, getHeight() - 4) / getQuantVert();
+                for (int i = 0; i < getQuantHoriz(); i++) {
+                    for (int j = 0; j < getQuantVert(); j++) {
+                        if (matrizGlyph[i][j].getBounds().contains(e.getX(), e.getY())) {
+                            while (g < itensGrid.length) {
+                                //System.out.println(itensGrid[g].getGlyph().getBounds());
+                                //System.out.println(itensGrid[g].getGlyph().toString());
+                                //System.out.println(itensGrid[g].getGlyph());
+                                break;
+                            }
+                            g++;
+                            ArrayList<Glyph> list = new ArrayList<>();
+                            matrizGlyph[i][j].getChildren(list);
+                            System.out.println("glyph"+list.toString());
+                            
+                            Glyph glyph;
+                            glyph = new Cor();
+                            Cor cor = (Cor) glyph;
+                            cor.setCor(Color.decode("#3366cc"));
+                            System.out.println(list.contains(cor));
+                            System.out.println("achou item!");
+                            break;
+                        }
+                    }
+                }
+            }
+
+        });
         glyphManager = new GlyphManager();
         glyphManager.setPerctOverlap(quantOlverlap);
 
