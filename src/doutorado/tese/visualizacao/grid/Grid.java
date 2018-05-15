@@ -13,6 +13,7 @@ import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.numbers.Numeral;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -42,38 +43,24 @@ public class Grid extends JPanel {
     private String[] variaveisVisuaisEscolhidas;
     private float porcetagem;
     private float quantOlverlap;
+    private boolean mouseClickedAchouItem = false;
 
     public Grid() {
-         this.addMouseListener(new MouseAdapter() {
+        this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 System.out.println(e.getX() + " ," + e.getY());
-
-                int g = 0;
-                int size = Math.min(getWidth() - 4, getHeight() - 4) / getQuantVert();
-                for (int i = 0; i < getQuantHoriz(); i++) {
-                    for (int j = 0; j < getQuantVert(); j++) {
-                        if (matrizGlyph[i][j].getBounds().contains(e.getX(), e.getY())) {
-                            while (g < itensGrid.length) {
-                                //System.out.println(itensGrid[g].getGlyph().getBounds());
-                                //System.out.println(itensGrid[g].getGlyph().toString());
-                                //System.out.println(itensGrid[g].getGlyph());
-                                break;
-                            }
-                            g++;
-                            ArrayList<Glyph> list = new ArrayList<>();
-                            matrizGlyph[i][j].getChildren(list);
-                            System.out.println("glyph"+list.toString());
-                            
-                            Glyph glyph;
-                            glyph = new Cor();
-                            Cor cor = (Cor) glyph;
-                            cor.setCor(Color.decode("#3366cc"));
-                            System.out.println(list.contains(cor));
-                            System.out.println("achou item!");
-                            break;
-                        }
+                for (ItemGrid itemGrid : itensGrid) {
+                    if (itemGrid.getGlyph().getBounds().contains(e.getX(), e.getY())) {
+                        Graphics2D g2d = (Graphics2D) getGraphics().create();
+                        g2d.setStroke(new BasicStroke(3f));
+                        g2d.setColor(Color.GREEN);
+                        g2d.drawRect(itemGrid.getGlyph().getBounds().x,
+                                itemGrid.getGlyph().getBounds().y,
+                                itemGrid.getGlyph().getBounds().width,
+                                itemGrid.getGlyph().getBounds().height);
+                        g2d.dispose();
                     }
                 }
             }
@@ -178,7 +165,7 @@ public class Grid extends JPanel {
         //TODO
     }
 
-    public ItemGrid[] criarItens(){
+    public ItemGrid[] criarItens() {
         int totalItens = getQuantHoriz() * getQuantVert();
         setItensGrid(new ItemGrid[totalItens]);
         for (int i = 0; i < getItensGrid().length; i++) {
@@ -186,7 +173,7 @@ public class Grid extends JPanel {
         }
         return getItensGrid();
     }
-    
+
     public int getQuantVert() {
         return quantVert;
     }
@@ -252,6 +239,5 @@ public class Grid extends JPanel {
     public void setQuantOlverlap(float quantOlverlap) {
         this.quantOlverlap = quantOlverlap;
     }
-    
-    
+
 }
