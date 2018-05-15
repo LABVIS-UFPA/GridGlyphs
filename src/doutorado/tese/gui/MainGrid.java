@@ -84,9 +84,10 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        gridButtonGroup = new javax.swing.ButtonGroup();
         progressBarDialog = new javax.swing.JDialog();
         progressoBarra = new javax.swing.JProgressBar();
+        overlapButtonGroup = new javax.swing.ButtonGroup();
         painelEsquerda = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -134,9 +135,9 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         jMenu1 = new javax.swing.JMenu();
         openFileMenuItem = new javax.swing.JMenuItem();
 
-        buttonGroup1.add(radio5x10);
-        buttonGroup1.add(radio10x20);
-        buttonGroup1.add(radio15x24);
+        gridButtonGroup.add(radio5x10);
+        gridButtonGroup.add(radio10x20);
+        gridButtonGroup.add(radio15x24);
 
         progressBarDialog.setTitle("Please wait..."
         );
@@ -160,6 +161,11 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                 .addComponent(progressoBarra, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(42, Short.MAX_VALUE))
         );
+
+        overlapButtonGroup.add(radio40);
+        overlapButtonGroup.add(radio60);
+        overlapButtonGroup.add(radio80);
+        overlapButtonGroup.add(radio100);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -335,12 +341,14 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                         .addComponent(msgFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(153, 153, 153))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(radio5x10)))
+                                .addComponent(radio5x10))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(13, 13, 13)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -349,22 +357,23 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                                 .addComponent(radio15x24)
                                 .addGap(250, 250, 250))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(42, 42, 42)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(81, 81, 81)
-                                        .addComponent(radio60)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(radio40)))
+                                .addGap(42, 42, 42)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(radio100)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(radio80)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(171, 171, 171)
+                                .addComponent(radio60)
+                                .addGap(18, 18, 18)
+                                .addComponent(radio40))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(radio100)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(radio80)
+                                .addGap(135, 135, 135)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -376,14 +385,14 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                     .addComponent(radio5x10)
                     .addComponent(radio10x20)
                     .addComponent(radio15x24))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(radio100)
                     .addComponent(radio80)
                     .addComponent(radio60)
                     .addComponent(radio40))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -494,7 +503,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(viewGlyphsButton)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Glyphs", jPanel4);
@@ -577,7 +586,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -755,31 +764,33 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 
     private void radio5x10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio5x10ActionPerformed
         configGrid();
+        habilitarRadioOpcoesOverlap(true);
     }//GEN-LAST:event_radio5x10ActionPerformed
 
     private void radio10x20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio10x20ActionPerformed
         configGrid();
+        habilitarRadioOpcoesOverlap(true);
     }//GEN-LAST:event_radio10x20ActionPerformed
 
     private void radio15x24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio15x24ActionPerformed
         configGrid();
+        habilitarRadioOpcoesOverlap(true);
     }//GEN-LAST:event_radio15x24ActionPerformed
 
     private void radio100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio100ActionPerformed
-        configGrid();
+        configOverlap();
     }//GEN-LAST:event_radio100ActionPerformed
 
     private void radio80ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio80ActionPerformed
-        configGrid();
-
+        configOverlap();
     }//GEN-LAST:event_radio80ActionPerformed
 
     private void radio40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio40ActionPerformed
-        configGrid();
+        configOverlap();
     }//GEN-LAST:event_radio40ActionPerformed
 
     private void radio60ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio60ActionPerformed
-        configGrid();
+        configOverlap();
     }//GEN-LAST:event_radio60ActionPerformed
 
     /**
@@ -824,10 +835,10 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton baixoButton;
     private javax.swing.JButton botaoConfiVarVisuais;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton cimaButton;
     private javax.swing.JComboBox<String> corComboBox;
     private javax.swing.JComboBox<String> formaComboBox;
+    private javax.swing.ButtonGroup gridButtonGroup;
     private javax.swing.JButton inserirButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -856,6 +867,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JLabel msgFeedback;
     private javax.swing.JComboBox<String> numeroComboBox;
     private javax.swing.JMenuItem openFileMenuItem;
+    private javax.swing.ButtonGroup overlapButtonGroup;
     private javax.swing.JPanel painelEsquerda;
     private javax.swing.JDialog progressBarDialog;
     private javax.swing.JProgressBar progressoBarra;
@@ -874,20 +886,6 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     // End of variables declaration//GEN-END:variables
 
     public void configGrid() {
-        if (radio100.isSelected()) {
-
-            porcentagem = 1f;
-        }
-        else if (radio80.isSelected()) {
-            porcentagem = 0.8f;
-        }
-        else if (radio60.isSelected()) {
-            porcentagem = 0.6f;
-        }
-        else if (radio40.isSelected()) {
-            porcentagem = 0.4f;
-        }
-
         if (radio15x24.isSelected()) {
             gridPanel.setQuantVert(15);
             gridPanel.setQuantHoriz(24);
@@ -897,6 +895,18 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         } else {
             gridPanel.setQuantVert(5);
             gridPanel.setQuantHoriz(10);
+        }        
+    }
+    
+    private void configOverlap(){
+        if (radio100.isSelected()) {
+            gridPanel.setQuantOlverlap(1f);
+        } else if (radio80.isSelected()) {
+            gridPanel.setQuantOlverlap(0.8f);
+        } else if (radio60.isSelected()) {
+            gridPanel.setQuantOlverlap(0.6f);
+        } else if (radio40.isSelected()) {
+            gridPanel.setQuantOlverlap(0.4f);
         }
         if (!varVisuaisList.isEnabled()) {
             varVisuaisList.setEnabled(true);
@@ -1001,11 +1011,13 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         radio5x10.setEnabled(ativador);
         radio10x20.setEnabled(ativador);
         radio15x24.setEnabled(ativador);
+    }
+
+    private void habilitarRadioOpcoesOverlap(boolean ativador) {
         radio100.setEnabled(ativador);
         radio80.setEnabled(ativador);
         radio60.setEnabled(ativador);
         radio40.setEnabled(ativador);
-
     }
 
     private void configComboBoxVarVisuais() {

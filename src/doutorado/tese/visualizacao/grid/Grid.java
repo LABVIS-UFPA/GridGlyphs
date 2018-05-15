@@ -37,10 +37,11 @@ public class Grid extends JPanel {
     private final GlyphManager glyphManager;
     private String[] variaveisVisuaisEscolhidas;
     private float porcetagem;
+    private float quantOlverlap;
 
     public Grid() {
         glyphManager = new GlyphManager();
-        glyphManager.setPorcetagem(porcetagem);
+        glyphManager.setPerctOverlap(quantOlverlap);
 
         addHierarchyBoundsListener(new HierarchyBoundsAdapter() {
             @Override
@@ -101,6 +102,7 @@ public class Grid extends JPanel {
         glyphManager.setVariaveisVisuaisEscolhidas(getVariaveisVisuaisEscolhidas());
         glyphManager.analyseLayers();
         for (ItemGrid itensGrid : getItensGrid()) {
+            glyphManager.setPerctOverlap(quantOlverlap);
             glyphManager.configLayers(itensGrid);
         }
     }
@@ -196,6 +198,20 @@ public class Grid extends JPanel {
 
     public void setPorcetagem(float porcetagem) {
         this.porcetagem = porcetagem;
+    }
+
+    /**
+     * @return the quantOlverlap
+     */
+    public float getQuantOlverlap() {
+        return quantOlverlap;
+    }
+
+    /**
+     * @param quantOlverlap the quantOlverlap to set
+     */
+    public void setQuantOlverlap(float quantOlverlap) {
+        this.quantOlverlap = quantOlverlap;
     }
     
     

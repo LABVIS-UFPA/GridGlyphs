@@ -19,7 +19,7 @@ public abstract class Glyph {
 
     protected Glyph glyphChild;
     private Rectangle bounds;
-    public float pectSobreposicao = 1f;
+    public float pectSobreposicao;
 
     public void paint(Graphics2D g2d) {
         if (glyphChild != null) {

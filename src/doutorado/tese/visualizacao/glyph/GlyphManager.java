@@ -5,13 +5,11 @@
  */
 package doutorado.tese.visualizacao.glyph;
 
-import doutorado.tese.util.io.ManipuladorArquivo;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.numbers.Numeral;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.FormaGeometrica;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Overlap;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Retangulo;
+import doutorado.tese.visualizacao.glyph.decorator.overlap.Overlap;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Trapezio;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
 import doutorado.tese.visualizacao.grid.ItemGrid;
@@ -29,41 +27,29 @@ public class GlyphManager {
     private Numeral numero;
     private final HashMap<String, Boolean> activeLayers;
     private String[] variaveisVisuaisEscolhidas;
-    private float porcetagem;    
+    private float perctOverlap;
 
     public GlyphManager() {
         activeLayers = new HashMap<>();
         resetActiveLayers();
-            
+
     }
 
     public Glyph setLayerInGlyph(String varVisual) {
         Glyph glyph = null;
-      
 
         switch (varVisual) {
             case "Color":
                 glyph = new Cor();
                 Cor cor = (Cor) glyph;
                 cor.setCor(Color.decode("#3366cc"));
+                cor.setPectSobreposicao(perctOverlap);
                 break;
             case "Letter":
                 glyph = new Letra();
                 letra = (Letra) glyph;
-                if (activeLayers.get("Number")) {
-                    letra.setLetra("I");
-                } else {
-                    letra.setLetra("I");
-                }
-                break;
-            case "Number":
-                glyph = new Numeral();
-                numero = (Numeral) glyph;
-                if (activeLayers.get("Letter")) {
-                    numero.setNumero("3");
-                } else {
-                    numero.setNumero("3");
-                }
+                letra.setLetra("H");
+//                letra.pectSobreposicao(perctOverlap);
                 break;
             case "Shape":
                 glyph = new FormaGeometrica();
@@ -71,18 +57,20 @@ public class GlyphManager {
 //                forma.setDrawBehavior(new Cruz());
 //                forma.setDrawBehavior(new Ellipse());
                 forma.setDrawBehavior(new Trapezio());
+                forma.setPectSobreposicao(perctOverlap);
 //                System.out.println("criou forma");
                 break;
             case "Texture":
                 glyph = new Textura(Color.GRAY, new Color(255, 0, 0, 0));
-                Textura textura = (Textura) glyph;                
+                Textura textura = (Textura) glyph;
                 textura.setNomeTextura("PATTERN_HORIZONTAL");
+                textura.setPectSobreposicao(perctOverlap);
                 break;
             case "Overlap":
-                glyph = new FormaGeometrica();
-                glyph.setPectSobreposicao(porcetagem);
-                FormaGeometrica overlap = (FormaGeometrica) glyph;               
-                overlap.setDrawBehavior(new Overlap());
+                glyph = new Overlap();
+                Overlap overlap = (Overlap) glyph;
+                overlap.setCor(Color.WHITE);
+                overlap.setPectSobreposicao(getPerctOverlap());
                 break;
             default:
                 throw new AssertionError();
@@ -102,7 +90,7 @@ public class GlyphManager {
         glyph.setBounds(glyph.getBounds());
     }
 
-    public void analyseLayers() {        
+    public void analyseLayers() {
         resetActiveLayers();
         for (String i : getVariaveisVisuaisEscolhidas()) {
             activeLayers.put(i, true);
@@ -132,12 +120,12 @@ public class GlyphManager {
     public void setVariaveisVisuaisEscolhidas(String[] variaveisVisuaisEscolhidas) {
         this.variaveisVisuaisEscolhidas = variaveisVisuaisEscolhidas;
     }
-    
-    public float getPorcetagem() {
-        return porcetagem;
+
+    public float getPerctOverlap() {
+        return perctOverlap;
     }
 
-    public void setPorcetagem(float porcetagem) {
-        this.porcetagem = porcetagem;
+    public void setPerctOverlap(float perctOverlap) {
+        this.perctOverlap = perctOverlap;
     }
 }

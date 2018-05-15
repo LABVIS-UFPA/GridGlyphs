@@ -91,6 +91,7 @@ public class Trapezio implements DrawBehavior {
         return (yPoints[2] - yPoints[0]) * (xPoints[3] - xPoints[2]);
     }
 
+    @Override
     public Shape getClipShape() {
         return polygon;
     }
