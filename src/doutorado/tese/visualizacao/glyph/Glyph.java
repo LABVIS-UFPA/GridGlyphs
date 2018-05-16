@@ -22,6 +22,7 @@ public abstract class Glyph {
     public float pectSobreposicao;
     private Glyph father;
     private final ArrayList children = new ArrayList();
+    public Boolean selecionado = false;
 
     public void paint(Graphics2D g2d) {
         if (child != null) {
@@ -46,8 +47,9 @@ public abstract class Glyph {
     }
 
     /**
-     * Metodo que faz a inclusao de um Glyph filho ao GLyphs pai.
-     * Este metodo tambem atualiza o pai do glyph filho.
+     * Metodo que faz a inclusao de um Glyph filho ao GLyphs pai. Este metodo
+     * tambem atualiza o pai do glyph filho.
+     *
      * @param glyphChild glyph filho a ser incluido
      */
     public void appendChild(Glyph glyphChild) {
@@ -96,6 +98,14 @@ public abstract class Glyph {
      */
     protected Glyph getFather() {
         return father;
+    }
+
+    public Boolean getSelecionado() {
+        return selecionado;
+    }
+
+    public void setSelecionado(Boolean selecionado) {
+        this.selecionado = selecionado;
     }
 
     @Override
