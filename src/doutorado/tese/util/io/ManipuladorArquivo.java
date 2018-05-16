@@ -111,6 +111,7 @@ public class ManipuladorArquivo {
         return vetorLinha;
     }
 
+    
     /**
      * Retorna um objeto coluna pelo nome da coluna
      *
