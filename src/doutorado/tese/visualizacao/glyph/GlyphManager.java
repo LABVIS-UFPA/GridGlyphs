@@ -32,7 +32,6 @@ public class GlyphManager {
     public GlyphManager() {
         activeLayers = new HashMap<>();
         resetActiveLayers();
-
     }
 
     public Glyph setLayerInGlyph(String varVisual) {
@@ -49,7 +48,7 @@ public class GlyphManager {
                 glyph = new Letra();
                 letra = (Letra) glyph;
                 letra.setLetra("H");
-//                letra.pectSobreposicao(perctOverlap);
+                letra.setPectSobreposicao(perctOverlap);
                 break;
             case "Shape":
                 glyph = new FormaGeometrica();
@@ -80,14 +79,15 @@ public class GlyphManager {
     }
     
     public void configLayers(ItemGrid item) {
-        Glyph glyph = item.getGlyph();
-        glyph.killAllChild();
+        Glyph father = item.getGlyph();
+        father.killAllChild();
         for (String varVisual : getVariaveisVisuaisEscolhidas()) {
-            glyph.appendChild(setLayerInGlyph(varVisual));
+            Glyph child = setLayerInGlyph(varVisual);
+            father.appendChild(child);
             ArrayList<Glyph> list = new ArrayList<>();
-            glyph.getChildren(list);
+            father.getChildren(list);
         }
-        glyph.setBounds(glyph.getBounds());
+        father.setBounds(father.getBounds());
     }
 
     public void analyseLayers() {

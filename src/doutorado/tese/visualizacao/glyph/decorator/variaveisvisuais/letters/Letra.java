@@ -46,14 +46,14 @@ public class Letra extends Glyph {
     }
 
     private void drawLetra(Graphics2D g2d) {
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
         g2d.setFont(getFonte());
         //calculode centro das letras
         Point centroLetra = calcularFontMetrics(g2d);
         int x = centroLetra.x;
         int y = centroLetra.y;
-        
+
         g2d.setColor(new Color(0, 255, 0, 0));
         g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
         g2d.setColor(Color.black);
@@ -99,6 +99,20 @@ public class Letra extends Glyph {
         yPoints[1] = height;
     }
 
+    @Override
+    public Shape getClipShape() {
+        BufferedImage textImage = new BufferedImage(
+                getBounds().width,
+                getBounds().height,
+                BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = textImage.createGraphics();
+        FontRenderContext frc = g2d.getFontRenderContext();
+        Point centroLetra = calcularFontMetrics(g2d);
+        int x = centroLetra.x;
+        int y = centroLetra.y;
+        return getFonte().createGlyphVector(frc, letra).getOutline(x, y);
+    }
+
     /**
      * @return the fonte
      */
@@ -138,19 +152,4 @@ public class Letra extends Glyph {
     public int getArea() {
         return heightLetra * widthLetra;
     }
-
-    @Override
-    public Shape getClipShape() {
-        BufferedImage textImage = new BufferedImage(
-                getBounds().width,
-                getBounds().height,
-                BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = textImage.createGraphics();
-        FontRenderContext frc = g2d.getFontRenderContext();
-        Point centroLetra = calcularFontMetrics(g2d);
-        int x = centroLetra.x;
-        int y = centroLetra.y;
-        return getFonte().createGlyphVector(frc, letra).getOutline(x, y);
-    }
-
 }

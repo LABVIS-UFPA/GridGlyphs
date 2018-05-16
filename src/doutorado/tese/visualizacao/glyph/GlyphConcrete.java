@@ -20,8 +20,8 @@ public class GlyphConcrete extends Glyph {
     @Override
     public void setBounds(Rectangle bounds) {
         this.bounds = bounds;
-        if (this.glyphChild != null) {
-            this.glyphChild.setBounds(new Rectangle(bounds));
+        if (this.child != null) {
+            this.child.setBounds(new Rectangle(bounds));
         }
     }
 

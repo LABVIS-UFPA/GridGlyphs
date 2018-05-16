@@ -191,7 +191,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         jScrollPane2.setViewportView(varVisuaisEscolidasList);
 
         varVisuaisList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Texture", "Color", "Shape", "Letter", "Number", "Overlap" };
+            String[] strings = { "Texture", "Color", "Shape", "Letter", "Overlap" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -351,7 +351,6 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                                 .addGap(13, 13, 13)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(radio10x20)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(radio15x24)
@@ -372,8 +371,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(radio100)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(radio80)
-                                .addGap(135, 135, 135)))
+                                .addComponent(radio80)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(

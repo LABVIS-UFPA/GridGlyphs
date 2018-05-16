@@ -1,5 +1,6 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture;
 
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.GeometryFactory;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -7,11 +8,13 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Paint;
+import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.TexturePaint;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -64,6 +67,7 @@ public class TMPatternFactory {
         textures = new HashMap<>();
         textureColor = color;
         this.backgroungColor = backgroundColor;
+//        buildPatternHorizontalPolygon();
         buildPatternHorizontal();
         buildPatternVertical();
         buildPatternDiag_Right2Left();
@@ -89,7 +93,7 @@ public class TMPatternFactory {
     /**
      * Returns the running instance of TMPatternFactory.
      *
-     * @param color the texture color 
+     * @param color the texture color
      * @return the running instance of TMPatternFactory
      */
     public static TMPatternFactory getInstance(Color color, Color backgroundColor) {
@@ -192,6 +196,60 @@ public class TMPatternFactory {
         return panel;
     }
 
+    private void buildPatternHorizontalPolygon() {
+        BufferedImage image = new BufferedImage(16, 16, BufferedImage.TYPE_4BYTE_ABGR);
+        Graphics2D g2d = image.createGraphics();
+        g2d.setStroke(new BasicStroke(3f));
+        g2d.setColor(backgroungColor);
+        g2d.fillRect(0, 0, 16, 16);
+
+        g2d.setColor(textureColor);
+        
+        Polygon p1 = new Polygon();
+        p1.addPoint(0, 6);
+        p1.addPoint(16, 6);
+
+        Polygon p2 = new Polygon();
+        p2.addPoint(0, 14);
+        p2.addPoint(16, 14);
+
+        Polygon p3 = new Polygon();
+        p3.addPoint(0, 6);
+        p3.addPoint(0, 14);
+
+        Polygon p4 = new Polygon();
+        p4.addPoint(16, 6);
+        p4.addPoint(16, 14);
+
+//        Area area1 = new Area(p1);
+//        Area area2 = new Area(p2);
+//        Area area3 = new Area(p3);
+//        Area area4 = new Area(p4);
+        
+//        area1.intersect(area3);
+//        area2.intersect(area4);
+//        System.out.println("area1.getBounds(): "+area1.getBounds());
+        
+//        area1.intersect(area2);
+        g2d.drawPolygon(p1);
+        g2d.drawPolygon(p2);
+        g2d.setColor(new Color(255, 0, 0, 100));
+        g2d.drawPolygon(p3);
+        g2d.drawPolygon(p4);
+        
+//        g2d.fill(area1);
+        
+//        System.out.println(textureColor);
+////        g.drawLine(0, 1, 16, 1);
+//        g.drawLine(0, 6, 16, 6);
+////        g.drawLine(0, 8, 16, 8);
+//        g.drawLine(0, 14, 16, 14);
+        Rectangle r = new Rectangle(0, 0, 16, 16);
+        Paint pattern = new TexturePaint(image, r);
+//        patterns.put("PATTERN_HORIZONTAL", pattern);
+        textures.put("PATTERN_HORIZONTAL_POLYGON", pattern);
+    }
+
     /* --- Patterns building --- */
     /**
      * Builds and adds the PATTERN_HORIZONTAL in patterns.
@@ -203,7 +261,6 @@ public class TMPatternFactory {
         g.setColor(backgroungColor);
         g.fillRect(0, 0, 16, 16);
         g.setColor(textureColor);
-        System.out.println(textureColor);
 //        g.drawLine(0, 1, 16, 1);
         g.drawLine(0, 6, 16, 6);
 //        g.drawLine(0, 8, 16, 8);
@@ -497,6 +554,7 @@ public class TMPatternFactory {
         g.drawLine(3, 8, 6, 5);
         Rectangle r = new Rectangle(0, 0, 10, 10);
         Paint pattern = new TexturePaint(image, r);
+        
         textures.put("PATTERN_DOWN", pattern);
     }
 
@@ -564,6 +622,7 @@ class JPatternPanel extends JPanel {
     public void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setPaint(pattern);
+        
         g2.fillRect(getX(), getY(), getWidth(), getHeight());
     }
 

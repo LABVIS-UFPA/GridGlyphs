@@ -50,7 +50,6 @@ public class Grid extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                System.out.println(e.getX() + " ," + e.getY());
                 for (ItemGrid itemGrid : itensGrid) {
                     if (itemGrid.getGlyph().getBounds().contains(e.getX(), e.getY())) {
                         Graphics2D g2d = (Graphics2D) getGraphics().create();
