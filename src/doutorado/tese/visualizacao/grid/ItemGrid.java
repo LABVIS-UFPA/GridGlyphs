@@ -49,4 +49,7 @@ public class ItemGrid {
     public void setGlyph(Glyph glyph) {
         this.glyph = glyph;
     }
+    
+    
+    
 }

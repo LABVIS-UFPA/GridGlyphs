@@ -20,6 +20,7 @@ public abstract class Glyph {
     protected Glyph glyphChild;
     private Rectangle bounds;
     public float pectSobreposicao;
+    public Boolean selecionado = false;
 
     public void paint(Graphics2D g2d) {
         if (glyphChild != null) {
@@ -71,4 +72,14 @@ public abstract class Glyph {
     public void setPectSobreposicao(float pectSobreposicao) {
         this.pectSobreposicao = pectSobreposicao;
     }
+
+    public Boolean getSelecionado() {
+        return selecionado;
+    }
+
+    public void setSelecionado(Boolean selecionado) {
+        this.selecionado = selecionado;
+    }
+    
+    
 }
