@@ -9,6 +9,7 @@ import doutorado.tese.visualizacao.glyph.Glyph;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Paint;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -85,5 +86,10 @@ public class FormaGeometrica extends Glyph {
     @Override
     public Shape getClipShape() {
         return this.drawBehavior.getClipShape();
+    }
+
+    @Override
+    public Paint getTexturePaint() {
+        return null;
     }
 }

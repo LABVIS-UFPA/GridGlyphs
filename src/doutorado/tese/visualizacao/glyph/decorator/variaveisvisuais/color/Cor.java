@@ -9,9 +9,11 @@ import doutorado.tese.visualizacao.glyph.Glyph;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Paint;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.TexturePaint;
 
 /**
  *
@@ -24,17 +26,22 @@ public class Cor extends Glyph {
     private Color cor;
 
     @Override
-    public void paint(Graphics2D g) {
-        drawCor(g);
-        super.paint(g);
-    }
-
-    private void drawCor(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-
+    public void paint(Graphics2D g2d) {
+        if (g2d.getPaint() instanceof TexturePaint) {
+            TexturePaint paint = (TexturePaint) g2d.getPaint();
+            for (int i = 0; i < paint.getImage().getWidth(); i++) {
+                for (int j = 0; j < paint.getImage().getHeight(); j++) {
+                    if (paint.getImage().getRGB(i, j) == Color.GRAY.getRGB()) {
+                        paint.getImage().setRGB(i, j, getCor().getRGB());
+                    }
+                }
+            }
+        } else {
+            g2d.setColor(getCor());            
+        }
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setColor(getCor());
         g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
+        super.paint(g2d);
     }
 
     @Override
@@ -79,6 +86,11 @@ public class Cor extends Glyph {
     @Override
     public Shape getClipShape() {
         return getBounds();
+    }
+
+    @Override
+    public Paint getTexturePaint() {
+        return null;
     }
 
 }

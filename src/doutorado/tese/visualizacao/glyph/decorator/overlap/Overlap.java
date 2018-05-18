@@ -10,6 +10,7 @@ import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.DrawB
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Paint;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
@@ -76,5 +77,10 @@ public class Overlap extends Glyph {
     @Override
     public Shape getClipShape() {
         return getBounds();
+    }
+
+    @Override
+    public Paint getTexturePaint() {
+        return null;
     }
 }

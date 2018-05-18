@@ -27,8 +27,6 @@ public class Trapezio implements DrawBehavior {
     public void paint(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-//        g2d.setPaint(Color.BLACK);
-
         g2d.setColor(Color.white);
         g2d.fillPolygon(polygon);
         g2d.setColor(Color.BLACK);

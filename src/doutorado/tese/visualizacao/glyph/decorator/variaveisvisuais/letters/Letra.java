@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
+import java.awt.Paint;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
@@ -151,5 +152,10 @@ public class Letra extends Glyph {
 
     public int getArea() {
         return heightLetra * widthLetra;
+    }
+
+    @Override
+    public Paint getTexturePaint() {
+        return null;
     }
 }

@@ -77,15 +77,18 @@ public class GlyphManager {
 
         return glyph;
     }
-    
+
     public void configLayers(ItemGrid item) {
         Glyph father = item.getGlyph();
         father.killAllChild();
         for (String varVisual : getVariaveisVisuaisEscolhidas()) {
             Glyph child = setLayerInGlyph(varVisual);
             father.appendChild(child);
-            ArrayList<Glyph> list = new ArrayList<>();
-            father.getChildren(list);
+//            ArrayList<Glyph> list = new ArrayList<>();
+//            father.getChildren(list);
+//            if (father.child.getClass().getSimpleName().equals("Textura")) {
+//                System.out.println("Cor Textura: "+((Textura) father.child).getCor());
+//            }
         }
         father.setBounds(father.getBounds());
     }

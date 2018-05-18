@@ -7,10 +7,16 @@ package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture;
 
 import doutorado.tese.visualizacao.glyph.Glyph;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Paint;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.TexturePaint;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
 
 /**
  *
@@ -24,28 +30,21 @@ public class Textura extends Glyph {
     TMPatternFactory textura;
     private Color cor;
     private Color backgroundColor;
+    BufferedImage clone;
 
-    public Textura() {
-        textura = TMPatternFactory.getInstance(Color.BLACK, Color.WHITE);
-    }    
-    
     public Textura(Color cor, Color backgroundColor) {
         textura = TMPatternFactory.getInstance(cor, backgroundColor);
     }
 
     @Override
     public void paint(Graphics2D g2d) {
-        drawTextura(g2d);
-        super.paint(g2d);
-    }
-
-    private void drawTextura(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setPaint(textura.get(getNomeTextura()));
 
         g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
         g2d.setColor(Color.BLACK);
         g2d.drawRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
+        super.paint(g2d);
     }
 
     @Override
@@ -97,6 +96,8 @@ public class Textura extends Glyph {
 
     public void setCor(Color cor) {
         this.cor = cor;
+//        textura.setTextureColor(this.cor);
+//        textura.resetTextures();
     }
 
     public Color getBackgroundColor() {
@@ -111,6 +112,31 @@ public class Textura extends Glyph {
     public Shape getClipShape() {
         return getBounds();
     }
-    
-    
+
+    @Override
+    public Paint getTexturePaint() {
+        Rectangle r = new Rectangle(0, 0, 16, 16);
+        BufferedImage original = ((TexturePaint) textura.get(getNomeTextura())).getImage();
+        if (clone == null) {
+            clone = deepCopy(original);
+        }
+        Paint pattern = new TexturePaint(clone, r);
+
+        return pattern;
+    }
+
+    public static BufferedImage deepCopy(BufferedImage bi) {
+        ColorModel cm = bi.getColorModel();
+        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+        WritableRaster raster = bi.copyData(null);
+        return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+    }
+
+    public static BufferedImage copyImage(BufferedImage source) {
+        BufferedImage b = new BufferedImage(source.getWidth(), source.getHeight(), source.getType());
+        Graphics2D g = (Graphics2D) b.createGraphics();
+        g.drawImage(source, 0, 0, null);
+        g.dispose();
+        return b;
+    }
 }
