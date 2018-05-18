@@ -5,9 +5,7 @@
  */
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
-import doutorado.tese.visualizacao.glyph.Glyph;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Rectangle;
@@ -19,6 +17,7 @@ public class Losango implements DrawBehavior {
     private int[] xPoints;
     private int[] yPoints;
     private Rectangle bounds;
+    Polygon p;
 
     public Losango() {
     }
@@ -28,7 +27,7 @@ public class Losango implements DrawBehavior {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);        
         g2d.setPaint(Color.BLACK);
         
-        Polygon p = new Polygon();        
+        p = new Polygon();        
         p.addPoint(xPoints[0], yPoints[0]);
         p.addPoint(xPoints[1], yPoints[1]);
         p.addPoint(xPoints[2], yPoints[2]);
@@ -104,6 +103,6 @@ public class Losango implements DrawBehavior {
 
     @Override
     public Shape getClipShape() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return p;
     }
 }
