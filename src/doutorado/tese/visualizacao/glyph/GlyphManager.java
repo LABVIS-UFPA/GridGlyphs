@@ -10,11 +10,10 @@ import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letr
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.numbers.Numeral;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.FormaGeometrica;
 import doutorado.tese.visualizacao.glyph.decorator.overlap.Overlap;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Trapezio;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.Cruz;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
 import doutorado.tese.visualizacao.grid.ItemGrid;
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -53,9 +52,9 @@ public class GlyphManager {
             case "Shape":
                 glyph = new FormaGeometrica();
                 FormaGeometrica forma = (FormaGeometrica) glyph;
-//                forma.setDrawBehavior(new Cruz());
+                forma.setDrawBehavior(new Cruz());
 //                forma.setDrawBehavior(new Ellipse());
-                forma.setDrawBehavior(new Trapezio());
+//                forma.setDrawBehavior(new Trapezio());
                 forma.setPectSobreposicao(perctOverlap);
 //                System.out.println("criou forma");
                 break;

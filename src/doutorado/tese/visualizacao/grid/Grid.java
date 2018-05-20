@@ -50,45 +50,44 @@ public class Grid extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                for (ItemGrid itemGrid : itensGrid) {
-                    if (itemGrid.getGlyph().getBounds().contains(e.getX(), e.getY())) {
-                        if (!itemGrid.getGlyph().getSelecionado()) {
-                  
-                        itemGrid.getGlyph().setSelecionado(true);
-                        Graphics2D g2d = (Graphics2D) getGraphics().create();
-                        g2d.setStroke(new BasicStroke(3f));
-                        g2d.setColor(Color.decode("#B22222"));
-                        
-                        g2d.drawRect(itemGrid.getGlyph().getBounds().x,
-                                itemGrid.getGlyph().getBounds().y,
-                                itemGrid.getGlyph().getBounds().width,
-                                itemGrid.getGlyph().getBounds().height);
-                        g2d.dispose();
+                if (itensGrid != null) {
+                    for (ItemGrid itemGrid : itensGrid) {
+                        if (itemGrid.getGlyph().getBounds().contains(e.getX(), e.getY())) {
+                            if (!itemGrid.getGlyph().getSelecionado()) {
+                                itemGrid.getGlyph().setSelecionado(true);
+                                Graphics2D g2d = (Graphics2D) getGraphics().create();
+                                g2d.setStroke(new BasicStroke(3f));
+                                g2d.setColor(Color.decode("#B22222"));
+
+                                g2d.drawRect(itemGrid.getGlyph().getBounds().x,
+                                        itemGrid.getGlyph().getBounds().y,
+                                        itemGrid.getGlyph().getBounds().width,
+                                        itemGrid.getGlyph().getBounds().height);
+                                g2d.dispose();
+                            } else {
+                                itemGrid.getGlyph().setSelecionado(false);
+                                Graphics2D g2d = (Graphics2D) getGraphics().create();
+                                g2d.setStroke(new BasicStroke(3f));
+                                g2d.setColor(Color.decode("#F0F8FF"));
+
+                                g2d.drawRect(itemGrid.getGlyph().getBounds().x,
+                                        itemGrid.getGlyph().getBounds().y,
+                                        itemGrid.getGlyph().getBounds().width,
+                                        itemGrid.getGlyph().getBounds().height);
+
+                                g2d.setStroke(new BasicStroke(0.1f));
+                                g2d.setColor(Color.BLACK);
+                                g2d.drawRect(itemGrid.getGlyph().getBounds().x,
+                                        itemGrid.getGlyph().getBounds().y,
+                                        itemGrid.getGlyph().getBounds().width,
+                                        itemGrid.getGlyph().getBounds().height);
+
+                                g2d.dispose();
+                            }
                         }
-                    else{
-                            itemGrid.getGlyph().setSelecionado(false);
-                            Graphics2D g2d = (Graphics2D) getGraphics().create();
-                            g2d.setStroke(new BasicStroke(3f));
-                            g2d.setColor(Color.decode("#F0F8FF"));
-                        
-                        g2d.drawRect(itemGrid.getGlyph().getBounds().x,
-                                itemGrid.getGlyph().getBounds().y,
-                                itemGrid.getGlyph().getBounds().width,
-                                itemGrid.getGlyph().getBounds().height);
-                        
-                        g2d.setStroke(new BasicStroke(0.1f));
-                        g2d.setColor(Color.BLACK);
-                        g2d.drawRect(itemGrid.getGlyph().getBounds().x,
-                                itemGrid.getGlyph().getBounds().y,
-                                itemGrid.getGlyph().getBounds().width,
-                                itemGrid.getGlyph().getBounds().height);
-                        
-                        g2d.dispose();                            
-                        }}
-                    
+                    }
                 }
             }
-
         });
         glyphManager = new GlyphManager();
         glyphManager.setPerctOverlap(quantOlverlap);
