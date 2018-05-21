@@ -5,7 +5,9 @@
  */
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
+import doutorado.tese.visualizacao.glyph.Glyph;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Rectangle;

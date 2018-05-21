@@ -1,6 +1,7 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
@@ -80,7 +81,7 @@ public class Retangulo implements DrawBehavior {
 
     @Override
     public Shape getClipShape() {
-        return getBounds();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
