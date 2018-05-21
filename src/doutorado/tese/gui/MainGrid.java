@@ -92,6 +92,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         progressoBarra = new javax.swing.JProgressBar();
         overlapButtonGroup = new javax.swing.ButtonGroup();
         scenariosButtonGroup = new javax.swing.ButtonGroup();
+        glyphModelRadioGroup = new javax.swing.ButtonGroup();
         jSplitPane1 = new javax.swing.JSplitPane();
         painelEsquerda = new javax.swing.JPanel();
         painelDireita = new javax.swing.JPanel();
@@ -145,6 +146,9 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         cenario2_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         cenario3_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         cenario4_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        overlappingRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        maskInclusionRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
 
         gridButtonGroup.add(radio5x10);
         gridButtonGroup.add(radio10x20);
@@ -182,6 +186,9 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         scenariosButtonGroup.add(cenario2_RadioButtonMenuItem);
         scenariosButtonGroup.add(cenario3_RadioButtonMenuItem);
         scenariosButtonGroup.add(cenario4_RadioButtonMenuItem);
+
+        glyphModelRadioGroup.add(overlappingRadioButtonMenuItem);
+        glyphModelRadioGroup.add(maskInclusionRadioButtonMenuItem);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -650,6 +657,18 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Glyph Model");
+
+        overlappingRadioButtonMenuItem.setSelected(true);
+        overlappingRadioButtonMenuItem.setText("Overlapping");
+        jMenu3.add(overlappingRadioButtonMenuItem);
+
+        maskInclusionRadioButtonMenuItem.setSelected(true);
+        maskInclusionRadioButtonMenuItem.setText("Mask inclusion");
+        jMenu3.add(maskInclusionRadioButtonMenuItem);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -931,6 +950,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JButton cimaButton;
     private javax.swing.JComboBox<String> corComboBox;
     private javax.swing.JComboBox<String> formaComboBox;
+    private javax.swing.ButtonGroup glyphModelRadioGroup;
     private javax.swing.ButtonGroup gridButtonGroup;
     private javax.swing.JButton inserirButton;
     private javax.swing.JLabel jLabel1;
@@ -947,6 +967,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -959,10 +980,12 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JComboBox<String> letraComboBox;
+    private javax.swing.JRadioButtonMenuItem maskInclusionRadioButtonMenuItem;
     private javax.swing.JLabel msgFeedback;
     private javax.swing.JComboBox<String> numeroComboBox;
     private javax.swing.JMenuItem openFileMenuItem;
     private javax.swing.ButtonGroup overlapButtonGroup;
+    private javax.swing.JRadioButtonMenuItem overlappingRadioButtonMenuItem;
     private javax.swing.JPanel painelDireita;
     private javax.swing.JPanel painelEsquerda;
     private javax.swing.JDialog progressBarDialog;

@@ -53,6 +53,11 @@
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="scenariosButtonGroup.add(cenario1_RadioButtonMenuItem);&#xa;scenariosButtonGroup.add(cenario2_RadioButtonMenuItem);&#xa;scenariosButtonGroup.add(cenario3_RadioButtonMenuItem);&#xa;scenariosButtonGroup.add(cenario4_RadioButtonMenuItem);"/>
       </AuxValues>
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="glyphModelRadioGroup">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="glyphModelRadioGroup.add(overlappingRadioButtonMenuItem);&#xa;glyphModelRadioGroup.add(maskInclusionRadioButtonMenuItem);"/>
+      </AuxValues>
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
@@ -106,6 +111,25 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cenario4_RadioButtonMenuItemActionPerformed"/>
               </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Glyph Model"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="overlappingRadioButtonMenuItem">
+              <Properties>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="Overlapping"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="maskInclusionRadioButtonMenuItem">
+              <Properties>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="Mask inclusion"/>
+              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
