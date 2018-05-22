@@ -70,7 +70,7 @@ public class Hexagono implements DrawBehavior {
         yPoints = new int[6];
 
         xPoints[0] = halfWidth;
-        yPoints[0] = (int) Math.round(rect.y + rect.height / 2 - height / 2);
+        yPoints[0] = Math.round(rect.y + rect.height / 2 - height / 2);
 
         xPoints[1] = (int) Math.round(rect.x + rect.width / 2 - width / 2);
         yPoints[1] = halfHeight - innerHeight;
