@@ -234,7 +234,7 @@ public class TMPatternFactory {
      * Builds and adds the PATTERN_HORIZONTAL in patterns.
      */
     private void buildPatternHorizontal() {
-        BufferedImage image = new BufferedImage(16, 16, BufferedImage.TYPE_4BYTE_ABGR);
+        BufferedImage image = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setStroke(new BasicStroke(3f));
         g.setColor(backgroungColor);
@@ -256,7 +256,7 @@ public class TMPatternFactory {
      */
     private void buildPatternDiag_Right2Left() {
         BufferedImage image
-                = new BufferedImage(16, 16, BufferedImage.TYPE_INT_RGB);
+                = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setStroke(new BasicStroke(3f));
         g.setColor(backgroungColor);
@@ -276,7 +276,7 @@ public class TMPatternFactory {
      */
     private void buildPattern_CrossLines() {
         BufferedImage image
-                = new BufferedImage(16, 16, BufferedImage.TYPE_INT_RGB);
+                = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setColor(backgroungColor);
         g.fillRect(0, 0, 16, 16);
@@ -298,12 +298,12 @@ public class TMPatternFactory {
      */
     private void buildPatternDiag_CrossLines() {
         BufferedImage image
-                = new BufferedImage(14, 14, BufferedImage.TYPE_INT_RGB);
+                = new BufferedImage(14, 14, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setStroke(new BasicStroke(2.2f));
-        g.setColor(Color.white);
+        g.setColor(backgroungColor);
         g.fillRect(0, 0, 14, 14);
-        g.setColor(Color.black);
+        g.setColor(textureColor);
         g.drawLine(0, 0, 14, 14);
         g.drawLine(0, 14, 14, 0);
         Rectangle r = new Rectangle(0, 0, 14, 14);
@@ -317,12 +317,12 @@ public class TMPatternFactory {
      */
     private void buildPatternDiag_Left2Right() {
         BufferedImage image
-                = new BufferedImage(16, 16, BufferedImage.TYPE_INT_RGB);
+                = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setStroke(new BasicStroke(2.1f));
-        g.setColor(Color.white);
+        g.setColor(backgroungColor);
         g.fillRect(0, 0, 16, 16);
-        g.setColor(Color.black);
+        g.setColor(textureColor);
         g.drawLine(8, 0, 0, 8);
 //        g.drawLine(0, 13, 13, 0);
         g.drawLine(16, 8, 8, 16);
@@ -337,12 +337,12 @@ public class TMPatternFactory {
      */
     private void buildPatternVertical() {
         BufferedImage image
-                = new BufferedImage(16, 16, BufferedImage.TYPE_INT_RGB);
+                = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setStroke(new BasicStroke(1.8f));
-        g.setColor(Color.white);
+        g.setColor(backgroungColor);
         g.fillRect(0, 0, 16, 16);
-        g.setColor(Color.black);
+        g.setColor(textureColor);
 //        g.drawLine(1, 0, 1, 16);
         g.drawLine(3, 0, 3, 16);
         g.drawLine(8, 0, 8, 16);
@@ -358,12 +358,12 @@ public class TMPatternFactory {
      */
     private void buildPatternUp() {
         BufferedImage image
-                = new BufferedImage(16, 16, BufferedImage.TYPE_INT_RGB);
+                = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setStroke(new BasicStroke(1.5f));
-        g.setColor(Color.white);
+        g.setColor(backgroungColor);
         g.fillRect(0, 0, 16, 16);
-        g.setColor(Color.black);
+        g.setColor(textureColor);
         g.drawLine(3, 1, 0, 4);
         g.drawLine(3, 1, 6, 4);
         g.drawLine(4, 8, 0, 12);
@@ -380,7 +380,7 @@ public class TMPatternFactory {
      */
     private void buildPatternDiagDots() {
         BufferedImage image
-                = new BufferedImage(13, 13, BufferedImage.TYPE_INT_RGB);
+                = new BufferedImage(13, 13, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setColor(Color.white);
         g.fillRect(0, 0, 13, 13);
@@ -403,7 +403,7 @@ public class TMPatternFactory {
      */
     private void buildPatternDiagDots2() {
         BufferedImage image
-                = new BufferedImage(16, 16, BufferedImage.TYPE_INT_RGB);
+                = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(Color.white);
@@ -422,7 +422,7 @@ public class TMPatternFactory {
      */
     private void buildPatternDots() {
         BufferedImage image
-                = new BufferedImage(5, 5, BufferedImage.TYPE_INT_RGB);
+                = new BufferedImage(5, 5, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setColor(Color.white);
         g.fillRect(0, 0, 5, 5);
@@ -438,7 +438,7 @@ public class TMPatternFactory {
      */
     private void buildPatternPlus() {
         BufferedImage image
-                = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
+                = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setColor(Color.white);
         g.fillRect(0, 0, 10, 10);
@@ -457,7 +457,7 @@ public class TMPatternFactory {
      */
     private void buildPatternTuiles() {
         BufferedImage image
-                = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
+                = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setColor(Color.white);
         g.fillRect(0, 0, 10, 10);
@@ -475,7 +475,7 @@ public class TMPatternFactory {
      */
     private void buildPatternLeft() {
         BufferedImage image
-                = new BufferedImage(14, 14, BufferedImage.TYPE_INT_RGB);
+                = new BufferedImage(14, 14, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setColor(Color.white);
         g.fillRect(0, 0, 14, 14);
@@ -498,7 +498,7 @@ public class TMPatternFactory {
      */
     private void buildPatternSquares() {
         BufferedImage image
-                = new BufferedImage(8, 9, BufferedImage.TYPE_INT_RGB);
+                = new BufferedImage(8, 9, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setColor(Color.white);
         g.fillRect(0, 0, 8, 9);
@@ -522,7 +522,7 @@ public class TMPatternFactory {
      */
     private void buildPatternDown() {
 //        patterns.put("PATTERN_DARK_GRAY", Color.darkGray);
-        BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
+        BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setStroke(new BasicStroke(1.8f));
         g.setColor(Color.white);
@@ -542,12 +542,12 @@ public class TMPatternFactory {
      * Builds and adds the PATTERN_RIGHT in patterns.
      */
     private void buildPatternRight() {
-        BufferedImage image = new BufferedImage(16, 16, BufferedImage.TYPE_INT_RGB);
+        BufferedImage image = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setStroke(new BasicStroke(1.8f));
-        g.setColor(Color.white);
+        g.setColor(backgroungColor);
         g.fillRect(0, 0, 16, 16);
-        g.setColor(Color.black);
+        g.setColor(textureColor);
         g.drawLine(8, 8, 4, 4);
         g.drawLine(8, 8, 4, 12);
 //        g.drawLine(5, 3, 8, 6);
@@ -563,7 +563,7 @@ public class TMPatternFactory {
      * Builds and adds the PATTERN_CHESS in patterns.
      */
     private void buildPatternSquareC() {
-        BufferedImage image = new BufferedImage(14, 14, BufferedImage.TYPE_INT_RGB);
+        BufferedImage image = new BufferedImage(14, 14, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setColor(Color.white);
         g.fillRect(0, 0, 14, 14);

@@ -739,6 +739,8 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         botaoConfiVarVisuais.setEnabled(true);
 
         //remover o conteudo da lista de atributos original
+
+
         ListModel<String> modelOriginal = varVisuaisList.getModel();
         List<String> selectedValuesList = varVisuaisList.getSelectedValuesList();
         for (int i = 0; i < modelOriginal.getSize(); i++) {
