@@ -20,7 +20,6 @@ import java.awt.Shape;
 public class FormaGeometrica extends Glyph {
 
     private Rectangle bounds;
-    private GeometryFactory.FORMAS.GLYPH_FORMAS name;
     private Color cor;
     private DrawBehavior drawBehavior;
 
@@ -45,6 +44,11 @@ public class FormaGeometrica extends Glyph {
             public Shape getClipShape() {
                 return new Polygon();
             }
+
+            @Override
+            public void drawForeground(Graphics2D g2d) {
+                
+            }
         };
     }    
     
@@ -52,6 +56,7 @@ public class FormaGeometrica extends Glyph {
     public void paint(Graphics2D g2d) {
         drawBehavior.paint(g2d);
         super.paint(g2d);
+        drawBehavior.drawForeground(g2d);
     }
 
     public void setColor(Color cor) {
@@ -77,7 +82,7 @@ public class FormaGeometrica extends Glyph {
     public void setDrawBehavior(DrawBehavior drawBehavior) {
         this.drawBehavior = drawBehavior;
     }
-
+    
     public int getArea() {
         return 0;
     }
@@ -92,9 +97,6 @@ public class FormaGeometrica extends Glyph {
         return null;
     }
 
-    public void setDrawBehavior(GeometryFactory.FORMAS.GLYPH_FORMAS glyph_formas) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
    
 }

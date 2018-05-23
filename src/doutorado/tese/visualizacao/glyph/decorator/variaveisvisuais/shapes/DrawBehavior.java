@@ -22,4 +22,6 @@ public interface DrawBehavior {
     public void setBounds(Rectangle bounds);
 
     public Shape getClipShape();
+    
+    public void drawForeground(Graphics2D g2d);
 }

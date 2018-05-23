@@ -6,7 +6,6 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Rectangle;
@@ -21,9 +20,6 @@ public class Cruz implements DrawBehavior {
     private Rectangle bounds;
 
     public Cruz() {
-//        super(r, GeometryFactory.FORMAS.GLYPH_FORMAS.CRUZ);
-        
-//        this.bounds = bounds;
     }
 
     @Override
@@ -59,7 +55,6 @@ public class Cruz implements DrawBehavior {
         points[1] = getBounds().height;
 
 //        verificarRetangulo(points);
-
         int width = (int) Math.round(points[0] * 0.95f);
         int height = (int) Math.round(points[1] * 0.95f);
 
@@ -124,17 +119,17 @@ public class Cruz implements DrawBehavior {
         p.addPoint(xPoints[10], yPoints[10]);
         p.addPoint(xPoints[11], yPoints[11]);
     }
-    
-    public Rectangle getBounds(){
+
+    public Rectangle getBounds() {
         return this.bounds;
     }
-    
+
     @Override
-    public void setBounds(Rectangle bounds){
+    public void setBounds(Rectangle bounds) {
         this.bounds = bounds;
         montarCruz();
     }
-    
+
     @Override
     public int getArea() {
         return (xPoints[8] - xPoints[2]) * (yPoints[5] - yPoints[0]);
@@ -143,5 +138,11 @@ public class Cruz implements DrawBehavior {
     @Override
     public Shape getClipShape() {
         return p;
+    }
+
+    @Override
+    public void drawForeground(Graphics2D g2d) {
+        g2d.setColor(Color.BLACK);
+        g2d.drawPolygon(p);
     }
 }

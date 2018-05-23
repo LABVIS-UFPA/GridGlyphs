@@ -54,7 +54,6 @@ public class Hexagono implements DrawBehavior {
         points[1] = rect.height;
 
 //        verificarRetangulo(points);
-
         int width = (int) Math.round(points[0] * 0.95);
         int height = (int) Math.round(points[1] * 0.95);
 
@@ -97,12 +96,12 @@ public class Hexagono implements DrawBehavior {
         p.addPoint(xPoints[5], yPoints[5]);
     }
 
-    public Rectangle getBounds(){
+    public Rectangle getBounds() {
         return this.bounds;
     }
-    
+
     @Override
-    public void setBounds(Rectangle bounds){
+    public void setBounds(Rectangle bounds) {
         this.bounds = bounds;
         montarHexagono();
     }
@@ -115,5 +114,11 @@ public class Hexagono implements DrawBehavior {
     @Override
     public Shape getClipShape() {
         return p;
+    }
+
+    @Override
+    public void drawForeground(Graphics2D g2d) {
+        g2d.setColor(Color.black);
+        g2d.draw(p);
     }
 }

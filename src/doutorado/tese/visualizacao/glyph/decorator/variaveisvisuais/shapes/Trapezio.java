@@ -93,4 +93,10 @@ public class Trapezio implements DrawBehavior {
     public Shape getClipShape() {
         return polygon;
     }
+
+    @Override
+    public void drawForeground(Graphics2D g2d) {
+        g2d.setColor(Color.BLACK);
+        g2d.drawPolygon(polygon);
+    }
 }

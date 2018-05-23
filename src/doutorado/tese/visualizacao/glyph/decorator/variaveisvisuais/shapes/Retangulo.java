@@ -1,7 +1,6 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
@@ -81,7 +80,13 @@ public class Retangulo implements DrawBehavior {
 
     @Override
     public Shape getClipShape() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getBounds();
+    }
+
+    @Override
+    public void drawForeground(Graphics2D g2d) {
+        g2d.setColor(Color.BLACK);
+        g2d.drawRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
     }
 
 }

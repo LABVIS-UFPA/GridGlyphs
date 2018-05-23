@@ -19,20 +19,15 @@ public class Losango implements DrawBehavior {
     private int[] xPoints;
     private int[] yPoints;
     private Rectangle bounds;
+    private Polygon p;
 
     public Losango() {
     }
 
     @Override
     public void paint(Graphics2D g2d) {
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);        
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setPaint(Color.BLACK);
-        
-        Polygon p = new Polygon();        
-        p.addPoint(xPoints[0], yPoints[0]);
-        p.addPoint(xPoints[1], yPoints[1]);
-        p.addPoint(xPoints[2], yPoints[2]);
-        p.addPoint(xPoints[3], yPoints[3]);
 
         g2d.setColor(Color.white);
         g2d.fillPolygon(p);
@@ -58,45 +53,49 @@ public class Losango implements DrawBehavior {
         points[1] = getBounds().height;
 
 //        verificarRetangulo(points);
-
         int width = (int) Math.round(points[0] * 0.95);
         int height = (int) Math.round(points[1] * 0.95);
-
 
         int halfWidth = width / 2;
         int halfHeight = height / 2;
         int innerWidth = width / 2;
-        int innerHeight = height /2;
+//        int innerHeight = height / 2;
 
-        halfWidth += getBounds().x + getBounds().width/2 - width/2;
-        halfHeight += getBounds().y + getBounds().height/2 - height/2;
+        halfWidth += getBounds().x + getBounds().width / 2 - width / 2;
+        halfHeight += getBounds().y + getBounds().height / 2 - height / 2;
 
         xPoints = new int[4];
         yPoints = new int[4];
 
         xPoints[0] = halfWidth;
-        yPoints[0] = (int) Math.round(getBounds().y + getBounds().height/2 - height/2);
+        yPoints[0] = (int) Math.round(getBounds().y + getBounds().height / 2 - height / 2);
 
-        xPoints[1] = halfWidth-innerWidth;
+        xPoints[1] = halfWidth - innerWidth;
         yPoints[1] = halfHeight;
 
         xPoints[2] = halfWidth;
-        yPoints[2] = height + (int) Math.round(getBounds().y + getBounds().height/2 - height/2);
+        yPoints[2] = height + (int) Math.round(getBounds().y + getBounds().height / 2 - height / 2);
 
         xPoints[3] = halfWidth + innerWidth;
         yPoints[3] = halfHeight;
+
+        p = new Polygon();
+        p.addPoint(xPoints[0], yPoints[0]);
+        p.addPoint(xPoints[1], yPoints[1]);
+        p.addPoint(xPoints[2], yPoints[2]);
+        p.addPoint(xPoints[3], yPoints[3]);
     }
-    
-    public Rectangle getBounds(){
+
+    public Rectangle getBounds() {
         return this.bounds;
     }
-    
+
     @Override
-    public void setBounds(Rectangle bounds){
+    public void setBounds(Rectangle bounds) {
         this.bounds = bounds;
         montarLosango();
     }
-    
+
     @Override
     public int getArea() {
         return (yPoints[2] - yPoints[0]) * (xPoints[3] - xPoints[1]);
@@ -104,6 +103,12 @@ public class Losango implements DrawBehavior {
 
     @Override
     public Shape getClipShape() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return p;
+    }
+
+    @Override
+    public void drawForeground(Graphics2D g2d) {
+        g2d.setColor(Color.black);
+        g2d.draw(p);
     }
 }

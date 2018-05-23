@@ -1,10 +1,7 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
@@ -56,9 +53,7 @@ public class Ellipse implements DrawBehavior {
         int height = (int) Math.round(points[1] * 0.95);
 
         p = new Path2D.Double();       
-        p.append(new Ellipse2D.Double(rect.x,rect.y+height/4,width,height/2 ), true);
-
-        
+        p.append(new Ellipse2D.Double(rect.x + 2,rect.y+height/4,width,height/2 ), true);        
     }
     
     public Rectangle getBounds(){
@@ -79,6 +74,12 @@ public class Ellipse implements DrawBehavior {
     @Override
     public Shape getClipShape() {
         return p;
+    }
+
+    @Override
+    public void drawForeground(Graphics2D g2d) {
+        g2d.setColor(Color.black);
+        g2d.draw(p);
     }
 
 }

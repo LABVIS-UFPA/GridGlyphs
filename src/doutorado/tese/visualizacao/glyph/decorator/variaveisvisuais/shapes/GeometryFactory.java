@@ -41,7 +41,7 @@ public class GeometryFactory {
     private GeometryFactory() {
     }
 
-    public static DrawBehavior create(Glyph absGlyph, Rectangle bounds, FORMAS.GLYPH_FORMAS forma) {
+    public static DrawBehavior create(FORMAS.GLYPH_FORMAS forma) {
         switch (forma) {
             case RETANGULO:
                 return new Retangulo();
