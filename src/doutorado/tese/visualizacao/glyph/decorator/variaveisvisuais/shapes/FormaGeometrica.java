@@ -92,4 +92,10 @@ public class FormaGeometrica extends Glyph {
     public Paint getTexturePaint() {
         return null;
     }
+
+    public void setDrawBehavior(GeometryFactory.FORMAS.GLYPH_FORMAS glyph_formas) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+   
 }
