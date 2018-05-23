@@ -14,11 +14,12 @@ import java.awt.Shape;
  * @author Anderson Soares
  */
 public interface DrawBehavior {
+
     public void paint(Graphics2D g2d);
-    
+
     public int getArea();
 
     public void setBounds(Rectangle bounds);
-    
+
     public Shape getClipShape();
 }

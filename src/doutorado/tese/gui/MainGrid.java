@@ -57,6 +57,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private String[] variaveisVisuaisEscolhidas;
     public float porcentagem = 1f;
     public ScenarioManager scenarioManager;
+    private boolean overlappingActivated;
 
     /**
      * Creates new form MainGrid
@@ -76,6 +77,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         gridPanel.setDoubleBuffered(true);
         habilitarRadiosOpcoesGrid(true);
         msgFeedback.setVisible(false);
+        overlappingActivated = false;
     }
 
     /**
@@ -661,10 +663,20 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 
         overlappingRadioButtonMenuItem.setSelected(true);
         overlappingRadioButtonMenuItem.setText("Overlapping");
+        overlappingRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                overlappingRadioButtonMenuItemActionPerformed(evt);
+            }
+        });
         jMenu3.add(overlappingRadioButtonMenuItem);
 
         maskInclusionRadioButtonMenuItem.setSelected(true);
         maskInclusionRadioButtonMenuItem.setText("Mask inclusion");
+        maskInclusionRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maskInclusionRadioButtonMenuItemActionPerformed(evt);
+            }
+        });
         jMenu3.add(maskInclusionRadioButtonMenuItem);
 
         jMenuBar1.add(jMenu3);
@@ -849,7 +861,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 
     private void viewGlyphsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewGlyphsButtonActionPerformed
         ArrayList<Object> atributosEscolhidosGlyph = getAtributosEscolhidosGlyph();
-        gridPanel.setAtributosEscolhidos(atributosEscolhidosGlyph);
+//        gridPanel.setAtributosEscolhidos(atributosEscolhidosGlyph);
 
 //        atualizarLegendaGlyphs(atributosEscolhidosGlyph);
     }//GEN-LAST:event_viewGlyphsButtonActionPerformed
@@ -900,6 +912,14 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private void cenario4_RadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cenario4_RadioButtonMenuItemActionPerformed
         configCenario();
     }//GEN-LAST:event_cenario4_RadioButtonMenuItemActionPerformed
+
+    private void overlappingRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overlappingRadioButtonMenuItemActionPerformed
+        loadGlyphModel();
+    }//GEN-LAST:event_overlappingRadioButtonMenuItemActionPerformed
+
+    private void maskInclusionRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maskInclusionRadioButtonMenuItemActionPerformed
+        loadGlyphModel();
+    }//GEN-LAST:event_maskInclusionRadioButtonMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1050,6 +1070,11 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         } else {
             System.out.println("Cenário 4 escolhido.");
         }
+    }
+
+    private void loadGlyphModel() {
+        overlappingActivated = overlappingRadioButtonMenuItem.isSelected();
+        gridPanel.setGlyphOverlappingModel(overlappingActivated);
     }
 
     private void loadVariaveisEscolhidasList(Object[] objs, JList<String> jList) {

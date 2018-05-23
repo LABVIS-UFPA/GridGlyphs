@@ -5,9 +5,6 @@
  */
 package doutorado.tese.visualizacao.glyph;
 
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Rectangle;
@@ -27,6 +24,7 @@ public abstract class Glyph {
     private Glyph father;
     private final ArrayList children = new ArrayList();
     public Boolean selecionado = false;
+    public boolean overlappingActivated = false;
 
     public void paint(Graphics2D g2d) {
         if (child != null) {
@@ -68,22 +66,6 @@ public abstract class Glyph {
             this.child = pai;
             this.children.add(pai);
             this.child.father = this;
-//            System.out.println("tipo child: " + this.child.getClass().getSimpleName());
-//            String nomeFilho = this.child.getClass().getSimpleName();
-//            String nomePai = this.child.father.getClass().getSimpleName();
-//            if (nomeFilho.equalsIgnoreCase("Cor")
-//                    && nomePai.equalsIgnoreCase("Textura")) {
-//                Cor filhoCor = (Cor) this.child;
-//                Textura paiTextura = (Textura) this.child.father;
-//                paiTextura.setCor(filhoCor.getCor());
-//                filhoCor.setCor(new Color(0, 0, 255, 0));                
-//            }
-//            else{
-//                Textura paiTextura = (Textura) this.child.father;
-//                paiTextura.setCor(Color.BLACK);
-//                Cor filhoCor = (Cor) this.child;
-////                filhoCor.setCor(new Color(0, 0, 255, 0));
-//            }
         }
     }
 

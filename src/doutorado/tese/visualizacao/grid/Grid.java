@@ -5,14 +5,9 @@
  */
 package doutorado.tese.visualizacao.grid;
 
-import doutorado.tese.util.io.ManipuladorArquivo;
 import doutorado.tese.visualizacao.glyph.Glyph;
 import doutorado.tese.visualizacao.glyph.GlyphConcrete;
 import doutorado.tese.visualizacao.glyph.GlyphManager;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.numbers.Numeral;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -23,7 +18,6 @@ import java.awt.event.HierarchyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import javax.swing.JPanel;
 
@@ -184,10 +178,13 @@ public class Grid extends JPanel {
         return matrizGlyph;
     }
 
-    public void setAtributosEscolhidos(List<Object> atributosEscolhidos) {
-        //TODO
+//    public void setAtributosEscolhidos(List<Object> atributosEscolhidos) {
+//        //TODO
+//    }
+    public void setGlyphOverlappingModel(boolean overlappingActivated) {
+        
     }
-
+    
     public ItemGrid[] criarItens() {
         int totalItens = getQuantHoriz() * getQuantVert();
         setItensGrid(new ItemGrid[totalItens]);
