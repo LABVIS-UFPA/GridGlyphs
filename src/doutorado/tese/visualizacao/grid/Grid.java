@@ -181,8 +181,9 @@ public class Grid extends JPanel {
 //    public void setAtributosEscolhidos(List<Object> atributosEscolhidos) {
 //        //TODO
 //    }
+    
     public void setGlyphOverlappingModel(boolean overlappingActivated) {
-        
+        glyphManager.configGlyphDesingModel(overlappingActivated);
     }
     
     public ItemGrid[] criarItens() {

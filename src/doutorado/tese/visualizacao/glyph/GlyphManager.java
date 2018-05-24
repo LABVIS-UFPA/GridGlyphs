@@ -31,6 +31,7 @@ public class GlyphManager {
     private final HashMap<String, Boolean> activeLayers;
     private String[] variaveisVisuaisEscolhidas;
     private float perctOverlap;
+    private boolean overlappingActivated;
 
     public GlyphManager() {
         activeLayers = new HashMap<>();
@@ -68,6 +69,7 @@ public class GlyphManager {
                     letra = (Letra) glyph;
                     letra.setLetra(Constantes.LETRAS_ALFABETO[random]);
                     letra.setPectSobreposicao(perctOverlap);
+                    letra.setOverlappingActivated(overlappingActivated);
 //                }
                 break;
             case "Shape":
@@ -77,6 +79,7 @@ public class GlyphManager {
                     FormaGeometrica forma = (FormaGeometrica) glyph;
                     forma.setDrawBehavior(GeometryFactory.create(GeometryFactory.FORMAS.GLYPH_FORMAS.values()[random]));
                     forma.setPectSobreposicao(perctOverlap);
+                    forma.setOverlappingActivated(overlappingActivated);
 //                }
                 break;
             case "Texture":
@@ -153,5 +156,9 @@ public class GlyphManager {
 
     public void setPerctOverlap(float perctOverlap) {
         this.perctOverlap = perctOverlap;
+    }
+
+    public void configGlyphDesingModel(boolean overlappingActivated) {
+        this.overlappingActivated = overlappingActivated;
     }
 }

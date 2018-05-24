@@ -24,7 +24,7 @@ public abstract class Glyph {
     private Glyph father;
     private final ArrayList children = new ArrayList();
     public Boolean selecionado = false;
-    public boolean overlappingActivated = false;
+    private boolean overlappingActivated = false;
 
     public void paint(Graphics2D g2d) {
         if (child != null) {
@@ -119,5 +119,19 @@ public abstract class Glyph {
     public String toString() {
 //        System.out.println(this.getClass().getSimpleName());
         return this.getClass().getSimpleName(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * @return the overlappingActivated
+     */
+    public boolean isOverlappingActivated() {
+        return overlappingActivated;
+    }
+
+    /**
+     * @param overlappingActivated the overlappingActivated to set
+     */
+    public void setOverlappingActivated(boolean overlappingActivated) {
+        this.overlappingActivated = overlappingActivated;
     }
 }

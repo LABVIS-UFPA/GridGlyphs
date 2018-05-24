@@ -27,7 +27,7 @@ public class FormaGeometrica extends Glyph {
         this.drawBehavior = new DrawBehavior() {
             @Override
             public void paint(Graphics2D g) {
-                
+
             }
 
             @Override
@@ -37,7 +37,7 @@ public class FormaGeometrica extends Glyph {
 
             @Override
             public void setBounds(Rectangle bounds) {
-                
+
             }
 
             @Override
@@ -47,16 +47,21 @@ public class FormaGeometrica extends Glyph {
 
             @Override
             public void drawForeground(Graphics2D g2d) {
-                
+
             }
         };
-    }    
-    
+    }
+
     @Override
     public void paint(Graphics2D g2d) {
         drawBehavior.paint(g2d);
+        if (isOverlappingActivated()) {
+            drawBehavior.drawForeground(g2d);
+        }
         super.paint(g2d);
-        drawBehavior.drawForeground(g2d);
+        if (!isOverlappingActivated()) {
+            drawBehavior.drawForeground(g2d);
+        }
     }
 
     public void setColor(Color cor) {
@@ -74,7 +79,6 @@ public class FormaGeometrica extends Glyph {
         drawBehavior.setBounds(bounds);
     }
 
-    
     public DrawBehavior getDrawBehavior() {
         return drawBehavior;
     }
@@ -82,14 +86,18 @@ public class FormaGeometrica extends Glyph {
     public void setDrawBehavior(DrawBehavior drawBehavior) {
         this.drawBehavior = drawBehavior;
     }
-    
+
     public int getArea() {
         return 0;
     }
 
     @Override
     public Shape getClipShape() {
-        return this.drawBehavior.getClipShape();
+        if (isOverlappingActivated()) {
+            return this.getBounds();
+        } else {
+            return this.drawBehavior.getClipShape();
+        }
     }
 
     @Override
@@ -97,6 +105,4 @@ public class FormaGeometrica extends Glyph {
         return null;
     }
 
-    
-   
 }

@@ -102,16 +102,20 @@ public class Letra extends Glyph {
 
     @Override
     public Shape getClipShape() {
-        BufferedImage textImage = new BufferedImage(
-                getBounds().width,
-                getBounds().height,
-                BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = textImage.createGraphics();
-        FontRenderContext frc = g2d.getFontRenderContext();
-        Point centroLetra = calcularFontMetrics(g2d);
-        int x = centroLetra.x;
-        int y = centroLetra.y;
-        return getFonte().createGlyphVector(frc, letra).getOutline(x, y);
+        if (isOverlappingActivated()) {
+            return this.getBounds();
+        } else {
+            BufferedImage textImage = new BufferedImage(
+                    getBounds().width,
+                    getBounds().height,
+                    BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2d = textImage.createGraphics();
+            FontRenderContext frc = g2d.getFontRenderContext();
+            Point centroLetra = calcularFontMetrics(g2d);
+            int x = centroLetra.x;
+            int y = centroLetra.y;
+            return getFonte().createGlyphVector(frc, letra).getOutline(x, y);
+        }
     }
 
     /**
