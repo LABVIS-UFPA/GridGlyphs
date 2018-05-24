@@ -57,7 +57,6 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private String[] variaveisVisuaisEscolhidas;
     public float porcentagem = 1f;
     public ScenarioManager scenarioManager;
-    private boolean overlappingActivated;
 
     /**
      * Creates new form MainGrid
@@ -77,7 +76,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         gridPanel.setDoubleBuffered(true);
         habilitarRadiosOpcoesGrid(true);
         msgFeedback.setVisible(false);
-        overlappingActivated = false;
+        loadGlyphModel();
     }
 
     /**
@@ -148,7 +147,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         cenario2_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         cenario3_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         cenario4_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        glyphModelMenu = new javax.swing.JMenu();
         overlappingRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         maskInclusionRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
 
@@ -659,7 +658,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Glyph Model");
+        glyphModelMenu.setText("Glyph Model");
 
         overlappingRadioButtonMenuItem.setSelected(true);
         overlappingRadioButtonMenuItem.setText("Overlapping");
@@ -668,18 +667,17 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                 overlappingRadioButtonMenuItemActionPerformed(evt);
             }
         });
-        jMenu3.add(overlappingRadioButtonMenuItem);
+        glyphModelMenu.add(overlappingRadioButtonMenuItem);
 
-        maskInclusionRadioButtonMenuItem.setSelected(true);
         maskInclusionRadioButtonMenuItem.setText("Mask inclusion");
         maskInclusionRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 maskInclusionRadioButtonMenuItemActionPerformed(evt);
             }
         });
-        jMenu3.add(maskInclusionRadioButtonMenuItem);
+        glyphModelMenu.add(maskInclusionRadioButtonMenuItem);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(glyphModelMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -708,7 +706,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         }
         atributos.addAll(varVisuaisEscolidasList.getSelectedValuesList());
         atributos.sort(null);
-        loadItensVarVisuais(atributos.toArray());
+        loadVarVisuais(atributos.toArray());
 
         //remover o conteudo da lista de hierarquia treemap
         ListModel<String> modelGlyphs = varVisuaisEscolidasList.getModel();
@@ -739,8 +737,6 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         botaoConfiVarVisuais.setEnabled(true);
 
         //remover o conteudo da lista de atributos original
-
-
         ListModel<String> modelOriginal = varVisuaisList.getModel();
         List<String> selectedValuesList = varVisuaisList.getSelectedValuesList();
         for (int i = 0; i < modelOriginal.getSize(); i++) {
@@ -748,7 +744,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                 newListaAtribTreemap.add(modelOriginal.getElementAt(i));
             }
         }
-        loadItensVarVisuais(newListaAtribTreemap.toArray());
+        loadVarVisuais(newListaAtribTreemap.toArray());
     }//GEN-LAST:event_inserirButtonActionPerformed
 
     private void cimaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cimaButtonActionPerformed
@@ -789,7 +785,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     }//GEN-LAST:event_baixoButtonActionPerformed
 
     private void botaoConfiVarVisuaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfiVarVisuaisActionPerformed
-        variaveisVisuaisEscolhidas = parseListString2Array(varVisuaisEscolidasList.getModel());
+        variaveisVisuaisEscolhidas = parseListModelString2Array(varVisuaisEscolidasList.getModel());
         gridPanel.criarItens();
         gridPanel.setVariaveisVisuaisEscolhidas(variaveisVisuaisEscolhidas);
         gridPanel.loadMatrizGlyphs();
@@ -972,6 +968,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JButton cimaButton;
     private javax.swing.JComboBox<String> corComboBox;
     private javax.swing.JComboBox<String> formaComboBox;
+    private javax.swing.JMenu glyphModelMenu;
     private javax.swing.ButtonGroup glyphModelRadioGroup;
     private javax.swing.ButtonGroup gridButtonGroup;
     private javax.swing.JButton inserirButton;
@@ -989,7 +986,6 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1075,8 +1071,22 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     }
 
     private void loadGlyphModel() {
-        overlappingActivated = overlappingRadioButtonMenuItem.isSelected();
-        gridPanel.setGlyphOverlappingModel(overlappingActivated);
+        gridPanel.setGlyphOverlappingModel(overlappingRadioButtonMenuItem.isSelected());
+        String[] vetor = null;
+        if (!overlappingRadioButtonMenuItem.isSelected()) {
+            vetor = new String[]{};
+            loadVariaveisEscolhidasList(vetor, varVisuaisEscolidasList);
+            vetor = new String[]{"Texture", "Color", "Shape", "Letter"};
+            loadVarVisuais(vetor);
+            glyphModelMenu.setText("Glyph Model: Mask inclusion");
+        } else {
+            vetor = new String[]{};
+            loadVariaveisEscolhidasList(vetor, varVisuaisEscolidasList);
+            vetor = new String[]{"Texture", "Color", "Shape", "Letter", "Overlap"};
+            loadVarVisuais(vetor);
+            glyphModelMenu.setText("Glyph Model: Overlapping");
+        }
+        botaoConfiVarVisuais.setEnabled(false);
     }
 
     private void loadVariaveisEscolhidasList(Object[] objs, JList<String> jList) {
@@ -1084,13 +1094,13 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         jList.setModel(model);
     }
 
-    private void loadItensVarVisuais(Object[] objs) {
+    private void loadVarVisuais(Object[] objs) {
         DefaultComboBoxModel model = new DefaultComboBoxModel(objs);
         varVisuaisList.setModel(model);
         varVisuaisList.setEnabled(true);
     }
 
-    public String[] parseListString2Array(ListModel<String> lista) {
+    public String[] parseListModelString2Array(ListModel<String> lista) {
         String[] convertida = new String[lista.getSize()];
         for (int i = 0; i < convertida.length; i++) {
             convertida[i] = lista.getElementAt(i);

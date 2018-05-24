@@ -114,7 +114,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu3">
+        <Menu class="javax.swing.JMenu" name="glyphModelMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Glyph Model"/>
           </Properties>
@@ -130,7 +130,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JRadioButtonMenuItem" name="maskInclusionRadioButtonMenuItem">
               <Properties>
-                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Mask inclusion"/>
               </Properties>
               <Events>
