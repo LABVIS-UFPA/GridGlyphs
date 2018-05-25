@@ -26,17 +26,21 @@ public class Cor extends Glyph {
 
     @Override
     public void paint(Graphics2D g2d) {
-        if (g2d.getPaint() instanceof TexturePaint) {
-            TexturePaint paint = (TexturePaint) g2d.getPaint();
-            for (int i = 0; i < paint.getImage().getWidth(); i++) {
-                for (int j = 0; j < paint.getImage().getHeight(); j++) {
-                    if (paint.getImage().getRGB(i, j) == Color.GRAY.getRGB()) {
-                        paint.getImage().setRGB(i, j, getCor().getRGB());
+        if (isOverlappingActivated()) {
+            g2d.setColor(getCor());
+        } else {
+            if (g2d.getPaint() instanceof TexturePaint) {
+                TexturePaint paint = (TexturePaint) g2d.getPaint();
+                for (int i = 0; i < paint.getImage().getWidth(); i++) {
+                    for (int j = 0; j < paint.getImage().getHeight(); j++) {
+                        if (paint.getImage().getRGB(i, j) == Color.GRAY.getRGB()) {
+                            paint.getImage().setRGB(i, j, getCor().getRGB());
+                        }
                     }
                 }
+            } else {
+                g2d.setColor(getCor());
             }
-        } else {
-            g2d.setColor(getCor());            
         }
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);

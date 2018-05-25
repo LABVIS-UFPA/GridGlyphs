@@ -118,7 +118,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         jLabel12 = new javax.swing.JLabel();
         radio100 = new javax.swing.JRadioButton();
         radio80 = new javax.swing.JRadioButton();
-        radio40 = new javax.swing.JRadioButton();
+        radio70 = new javax.swing.JRadioButton();
         radio60 = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -178,7 +178,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
-        overlapButtonGroup.add(radio40);
+        overlapButtonGroup.add(radio70);
         overlapButtonGroup.add(radio60);
         overlapButtonGroup.add(radio80);
         overlapButtonGroup.add(radio100);
@@ -326,16 +326,16 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
             }
         });
 
-        radio40.setText("40%");
-        radio40.setActionCommand("");
-        radio40.setEnabled(false);
-        radio40.addActionListener(new java.awt.event.ActionListener() {
+        radio70.setText("60%");
+        radio70.setActionCommand("");
+        radio70.setEnabled(false);
+        radio70.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radio40ActionPerformed(evt);
+                radio70ActionPerformed(evt);
             }
         });
 
-        radio60.setText("60%");
+        radio60.setText("70%");
         radio60.setActionCommand("");
         radio60.setEnabled(false);
         radio60.addActionListener(new java.awt.event.ActionListener() {
@@ -397,7 +397,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(radio60)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(radio40)
+                        .addComponent(radio70)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -415,7 +415,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                     .addComponent(radio100)
                     .addComponent(radio80)
                     .addComponent(radio60)
-                    .addComponent(radio40))
+                    .addComponent(radio70))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -866,17 +866,14 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 
     private void radio5x10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio5x10ActionPerformed
         configGrid();
-        habilitarRadioOpcoesOverlap(true);
     }//GEN-LAST:event_radio5x10ActionPerformed
 
     private void radio10x20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio10x20ActionPerformed
         configGrid();
-        habilitarRadioOpcoesOverlap(true);
     }//GEN-LAST:event_radio10x20ActionPerformed
 
     private void radio15x24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio15x24ActionPerformed
         configGrid();
-        habilitarRadioOpcoesOverlap(true);
     }//GEN-LAST:event_radio15x24ActionPerformed
 
     private void radio100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio100ActionPerformed
@@ -887,9 +884,9 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         configOverlap();
     }//GEN-LAST:event_radio80ActionPerformed
 
-    private void radio40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio40ActionPerformed
+    private void radio70ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio70ActionPerformed
         configOverlap();
-    }//GEN-LAST:event_radio40ActionPerformed
+    }//GEN-LAST:event_radio70ActionPerformed
 
     private void radio60ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio60ActionPerformed
         configOverlap();
@@ -1011,9 +1008,9 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JRadioButton radio100;
     private javax.swing.JRadioButton radio10x20;
     private javax.swing.JRadioButton radio15x24;
-    private javax.swing.JRadioButton radio40;
     private javax.swing.JRadioButton radio5x10;
     private javax.swing.JRadioButton radio60;
+    private javax.swing.JRadioButton radio70;
     private javax.swing.JRadioButton radio80;
     private javax.swing.JButton removerButton;
     private javax.swing.ButtonGroup scenariosButtonGroup;
@@ -1038,6 +1035,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 //            gridPanel.setQuantVert(10);
 //            gridPanel.setQuantHoriz(18);
         }
+        analisarGUI2GlyphModel();
     }
 
     private void configOverlap() {
@@ -1046,9 +1044,9 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         } else if (radio80.isSelected()) {
             gridPanel.setQuantOlverlap(0.8f);
         } else if (radio60.isSelected()) {
+            gridPanel.setQuantOlverlap(0.7f);
+        } else if (radio70.isSelected()) {
             gridPanel.setQuantOlverlap(0.6f);
-        } else if (radio40.isSelected()) {
-            gridPanel.setQuantOlverlap(0.4f);
         }
         if (!varVisuaisList.isEnabled()) {
             varVisuaisList.setEnabled(true);
@@ -1073,7 +1071,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private void loadGlyphModel() {
         gridPanel.setGlyphOverlappingModel(overlappingRadioButtonMenuItem.isSelected());
         String[] vetor = null;
-        if (!overlappingRadioButtonMenuItem.isSelected()) {
+        if (!overlappingRadioButtonMenuItem.isSelected()) {//mascara ativada
             vetor = new String[]{};
             loadVariaveisEscolhidasList(vetor, varVisuaisEscolidasList);
             vetor = new String[]{"Texture", "Color", "Shape", "Letter"};
@@ -1086,6 +1084,8 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
             loadVarVisuais(vetor);
             glyphModelMenu.setText("Glyph Model: Overlapping");
         }
+        analisarGUI2GlyphModel();
+        configOverlap();
         botaoConfiVarVisuais.setEnabled(false);
     }
 
@@ -1190,7 +1190,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         radio100.setEnabled(ativador);
         radio80.setEnabled(ativador);
         radio60.setEnabled(ativador);
-        radio40.setEnabled(ativador);
+        radio70.setEnabled(ativador);
     }
 
     private void configComboBoxVarVisuais() {
@@ -1228,6 +1228,16 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         atributosEscolhidosGlyph.add(letraComboBox.getSelectedItem());
         atributosEscolhidosGlyph.add(numeroComboBox.getSelectedItem());
         return atributosEscolhidosGlyph;
+    }
+
+    private void analisarGUI2GlyphModel() {
+        if (overlappingRadioButtonMenuItem.isSelected()) {
+            habilitarRadioOpcoesOverlap(true);
+            radio100.setEnabled(false);
+        } else {
+            habilitarRadioOpcoesOverlap(false);
+            radio100.setSelected(true);
+        }
     }
 
     @Override

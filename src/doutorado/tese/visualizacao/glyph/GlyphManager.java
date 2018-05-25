@@ -51,6 +51,7 @@ public class GlyphManager {
                     random = 1 + (int) (Math.random() * Constantes.getCorFormas().length - 1);
                     cor.setCor(Color.decode(Constantes.getCorFormas()[random]));
                     cor.setPectSobreposicao(perctOverlap);
+                    cor.setOverlappingActivated(overlappingActivated);
 //                }
                 break;
             case "Color2":

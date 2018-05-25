@@ -53,7 +53,7 @@ public class Ellipse implements DrawBehavior {
         int height = (int) Math.round(points[1] * 0.95);
 
         p = new Path2D.Double();       
-        p.append(new Ellipse2D.Double(rect.x + 2,rect.y+height/4,width,height/2 ), true);        
+        p.append(new Ellipse2D.Double(rect.x + 2, rect.y + height / 4, width, height / 1.5 ), true);        
     }
     
     public Rectangle getBounds(){

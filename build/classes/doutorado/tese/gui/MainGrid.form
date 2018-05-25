@@ -45,7 +45,7 @@
     </Container>
     <Component class="javax.swing.ButtonGroup" name="overlapButtonGroup">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="overlapButtonGroup.add(radio40);&#xa;overlapButtonGroup.add(radio60);&#xa;overlapButtonGroup.add(radio80);&#xa;overlapButtonGroup.add(radio100);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="overlapButtonGroup.add(radio70);&#xa;overlapButtonGroup.add(radio60);&#xa;overlapButtonGroup.add(radio80);&#xa;overlapButtonGroup.add(radio100);"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.ButtonGroup" name="scenariosButtonGroup">
@@ -315,7 +315,7 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="radio60" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="radio40" min="-2" max="-2" attributes="0"/>
+                                      <Component id="radio70" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -338,7 +338,7 @@
                                   <Component id="radio100" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="radio80" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="radio60" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="radio40" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="radio70" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -553,19 +553,19 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radio80ActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="radio40">
+                    <Component class="javax.swing.JRadioButton" name="radio70">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="40%"/>
+                        <Property name="text" type="java.lang.String" value="60%"/>
                         <Property name="actionCommand" type="java.lang.String" value=""/>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radio40ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radio70ActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="radio60">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="60%"/>
+                        <Property name="text" type="java.lang.String" value="70%"/>
                         <Property name="actionCommand" type="java.lang.String" value=""/>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
