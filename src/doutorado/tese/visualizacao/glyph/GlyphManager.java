@@ -85,6 +85,13 @@ public class GlyphManager {
         return glyph;
     }
 
+    /**
+     * Recebe um ItemGrid, mata todos os seus filhos antigos, e adiciona 
+     * seus novos filhos de acordo com a hierarquia passada atraves da funcao 
+     * variaveisVisuaisEscolhidas().
+     * Por fim, é definido o tamanho de cada item do grid.
+     * @param item 
+     */
     public void configLayers(ItemGrid item) {
         Glyph father = item.getGlyph();
         father.killAllChild();
@@ -100,6 +107,9 @@ public class GlyphManager {
         father.setBounds(father.getBounds());
     }
 
+    /**
+     * Metodo que atualiza o mapa de layers ativas do glyph
+     */
     public void analyseLayers() {
         resetActiveLayers();
         for (String i : getVariaveisVisuaisEscolhidas()) {

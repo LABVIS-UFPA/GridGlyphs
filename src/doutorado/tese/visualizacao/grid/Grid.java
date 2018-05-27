@@ -37,50 +37,13 @@ public class Grid extends JPanel {
     private String[] variaveisVisuaisEscolhidas;
     private float porcetagem;
     private float quantOlverlap;
-    private boolean mouseClickedAchouItem = false;
 
     public Grid() {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if (itensGrid != null) {
-                    for (ItemGrid itemGrid : itensGrid) {
-                        if (itemGrid.getGlyph().getBounds().contains(e.getX(), e.getY())) {
-                            if (!itemGrid.getGlyph().getSelecionado()) {
-                                itemGrid.getGlyph().setSelecionado(true);
-                                Graphics2D g2d = (Graphics2D) getGraphics().create();
-                                g2d.setStroke(new BasicStroke(3f));
-                                g2d.setColor(Color.decode("#B22222"));
-
-                                g2d.drawRect(itemGrid.getGlyph().getBounds().x,
-                                        itemGrid.getGlyph().getBounds().y,
-                                        itemGrid.getGlyph().getBounds().width,
-                                        itemGrid.getGlyph().getBounds().height);
-                                g2d.dispose();
-                            } else {
-                                itemGrid.getGlyph().setSelecionado(false);
-                                Graphics2D g2d = (Graphics2D) getGraphics().create();
-                                g2d.setStroke(new BasicStroke(3f));
-                                g2d.setColor(Color.decode("#F0F8FF"));
-
-                                g2d.drawRect(itemGrid.getGlyph().getBounds().x,
-                                        itemGrid.getGlyph().getBounds().y,
-                                        itemGrid.getGlyph().getBounds().width,
-                                        itemGrid.getGlyph().getBounds().height);
-
-                                g2d.setStroke(new BasicStroke(0.1f));
-                                g2d.setColor(Color.BLACK);
-                                g2d.drawRect(itemGrid.getGlyph().getBounds().x,
-                                        itemGrid.getGlyph().getBounds().y,
-                                        itemGrid.getGlyph().getBounds().width,
-                                        itemGrid.getGlyph().getBounds().height);
-
-                                g2d.dispose();
-                            }
-                        }
-                    }
-                }
+                mouseClickedMouseListener(e);
             }
         });
         glyphManager = new GlyphManager();
@@ -89,13 +52,57 @@ public class Grid extends JPanel {
         addHierarchyBoundsListener(new HierarchyBoundsAdapter() {
             @Override
             public void ancestorResized(HierarchyEvent e) {
-                setPreferredSize(getParent().getPreferredSize());
-                setSize(getParent().getSize());
-                rect.height = getParent().getPreferredSize().height;
-                rect.width = getParent().getPreferredSize().width;
+                ancestorResizedHierarchyBoundsListener();
             }
         });
         this.rect = new Rectangle(0, 0, 0, 0);
+    }
+
+    private void ancestorResizedHierarchyBoundsListener() {
+        setPreferredSize(getParent().getPreferredSize());
+        setSize(getParent().getSize());
+        rect.height = getParent().getPreferredSize().height;
+        rect.width = getParent().getPreferredSize().width;
+    }
+
+    private void mouseClickedMouseListener(MouseEvent e) {
+        if (itensGrid != null) {
+            for (ItemGrid itemGrid : itensGrid) {
+                if (itemGrid.getGlyph().getBounds().contains(e.getX(), e.getY())) {
+                    if (!itemGrid.getGlyph().getSelecionado()) {
+                        itemGrid.getGlyph().setSelecionado(true);
+                        Graphics2D g2d = (Graphics2D) getGraphics().create();
+                        g2d.setStroke(new BasicStroke(3f));
+                        g2d.setColor(Color.decode("#B22222"));
+
+                        g2d.drawRect(itemGrid.getGlyph().getBounds().x,
+                                itemGrid.getGlyph().getBounds().y,
+                                itemGrid.getGlyph().getBounds().width,
+                                itemGrid.getGlyph().getBounds().height);
+                        g2d.dispose();
+                    } else {
+                        itemGrid.getGlyph().setSelecionado(false);
+                        Graphics2D g2d = (Graphics2D) getGraphics().create();
+                        g2d.setStroke(new BasicStroke(3f));
+                        g2d.setColor(Color.decode("#F0F8FF"));
+
+                        g2d.drawRect(itemGrid.getGlyph().getBounds().x,
+                                itemGrid.getGlyph().getBounds().y,
+                                itemGrid.getGlyph().getBounds().width,
+                                itemGrid.getGlyph().getBounds().height);
+
+                        g2d.setStroke(new BasicStroke(0.1f));
+                        g2d.setColor(Color.BLACK);
+                        g2d.drawRect(itemGrid.getGlyph().getBounds().x,
+                                itemGrid.getGlyph().getBounds().y,
+                                itemGrid.getGlyph().getBounds().width,
+                                itemGrid.getGlyph().getBounds().height);
+
+                        g2d.dispose();
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -134,16 +141,15 @@ public class Grid extends JPanel {
     }
 
     /**
-     * Metodo responsavel por configurar os glyphs do grid. Varre a matriz de
-     * glyphs, mata todos os filhos antigos, e adiciona os novos filhos de
-     * acordo com a hierarquia passada através do variaveisVisuaisEscolhidas.
-     * Por fim, é definido o tamanho de cada item do grid.
+     * Metodo responsavel por configurar os glyphs do grid. Varre o vetor de
+     * Itens do Grid, setando para cada obj ItemGrid seu respectivo valor de
+     * overlapping e chama a funcao que configura as layers dos glyphs.
      *
      * @param itensHierarquia
      */
-    public void setCofig() {
+    public void setCofigItensGrid() {
         glyphManager.setVariaveisVisuaisEscolhidas(getVariaveisVisuaisEscolhidas());
-        glyphManager.analyseLayers();
+//        glyphManager.analyseLayers();
         for (ItemGrid itensGrid : getItensGrid()) {
             glyphManager.setPerctOverlap(quantOlverlap);
             glyphManager.configLayers(itensGrid);
@@ -181,11 +187,10 @@ public class Grid extends JPanel {
 //    public void setAtributosEscolhidos(List<Object> atributosEscolhidos) {
 //        //TODO
 //    }
-    
     public void setGlyphOverlappingModel(boolean overlappingActivated) {
         glyphManager.configGlyphDesingModel(overlappingActivated);
     }
-    
+
     public ItemGrid[] criarItens() {
         int totalItens = getQuantHoriz() * getQuantVert();
         setItensGrid(new ItemGrid[totalItens]);
@@ -259,6 +264,11 @@ public class Grid extends JPanel {
      */
     public void setQuantOlverlap(float quantOlverlap) {
         this.quantOlverlap = quantOlverlap;
+    }
+
+    public void setGridSize(int vert, int horiz) {
+        setQuantVert(vert);
+        setQuantHoriz(horiz);
     }
 
 }
