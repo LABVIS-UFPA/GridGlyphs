@@ -62,7 +62,6 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         }
         initComponents();
         gridPanel = new Grid();
-//        scenarioManager = new ScenarioManager();
         gridPanel.setPorcetagem(porcentagem);
         painelEsquerda.add(gridPanel);
         gridPanel.setDoubleBuffered(true);
@@ -499,7 +498,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                                 .addGap(60, 60, 60)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(6, 6, 6)))
-                .addGroup(glyphs_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(glyphs_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(glyphs_jPanelLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE))
@@ -872,6 +871,8 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     }//GEN-LAST:event_varVisuaisEscolidasListValueChanged
 
     private void enviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarButtonActionPerformed
+//        scenarioManager = new ScenarioManager(gridPanel, painelQuestoes_jTextPane);
+
         scenarioManager.nextStep();
     }//GEN-LAST:event_enviarButtonActionPerformed
 
@@ -1005,9 +1006,9 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 
     private void configCenario() {
         scenarioManager = new ScenarioManager(gridPanel, painelQuestoes_jTextPane);
-
+        
         if (cenario1_RadioButtonMenuItem.isSelected()) {
-            scenarioManager.carregarCenarios("cenario1");            
+            scenarioManager.carregarCenarios("cenario1");
         } else if (cenario2_RadioButtonMenuItem.isSelected()) {
             System.out.println("Cenário 2 escolhido.");
         } else if (cenario3_RadioButtonMenuItem.isSelected()) {
@@ -1086,7 +1087,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                 if (glyph) {
                     analisarQuantAtributosCategoricos(list, Constantes.getCorGlyphs());
                 } else {
-                    analisarQuantAtributosCategoricos(list, Constantes.getCor());
+                    analisarQuantAtributosCategoricos(list, Constantes.getCorOverlap());
                 }
                 break;
             case NIVEL_3:

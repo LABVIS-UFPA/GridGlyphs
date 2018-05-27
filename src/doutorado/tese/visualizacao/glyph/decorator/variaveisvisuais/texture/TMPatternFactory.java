@@ -200,9 +200,9 @@ public class TMPatternFactory {
         
         for (String textureName : TM.getTexturesNames()) {
             System.out.println(textureName);
-            TM.setTextureColor(Color.YELLOW);
-            TM.setBackgroungColor(Color.WHITE);
-            TM.resetTextures();
+//            TM.setTextureColor(Color.YELLOW);
+//            TM.setBackgroungColor(Color.WHITE);
+//            TM.resetTextures();
             panel.add(buildTestPatternPanel(textureName, TM.get(textureName)));
         }
 

@@ -19,6 +19,7 @@ public class Resposta {
 
     public Resposta(Glyph glyphResposta) {
         this.glyphResposta = glyphResposta;
+        glyphsResposta = new ArrayList<>();
     }
 
     public Resposta(ArrayList<Glyph> glyphsResposta) {

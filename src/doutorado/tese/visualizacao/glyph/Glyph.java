@@ -18,30 +18,31 @@ import java.util.List;
  */
 public abstract class Glyph {
 
-    protected Glyph child;
+    private Glyph child;
     private Rectangle bounds;
     public float pectSobreposicao;
     private Glyph father;
     private final ArrayList children = new ArrayList();
     public Boolean selecionado = false;
     private boolean overlappingActivated = false;
+    private boolean glyphResposta;
 
     public void paint(Graphics2D g2d) {
-        if (child != null) {
+        if (getChild() != null) {
             if(getTexturePaint() != null){
                 g2d.setPaint(getTexturePaint());
             }
             if (getClipShape() != null) {
                 g2d.clip(getClipShape());
             }
-            child.paint(g2d);
+            getChild().paint(g2d);
         }
     }
 
     public void setBounds(Rectangle bounds) {
         this.bounds = bounds;
-        if (this.child != null) {
-            this.child.setBounds(new Rectangle(bounds.x + Math.round(((bounds.width * (1 - pectSobreposicao)) / 2)),
+        if (this.getChild() != null) {
+            this.getChild().setBounds(new Rectangle(bounds.x + Math.round(((bounds.width * (1 - pectSobreposicao)) / 2)),
                     bounds.y + Math.round(((bounds.height * (1 - pectSobreposicao)) / 2)),
                     Math.round(bounds.width * pectSobreposicao), Math.round(bounds.height * pectSobreposicao)));
         }
@@ -58,7 +59,7 @@ public abstract class Glyph {
      * @param glyphChild glyph filho a ser incluido
      */
     public void appendChild(Glyph glyphChild) {
-        Glyph pai = this.child;
+        Glyph pai = this.getChild();
         if (pai != null) {
             pai.appendChild(glyphChild);
         } else {
@@ -71,11 +72,11 @@ public abstract class Glyph {
 
     public void getChildren(ArrayList<Glyph> children) {
         children.add(this);
-        if (this.child != null) {
-            this.child.getChildren(children);
+        if (this.getChild() != null) {
+            this.getChild().getChildren(children);
         }
     }
-
+    
     public List<Glyph> getChildren() {
         return children;
     }
@@ -118,7 +119,7 @@ public abstract class Glyph {
     @Override
     public String toString() {
 //        System.out.println(this.getClass().getSimpleName());
-        return this.getClass().getSimpleName(); //To change body of generated methods, choose Tools | Templates.
+        return this.getClass().getSimpleName();
     }
 
     /**
@@ -133,5 +134,23 @@ public abstract class Glyph {
      */
     public void setOverlappingActivated(boolean overlappingActivated) {
         this.overlappingActivated = overlappingActivated;
+    }
+
+    /**
+     * @return the child
+     */
+    public Glyph getChild() {
+        return child;
+    }
+
+    public boolean isGlyphResposta() {
+        return glyphResposta;
+    }
+
+    /**
+     * @param glyphResposta the glyphResposta to set
+     */
+    public void setGlyphResposta(boolean glyphResposta) {
+        this.glyphResposta = glyphResposta;
     }
 }

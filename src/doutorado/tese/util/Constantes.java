@@ -38,16 +38,18 @@ public class Constantes {
     public static final int PRESENTE = 1;
     public static final int AUSENTE = 0;
 
-//    private static Color[] cores = {Color.BLUE, Color.GREEN, Color.MAGENTA, Color.ORANGE, Color.PINK, Color.RED, Color.YELLOW};
-    private static String[] cor = {
-        "#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477",
-        "#66aa00", "#b82e2e", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc",
-        "#e67300", "#8b0707", "#651067", "#329262", "#5574a6", "#3b3eac", "#F0F8FF"
+    private static String[] corOverlap = {
+        "#B40000", "#3B70A2",
+        "#2CB01C", "#D1D0CA",
+        "#CDB5", "#70C2E8",
+        "FF95C9", "#62354C"
     };
 
     private static String[] corGlyphs = {
-        "#ff0101", "#f8d930", "#174580", "#00a1d7",
-        "#0a8300", "#ff3797", "#8c8589", "#000000"
+        "#FF0101", "#174580",
+        "#0A8300", "#8C8589",
+        "#F8D930", "#00A1D7",
+        "#FF3797", "#000000"
     };
 
     public final static String[] TIPO_TEXTURA = {
@@ -59,18 +61,10 @@ public class Constantes {
         "PATTERN_RIGHT",
         "PATTERN_DIAG_CROSS_LINES",
         "PATTERN_CROSS_LINES"
-//        "PATTERN_DIAGDOTS2" ,
-//        "PATTERN_DOTS",
-//        "PATTERN_CHESS",
-//        "PATTERN_PLUS" ,
-//        "PATTERN_DOWN",
-//        "PATTERN_LEFT",
-//        "PATTERN_DIAGDOTS"
     };
 
     public final static String[] LETRAS_ALFABETO = {
-        "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
-        "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+        "A", "B", "C", "D", "E", "F", "G", "H"
     };
 
     public final static String[] NUMEROS = {
@@ -126,8 +120,8 @@ public class Constantes {
      *
      * @return
      */
-    public static String[] getCor() {
-        return cor;
+    public static String[] getCorOverlap() {
+        return corOverlap;
     }
 
     /**

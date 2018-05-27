@@ -143,16 +143,14 @@ public class Grid extends JPanel {
     /**
      * Metodo responsavel por configurar os glyphs do grid. Varre o vetor de
      * Itens do Grid, setando para cada obj ItemGrid seu respectivo valor de
-     * overlapping e chama a funcao que configura as layers dos glyphs.
-     *
-     * @param itensHierarquia
+     * overlapping e chama a funcao que configura as layers dos glyphs. 
      */
     public void setCofigItensGrid() {
-        glyphManager.setVariaveisVisuaisEscolhidas(getVariaveisVisuaisEscolhidas());
+        getGlyphManager().setVariaveisVisuaisEscolhidas(getVariaveisVisuaisEscolhidas());
 //        glyphManager.analyseLayers();
-        for (ItemGrid itensGrid : getItensGrid()) {
-            glyphManager.setPerctOverlap(quantOlverlap);
-            glyphManager.configLayers(itensGrid);
+        for (ItemGrid itemGrid : getItensGrid()) {
+            getGlyphManager().setPerctOverlap(quantOlverlap);
+            getGlyphManager().configLayers(itemGrid);
         }
     }
 
@@ -164,31 +162,53 @@ public class Grid extends JPanel {
      * @return matriz de glyphs
      */
     public Glyph[][] loadMatrizGlyphs() {
-        int size = Math.min(getWidth() - 4, getHeight() - 4) / getQuantVert();
         matrizGlyph = new Glyph[getQuantHoriz()][getQuantVert()];
         int g = 0;
         for (int i = 0; i < getQuantHoriz(); i++) {
             for (int j = 0; j < getQuantVert(); j++) {
-                while (g < itensGrid.length) {
+                if (g < itensGrid.length) {
                     matrizGlyph[i][j] = new GlyphConcrete();
-                    int x = i * size;
-                    int y = j * size;
-                    matrizGlyph[i][j].setBounds(new Rectangle(x, y, size, size));
+//                    int x = i * size;
+//                    int y = j * size;
+//                    matrizGlyph[i][j].setBounds(new Rectangle(x, y, size, size));
                     itensGrid[g].setGlyph(matrizGlyph[i][j]);
 //                    System.out.println("Montando matrix=z: " + itensGrid[g].getGlyph().getBounds());
-                    break;
+//                    break;
                 }
                 g++;
             }
         }
+        defineBoundsFromIndex();
         return matrizGlyph;
     }
 
-//    public void setAtributosEscolhidos(List<Object> atributosEscolhidos) {
-//        //TODO
-//    }
+    public void defineBoundsFromIndex() {
+        int size = Math.min(getWidth() - 4, getHeight() - 4) / getQuantVert();
+
+        for (int i = 0; i < getQuantHoriz(); i++) {
+            for (int j = 0; j < getQuantVert(); j++) {
+                int x = i * size;
+                int y = j * size;
+                matrizGlyph[i][j].setBounds(new Rectangle(x, y, size, size));
+            }
+        }
+    }
+
+    public void shufflePosition() {
+        int n = getQuantHoriz() * getQuantVert() * 10;
+        int cont = 0;
+        while (cont < n) {
+            int x1 = (int) (Math.random() * getQuantHoriz()), x2 = (int) (Math.random() * getQuantHoriz()),
+                    y1 = (int) (Math.random() * getQuantVert()), y2 = (int) (Math.random() * getQuantVert());
+            Glyph tempGlyph = matrizGlyph[x1][y1];
+            matrizGlyph[x1][y1] = matrizGlyph[x2][y2];
+            matrizGlyph[x2][y2] = tempGlyph;
+            cont++;
+        }
+    }
+
     public void setGlyphOverlappingModel(boolean overlappingActivated) {
-        glyphManager.configGlyphDesingModel(overlappingActivated);
+        getGlyphManager().configGlyphDesingModel(overlappingActivated);
     }
 
     public ItemGrid[] criarItens() {
@@ -269,6 +289,13 @@ public class Grid extends JPanel {
     public void setGridSize(int vert, int horiz) {
         setQuantVert(vert);
         setQuantHoriz(horiz);
+    }
+
+    /**
+     * @return the glyphManager
+     */
+    public GlyphManager getGlyphManager() {
+        return glyphManager;
     }
 
 }

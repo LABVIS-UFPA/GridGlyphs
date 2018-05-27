@@ -649,12 +649,12 @@
                                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Group type="102" alignment="3" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                                       <Component id="jLabel6" pref="21" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="letraComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="letraComboBox" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                               <Component id="viewGlyphsButton" min="-2" max="-2" attributes="0"/>

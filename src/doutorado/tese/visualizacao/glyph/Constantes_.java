@@ -12,7 +12,8 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @author Anderson
  */
-public class Constantes {
+@Deprecated
+public class Constantes_ {
 
     public final static String PROGRESS = "progress";
     public final static String VALUE_SAME_SIZE = "\t1";

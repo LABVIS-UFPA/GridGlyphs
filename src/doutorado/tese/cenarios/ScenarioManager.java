@@ -7,8 +7,11 @@ package doutorado.tese.cenarios;
 
 import doutorado.tese.visualizacao.glyph.GlyphConcrete;
 import doutorado.tese.visualizacao.grid.Grid;
+import doutorado.tese.visualizacao.grid.ItemGrid;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 
 /**
@@ -26,7 +29,10 @@ public class ScenarioManager {
     private String[] vetorTipoTarefa = {"Identificação", "Localização"};
     private String[] vetorQuestoes = {"Encontre o elemento abaixo na visualização:",
         "Encontre o grupo de elementos abaixo na visualização:"};
-    private JTextPane perguntaAtual;
+    private JTextPane perguntaAtual_TextPanel;
+    private Pergunta perguntaAtual;
+    private Resposta respostaAtual;
+    private long inicioTempo, fimTempo;
 
     private Thread t1;
 
@@ -35,7 +41,7 @@ public class ScenarioManager {
 
     public ScenarioManager(Grid gridPanel, JTextPane painelPergunta) {
         this.gridPanel = gridPanel;
-        this.perguntaAtual = painelPergunta;
+        this.perguntaAtual_TextPanel = painelPergunta;
     }
 
     public void carregarCenarios(String nomeCenario) {
@@ -65,24 +71,28 @@ public class ScenarioManager {
             public void run() {
                 for (int t = 0; t < vetorTamGridHorizontal.length; t++) {
                     gridPanel.setGridSize(vetorTamGridVertical[t], vetorTamGridHorizontal[t]);
-                    System.out.print("Tam GRID: " + vetorTamGridVertical[t] + " x " + vetorTamGridHorizontal[t]);
+//                    System.out.print("Tam GRID: " + vetorTamGridVertical[t] + " x " + vetorTamGridHorizontal[t]);
                     for (int p = 0; p < vetorQuantPercentOverlapping.length; p++) {
                         gridPanel.setQuantOlverlap(vetorQuantPercentOverlapping[p]);
-                        System.out.println("\tPerct Overlapping: " + vetorQuantPercentOverlapping[p]);
+//                        System.out.print("\tPerct Overlapping: " + vetorQuantPercentOverlapping[p]);
                         for (int tarefa = 0; tarefa < vetorTipoTarefa.length; tarefa++) {
                             for (int i = 0; i < vetorVarVisuais.length - 1; i++) {
                                 for (int j = 0; j < numVisualizacoes; j++) {
                                     gridPanel.setVariaveisVisuaisEscolhidas(new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
                                     gridPanel.criarItens();
                                     gridPanel.loadMatrizGlyphs();
+//                                    System.out.println("\t" + j + " - Var: " + vetorVarVisuais[i]);
                                     gridPanel.setCofigItensGrid();
+                                    gridPanel.shufflePosition();
+                                    gridPanel.defineBoundsFromIndex();
                                     gridPanel.repaint();
-
-                                    Pergunta pergunta = new Pergunta(vetorQuestoes[tarefa]);
-                                    Resposta r1 = new Resposta(new GlyphConcrete());
-                                    pergunta.setResposta(r1);
-                                    perguntaAtual.setText(pergunta.getQuestao());
-                                    System.out.println("\t" + j + " - Var: " + vetorVarVisuais[i]);
+                                    
+                                    setPerguntaAtual(new Pergunta(vetorQuestoes[tarefa]));
+                                                                        
+                                    perguntaAtual_TextPanel.setText(getPerguntaAtual().getQuestao());
+//                                    inicioTempo = ((System.currentTimeMillis() / (1000*60)) % 60);
+                                    inicioTempo = System.currentTimeMillis();
+                                    System.out.println("Tempo inicio: "+inicioTempo);
                                     try {
                                         synchronized (t1) {
                                             t1.wait();
@@ -92,23 +102,72 @@ public class ScenarioManager {
                                     }}}}}}}
         });
         t1.start();
+        
     }
 
+    /**
+     * Metodo que varre os itensGrid procurando os que foram selecionados pelo usuario.
+     * Um vez encontrado os glyphs selecionados pelo usuario, estes sao adicionados em uma lista
+     * de glyphs representando as respostas dos usuarios, e por fim essa lista é repassada para a 
+     * pergunta atual. Desta forma é possível comparar as respostas dos usuarios com as respostas
+     * corretas.
+     */
     public void nextStep() {
+        Resposta respostaUsuario = new Resposta(new GlyphConcrete());
+        for (ItemGrid itemGrid : gridPanel.getItensGrid()) {
+            if(itemGrid.getGlyph().selecionado){
+//                ArrayList familia = new ArrayList();
+//                System.out.println(itemGrid.getGlyphFamily(itemGrid.getGlyph(), familia));
+                respostaUsuario.getGlyphsResposta().add(itemGrid.getGlyph());
+            }
+        }
+        getPerguntaAtual().setRespostaUsuario(respostaUsuario);
+        //TODO comparar a resposta do usuario com a resposta certa
+//        if(gridPanel.getGlyphManager().){
+            
+//        }
+        gridPanel.getGlyphManager().resetValoresSorteados();
         synchronized (t1) {
             t1.notify();
-            //varrer itensGrid e procurar os que estao selecionados
         }
     }
     
-    public static void main(String[] args) {
-        Cenario cenario1 = new Cenario();
-        Pergunta p1 = new Pergunta("Qual glyph abaixo é azul?");
-        Resposta r1 = new Resposta(new GlyphConcrete());
-        p1.setResposta(r1);
+//    public static void main(String[] args) {
+//        Cenario cenario1 = new Cenario();
+//        Pergunta p1 = new Pergunta("Qual glyph abaixo é azul?");
+//        Resposta r1 = new Resposta(new GlyphConcrete());
+//        p1.setResposta(r1);
+//
+//        System.out.println("Pergunta: " + p1.getQuestao());
+//        System.out.println("Resposta: " + p1.getResposta().getGlyphResposta());
+//    }
 
-        System.out.println("Pergunta: " + p1.getQuestao());
-        System.out.println("Resposta: " + p1.getResposta().getGlyphResposta());
+    /**
+     * @return the perguntaAtual
+     */
+    public Pergunta getPerguntaAtual() {
+        return perguntaAtual;
+    }
+
+    /**
+     * @param perguntaAtual the perguntaAtual to set
+     */
+    public void setPerguntaAtual(Pergunta perguntaAtual) {
+        this.perguntaAtual = perguntaAtual;
+    }
+
+    /**
+     * @return the respostaAtual
+     */
+    public Resposta getRespostaAtual() {
+        return respostaAtual;
+    }
+
+    /**
+     * @param respostaAtual the respostaAtual to set
+     */
+    public void setRespostaAtual(Resposta respostaAtual) {
+        this.respostaAtual = respostaAtual;
     }
 
 }

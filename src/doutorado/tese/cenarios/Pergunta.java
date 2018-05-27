@@ -11,19 +11,20 @@ package doutorado.tese.cenarios;
  */
 public class Pergunta {
 
-    private Resposta resposta;
+    private Resposta respostaCerta;
+    private Resposta respostaUsuario;
     private String questao;
 
     public Pergunta(String questao) {
         this.questao = questao;
     }
 
-    public Resposta getResposta() {
-        return resposta;
+    public Resposta getRespostaCerta() {
+        return respostaCerta;
     }
 
-    public void setResposta(Resposta resposta) {
-        this.resposta = resposta;
+    public void setRespostaCerta(Resposta respostaCerta) {
+        this.respostaCerta = respostaCerta;
     }
 
     /**
@@ -38,6 +39,20 @@ public class Pergunta {
      */
     public void setQuestao(String questao) {
         this.questao = questao;
+    }
+
+    /**
+     * @return the respostaUsuario
+     */
+    public Resposta getRespostaUsuario() {
+        return respostaUsuario;
+    }
+
+    /**
+     * @param respostaUsuario the respostaUsuario to set
+     */
+    public void setRespostaUsuario(Resposta respostaUsuario) {
+        this.respostaUsuario = respostaUsuario;
     }
 
 }
