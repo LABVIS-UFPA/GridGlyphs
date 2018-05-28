@@ -23,7 +23,7 @@ public abstract class Glyph {
     public float pectSobreposicao;
     private Glyph father;
     private final ArrayList children = new ArrayList();
-    public Boolean selecionado = false;
+    public Boolean selectedByUser = false;
     private boolean overlappingActivated = false;
     private boolean glyphResposta;
 
@@ -108,12 +108,12 @@ public abstract class Glyph {
         return father;
     }
 
-    public Boolean getSelecionado() {
-        return selecionado;
+    public Boolean getSelectedByUser() {
+        return selectedByUser;
     }
 
-    public void setSelecionado(Boolean selecionado) {
-        this.selecionado = selecionado;
+    public void setSelectedByUser(Boolean selectedByUser) {
+        this.selectedByUser = selectedByUser;
     }
 
     @Override

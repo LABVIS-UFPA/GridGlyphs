@@ -37,6 +37,7 @@ public class Grid extends JPanel {
     private String[] variaveisVisuaisEscolhidas;
     private float porcetagem;
     private float quantOlverlap;
+    private ArrayList<ItemGrid> gabarito;
 
     public Grid() {
         this.addMouseListener(new MouseAdapter() {
@@ -69,8 +70,9 @@ public class Grid extends JPanel {
         if (itensGrid != null) {
             for (ItemGrid itemGrid : itensGrid) {
                 if (itemGrid.getGlyph().getBounds().contains(e.getX(), e.getY())) {
-                    if (!itemGrid.getGlyph().getSelecionado()) {
-                        itemGrid.getGlyph().setSelecionado(true);
+                    if (!itemGrid.getGlyph().getSelectedByUser()) {
+                        itemGrid.getGlyph().setSelectedByUser(true);
+                        itemGrid.setPossuiGlyphResposta(true);
                         Graphics2D g2d = (Graphics2D) getGraphics().create();
                         g2d.setStroke(new BasicStroke(3f));
                         g2d.setColor(Color.decode("#B22222"));
@@ -81,7 +83,8 @@ public class Grid extends JPanel {
                                 itemGrid.getGlyph().getBounds().height);
                         g2d.dispose();
                     } else {
-                        itemGrid.getGlyph().setSelecionado(false);
+                        itemGrid.getGlyph().setSelectedByUser(false);
+                        itemGrid.setPossuiGlyphResposta(false);
                         Graphics2D g2d = (Graphics2D) getGraphics().create();
                         g2d.setStroke(new BasicStroke(3f));
                         g2d.setColor(Color.decode("#F0F8FF"));
@@ -143,15 +146,23 @@ public class Grid extends JPanel {
     /**
      * Metodo responsavel por configurar os glyphs do grid. Varre o vetor de
      * Itens do Grid, setando para cada obj ItemGrid seu respectivo valor de
-     * overlapping e chama a funcao que configura as layers dos glyphs. 
+     * overlapping e chama a funcao que configura as layers dos glyphs. Por fim,
+     * verifica se o item possui um glyph com um de seus filhos sendo a resposta 
+     * de uma pergunta, caso sim, o item é adicionado ao gabarito (ArrayList<ItemGrid>)
+     * @return retorna o gabarito
      */
-    public void setCofigItensGrid() {
+    public ArrayList<ItemGrid> setCofigItensGrid() {
+        gabarito = new ArrayList();
         getGlyphManager().setVariaveisVisuaisEscolhidas(getVariaveisVisuaisEscolhidas());
 //        glyphManager.analyseLayers();
         for (ItemGrid itemGrid : getItensGrid()) {
             getGlyphManager().setPerctOverlap(quantOlverlap);
             getGlyphManager().configLayers(itemGrid);
+            if(itemGrid.isPossuiGlyphResposta()){
+                getGabarito().add(itemGrid);
+            }
         }
+        return getGabarito();
     }
 
     /**
@@ -296,6 +307,20 @@ public class Grid extends JPanel {
      */
     public GlyphManager getGlyphManager() {
         return glyphManager;
+    }
+    
+    /**
+     * @return the gabarito
+     */
+    public ArrayList<ItemGrid> getGabarito() {
+        return gabarito;
+    }
+
+    /**
+     * @param gabarito the gabarito to set
+     */
+    public void setGabarito(ArrayList<ItemGrid> gabarito) {
+        this.gabarito = gabarito;
     }
 
 }

@@ -6,6 +6,7 @@
 package doutorado.tese.cenarios;
 
 import doutorado.tese.visualizacao.glyph.Glyph;
+import doutorado.tese.visualizacao.grid.ItemGrid;
 import java.util.ArrayList;
 
 /**
@@ -14,45 +15,38 @@ import java.util.ArrayList;
  */
 public class Resposta {
 
-    private ArrayList<Glyph> glyphsResposta;
-    private Glyph glyphResposta;
+    private ArrayList<ItemGrid> itensResposta;
+    private ItemGrid itemResposta;
 
-    public Resposta(Glyph glyphResposta) {
-        this.glyphResposta = glyphResposta;
-        glyphsResposta = new ArrayList<>();
-    }
-
-    public Resposta(ArrayList<Glyph> glyphsResposta) {
-        this.glyphsResposta = glyphsResposta;
-    }
-
-    /**
-     * @return the glyphsResposta
-     */
-    public ArrayList<Glyph> getGlyphsResposta() {
-        return glyphsResposta;
-    }
-
-    /**
-     * @param glyphsResposta the glyphsResposta to set
-     */
-    public void setGlyphsResposta(ArrayList<Glyph> glyphsResposta) {
-        this.glyphsResposta = glyphsResposta;
-    }
-
-    /**
-     * @return the glyphResposta
-     */
-    public Glyph getGlyphResposta() {
-        return glyphResposta;
-    }
-
-    /**
-     * @param glyphResposta the glyphResposta to set
-     */
-    public void setGlyphResposta(Glyph glyphResposta) {
-        this.glyphResposta = glyphResposta;
+    public Resposta() {
+        itensResposta = new ArrayList<>();
     }
     
-    
+    /**
+     * @return the itemResposta
+     */
+    public ItemGrid getItemResposta() {
+        return itemResposta;
+    }
+
+    /**
+     * @param itemResposta the itemResposta to set
+     */
+    public void setItemResposta(ItemGrid itemResposta) {
+        this.itemResposta = itemResposta;
+    }
+
+    /**
+     * @return the itensResposta
+     */
+    public ArrayList<ItemGrid> getItensResposta() {
+        return itensResposta;
+    }
+
+    /**
+     * @param itensResposta the itensResposta to set
+     */
+    public void setItensResposta(ArrayList<ItemGrid> itensResposta) {
+        this.itensResposta = itensResposta;
+    }
 }

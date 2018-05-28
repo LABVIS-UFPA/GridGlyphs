@@ -91,6 +91,9 @@ public class ItemGrid {
     }
 
     /**
+     * Metodo usado para indicar que o ItemGrid em questão possui um gliph com 
+     * pelo menos um de seus filhos sendo a resposta correta (gabarito) da 
+     * questão (pergunta) proposta.
      * @return the possuiGlyphResposta
      */
     public boolean isPossuiGlyphResposta() {
@@ -98,6 +101,7 @@ public class ItemGrid {
     }
 
     /**
+     * 
      * @param possuiGlyphResposta the possuiGlyphResposta to set
      */
     public void setPossuiGlyphResposta(boolean possuiGlyphResposta) {

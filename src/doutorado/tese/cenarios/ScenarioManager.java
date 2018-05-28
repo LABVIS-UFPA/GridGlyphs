@@ -5,6 +5,7 @@
  */
 package doutorado.tese.cenarios;
 
+import doutorado.tese.visualizacao.glyph.Glyph;
 import doutorado.tese.visualizacao.glyph.GlyphConcrete;
 import doutorado.tese.visualizacao.grid.Grid;
 import doutorado.tese.visualizacao.grid.ItemGrid;
@@ -33,6 +34,7 @@ public class ScenarioManager {
     private Pergunta perguntaAtual;
     private Resposta respostaAtual;
     private long inicioTempo, fimTempo;
+    private Resposta respostaCerta;
 
     private Thread t1;
 
@@ -78,16 +80,20 @@ public class ScenarioManager {
                         for (int tarefa = 0; tarefa < vetorTipoTarefa.length; tarefa++) {
                             for (int i = 0; i < vetorVarVisuais.length - 1; i++) {
                                 for (int j = 0; j < numVisualizacoes; j++) {
+                                    respostaCerta = new Resposta();
+                                    
                                     gridPanel.setVariaveisVisuaisEscolhidas(new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
                                     gridPanel.criarItens();
                                     gridPanel.loadMatrizGlyphs();
 //                                    System.out.println("\t" + j + " - Var: " + vetorVarVisuais[i]);
-                                    gridPanel.setCofigItensGrid();
+                                    respostaCerta.setItensResposta(gridPanel.setCofigItensGrid());
+//                                    ArrayList<ItemGrid> setCofigItensGrid = gridPanel.setCofigItensGrid();
                                     gridPanel.shufflePosition();
                                     gridPanel.defineBoundsFromIndex();
                                     gridPanel.repaint();
                                     
                                     setPerguntaAtual(new Pergunta(vetorQuestoes[tarefa]));
+                                    getPerguntaAtual().setRespostaCerta(respostaCerta);
                                                                         
                                     perguntaAtual_TextPanel.setText(getPerguntaAtual().getQuestao());
 //                                    inicioTempo = ((System.currentTimeMillis() / (1000*60)) % 60);
@@ -113,19 +119,22 @@ public class ScenarioManager {
      * corretas.
      */
     public void nextStep() {
-        Resposta respostaUsuario = new Resposta(new GlyphConcrete());
+        Resposta respostaUsuario = new Resposta();
+        
         for (ItemGrid itemGrid : gridPanel.getItensGrid()) {
-            if(itemGrid.getGlyph().selecionado){
-//                ArrayList familia = new ArrayList();
-//                System.out.println(itemGrid.getGlyphFamily(itemGrid.getGlyph(), familia));
-                respostaUsuario.getGlyphsResposta().add(itemGrid.getGlyph());
+            if(itemGrid.isPossuiGlyphResposta()){
+                respostaUsuario.getItensResposta().add(itemGrid);
             }
-        }
+        }        
         getPerguntaAtual().setRespostaUsuario(respostaUsuario);
         //TODO comparar a resposta do usuario com a resposta certa
-//        if(gridPanel.getGlyphManager().){
-            
-//        }
+        for (ItemGrid itemGabarito : perguntaAtual.getRespostaCerta().getItensResposta()) {
+            for (ItemGrid itemRespostaUsuario : perguntaAtual.getRespostaUsuario().getItensResposta()) {
+                if(itemGabarito == itemRespostaUsuario){
+                    System.out.println("resposta certa: \n"+itemGabarito +" == "+ itemRespostaUsuario);
+                }
+            }
+        }
         gridPanel.getGlyphManager().resetValoresSorteados();
         synchronized (t1) {
             t1.notify();
