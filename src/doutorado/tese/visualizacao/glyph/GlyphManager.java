@@ -29,6 +29,8 @@ public class GlyphManager {
     private boolean overlappingActivated;
     private int texturaSorteada = -1;
     private int corSorteada = -1;
+    private int cor2Sorteada = -1;
+
     private int formaSorteada = -1;
     private int letraSorteada = -1;
 
@@ -38,11 +40,14 @@ public class GlyphManager {
     }
 
     public Glyph setLayerInGlyph(String varVisual) {
-        Glyph glyph = null;
+         Glyph glyph = null;
 
         switch (varVisual) {
             case "Color":
                 glyph = defineRandomColor();
+                break;
+            case "Color2":
+                glyph = defineRandomColorOvelerlap();
                 break;
             case "Letter":
                 glyph = defineRandomLetter();
@@ -147,6 +152,7 @@ public class GlyphManager {
         corSorteada = -1;
         formaSorteada = -1;
         letraSorteada = -1;
+        cor2Sorteada =-1;
     }
 
     private Glyph defineRandomTexture() {
@@ -180,6 +186,24 @@ public class GlyphManager {
             System.out.println("Sorteada:" + Constantes.getCorGlyphs()[corSorteada].toString());
         }
         cor.setCor(Color.decode(Constantes.getCorGlyphs()[random]));
+        cor.setPectSobreposicao(perctOverlap);
+        cor.setOverlappingActivated(overlappingActivated);
+        return glyph;
+    }
+    
+    private Glyph defineRandomColorOvelerlap() {
+        int random = (int) (Math.random() * Constantes.getCorOverlap().length);
+        while (random == cor2Sorteada) {
+            random = (int) (Math.random() * Constantes.getCorOverlap().length);
+        }
+        Glyph glyph = new Cor();
+        Cor cor = (Cor) glyph;
+        if (cor2Sorteada == -1) {
+            cor2Sorteada = random;
+            cor.setGlyphResposta(true);
+            System.out.println("Sorteada:" + Constantes.getCorOverlap()[cor2Sorteada].toString());
+        }
+        cor.setCor(Color.decode(Constantes.getCorOverlap()[random]));
         cor.setPectSobreposicao(perctOverlap);
         cor.setOverlappingActivated(overlappingActivated);
         return glyph;

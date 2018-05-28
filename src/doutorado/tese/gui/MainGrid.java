@@ -1012,7 +1012,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         } else if (cenario2_RadioButtonMenuItem.isSelected()) {
             System.out.println("Cenário 2 escolhido.");
         } else if (cenario3_RadioButtonMenuItem.isSelected()) {
-            System.out.println("Cenário 3 escolhido.");
+            scenarioManager.carregarCenarios("cenario3");
         } else {
             System.out.println("Cenário 4 escolhido.");
         }

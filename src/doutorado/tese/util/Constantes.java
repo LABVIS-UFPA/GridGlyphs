@@ -42,7 +42,7 @@ public class Constantes {
         "#B40000", "#3B70A2",
         "#2CB01C", "#D1D0CA",
         "#CDB5", "#70C2E8",
-        "FF95C9", "#62354C"
+        "#FF95C9", "#62354C"
     };
 
     private static String[] corGlyphs = {
