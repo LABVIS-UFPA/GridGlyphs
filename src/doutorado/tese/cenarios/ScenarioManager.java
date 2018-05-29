@@ -183,7 +183,7 @@ public class ScenarioManager {
         analisarRespostas();
         gridPanel.getGlyphManager().resetValoresSorteados();
         synchronized (t1) {
-            threadTime.s
+//            threadTime.s
             t1.notify();
         }
     }
@@ -201,7 +201,7 @@ public class ScenarioManager {
                 getPerguntaAtual().getRespostaUsuario().getListItens().size()){
             for (ItemGrid itemGabarito : perguntaAtual.getRespostaCerta().getListItens()) {
                 for (ItemGrid itemRespostaUsuario : perguntaAtual.getRespostaUsuario().getListItens()) {
-                    if(itemGabarito.equals(itemRespostaUsuario)){
+                    if(itemGabarito == itemRespostaUsuario){
                         //TODO escrever no LOG o tempo de resposta, se ele acertou, num de usuário, numero da tarefa, e a configuracao
                         System.out.println("resposta certa: \n"+itemGabarito +" == "+ itemRespostaUsuario);
                     }
