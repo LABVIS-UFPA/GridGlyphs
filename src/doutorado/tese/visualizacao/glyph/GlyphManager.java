@@ -30,7 +30,6 @@ public class GlyphManager {
     private int texturaSorteada = -1;
     private int corSorteada = -1;
     private int cor2Sorteada = -1;
-
     private int formaSorteada = -1;
     private int letraSorteada = -1;
 
@@ -152,7 +151,7 @@ public class GlyphManager {
         corSorteada = -1;
         formaSorteada = -1;
         letraSorteada = -1;
-        cor2Sorteada =-1;
+        cor2Sorteada = -1;
     }
 
     private Glyph defineRandomTexture() {

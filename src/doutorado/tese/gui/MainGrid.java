@@ -48,7 +48,6 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private String[] variaveisVisuaisEscolhidas;
     public float porcentagem = 1f;
     public ScenarioManager scenarioManager;
-//    public ScenarioManager cenarioManager;
 
     /**
      * Creates new form MainGrid
@@ -126,6 +125,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         painelQuestoes_jTextPane = new javax.swing.JTextPane();
         painel_legenda = new javax.swing.JPanel();
         enviarButton = new javax.swing.JButton();
+        painelValoresVarVisuais = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         openFileMenuItem = new javax.swing.JMenuItem();
@@ -133,7 +133,6 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         cenario1_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         cenario2_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         cenario3_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
-        cenario4_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         glyphModelMenu = new javax.swing.JMenu();
         overlappingRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         maskInclusionRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
@@ -173,7 +172,6 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         scenariosButtonGroup.add(cenario1_RadioButtonMenuItem);
         scenariosButtonGroup.add(cenario2_RadioButtonMenuItem);
         scenariosButtonGroup.add(cenario3_RadioButtonMenuItem);
-        scenariosButtonGroup.add(cenario4_RadioButtonMenuItem);
 
         glyphModelRadioGroup.add(overlappingRadioButtonMenuItem);
         glyphModelRadioGroup.add(maskInclusionRadioButtonMenuItem);
@@ -183,15 +181,17 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         jSplitPane1.setDividerLocation(1040);
         jSplitPane1.setAutoscrolls(true);
 
+        painelEsquerda.setPreferredSize(new java.awt.Dimension(1039, 514));
+
         javax.swing.GroupLayout painelEsquerdaLayout = new javax.swing.GroupLayout(painelEsquerda);
         painelEsquerda.setLayout(painelEsquerdaLayout);
         painelEsquerdaLayout.setHorizontalGroup(
             painelEsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1039, Short.MAX_VALUE)
+            .addGap(0, 1027, Short.MAX_VALUE)
         );
         painelEsquerdaLayout.setVerticalGroup(
             painelEsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 514, Short.MAX_VALUE)
+            .addGap(0, 516, Short.MAX_VALUE)
         );
 
         jSplitPane1.setLeftComponent(painelEsquerda);
@@ -532,7 +532,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         painel_legendaLayout.setHorizontalGroup(
             painel_legendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painel_legendaLayout.createSequentialGroup()
-                .addContainerGap(225, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(enviarButton)
                 .addGap(27, 27, 27))
         );
@@ -550,19 +550,32 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
             painelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelDireitaLayout.createSequentialGroup()
                 .addGroup(painelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(painel_legenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, Short.MAX_VALUE)
+                    .addComponent(painel_legenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         painelDireitaLayout.setVerticalGroup(
             painelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelDireitaLayout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(painel_legenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTabbedPane1)
+                .addGap(8, 8, 8)
+                .addComponent(painel_legenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jSplitPane1.setRightComponent(painelDireita);
+
+        painelValoresVarVisuais.setBorder(javax.swing.BorderFactory.createTitledBorder("Visual variables values"));
+
+        javax.swing.GroupLayout painelValoresVarVisuaisLayout = new javax.swing.GroupLayout(painelValoresVarVisuais);
+        painelValoresVarVisuais.setLayout(painelValoresVarVisuaisLayout);
+        painelValoresVarVisuaisLayout.setHorizontalGroup(
+            painelValoresVarVisuaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        painelValoresVarVisuaisLayout.setVerticalGroup(
+            painelValoresVarVisuaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 116, Short.MAX_VALUE)
+        );
 
         jMenu1.setText("File");
 
@@ -602,14 +615,6 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         });
         jMenu2.add(cenario3_RadioButtonMenuItem);
 
-        cenario4_RadioButtonMenuItem.setText("Scenario 4");
-        cenario4_RadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cenario4_RadioButtonMenuItemActionPerformed(evt);
-            }
-        });
-        jMenu2.add(cenario4_RadioButtonMenuItem);
-
         jMenuBar1.add(jMenu2);
 
         glyphModelMenu.setText("Glyph Model");
@@ -640,10 +645,14 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1381, Short.MAX_VALUE)
+            .addComponent(painelValoresVarVisuais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(painelValoresVarVisuais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -688,10 +697,6 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private void cenario3_RadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cenario3_RadioButtonMenuItemActionPerformed
         configCenario();
     }//GEN-LAST:event_cenario3_RadioButtonMenuItemActionPerformed
-
-    private void cenario4_RadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cenario4_RadioButtonMenuItemActionPerformed
-        configCenario();
-    }//GEN-LAST:event_cenario4_RadioButtonMenuItemActionPerformed
 
     private void overlappingRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overlappingRadioButtonMenuItemActionPerformed
         loadGlyphModel();
@@ -921,7 +926,6 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JRadioButtonMenuItem cenario1_RadioButtonMenuItem;
     private javax.swing.JRadioButtonMenuItem cenario2_RadioButtonMenuItem;
     private javax.swing.JRadioButtonMenuItem cenario3_RadioButtonMenuItem;
-    private javax.swing.JRadioButtonMenuItem cenario4_RadioButtonMenuItem;
     private javax.swing.JButton cimaButton;
     private javax.swing.JComboBox<String> corComboBox;
     private javax.swing.JButton enviarButton;
@@ -955,6 +959,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JPanel painelDireita;
     private javax.swing.JPanel painelEsquerda;
     private javax.swing.JTextPane painelQuestoes_jTextPane;
+    private javax.swing.JPanel painelValoresVarVisuais;
     private javax.swing.JPanel painel_legenda;
     private javax.swing.JDialog progressBarDialog;
     private javax.swing.JProgressBar progressoBarra;
@@ -1005,7 +1010,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     }
 
     private void configCenario() {
-        scenarioManager = new ScenarioManager(gridPanel, painelQuestoes_jTextPane);
+        scenarioManager = new ScenarioManager(gridPanel, painelQuestoes_jTextPane, painelValoresVarVisuais);
         
         if (cenario1_RadioButtonMenuItem.isSelected()) {
             scenarioManager.carregarCenarios("cenario1");

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
 /**
@@ -23,28 +24,28 @@ public class ScenarioManager {
 
     private Grid gridPanel;
     private int numVisualizacoes = 10;
-    private int[] vetorTamGridVertical = {5, 10, 10};
-    private int[] vetorTamGridHorizontal = {10, 27, 30};
-    private float[] vetorQuantPercentOverlapping = {0.8f, 0.7f, 0.6f};
+    private int[] vetorTamGridVertical = {5, 6, 10};
+    private int[] vetorTamGridHorizontal = {10, 18, 10};
+    private float[] vetorQuantPercentOverlapping = {0.65f, 0.8f, 0f};
     private String[] vetorVarVisuais = {"Texture", "Color", "Shape", "Letter", "Color2","Overlap"};
-    //private String[] vetorVarVisuais2 = {"Color","Overlap","Color2"};
-    private String[] vetorTipoTarefa = {"Identificação", "Localização"};
-    private String[] vetorQuestoes = {"Encontre o elemento abaixo na visualização:",
-        "Encontre o grupo de elementos abaixo na visualização:"};
+    private String[] vetorTipoTarefa = {"Identificação"};//, "Localização"
+    private String[] vetorQuestoes = {"Find the unique element in the visualization:"};
+//            , "Encontre o grupo de elementos abaixo na visualização:"};
     private JTextPane perguntaAtual_TextPanel;
     private Pergunta perguntaAtual;
     private Resposta respostaAtual;
-    private long inicioTempo, fimTempo;
     private Resposta respostaCerta;
-
+    private long inicioTempo, fimTempo;
+    private JPanel painelValoresVarVisuais;
     private Thread t1;
 
     public ScenarioManager() {
     }
 
-    public ScenarioManager(Grid gridPanel, JTextPane painelPergunta) {
+    public ScenarioManager(Grid gridPanel, JTextPane painelPergunta, JPanel painelValoresVarVisuais) {
         this.gridPanel = gridPanel;
         this.perguntaAtual_TextPanel = painelPergunta;
+        this.painelValoresVarVisuais = painelValoresVarVisuais;
     }
 
     public void carregarCenarios(String nomeCenario) {
@@ -78,25 +79,26 @@ public class ScenarioManager {
                         for (int tarefa = 0; tarefa < vetorTipoTarefa.length; tarefa++) {
                             for (int i = 0; i < vetorVarVisuais.length - 2; i++) {
                                 for (int j = 0; j < numVisualizacoes; j++) {
+                                    setPerguntaAtual(new Pergunta(vetorQuestoes[tarefa]));
                                     respostaCerta = new Resposta();
                                     
-                                    gridPanel.setVariaveisVisuaisEscolhidas(new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
                                     gridPanel.criarItens();
+                                    gridPanel.setVariaveisVisuaisEscolhidas(new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
                                     gridPanel.loadMatrizGlyphs();
-//                                    System.out.println("\t" + j + " - Var: " + vetorVarVisuais[i]);
+                                    
                                     respostaCerta.setItensResposta(gridPanel.setCofigItensGrid());
-//                                    ArrayList<ItemGrid> setCofigItensGrid = gridPanel.setCofigItensGrid();
+                                    
                                     gridPanel.shufflePosition();
                                     gridPanel.defineBoundsFromIndex();
                                     gridPanel.repaint();
                                     
-                                    setPerguntaAtual(new Pergunta(vetorQuestoes[tarefa]));
                                     getPerguntaAtual().setRespostaCerta(respostaCerta);
                                                                         
                                     perguntaAtual_TextPanel.setText(getPerguntaAtual().getQuestao());
 //                                    inicioTempo = ((System.currentTimeMillis() / (1000*60)) % 60);
                                     inicioTempo = System.currentTimeMillis();
                                     System.out.println("Tempo inicio: "+inicioTempo);
+                                    showVisualVariablesValues();
                                     try {
                                         synchronized (t1) {
                                             t1.wait();
@@ -109,7 +111,12 @@ public class ScenarioManager {
         
     }
     
-      private void carregarCenario3() {
+    private void showVisualVariablesValues() {
+        //TODO criar um classe que herde de JPanel para poder desenhar os valores das var visuais
+//        painelValoresVarVisuais
+    }
+    
+    private void carregarCenario3() {
         Cenario cenario1 = new Cenario();
         gridPanel.setGlyphOverlappingModel(true);//definir glyph model
         t1 = new Thread(new Runnable() {
@@ -123,18 +130,18 @@ public class ScenarioManager {
 //                        System.out.print("\tPerct Overlapping: " + vetorQuantPercentOverlapping[p]);
                         for (int tarefa = 0; tarefa < vetorTipoTarefa.length; tarefa++) {
                                 for (int j = 0; j < numVisualizacoes; j++) {
+                                    setPerguntaAtual(new Pergunta(vetorQuestoes[tarefa]));
                                     respostaCerta = new Resposta();
-                                    gridPanel.setVariaveisVisuaisEscolhidas(new String[]{vetorVarVisuais[1], vetorVarVisuais[vetorVarVisuais.length - 2]});
                                     gridPanel.criarItens();
+                                    gridPanel.setVariaveisVisuaisEscolhidas(new String[]{vetorVarVisuais[1], vetorVarVisuais[vetorVarVisuais.length - 2]});
                                     gridPanel.loadMatrizGlyphs();  
                                     
                                     respostaCerta.setItensResposta(gridPanel.setCofigItensGrid());
-//                                    gridPanel.setCofigItensGrid();
+                                    
                                     gridPanel.shufflePosition();
                                     gridPanel.defineBoundsFromIndex();
                                     gridPanel.repaint();
                                     
-                                    setPerguntaAtual(new Pergunta(vetorQuestoes[tarefa]));
                                     getPerguntaAtual().setRespostaCerta(respostaCerta);
                                                                         
                                     perguntaAtual_TextPanel.setText(getPerguntaAtual().getQuestao());
@@ -161,6 +168,8 @@ public class ScenarioManager {
      * corretas.
      */
     public void nextStep() {
+        fimTempo = System.currentTimeMillis();
+        System.out.println("Fim tempo: "+fimTempo);
         Resposta respostaUsuario = new Resposta();
         
         for (ItemGrid itemGrid : gridPanel.getItensGrid()) {
@@ -169,10 +178,11 @@ public class ScenarioManager {
             }
         }        
         getPerguntaAtual().setRespostaUsuario(respostaUsuario);
-        //TODO comparar a resposta do usuario com a resposta certa
+        
         for (ItemGrid itemGabarito : perguntaAtual.getRespostaCerta().getItensResposta()) {
             for (ItemGrid itemRespostaUsuario : perguntaAtual.getRespostaUsuario().getItensResposta()) {
-                if(itemGabarito == itemRespostaUsuario){
+                if(itemGabarito.equals(itemRespostaUsuario)){
+                    
                     System.out.println("resposta certa: \n"+itemGabarito +" == "+ itemRespostaUsuario);
                 }
             }

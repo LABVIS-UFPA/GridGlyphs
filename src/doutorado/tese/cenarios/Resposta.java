@@ -5,7 +5,6 @@
  */
 package doutorado.tese.cenarios;
 
-import doutorado.tese.visualizacao.glyph.Glyph;
 import doutorado.tese.visualizacao.grid.ItemGrid;
 import java.util.ArrayList;
 
