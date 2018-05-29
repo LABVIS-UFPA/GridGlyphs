@@ -38,6 +38,7 @@ public class ScenarioManager {
     private long inicioTempo, fimTempo;
     private JPanel painelValoresVarVisuais;
     private Thread t1;
+    private Thread threadTime;
 
     public ScenarioManager() {
     }
@@ -86,7 +87,7 @@ public class ScenarioManager {
                                     gridPanel.setVariaveisVisuaisEscolhidas(new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
                                     gridPanel.loadMatrizGlyphs();
                                     
-                                    respostaCerta.setItensResposta(gridPanel.setCofigItensGrid());
+                                    respostaCerta.setListItens(gridPanel.setCofigItensGrid());
                                     
                                     gridPanel.shufflePosition();
                                     gridPanel.defineBoundsFromIndex();
@@ -101,19 +102,24 @@ public class ScenarioManager {
                                     showVisualVariablesValues();
                                     try {
                                         synchronized (t1) {
+                                            threadTime = new Thread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    try {
+                                                        Thread.sleep(5*1000);
+                                                    } catch (InterruptedException ex) {
+                                                        Logger.getLogger(ScenarioManager.class.getName()).log(Level.SEVERE, null, ex);
+                                                    }
+                                                    JOptionPane.showMessageDialog(null, "Your time is over!");
+                                                }});
+                                            threadTime.start();
                                             t1.wait();
                                         }
                                     } catch (InterruptedException ex) {
                                         Logger.getLogger(ScenarioManager.class.getName()).log(Level.SEVERE, null, ex);
                                     }}}}}}}
         });
-        t1.start();
-        
-    }
-    
-    private void showVisualVariablesValues() {
-        //TODO criar um classe que herde de JPanel para poder desenhar os valores das var visuais
-//        painelValoresVarVisuais
+        t1.start();        
     }
     
     private void carregarCenario3() {
@@ -136,7 +142,7 @@ public class ScenarioManager {
                                     gridPanel.setVariaveisVisuaisEscolhidas(new String[]{vetorVarVisuais[1], vetorVarVisuais[vetorVarVisuais.length - 2]});
                                     gridPanel.loadMatrizGlyphs();  
                                     
-                                    respostaCerta.setItensResposta(gridPanel.setCofigItensGrid());
+                                    respostaCerta.setListItens(gridPanel.setCofigItensGrid());
                                     
                                     gridPanel.shufflePosition();
                                     gridPanel.defineBoundsFromIndex();
@@ -146,7 +152,7 @@ public class ScenarioManager {
                                                                         
                                     perguntaAtual_TextPanel.setText(getPerguntaAtual().getQuestao());
 //                                    inicioTempo = ((System.currentTimeMillis() / (1000*60)) % 60);
-                                    inicioTempo = System.currentTimeMillis();
+                                    inicioTempo = System.nanoTime();
                                     System.out.println("Tempo inicio: "+inicioTempo);
                                     try {
                                         synchronized (t1) {
@@ -156,10 +162,14 @@ public class ScenarioManager {
                                         Logger.getLogger(ScenarioManager.class.getName()).log(Level.SEVERE, null, ex);
                                     }}}}}}
         });
-        t1.start();
-        
+        t1.start();        
     }
 
+    private void showVisualVariablesValues() {
+        //TODO criar um classe que herde de JPanel para poder desenhar os valores das var visuais
+//        painelValoresVarVisuais
+    }
+    
     /**
      * Metodo que varre os itensGrid procurando os que foram selecionados pelo usuario.
      * Um vez encontrado os glyphs selecionados pelo usuario, estes sao adicionados em uma lista
@@ -168,28 +178,35 @@ public class ScenarioManager {
      * corretas.
      */
     public void nextStep() {
-        fimTempo = System.currentTimeMillis();
+        fimTempo = System.nanoTime();
         System.out.println("Fim tempo: "+fimTempo);
+        analisarRespostas();
+        gridPanel.getGlyphManager().resetValoresSorteados();
+        synchronized (t1) {
+            threadTime.s
+            t1.notify();
+        }
+    }
+    
+    public void analisarRespostas(){
         Resposta respostaUsuario = new Resposta();
         
         for (ItemGrid itemGrid : gridPanel.getItensGrid()) {
-            if(itemGrid.isPossuiGlyphResposta()){
-                respostaUsuario.getItensResposta().add(itemGrid);
+            if(itemGrid.isSelectedByUser()){
+                respostaUsuario.getListItens().add(itemGrid);
             }
-        }        
+        }       
         getPerguntaAtual().setRespostaUsuario(respostaUsuario);
-        
-        for (ItemGrid itemGabarito : perguntaAtual.getRespostaCerta().getItensResposta()) {
-            for (ItemGrid itemRespostaUsuario : perguntaAtual.getRespostaUsuario().getItensResposta()) {
-                if(itemGabarito.equals(itemRespostaUsuario)){
-                    
-                    System.out.println("resposta certa: \n"+itemGabarito +" == "+ itemRespostaUsuario);
+        if(getPerguntaAtual().getRespostaCerta().getListItens().size() ==
+                getPerguntaAtual().getRespostaUsuario().getListItens().size()){
+            for (ItemGrid itemGabarito : perguntaAtual.getRespostaCerta().getListItens()) {
+                for (ItemGrid itemRespostaUsuario : perguntaAtual.getRespostaUsuario().getListItens()) {
+                    if(itemGabarito.equals(itemRespostaUsuario)){
+                        //TODO escrever no LOG o tempo de resposta, se ele acertou, num de usuário, numero da tarefa, e a configuracao
+                        System.out.println("resposta certa: \n"+itemGabarito +" == "+ itemRespostaUsuario);
+                    }
                 }
             }
-        }
-        gridPanel.getGlyphManager().resetValoresSorteados();
-        synchronized (t1) {
-            t1.notify();
         }
     }
     

@@ -14,11 +14,11 @@ import java.util.ArrayList;
  */
 public class Resposta {
 
-    private ArrayList<ItemGrid> itensResposta;
+    private ArrayList<ItemGrid> listItens;
     private ItemGrid itemResposta;
 
     public Resposta() {
-        itensResposta = new ArrayList<>();
+        listItens = new ArrayList<>();
     }
     
     /**
@@ -36,16 +36,16 @@ public class Resposta {
     }
 
     /**
-     * @return the itensResposta
+     * @return the listItens
      */
-    public ArrayList<ItemGrid> getItensResposta() {
-        return itensResposta;
+    public ArrayList<ItemGrid> getListItens() {
+        return listItens;
     }
 
     /**
-     * @param itensResposta the itensResposta to set
+     * @param listItens the listItens to set
      */
-    public void setItensResposta(ArrayList<ItemGrid> itensResposta) {
-        this.itensResposta = itensResposta;
+    public void setListItens(ArrayList<ItemGrid> listItens) {
+        this.listItens = listItens;
     }
 }

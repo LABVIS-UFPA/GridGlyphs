@@ -72,7 +72,7 @@ public class Grid extends JPanel {
                 if (itemGrid.getGlyph().getBounds().contains(e.getX(), e.getY())) {
                     if (!itemGrid.getGlyph().getSelectedByUser()) {
                         itemGrid.getGlyph().setSelectedByUser(true);
-                        itemGrid.setPossuiGlyphResposta(true);
+                        itemGrid.setSelectedByUser(true);
                         Graphics2D g2d = (Graphics2D) getGraphics().create();
                         g2d.setStroke(new BasicStroke(3f));
                         g2d.setColor(Color.decode("#B22222"));
@@ -84,7 +84,7 @@ public class Grid extends JPanel {
                         g2d.dispose();
                     } else {
                         itemGrid.getGlyph().setSelectedByUser(false);
-                        itemGrid.setPossuiGlyphResposta(false);
+                        itemGrid.setSelectedByUser(false);
                         Graphics2D g2d = (Graphics2D) getGraphics().create();
                         g2d.setStroke(new BasicStroke(3f));
                         g2d.setColor(Color.decode("#F0F8FF"));

@@ -19,6 +19,7 @@ public class ItemGrid {
     protected HashMap<Coluna, String> mapaDadosItem;
     private Glyph glyph;
     private boolean possuiGlyphResposta;
+    private boolean selectedByUser;
 
     public ItemGrid() {
         mapaDadosItem = new HashMap<>();
@@ -106,5 +107,19 @@ public class ItemGrid {
      */
     public void setPossuiGlyphResposta(boolean possuiGlyphResposta) {
         this.possuiGlyphResposta = possuiGlyphResposta;
+    }
+
+    /**
+     * @return the selectedByUser
+     */
+    public boolean isSelectedByUser() {
+        return selectedByUser;
+    }
+
+    /**
+     * @param selectedByUser the selectedByUser to set
+     */
+    public void setSelectedByUser(boolean selectedByUser) {
+        this.selectedByUser = selectedByUser;
     }
 }
