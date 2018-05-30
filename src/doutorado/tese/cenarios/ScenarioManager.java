@@ -5,6 +5,7 @@
  */
 package doutorado.tese.cenarios;
 
+import doutorado.tese.legenda.Legendas;
 import doutorado.tese.visualizacao.glyph.Glyph;
 import doutorado.tese.visualizacao.glyph.GlyphConcrete;
 import doutorado.tese.visualizacao.grid.Grid;
@@ -40,6 +41,7 @@ public class ScenarioManager {
     private JPanel painelValoresVarVisuais;
     private Thread t1;
     private Thread threadTime;
+    private Legendas legendaPainel;
 
     public ScenarioManager() {
     }
@@ -103,6 +105,7 @@ public class ScenarioManager {
                             for (int i = 0; i < vetorVarVisuais.length - 2; i++) {
                                 for (int j = 0; j < numVisualizacoes; j++) {
                                     setConfigCenario(t, p, tarefa, new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
+                                    //showVisualVariablesValues();
                                 }
                             }
                         }
@@ -136,8 +139,8 @@ public class ScenarioManager {
     }
 
     private void showVisualVariablesValues() {
-        //TODO criar um classe que herde de JPanel para poder desenhar os valores das var visuais
-//        painelValoresVarVisuais
+       legendaPainel.setRespostaCerta(respostaCerta);
+       legendaPainel.repaint();
     }
 
     /**
@@ -209,6 +212,16 @@ public class ScenarioManager {
         return perguntaAtual;
     }
 
+    public Legendas getLegendaPainel() {
+        return legendaPainel;
+    }
+
+    public void setLegendaPainel(Legendas legendaPainel) {
+        this.legendaPainel = legendaPainel;
+    }
+
+  
+    
     /**
      * @param perguntaAtual the perguntaAtual to set
      */
