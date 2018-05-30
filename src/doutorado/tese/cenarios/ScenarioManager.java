@@ -23,11 +23,12 @@ import javax.swing.JTextPane;
 public class ScenarioManager {
 
     private Grid gridPanel;
-    private int numVisualizacoes = 10;
-    private int[] vetorTamGridVertical = {5, 6, 10};
-    private int[] vetorTamGridHorizontal = {10, 18, 10};
+    private int numVisualizacoes = 5;
+    private int[] vetorTamGridVertical = {5, 5, 5};
+    private int[] vetorTamGridHorizontal = {10, 10, 10};
+    private double[] vetorTamScala = {1.5, 1.25, 1};
     private float[] vetorQuantPercentOverlapping = {0.65f, 0.8f, 0f};
-    private String[] vetorVarVisuais = {"Texture", "Color", "Shape", "Letter", "Color2","Overlap"};
+    private String[] vetorVarVisuais = {"Texture", "Color", "Shape", "Letter", "Color2", "Overlap"};
     private String[] vetorTipoTarefa = {"Identificação"};//, "Localização"
     private String[] vetorQuestoes = {"Find the unique element in the visualization:"};
 //            , "Encontre o grupo de elementos abaixo na visualização:"};
@@ -50,6 +51,7 @@ public class ScenarioManager {
     }
 
     public void carregarCenarios(String nomeCenario) {
+        this.gridPanel.setScenarioManager(this);
         switch (nomeCenario) {
             case "cenario1":
                 carregarCenario1();
@@ -58,11 +60,35 @@ public class ScenarioManager {
                 System.out.println("cenario 2 selecionado");
                 break;
             case "cenario3":
-            carregarCenario3();                
+                carregarCenario3();
                 break;
             default:
                 throw new AssertionError();
         }
+    }
+
+    private void setConfigCenario(int escala, int perctOverlapping, int tarefa, String... varEscolhidas) {
+        setPerguntaAtual(new Pergunta(vetorQuestoes[tarefa]));
+        respostaCerta = new Resposta();
+
+        gridPanel.setGridSize(vetorTamGridVertical[0], vetorTamGridHorizontal[0]);
+        gridPanel.setQuantOlverlap(vetorQuantPercentOverlapping[perctOverlapping]);
+        gridPanel.criarItens();
+        gridPanel.setVariaveisVisuaisEscolhidas(varEscolhidas);
+        gridPanel.loadMatrizGlyphs();
+
+        respostaCerta.setListItens(gridPanel.setCofigItensGrid());
+
+        gridPanel.shufflePosition();
+        gridPanel.defineBoundsFromIndex(vetorTamScala[escala]);
+        gridPanel.repaint();
+
+        getPerguntaAtual().setRespostaCerta(respostaCerta);
+
+        perguntaAtual_TextPanel.setText(getPerguntaAtual().getQuestao());
+        inicioTempo = System.currentTimeMillis();
+        showVisualVariablesValues();
+        acionarControleThreds();
     }
 
     private void carregarCenario1() {
@@ -71,154 +97,110 @@ public class ScenarioManager {
         t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int t = 0; t < vetorTamGridHorizontal.length; t++) {
-                    gridPanel.setGridSize(vetorTamGridVertical[t], vetorTamGridHorizontal[t]);
-//                    System.out.print("Tam GRID: " + vetorTamGridVertical[t] + " x " + vetorTamGridHorizontal[t]);
+                for (int t = 0; t < vetorTamScala.length; t++) {
                     for (int p = 0; p < vetorQuantPercentOverlapping.length; p++) {
-                        gridPanel.setQuantOlverlap(vetorQuantPercentOverlapping[p]);
-//                        System.out.print("\tPerct Overlapping: " + vetorQuantPercentOverlapping[p]);
                         for (int tarefa = 0; tarefa < vetorTipoTarefa.length; tarefa++) {
                             for (int i = 0; i < vetorVarVisuais.length - 2; i++) {
                                 for (int j = 0; j < numVisualizacoes; j++) {
-                                    setPerguntaAtual(new Pergunta(vetorQuestoes[tarefa]));
-                                    respostaCerta = new Resposta();
-                                    
-                                    gridPanel.criarItens();
-                                    gridPanel.setVariaveisVisuaisEscolhidas(new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
-                                    gridPanel.loadMatrizGlyphs();
-                                    
-                                    respostaCerta.setListItens(gridPanel.setCofigItensGrid());
-                                    
-                                    gridPanel.shufflePosition();
-                                    gridPanel.defineBoundsFromIndex();
-                                    gridPanel.repaint();
-                                    
-                                    getPerguntaAtual().setRespostaCerta(respostaCerta);
-                                                                        
-                                    perguntaAtual_TextPanel.setText(getPerguntaAtual().getQuestao());
-//                                    inicioTempo = ((System.currentTimeMillis() / (1000*60)) % 60);
-                                    inicioTempo = System.currentTimeMillis();
-                                    System.out.println("Tempo inicio: "+inicioTempo);
-                                    showVisualVariablesValues();
-                                    try {
-                                        synchronized (t1) {
-                                            threadTime = new Thread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    try {
-                                                        Thread.sleep(5*1000);
-                                                    } catch (InterruptedException ex) {
-                                                        Logger.getLogger(ScenarioManager.class.getName()).log(Level.SEVERE, null, ex);
-                                                    }
-                                                    JOptionPane.showMessageDialog(null, "Your time is over!");
-                                                }});
-                                            threadTime.start();
-                                            t1.wait();
-                                        }
-                                    } catch (InterruptedException ex) {
-                                        Logger.getLogger(ScenarioManager.class.getName()).log(Level.SEVERE, null, ex);
-                                    }}}}}}}
+                                    setConfigCenario(t, p, tarefa, new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
+                                }
+                            }
+                        }
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "Thanks for participate!", "Thanks!", JOptionPane.INFORMATION_MESSAGE);
+            }
         });
-        t1.start();        
+        t1.start();
     }
-    
-    private void carregarCenario3() {
-        Cenario cenario1 = new Cenario();
+
+    private void carregarCenario3() {//TODO refatprar esse metodo
+        Cenario cenario2 = new Cenario();
         gridPanel.setGlyphOverlappingModel(true);//definir glyph model
         t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int t = 0; t < vetorTamGridHorizontal.length; t++) {
-                    gridPanel.setGridSize(vetorTamGridVertical[t], vetorTamGridHorizontal[t]);
-//                    System.out.print("Tam GRID: " + vetorTamGridVertical[t] + " x " + vetorTamGridHorizontal[t]);
+                for (int t = 0; t < vetorTamScala.length; t++) {
                     for (int p = 0; p < vetorQuantPercentOverlapping.length; p++) {
-                        gridPanel.setQuantOlverlap(vetorQuantPercentOverlapping[p]);
-//                        System.out.print("\tPerct Overlapping: " + vetorQuantPercentOverlapping[p]);
                         for (int tarefa = 0; tarefa < vetorTipoTarefa.length; tarefa++) {
-                                for (int j = 0; j < numVisualizacoes; j++) {
-                                    setPerguntaAtual(new Pergunta(vetorQuestoes[tarefa]));
-                                    respostaCerta = new Resposta();
-                                    gridPanel.criarItens();
-                                    gridPanel.setVariaveisVisuaisEscolhidas(new String[]{vetorVarVisuais[1], vetorVarVisuais[vetorVarVisuais.length - 2]});
-                                    gridPanel.loadMatrizGlyphs();  
-                                    
-                                    respostaCerta.setListItens(gridPanel.setCofigItensGrid());
-                                    
-                                    gridPanel.shufflePosition();
-                                    gridPanel.defineBoundsFromIndex();
-                                    gridPanel.repaint();
-                                    
-                                    getPerguntaAtual().setRespostaCerta(respostaCerta);
-                                                                        
-                                    perguntaAtual_TextPanel.setText(getPerguntaAtual().getQuestao());
-//                                    inicioTempo = ((System.currentTimeMillis() / (1000*60)) % 60);
-                                    inicioTempo = System.nanoTime();
-                                    System.out.println("Tempo inicio: "+inicioTempo);
-                                    try {
-                                        synchronized (t1) {
-                                            t1.wait();
-                                        }
-                                    } catch (InterruptedException ex) {
-                                        Logger.getLogger(ScenarioManager.class.getName()).log(Level.SEVERE, null, ex);
-                                    }}}}}}
+                            for (int j = 0; j < numVisualizacoes; j++) {
+                                setConfigCenario(t, p, tarefa, new String[]{vetorVarVisuais[1], vetorVarVisuais[vetorVarVisuais.length - 2]});
+                            }
+                        }
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "Thanks for participate!", "Thanks!", JOptionPane.INFORMATION_MESSAGE);
+            }
         });
-        t1.start();        
+        t1.start();
     }
 
     private void showVisualVariablesValues() {
         //TODO criar um classe que herde de JPanel para poder desenhar os valores das var visuais
 //        painelValoresVarVisuais
     }
-    
+
     /**
-     * Metodo que varre os itensGrid procurando os que foram selecionados pelo usuario.
-     * Um vez encontrado os glyphs selecionados pelo usuario, estes sao adicionados em uma lista
-     * de glyphs representando as respostas dos usuarios, e por fim essa lista é repassada para a 
-     * pergunta atual. Desta forma é possível comparar as respostas dos usuarios com as respostas
+     * Metodo que varre os itensGrid procurando os que foram selecionados pelo
+     * usuario. Um vez encontrado os glyphs selecionados pelo usuario, estes sao
+     * adicionados em uma lista de glyphs representando as respostas dos
+     * usuarios, e por fim essa lista é repassada para a pergunta atual. Desta
+     * forma é possível comparar as respostas dos usuarios com as respostas
      * corretas.
      */
     public void nextStep() {
-        fimTempo = System.nanoTime();
-        System.out.println("Fim tempo: "+fimTempo);
+        fimTempo = System.currentTimeMillis();
         analisarRespostas();
         gridPanel.getGlyphManager().resetValoresSorteados();
         synchronized (t1) {
-//            threadTime.s
+            threadTime.interrupt();
             t1.notify();
         }
     }
-    
-    public void analisarRespostas(){
+
+    public void analisarRespostas() {
         Resposta respostaUsuario = new Resposta();
-        
+
         for (ItemGrid itemGrid : gridPanel.getItensGrid()) {
-            if(itemGrid.isSelectedByUser()){
+            if (itemGrid.isSelectedByUser()) {
                 respostaUsuario.getListItens().add(itemGrid);
             }
-        }       
+        }
         getPerguntaAtual().setRespostaUsuario(respostaUsuario);
-        if(getPerguntaAtual().getRespostaCerta().getListItens().size() ==
-                getPerguntaAtual().getRespostaUsuario().getListItens().size()){
+        if (getPerguntaAtual().getRespostaCerta().getListItens().size()
+                == getPerguntaAtual().getRespostaUsuario().getListItens().size()) {
             for (ItemGrid itemGabarito : perguntaAtual.getRespostaCerta().getListItens()) {
                 for (ItemGrid itemRespostaUsuario : perguntaAtual.getRespostaUsuario().getListItens()) {
-                    if(itemGabarito == itemRespostaUsuario){
+                    if (itemGabarito == itemRespostaUsuario) {
                         //TODO escrever no LOG o tempo de resposta, se ele acertou, num de usuário, numero da tarefa, e a configuracao
-                        System.out.println("resposta certa: \n"+itemGabarito +" == "+ itemRespostaUsuario);
+                        System.out.println("resposta certa: \n" + itemGabarito + " == " + itemRespostaUsuario);
                     }
                 }
             }
         }
     }
-    
-//    public static void main(String[] args) {
-//        Cenario cenario1 = new Cenario();
-//        Pergunta p1 = new Pergunta("Qual glyph abaixo é azul?");
-//        Resposta r1 = new Resposta(new GlyphConcrete());
-//        p1.setResposta(r1);
-//
-//        System.out.println("Pergunta: " + p1.getQuestao());
-//        System.out.println("Resposta: " + p1.getResposta().getGlyphResposta());
-//    }
+
+    private void acionarControleThreds() {
+        try {
+            synchronized (t1) {
+                threadTime = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(20 * 1000);
+                            JOptionPane.showMessageDialog(null, "Your time is over!", "Tic-tac, Tic-tac...!", JOptionPane.WARNING_MESSAGE);
+                            nextStep();
+                        } catch (InterruptedException ex) {
+                        }
+                    }
+                });
+                threadTime.start();
+                t1.wait();
+            }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ScenarioManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * @return the perguntaAtual

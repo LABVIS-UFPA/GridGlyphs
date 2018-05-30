@@ -5,6 +5,7 @@
  */
 package doutorado.tese.visualizacao.grid;
 
+import doutorado.tese.cenarios.ScenarioManager;
 import doutorado.tese.visualizacao.glyph.Glyph;
 import doutorado.tese.visualizacao.glyph.GlyphConcrete;
 import doutorado.tese.visualizacao.glyph.GlyphManager;
@@ -34,12 +35,16 @@ public class Grid extends JPanel {
     private boolean decision = false;
     private ItemGrid[] itensGrid;
     private final GlyphManager glyphManager;
+    private ScenarioManager scenarioManager;
     private String[] variaveisVisuaisEscolhidas;
     private float porcetagem;
     private float quantOlverlap;
     private ArrayList<ItemGrid> gabarito;
+    private double scala;
 
     public Grid() {
+        glyphManager = new GlyphManager();
+        glyphManager.setPerctOverlap(quantOlverlap);
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -47,8 +52,6 @@ public class Grid extends JPanel {
                 mouseClickedMouseListener(e);
             }
         });
-        glyphManager = new GlyphManager();
-        glyphManager.setPerctOverlap(quantOlverlap);
 
         addHierarchyBoundsListener(new HierarchyBoundsAdapter() {
             @Override
@@ -71,41 +74,38 @@ public class Grid extends JPanel {
             for (ItemGrid itemGrid : itensGrid) {
                 if (itemGrid.getGlyph().getBounds().contains(e.getX(), e.getY())) {
                     if (!itemGrid.getGlyph().getSelectedByUser()) {
-                        itemGrid.getGlyph().setSelectedByUser(true);
-                        itemGrid.setSelectedByUser(true);
-                        Graphics2D g2d = (Graphics2D) getGraphics().create();
-                        g2d.setStroke(new BasicStroke(3f));
-                        g2d.setColor(Color.decode("#B22222"));
-
-                        g2d.drawRect(itemGrid.getGlyph().getBounds().x,
-                                itemGrid.getGlyph().getBounds().y,
-                                itemGrid.getGlyph().getBounds().width,
-                                itemGrid.getGlyph().getBounds().height);
-                        g2d.dispose();
+                        defineBorderSelectedItem(itemGrid, true, Color.decode("#B22222"));
+                        if (scenarioManager != null) {//so entra se nao a ferramenta nao estiver no modo de definicao de cenarios
+                            scenarioManager.nextStep();
+                        }
                     } else {
-                        itemGrid.getGlyph().setSelectedByUser(false);
-                        itemGrid.setSelectedByUser(false);
-                        Graphics2D g2d = (Graphics2D) getGraphics().create();
-                        g2d.setStroke(new BasicStroke(3f));
-                        g2d.setColor(Color.decode("#F0F8FF"));
-
-                        g2d.drawRect(itemGrid.getGlyph().getBounds().x,
-                                itemGrid.getGlyph().getBounds().y,
-                                itemGrid.getGlyph().getBounds().width,
-                                itemGrid.getGlyph().getBounds().height);
-
-                        g2d.setStroke(new BasicStroke(0.1f));
-                        g2d.setColor(Color.BLACK);
-                        g2d.drawRect(itemGrid.getGlyph().getBounds().x,
-                                itemGrid.getGlyph().getBounds().y,
-                                itemGrid.getGlyph().getBounds().width,
-                                itemGrid.getGlyph().getBounds().height);
-
-                        g2d.dispose();
+                        defineBorderSelectedItem(itemGrid, false, Color.decode("#F0F8FF"));
                     }
                 }
             }
         }
+    }
+
+    /**
+     * Desenha de vermelho a borda do item selecionado, se o item selecionado
+     * for clicado novamente, o item terá sua borda pintada de AliceBlue
+     *
+     * @param itemGrid item selecionado pelo usuário
+     * @param isSelected flag que indica que o item está selecionado ou não
+     * @param color cor da borda a ser desenhada
+     */
+    private void defineBorderSelectedItem(ItemGrid itemGrid, boolean isSelected, Color color) {
+        itemGrid.getGlyph().setSelectedByUser(isSelected);
+        itemGrid.setSelectedByUser(isSelected);
+        Graphics2D g2d = (Graphics2D) getGraphics().create();
+        g2d.setStroke(new BasicStroke(3f));
+        g2d.setColor(color);
+
+        g2d.drawRect(itemGrid.getGlyph().getBounds().x,
+                itemGrid.getGlyph().getBounds().y,
+                itemGrid.getGlyph().getBounds().width,
+                itemGrid.getGlyph().getBounds().height);
+        g2d.dispose();
     }
 
     @Override
@@ -126,18 +126,20 @@ public class Grid extends JPanel {
         g2d.fillRect(0, 0, getSize().width, getSize().height);
         g2d.setColor(Color.BLACK);
 
-        for (int i = 0; i < getQuantHoriz(); i++) {
-            for (int j = 0; j < getQuantVert(); j++) {
-                int x = matrizGlyph[i][j].getBounds().x;
-                int y = matrizGlyph[i][j].getBounds().y;
-                int w = matrizGlyph[i][j].getBounds().width;
-                int h = matrizGlyph[i][j].getBounds().height;
+        if (matrizGlyph != null) {
+            for (int i = 0; i < getQuantHoriz(); i++) {
+                for (int j = 0; j < getQuantVert(); j++) {
+                    int x = matrizGlyph[i][j].getBounds().x;
+                    int y = matrizGlyph[i][j].getBounds().y;
+                    int w = matrizGlyph[i][j].getBounds().width;
+                    int h = matrizGlyph[i][j].getBounds().height;
 
-                ArrayList<Glyph> list = new ArrayList<>();
-                matrizGlyph[i][j].paint(g2d);
-                matrizGlyph[i][j].getChildren(list);
-                g2d.setClip(0, 0, getSize().width, getSize().height);
-                g2d.drawRect(x, y, w, h);
+                    ArrayList<Glyph> list = new ArrayList<>();
+                    matrizGlyph[i][j].paint(g2d);
+                    matrizGlyph[i][j].getChildren(list);
+                    g2d.setClip(0, 0, getSize().width, getSize().height);
+                    g2d.drawRect(x, y, w, h);
+                }
             }
         }
         g2d.dispose();
@@ -147,8 +149,10 @@ public class Grid extends JPanel {
      * Metodo responsavel por configurar os glyphs do grid. Varre o vetor de
      * Itens do Grid, setando para cada obj ItemGrid seu respectivo valor de
      * overlapping e chama a funcao que configura as layers dos glyphs. Por fim,
-     * verifica se o item possui um glyph com um de seus filhos sendo a resposta 
-     * de uma pergunta, caso sim, o item é adicionado ao gabarito (ArrayList<ItemGrid>)
+     * verifica se o item possui um glyph com um de seus filhos sendo a resposta
+     * de uma pergunta, caso sim, o item é adicionado ao gabarito
+     * (ArrayList<ItemGrid>)
+     *
      * @return retorna o gabarito
      */
     public ArrayList<ItemGrid> setCofigItensGrid() {
@@ -158,7 +162,7 @@ public class Grid extends JPanel {
         for (ItemGrid itemGrid : getItensGrid()) {
             getGlyphManager().setPerctOverlap(quantOlverlap);
             getGlyphManager().configLayers(itemGrid);
-            if(itemGrid.isPossuiGlyphResposta()){
+            if (itemGrid.isPossuiGlyphResposta()) {
                 getGabarito().add(itemGrid);
             }
         }
@@ -189,12 +193,13 @@ public class Grid extends JPanel {
                 g++;
             }
         }
-        defineBoundsFromIndex();
+        defineBoundsFromIndex(getScala());
         return matrizGlyph;
     }
 
-    public void defineBoundsFromIndex() {
-        int size = Math.min(getWidth() - 4, getHeight() - 4) / getQuantVert();
+    public void defineBoundsFromIndex(double perct) {
+//        int size = Math.min(getWidth() - 4, getHeight() - 4) / getQuantVert();
+        int size = (int) Math.round(48 * perct);
 
         for (int i = 0; i < getQuantHoriz(); i++) {
             for (int j = 0; j < getQuantVert(); j++) {
@@ -308,7 +313,7 @@ public class Grid extends JPanel {
     public GlyphManager getGlyphManager() {
         return glyphManager;
     }
-    
+
     /**
      * @return the gabarito
      */
@@ -321,6 +326,18 @@ public class Grid extends JPanel {
      */
     public void setGabarito(ArrayList<ItemGrid> gabarito) {
         this.gabarito = gabarito;
+    }
+
+    public void setScala(double d) {
+        this.scala = d;
+    }
+
+    public double getScala() {
+        return this.scala;
+    }
+
+    public void setScenarioManager(ScenarioManager scenarioManager) {
+        this.scenarioManager = scenarioManager;
     }
 
 }
