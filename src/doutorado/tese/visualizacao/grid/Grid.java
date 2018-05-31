@@ -41,6 +41,8 @@ public class Grid extends JPanel {
     private float quantOlverlap;
     private ArrayList<ItemGrid> gabarito;
     private double scala;
+    private boolean overlappingActivated;
+    private int quantValoresVarVisuais;
 
     public Grid() {
         glyphManager = new GlyphManager();
@@ -160,6 +162,7 @@ public class Grid extends JPanel {
         getGlyphManager().setVariaveisVisuaisEscolhidas(getVariaveisVisuaisEscolhidas());
 //        glyphManager.analyseLayers();
         for (ItemGrid itemGrid : getItensGrid()) {
+            getGlyphManager().setQuantValoresVarVisuais(quantValoresVarVisuais);
             getGlyphManager().setPerctOverlap(quantOlverlap);
             getGlyphManager().configLayers(itemGrid);
             if (itemGrid.isPossuiGlyphResposta()) {
@@ -224,7 +227,12 @@ public class Grid extends JPanel {
     }
 
     public void setGlyphOverlappingModel(boolean overlappingActivated) {
-        getGlyphManager().configGlyphDesingModel(overlappingActivated);
+        this.overlappingActivated = overlappingActivated;
+        getGlyphManager().configGlyphDesingModel(this.overlappingActivated);
+    }
+    
+    public boolean getGlyphOverlappingModel(){
+        return overlappingActivated;
     }
 
     public ItemGrid[] criarItens() {
@@ -338,6 +346,14 @@ public class Grid extends JPanel {
 
     public void setScenarioManager(ScenarioManager scenarioManager) {
         this.scenarioManager = scenarioManager;
+    }
+
+    public void setQuantValoresVarVisuais(int quantValoresVar) {
+        this.quantValoresVarVisuais = quantValoresVar;
+    }
+    
+    public int getQuantValoresVarVisuais(){
+        return quantValoresVarVisuais;
     }
 
 }

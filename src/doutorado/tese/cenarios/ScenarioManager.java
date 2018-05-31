@@ -5,11 +5,10 @@
  */
 package doutorado.tese.cenarios;
 
-import doutorado.tese.visualizacao.glyph.Glyph;
-import doutorado.tese.visualizacao.glyph.GlyphConcrete;
+import doutorado.tese.util.io.Escritor;
 import doutorado.tese.visualizacao.grid.Grid;
 import doutorado.tese.visualizacao.grid.ItemGrid;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -23,14 +22,15 @@ import javax.swing.JTextPane;
 public class ScenarioManager {
 
     private Grid gridPanel;
-    private int numVisualizacoes = 5;
-    private int[] vetorTamGridVertical = {5, 5, 5};
-    private int[] vetorTamGridHorizontal = {10, 10, 10};
+    private int numVisualizacoes = 4;
+    private int[] vetorTamGridVertical = {10, 5, 5};
+    private int[] vetorTamGridHorizontal = {16, 10, 10};
     private double[] vetorTamScala = {1.5, 1.25, 1};
     private float[] vetorQuantPercentOverlapping = {0.65f, 0.8f, 0f};
-    private String[] vetorVarVisuais = {"Texture", "Color", "Shape", "Letter", "Color2", "Overlap"};
-    private String[] vetorTipoTarefa = {"Identificação"};//, "Localização"
-    private String[] vetorQuestoes = {"Find the unique element in the visualization:"};
+    private int[] vetorQuantConjVarVisuais = {3, 4, 5};
+    private String[] vetorVarVisuais = {"Texture", "Color", "Shape", "Color2", "Overlap"};
+    private String[] vetorTipoTarefa = {"Localização"};//, "Identificação"
+    private String[] vetorQuestoes = {"Find the element above in the visualization:"};
 //            , "Encontre o grupo de elementos abaixo na visualização:"};
     private JTextPane perguntaAtual_TextPanel;
     private Pergunta perguntaAtual;
@@ -40,18 +40,34 @@ public class ScenarioManager {
     private JPanel painelValoresVarVisuais;
     private Thread t1;
     private Thread threadTime;
+    private Thread threadLog;
+    private int taskTime;
+    private String[] linhaLog;
+    private StringBuilder bufferLog;
 
     public ScenarioManager() {
     }
 
     public ScenarioManager(Grid gridPanel, JTextPane painelPergunta, JPanel painelValoresVarVisuais) {
+        this.taskTime = 30 * 1000;
         this.gridPanel = gridPanel;
         this.perguntaAtual_TextPanel = painelPergunta;
         this.painelValoresVarVisuais = painelValoresVarVisuais;
+        linhaLog = new String[9];
+        bufferLog = new StringBuilder();
+        bufferLog.append("ID_USER, ID_CONJ_VAR_VIS, ID_VAR_VIS, HAS_OVERLAP, ID_OVERLAP, ID_GRID, TIPO_TAREFA, ACURACIA, TEMP_RES");
+        bufferLog.append("\n");
     }
 
     public void carregarCenarios(String nomeCenario) {
         this.gridPanel.setScenarioManager(this);
+//        threadLog = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Escritor.escreverArquivo("log_GRID_Glyphs_"+nomeCenario+".csv", bufferLog.toString());
+//            }
+//        });
+//        threadLog.start();
         switch (nomeCenario) {
             case "cenario1":
                 carregarCenario1();
@@ -67,8 +83,8 @@ public class ScenarioManager {
         }
     }
 
-    private void setConfigCenario(int escala, int perctOverlapping, int tarefa, String... varEscolhidas) {
-        setPerguntaAtual(new Pergunta(vetorQuestoes[tarefa]));
+    private void setConfigCenario(int escala, int perctOverlapping, int questao, int quantValoresVar, String... varEscolhidas) {
+        setPerguntaAtual(new Pergunta(vetorQuestoes[questao]));
         respostaCerta = new Resposta();
 
         gridPanel.setGridSize(vetorTamGridVertical[0], vetorTamGridHorizontal[0]);
@@ -76,6 +92,7 @@ public class ScenarioManager {
         gridPanel.criarItens();
         gridPanel.setVariaveisVisuaisEscolhidas(varEscolhidas);
         gridPanel.loadMatrizGlyphs();
+        gridPanel.setQuantValoresVarVisuais(vetorQuantConjVarVisuais[quantValoresVar]);
 
         respostaCerta.setListItens(gridPanel.setCofigItensGrid());
 
@@ -86,9 +103,21 @@ public class ScenarioManager {
         getPerguntaAtual().setRespostaCerta(respostaCerta);
 
         perguntaAtual_TextPanel.setText(getPerguntaAtual().getQuestao());
-        inicioTempo = System.currentTimeMillis();
+        
+        inicioTempo = System.currentTimeMillis(); 
+        preencherLinhaLog(quantValoresVar, varEscolhidas[0], perctOverlapping);
         showVisualVariablesValues();
-        acionarControleThreds();
+        acionarControleThreads();
+    }
+    
+    private void preencherLinhaLog(int quantValoresVar, String varEscolhida, int perctOverlapping){
+        linhaLog[0] = System.getProperty("user.name");
+        linhaLog[1] = vetorQuantConjVarVisuais[quantValoresVar] + "";
+        linhaLog[2] = varEscolhida;
+        linhaLog[3] = gridPanel.getGlyphOverlappingModel() + "";
+        linhaLog[4] = vetorQuantPercentOverlapping[perctOverlapping] + "";
+        linhaLog[5] = vetorTamGridVertical[0] + "x" + vetorTamGridHorizontal[0];
+        linhaLog[6] = vetorTipoTarefa[0];
     }
 
     private void carregarCenario1() {
@@ -99,10 +128,12 @@ public class ScenarioManager {
             public void run() {
                 for (int t = 0; t < vetorTamScala.length; t++) {
                     for (int p = 0; p < vetorQuantPercentOverlapping.length; p++) {
-                        for (int tarefa = 0; tarefa < vetorTipoTarefa.length; tarefa++) {
+                        for (int questao = 0; questao < vetorQuestoes.length; questao++) {
                             for (int i = 0; i < vetorVarVisuais.length - 2; i++) {
-                                for (int j = 0; j < numVisualizacoes; j++) {
-                                    setConfigCenario(t, p, tarefa, new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
+                                for (int q = 0; q < vetorQuantConjVarVisuais.length; q++) {
+                                    for (int j = 0; j < numVisualizacoes; j++) {
+                                        setConfigCenario(t, p, questao, q, new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
+                                    }
                                 }
                             }
                         }
@@ -123,8 +154,10 @@ public class ScenarioManager {
                 for (int t = 0; t < vetorTamScala.length; t++) {
                     for (int p = 0; p < vetorQuantPercentOverlapping.length; p++) {
                         for (int tarefa = 0; tarefa < vetorTipoTarefa.length; tarefa++) {
-                            for (int j = 0; j < numVisualizacoes; j++) {
-                                setConfigCenario(t, p, tarefa, new String[]{vetorVarVisuais[1], vetorVarVisuais[vetorVarVisuais.length - 2]});
+                            for (int q = 0; q < vetorQuantConjVarVisuais.length; q++) {
+                                for (int j = 0; j < numVisualizacoes; j++) {
+                                    setConfigCenario(t, p, tarefa, vetorQuantConjVarVisuais[q], new String[]{vetorVarVisuais[1], vetorVarVisuais[vetorVarVisuais.length - 2]});
+                                }
                             }
                         }
                     }
@@ -150,12 +183,19 @@ public class ScenarioManager {
      */
     public void nextStep() {
         fimTempo = System.currentTimeMillis();
+        linhaLog[8] = (fimTempo - inicioTempo) + "";
         analisarRespostas();
         gridPanel.getGlyphManager().resetValoresSorteados();
+        String linha = Arrays.toString(linhaLog).replace("[", "").replace("]", "");
+        bufferLog.append(linha).append("\n");
+        Escritor.escreverArquivo("log_GRID_Glyphs.csv", bufferLog.toString());
         synchronized (t1) {
             threadTime.interrupt();
             t1.notify();
         }
+//        synchronized (threadLog) {
+//            threadLog.notify();
+//        }
     }
 
     public void analisarRespostas() {
@@ -172,23 +212,35 @@ public class ScenarioManager {
             for (ItemGrid itemGabarito : perguntaAtual.getRespostaCerta().getListItens()) {
                 for (ItemGrid itemRespostaUsuario : perguntaAtual.getRespostaUsuario().getListItens()) {
                     if (itemGabarito == itemRespostaUsuario) {
-                        //TODO escrever no LOG o tempo de resposta, se ele acertou, num de usuário, numero da tarefa, e a configuracao
-                        System.out.println("resposta certa: \n" + itemGabarito + " == " + itemRespostaUsuario);
+                        linhaLog[7] = "true";
+                    } else {
+                        linhaLog[7] = "false";
                     }
                 }
             }
         }
     }
 
-    private void acionarControleThreds() {
+    private void acionarThreadLog() {
+        synchronized (threadLog) {
+            try {
+                threadLog.wait();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ScenarioManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void acionarControleThreads() {
         try {
             synchronized (t1) {
                 threadTime = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            Thread.sleep(20 * 1000);
+                            Thread.sleep(taskTime);
                             JOptionPane.showMessageDialog(null, "Your time is over!", "Tic-tac, Tic-tac...!", JOptionPane.WARNING_MESSAGE);
+                            linhaLog[7] = "TIME_OVER";
                             nextStep();
                         } catch (InterruptedException ex) {
                         }

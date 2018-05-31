@@ -20,6 +20,8 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -31,8 +33,6 @@ import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -40,7 +40,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class MainGrid extends javax.swing.JFrame implements PropertyChangeListener {
 
-    private static final Logger LOGGER = LogManager.getLogger(MainGrid.class);
+//    private static final Logger LOGGER = LogManager.getLogger(MainGrid.class);
     private Grid gridPanel;
     private Task task;
     private ManipuladorArquivo manipulador;
@@ -56,8 +56,8 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-//            Logger.getLogger(MainGrid.class.getName()).log(Level.SEVERE, null, ex);
-            LOGGER.info(Main.class.getName());
+            Logger.getLogger(MainGrid.class.getName()).log(Level.SEVERE, null, ex);
+//            LOGGER.info(Main.class.getName());
         }
         initComponents();
         gridPanel = new Grid();
@@ -640,7 +640,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
             selectedFile = chooser.getSelectedFile();
 
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            LOGGER.info("Arquivo selecionado: " + selectedFile);
+//            LOGGER.info("Arquivo selecionado: " + selectedFile);
 
             progressBarDialog.setVisible(true);
             progressBarDialog.setSize(new Dimension(400, 115));
@@ -1210,50 +1210,51 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         int tarefas = 5;
         switch (ordem) {
             case 1:
-                LOGGER.info("Leitura do arquivo.");
+//                LOGGER.info("Leitura do arquivo.");
                 progressoBarra.setToolTipText("Tratando arquivo.");
                 manipulador = new ManipuladorArquivo();
+                manipulador.getExtensionFile(selectedFile.getName());
                 manipulador.lerArquivo(selectedFile);
                 porcentagem = (ordem * 100) / tarefas;
                 break;
             case 2:
                 try {
-                    LOGGER.info("Montando Objetos coluna.");
+//                    LOGGER.info("Montando Objetos coluna.");
                     manipulador.montarColunas(manipulador.getCabecalho(), manipulador.getTipos());
                     progressoBarra.setToolTipText("Montando colunas.");
                 } catch (Exception e) {
-                    LOGGER.error("Erro montar objetos COLUNA. \n", e);
+//                    LOGGER.error("Erro montar objetos COLUNA. \n", e);
                     e.printStackTrace();
                 }
                 porcentagem = (ordem * 100) / tarefas;
                 break;
             case 3:
                 try {
-                    LOGGER.info("Carregando itens no Grid.");
+//                    LOGGER.info("Carregando itens no Grid.");
                     progressoBarra.setToolTipText("Carregando itens no Grid.");
                     manipulador.carregarItensGrid();
                 } catch (Throwable e) {
-                    LOGGER.error("Erro ao carregar itens no grid. \n", e);
+//                    LOGGER.error("Erro ao carregar itens no grid. \n", e);
                     e.printStackTrace();
                 }
                 porcentagem = (ordem * 100) / tarefas;
                 break;
             case 4:
                 try {
-                    LOGGER.info("Definindo a descrição das colunas.");
+//                    LOGGER.info("Definindo a descrição das colunas.");
                     progressoBarra.setToolTipText("Definindo a descrição das colunas.");
                     for (int i = 0; i < manipulador.getColunas().length; i++) {
                         Coluna c = manipulador.getColunas()[i];
                         c.configurarDescricao(manipulador.getDadosColuna(manipulador.getCabecalho()[i]));
                     }
                 } catch (Exception e) {
-                    LOGGER.error("Erro ao definir a descrição das colunas. \n", e);
+//                    LOGGER.error("Erro ao definir a descrição das colunas. \n", e);
                     e.printStackTrace();
                 }
                 porcentagem = (ordem * 100) / tarefas;
                 break;
             case 5:
-                LOGGER.info("Preparando variáveis glyphs.");
+//                LOGGER.info("Preparando variáveis glyphs.");
                 progressoBarra.setToolTipText("Preparando valores para as variáveis glyph.");
                 loadVariaveisGlyph(getListaAtributosCategoricos(Constantes.NivelGlyph.NIVEL_1, true), texturaComboBox);
                 loadVariaveisGlyph(getListaAtributosCategoricos(Constantes.NivelGlyph.NIVEL_2, true), corComboBox);

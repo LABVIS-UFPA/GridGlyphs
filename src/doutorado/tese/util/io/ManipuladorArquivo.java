@@ -43,18 +43,15 @@ public class ManipuladorArquivo {
     }
 
     public String getExtensionFile(String fileName) {
-        String extension = "";
         int i = fileName.lastIndexOf('.');
         if (i > 0) {
-            extension = fileName.substring(i + 1);
+            extensaoArquivo = fileName.substring(i + 1);
         }
-        return extension;
+        return extensaoArquivo;
     }
 
     public void lerArquivo(File arquivo) {
-        file = arquivo;
-        extensaoArquivo = getExtensionFile(file.getName());
-        try (BufferedReader reader = Files.newBufferedReader(file.toPath(), charset)) {
+        try (BufferedReader reader = Files.newBufferedReader(arquivo.toPath(), charset)) {
             String line = null;
             int numLinha = 0;
 

@@ -32,6 +32,7 @@ public class GlyphManager {
     private int cor2Sorteada = -1;
     private int formaSorteada = -1;
     private int letraSorteada = -1;
+    private int quantValoresVarVisuais;
 
     public GlyphManager() {
         activeLayers = new HashMap<>();
@@ -155,9 +156,9 @@ public class GlyphManager {
     }
 
     private Glyph defineRandomTexture() {
-        int random = (int) (Math.random() * Constantes.TIPO_TEXTURA.length);
+        int random = (int) (Math.random() * quantValoresVarVisuais);
         while (random == texturaSorteada) {
-            random = (int) (Math.random() * Constantes.TIPO_TEXTURA.length);
+            random = (int) (Math.random() * quantValoresVarVisuais);
         }
         Glyph glyph = new Textura(Color.gray, new Color(255, 0, 0, 0));
         Textura textura = (Textura) glyph;
@@ -173,9 +174,9 @@ public class GlyphManager {
     }
 
     private Glyph defineRandomColor() {
-        int random = (int) (Math.random() * Constantes.getCorGlyphs().length);
+        int random = (int) (Math.random() * quantValoresVarVisuais);
         while (random == corSorteada) {
-            random = (int) (Math.random() * Constantes.getCorGlyphs().length);
+            random = (int) (Math.random() * quantValoresVarVisuais);
         }
         Glyph glyph = new Cor();
         Cor cor = (Cor) glyph;
@@ -191,9 +192,9 @@ public class GlyphManager {
     }
     
     private Glyph defineRandomColorOvelerlap() {
-        int random = (int) (Math.random() * Constantes.getCorOverlap().length);
+        int random = (int) (Math.random() * quantValoresVarVisuais);
         while (random == cor2Sorteada) {
-            random = (int) (Math.random() * Constantes.getCorOverlap().length);
+            random = (int) (Math.random() * quantValoresVarVisuais);
         }
         Glyph glyph = new Cor();
         Cor cor = (Cor) glyph;
@@ -209,9 +210,9 @@ public class GlyphManager {
     }
 
     private Glyph defineRandomShape() {
-        int random = (int) (Math.random() * GeometryFactory.FORMAS.GLYPH_FORMAS.values().length);
+        int random = (int) (Math.random() * quantValoresVarVisuais);
         while (random == formaSorteada) {
-            random = (int) (Math.random() * GeometryFactory.FORMAS.GLYPH_FORMAS.values().length);
+            random = (int) (Math.random() * quantValoresVarVisuais);
         }
         Glyph glyph = new FormaGeometrica();
         FormaGeometrica forma = (FormaGeometrica) glyph;
@@ -227,9 +228,9 @@ public class GlyphManager {
     }
 
     private Glyph defineRandomLetter() {
-        int random = (int) (Math.random() * Constantes.LETRAS_ALFABETO.length);
+        int random = (int) (Math.random() * quantValoresVarVisuais);
         while (random == letraSorteada) {
-            random = (int) (Math.random() * Constantes.LETRAS_ALFABETO.length);
+            random = (int) (Math.random() * quantValoresVarVisuais);
         }
         Glyph glyph = new Letra();
         letra = (Letra) glyph;
@@ -242,5 +243,9 @@ public class GlyphManager {
         letra.setPectSobreposicao(perctOverlap);
         letra.setOverlappingActivated(overlappingActivated);
         return glyph;
+    }
+
+    public void setQuantValoresVarVisuais(int quantValoresVarVisuais) {
+        this.quantValoresVarVisuais = quantValoresVarVisuais;
     }
 }
