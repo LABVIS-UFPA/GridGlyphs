@@ -9,11 +9,13 @@ import doutorado.tese.util.Constantes;
 import doutorado.tese.visualizacao.glyph.decorator.overlap.Overlap;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.DrawBehavior;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.FormaGeometrica;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.GeometryFactory;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
 import doutorado.tese.visualizacao.grid.ItemGrid;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -33,6 +35,9 @@ public class GlyphManager {
     private int formaSorteada = -1;
     private int letraSorteada = -1;
     private int quantValoresVarVisuais;
+    private Color[] cores;
+    private String[] texturas;
+    private GeometryFactory.FORMAS.GLYPH_FORMAS[] formaGeometricas;
 
     public GlyphManager() {
         activeLayers = new HashMap<>();
@@ -40,7 +45,7 @@ public class GlyphManager {
     }
 
     public Glyph setLayerInGlyph(String varVisual) {
-         Glyph glyph = null;
+        Glyph glyph = null;
 
         switch (varVisual) {
             case "Color":
@@ -95,7 +100,7 @@ public class GlyphManager {
 //            System.out.println(list.toString());
         }
         father.setBounds(father.getBounds());
-        if(item.hasGlyphResposta(father)){
+        if (item.hasGlyphResposta(father)) {
             item.setPossuiGlyphResposta(true);
         }
         return item;
@@ -153,9 +158,15 @@ public class GlyphManager {
         formaSorteada = -1;
         letraSorteada = -1;
         cor2Sorteada = -1;
+        cores = null;
+        texturas = null;
+        formaGeometricas = null;
     }
 
     private Glyph defineRandomTexture() {
+        if (texturas == null) {
+            definirConjuntoTexturas(quantValoresVarVisuais);
+        }
         int random = (int) (Math.random() * quantValoresVarVisuais);
         while (random == texturaSorteada) {
             random = (int) (Math.random() * quantValoresVarVisuais);
@@ -171,8 +182,23 @@ public class GlyphManager {
         textura.setOverlappingActivated(overlappingActivated);
         return glyph;
     }
+    
+    public void definirConjuntoTexturas(int quantValoresVarVisuais) {
+        ArrayList<String> sorteados = new ArrayList<>();
+        for (int i = 0; i < quantValoresVarVisuais; i++) {
+            int random;
+            do {
+                random = (int) (Math.random() * Constantes.TIPO_TEXTURA.length);
+            } while (sorteados.contains(Constantes.TIPO_TEXTURA[random]));
+            sorteados.add(Constantes.TIPO_TEXTURA[random]);
+        }
+        texturas = sorteados.toArray(new String[]{});
+    }
 
     private Glyph defineRandomColor() {
+        if (getCores() == null) {
+            definirConjuntoCores(quantValoresVarVisuais);
+        }
         int random = (int) (Math.random() * quantValoresVarVisuais);
         while (random == corSorteada) {
             random = (int) (Math.random() * quantValoresVarVisuais);
@@ -182,14 +208,13 @@ public class GlyphManager {
         if (corSorteada == -1) {
             corSorteada = random;
             cor.setGlyphResposta(true);
-        
         }
-        cor.setCor(Color.decode(Constantes.getCorGlyphs()[random]));
+        cor.setCor(getCores()[random]);
         cor.setPectSobreposicao(perctOverlap);
         cor.setOverlappingActivated(overlappingActivated);
         return glyph;
     }
-    
+
     private Glyph defineRandomColorOvelerlap() {
         int random = (int) (Math.random() * quantValoresVarVisuais);
         while (random == cor2Sorteada) {
@@ -208,6 +233,9 @@ public class GlyphManager {
     }
 
     private Glyph defineRandomShape() {
+        if (formaGeometricas == null) {
+            definirConjuntoFormas(quantValoresVarVisuais);
+        }
         int random = (int) (Math.random() * quantValoresVarVisuais);
         while (random == formaSorteada) {
             random = (int) (Math.random() * quantValoresVarVisuais);
@@ -218,10 +246,22 @@ public class GlyphManager {
             formaSorteada = random;
             forma.setGlyphResposta(true);
         }
-        forma.setDrawBehavior(GeometryFactory.create(GeometryFactory.FORMAS.GLYPH_FORMAS.values()[random]));
+        forma.setDrawBehavior(GeometryFactory.create(formaGeometricas[random]));
         forma.setPectSobreposicao(perctOverlap);
         forma.setOverlappingActivated(overlappingActivated);
         return glyph;
+    }
+    
+    public void definirConjuntoFormas(int quantValoresVarVisuais) {
+        ArrayList<GeometryFactory.FORMAS.GLYPH_FORMAS> sorteados = new ArrayList<>();
+        for (int i = 0; i < quantValoresVarVisuais; i++) {
+            int random;
+            do {
+                random = (int) (Math.random() * GeometryFactory.FORMAS.GLYPH_FORMAS.values().length);
+            } while (sorteados.contains(GeometryFactory.FORMAS.GLYPH_FORMAS.values()[random]));
+            sorteados.add(GeometryFactory.FORMAS.GLYPH_FORMAS.values()[random]);
+        }
+        formaGeometricas = sorteados.toArray(new GeometryFactory.FORMAS.GLYPH_FORMAS[]{});
     }
 
     private Glyph defineRandomLetter() {
@@ -234,7 +274,7 @@ public class GlyphManager {
         if (letraSorteada == -1) {
             letraSorteada = random;
             letra.setGlyphResposta(true);
-        }        
+        }
         letra.setLetra(Constantes.LETRAS_ALFABETO[random]);
         letra.setPectSobreposicao(perctOverlap);
         letra.setOverlappingActivated(overlappingActivated);
@@ -243,5 +283,31 @@ public class GlyphManager {
 
     public void setQuantValoresVarVisuais(int quantValoresVarVisuais) {
         this.quantValoresVarVisuais = quantValoresVarVisuais;
+    }
+    
+    public void definirConjuntoCores(int quantValoresVarVisuais) {
+        ArrayList<Color> sorteados = new ArrayList<>();
+        for (int i = 0; i < quantValoresVarVisuais; i++) {
+            int random;
+            do {
+                random = (int) (Math.random() * Constantes.getCorGlyphs().length);
+            } while (sorteados.contains(Color.decode(Constantes.getCorGlyphs()[random])));
+            sorteados.add(Color.decode(Constantes.getCorGlyphs()[random]));
+        }
+        setCores(sorteados.toArray(new Color[]{}));
+    }
+    
+    /**
+     * @return the cores
+     */
+    public Color[] getCores() {
+        return cores;
+    }
+
+    /**
+     * @param cores the cores to set
+     */
+    public void setCores(Color[] cores) {
+        this.cores = cores;
     }
 }
