@@ -89,4 +89,14 @@ public class Retangulo implements DrawBehavior {
         g2d.drawRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
     }
 
+    @Override
+    public Retangulo clone() throws CloneNotSupportedException {
+        try {
+            // call clone in Object.
+            return (Retangulo) super.clone();
+        } catch (CloneNotSupportedException e) {
+            System.err.println("Cloning not allowed.");
+            return this;
+        }
+    }
 }

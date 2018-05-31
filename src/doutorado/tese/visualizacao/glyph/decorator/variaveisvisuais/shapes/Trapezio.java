@@ -12,7 +12,6 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 
-//trapezio descendente
 public class Trapezio implements DrawBehavior {
 
     private int[] xPoints;
@@ -98,5 +97,16 @@ public class Trapezio implements DrawBehavior {
     public void drawForeground(Graphics2D g2d) {
         g2d.setColor(Color.BLACK);
         g2d.drawPolygon(polygon);
+    }
+    
+    @Override
+    public Trapezio clone() throws CloneNotSupportedException {
+        try {
+            // call clone in Object.
+            return (Trapezio) super.clone();
+        } catch (CloneNotSupportedException e) {
+            System.err.println("Cloning not allowed.");
+            return this;
+        }
     }
 }

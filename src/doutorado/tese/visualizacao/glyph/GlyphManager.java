@@ -165,7 +165,6 @@ public class GlyphManager {
         if (texturaSorteada == -1) {
             texturaSorteada = random;
             textura.setGlyphResposta(true);
-            System.out.println("Sorteada:" + Constantes.TIPO_TEXTURA[texturaSorteada]);
         }
         textura.setNomeTextura(Constantes.TIPO_TEXTURA[random]);
         textura.setPectSobreposicao(perctOverlap);
@@ -183,7 +182,6 @@ public class GlyphManager {
         if (corSorteada == -1) {
             corSorteada = random;
             cor.setGlyphResposta(true);
-            System.out.println("Sorteada:" + Constantes.getCorGlyphs()[corSorteada].toString());
         
         }
         cor.setCor(Color.decode(Constantes.getCorGlyphs()[random]));
@@ -202,7 +200,6 @@ public class GlyphManager {
         if (cor2Sorteada == -1) {
             cor2Sorteada = random;
             cor.setGlyphResposta(true);
-            System.out.println("Sorteada:" + Constantes.getCorOverlap()[cor2Sorteada].toString());
         }
         cor.setCor(Color.decode(Constantes.getCorOverlap()[random]));
         cor.setPectSobreposicao(perctOverlap);
@@ -220,7 +217,6 @@ public class GlyphManager {
         if (formaSorteada == -1) {
             formaSorteada = random;
             forma.setGlyphResposta(true);
-            System.out.println("Sorteada:" + GeometryFactory.FORMAS.GLYPH_FORMAS.values()[formaSorteada].toString());
         }
         forma.setDrawBehavior(GeometryFactory.create(GeometryFactory.FORMAS.GLYPH_FORMAS.values()[random]));
         forma.setPectSobreposicao(perctOverlap);
@@ -238,7 +234,6 @@ public class GlyphManager {
         if (letraSorteada == -1) {
             letraSorteada = random;
             letra.setGlyphResposta(true);
-            System.out.println("Sorteada:" + Constantes.LETRAS_ALFABETO[letraSorteada]);
         }        
         letra.setLetra(Constantes.LETRAS_ALFABETO[random]);
         letra.setPectSobreposicao(perctOverlap);

@@ -6,7 +6,6 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Rectangle;
@@ -120,5 +119,16 @@ public class Hexagono implements DrawBehavior {
     public void drawForeground(Graphics2D g2d) {
         g2d.setColor(Color.black);
         g2d.draw(p);
+    }
+    
+    @Override
+    public Hexagono clone() throws CloneNotSupportedException {
+        try {
+            // call clone in Object.
+            return (Hexagono) super.clone();
+        } catch (CloneNotSupportedException e) {
+            System.err.println("Cloning not allowed.");
+            return this;
+        }
     }
 }

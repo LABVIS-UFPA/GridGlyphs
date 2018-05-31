@@ -19,7 +19,6 @@ import java.awt.event.HierarchyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -75,7 +74,7 @@ public class Grid extends JPanel {
         if (itensGrid != null) {
             for (ItemGrid itemGrid : itensGrid) {
                 if (itemGrid.getGlyph().getBounds().contains(e.getX(), e.getY())) {
-                    if (!itemGrid.getGlyph().getSelectedByUser()) {
+                    if (!itemGrid.getGlyph().isSelectedByUser()) {
                         defineBorderSelectedItem(itemGrid, true, Color.decode("#B22222"));
                         if (scenarioManager != null) {//so entra se nao a ferramenta nao estiver no modo de definicao de cenarios
                             scenarioManager.nextStep();
@@ -131,16 +130,20 @@ public class Grid extends JPanel {
         if (matrizGlyph != null) {
             for (int i = 0; i < getQuantHoriz(); i++) {
                 for (int j = 0; j < getQuantVert(); j++) {
-                    int x = matrizGlyph[i][j].getBounds().x;
-                    int y = matrizGlyph[i][j].getBounds().y;
-                    int w = matrizGlyph[i][j].getBounds().width;
-                    int h = matrizGlyph[i][j].getBounds().height;
+                    if(matrizGlyph[i] == null || matrizGlyph[i][j] == null)
+                        return ;
+                    if (matrizGlyph[i][j].getBounds() != null) {
+                        int x = matrizGlyph[i][j].getBounds().x;
+                        int y = matrizGlyph[i][j].getBounds().y;
+                        int w = matrizGlyph[i][j].getBounds().width;
+                        int h = matrizGlyph[i][j].getBounds().height;
 
-                    ArrayList<Glyph> list = new ArrayList<>();
-                    matrizGlyph[i][j].paint(g2d);
-                    matrizGlyph[i][j].getChildren(list);
-                    g2d.setClip(0, 0, getSize().width, getSize().height);
-                    g2d.drawRect(x, y, w, h);
+                        ArrayList<Glyph> list = new ArrayList<>();
+                        matrizGlyph[i][j].paint(g2d);
+                        matrizGlyph[i][j].getChildren(list);
+                        g2d.setClip(0, 0, getSize().width, getSize().height);
+                        g2d.drawRect(x, y, w, h);
+                    }
                 }
             }
         }
@@ -230,8 +233,8 @@ public class Grid extends JPanel {
         this.overlappingActivated = overlappingActivated;
         getGlyphManager().configGlyphDesingModel(this.overlappingActivated);
     }
-    
-    public boolean getGlyphOverlappingModel(){
+
+    public boolean getGlyphOverlappingModel() {
         return overlappingActivated;
     }
 
@@ -351,8 +354,8 @@ public class Grid extends JPanel {
     public void setQuantValoresVarVisuais(int quantValoresVar) {
         this.quantValoresVarVisuais = quantValoresVar;
     }
-    
-    public int getQuantValoresVarVisuais(){
+
+    public int getQuantValoresVarVisuais() {
         return quantValoresVarVisuais;
     }
 

@@ -49,6 +49,17 @@ public class FormaGeometrica extends Glyph {
             public void drawForeground(Graphics2D g2d) {
 
             }
+
+            @Override
+            public DrawBehavior clone() throws CloneNotSupportedException {
+                try {
+                    // call clone in Object.
+                    return (DrawBehavior) super.clone();
+                } catch (CloneNotSupportedException e) {
+                    System.err.println("Cloning not allowed.");
+                    return this;
+                }
+            }
         };
     }
 
@@ -103,6 +114,20 @@ public class FormaGeometrica extends Glyph {
     @Override
     public Paint getTexturePaint() {
         return null;
+    }
+
+    @Override
+    public Glyph clone() throws CloneNotSupportedException {
+        try {
+            DrawBehavior drawBehaviorClone = this.getDrawBehavior().clone();
+            FormaGeometrica formaClonada = ((FormaGeometrica) super.clone());
+            formaClonada.setDrawBehavior(drawBehaviorClone);
+            formaClonada.killAllChild();
+            return (Glyph) formaClonada;
+        } catch (CloneNotSupportedException e) {
+            System.err.println("Cloning not allowed.");
+            return this;
+        }
     }
 
 }

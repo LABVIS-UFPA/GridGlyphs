@@ -13,7 +13,7 @@ import java.awt.Shape;
  *
  * @author Anderson Soares
  */
-public interface DrawBehavior {
+public interface DrawBehavior extends Cloneable{
 
     public void paint(Graphics2D g2d);
 
@@ -24,4 +24,6 @@ public interface DrawBehavior {
     public Shape getClipShape();
     
     public void drawForeground(Graphics2D g2d);
+    
+    public DrawBehavior clone() throws CloneNotSupportedException ;
 }

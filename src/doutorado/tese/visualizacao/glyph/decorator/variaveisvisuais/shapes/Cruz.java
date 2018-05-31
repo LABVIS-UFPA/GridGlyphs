@@ -145,4 +145,15 @@ public class Cruz implements DrawBehavior {
         g2d.setColor(Color.BLACK);
         g2d.drawPolygon(p);
     }
+    
+    @Override
+    public Cruz clone() throws CloneNotSupportedException {
+        try {
+            // call clone in Object.
+            return (Cruz) super.clone();
+        } catch (CloneNotSupportedException e) {
+            System.err.println("Cloning not allowed.");
+            return this;
+        }
+    }
 }

@@ -5,9 +5,7 @@
  */
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
-import doutorado.tese.visualizacao.glyph.Glyph;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Rectangle;
@@ -118,5 +116,16 @@ public class Pentagono implements DrawBehavior {
     public void drawForeground(Graphics2D g2d) {
         g2d.setColor(Color.black);
         g2d.draw(p);
+    }
+    
+    @Override
+    public Pentagono clone() throws CloneNotSupportedException {
+        try {
+            // call clone in Object.
+            return (Pentagono) super.clone();
+        } catch (CloneNotSupportedException e) {
+            System.err.println("Cloning not allowed.");
+            return this;
+        }
     }
 }

@@ -82,4 +82,14 @@ public class Ellipse implements DrawBehavior {
         g2d.draw(p);
     }
 
+    @Override
+    public Ellipse clone() throws CloneNotSupportedException {
+        try {
+            // call clone in Object.
+            return (Ellipse) super.clone();
+        } catch (CloneNotSupportedException e) {
+            System.err.println("Cloning not allowed.");
+            return this;
+        }
+    }
 }

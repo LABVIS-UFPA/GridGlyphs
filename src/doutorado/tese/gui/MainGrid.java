@@ -6,7 +6,7 @@
 package doutorado.tese.gui;
 
 import doutorado.tese.cenarios.ScenarioManager;
-import doutorado.tese.legenda.Legendas;
+import doutorado.tese.legenda.Legenda;
 import doutorado.tese.util.Constantes;
 import doutorado.tese.util.Metadados;
 import doutorado.tese.util.coluna.Coluna;
@@ -191,7 +191,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         );
         painelEsquerdaLayout.setVerticalGroup(
             painelEsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 661, Short.MAX_VALUE)
+            .addGap(0, 447, Short.MAX_VALUE)
         );
 
         jSplitPane1.setLeftComponent(painelEsquerda);
@@ -518,7 +518,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 
         jTabbedPane1.setSelectedIndex(2);
 
-        painel_legenda.setBackground(new java.awt.Color(204, 204, 204));
+        painel_legenda.setBackground(new java.awt.Color(255, 255, 255));
         painel_legenda.setBorder(javax.swing.BorderFactory.createTitledBorder("Visual variable values"));
 
         javax.swing.GroupLayout painel_legendaLayout = new javax.swing.GroupLayout(painel_legenda);
@@ -529,7 +529,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         );
         painel_legendaLayout.setVerticalGroup(
             painel_legendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 363, Short.MAX_VALUE)
+            .addGap(0, 149, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout painelDireitaLayout = new javax.swing.GroupLayout(painelDireita);
@@ -623,7 +623,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
         );
 
         pack();
@@ -975,7 +975,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 
     private void configCenario() {
         scenarioManager = new ScenarioManager(gridPanel, painelQuestoes_jTextPane, painel_legenda);
-        Legendas legenda = new Legendas();
+        Legenda legenda = new Legenda(painel_legenda.getBounds());
         painel_legenda.removeAll();
         painel_legenda.add(legenda);
         scenarioManager.setLegendaPainel(legenda);

@@ -5,9 +5,6 @@
  */
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
-import doutorado.tese.visualizacao.glyph.Glyph;
-import java.awt.Rectangle;
-
 /**
  *
  * @author Gustavo

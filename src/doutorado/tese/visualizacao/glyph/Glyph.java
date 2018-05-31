@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author Anderson Soares
  */
-public abstract class Glyph {
+public abstract class Glyph implements Cloneable{
 
     private Glyph child;
     private Rectangle bounds;
@@ -27,6 +27,9 @@ public abstract class Glyph {
     private boolean overlappingActivated = false;
     private boolean glyphResposta;
 
+    public Glyph() {
+    }
+    
     public void paint(Graphics2D g2d) {
         if (getChild() != null) {
             if(getTexturePaint() != null){
@@ -59,13 +62,13 @@ public abstract class Glyph {
      * @param glyphChild glyph filho a ser incluido
      */
     public void appendChild(Glyph glyphChild) {
-        Glyph pai = this.getChild();
-        if (pai != null) {
-            pai.appendChild(glyphChild);
+        Glyph filho = this.getChild();
+        if (filho != null) {
+            filho.appendChild(glyphChild);
         } else {
-            pai = glyphChild;
-            this.child = pai;
-            this.children.add(pai);
+            filho = glyphChild;
+            this.child = filho;
+            this.children.add(filho);
             this.child.father = this;
         }
     }
@@ -108,7 +111,7 @@ public abstract class Glyph {
         return father;
     }
 
-    public Boolean getSelectedByUser() {
+    public Boolean isSelectedByUser() {
         return selectedByUser;
     }
 
@@ -118,7 +121,6 @@ public abstract class Glyph {
 
     @Override
     public String toString() {
-//        System.out.println(this.getClass().getSimpleName());
         return this.getClass().getSimpleName();
     }
 
@@ -152,5 +154,16 @@ public abstract class Glyph {
      */
     public void setGlyphResposta(boolean glyphResposta) {
         this.glyphResposta = glyphResposta;
+    }
+    
+    @Override
+    public Glyph clone() throws CloneNotSupportedException {
+        try {
+            // call clone in Object.
+            return (Glyph) super.clone();
+        } catch (CloneNotSupportedException e) {
+            System.err.println("Cloning not allowed.");
+            return this;
+        }
     }
 }

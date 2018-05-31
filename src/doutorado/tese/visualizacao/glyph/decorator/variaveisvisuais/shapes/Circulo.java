@@ -1,7 +1,7 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
+import doutorado.tese.visualizacao.glyph.Glyph;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
@@ -88,5 +88,16 @@ public class Circulo implements DrawBehavior{
     public void drawForeground(Graphics2D g2d) {
         g2d.setColor(Color.black);
         g2d.draw(p);
+    }
+    
+    @Override
+    public Circulo clone() throws CloneNotSupportedException {
+        try {
+            // call clone in Object.
+            return (Circulo) super.clone();
+        } catch (CloneNotSupportedException e) {
+            System.err.println("Cloning not allowed.");
+            return this;
+        }
     }
 }
