@@ -5,6 +5,7 @@
  */
 package doutorado.tese.cenarios;
 
+import doutorado.tese.legenda.Legendas;
 import doutorado.tese.util.io.Escritor;
 import doutorado.tese.visualizacao.grid.Grid;
 import doutorado.tese.visualizacao.grid.ItemGrid;
@@ -40,7 +41,7 @@ public class ScenarioManager {
     private JPanel painelValoresVarVisuais;
     private Thread t1;
     private Thread threadTime;
-    private Thread threadLog;
+    private Legendas legendaPainel;
     private int taskTime;
     private String[] linhaLog;
     private StringBuilder bufferLog;
@@ -169,8 +170,8 @@ public class ScenarioManager {
     }
 
     private void showVisualVariablesValues() {
-        //TODO criar um classe que herde de JPanel para poder desenhar os valores das var visuais
-//        painelValoresVarVisuais
+       legendaPainel.setRespostaCerta(respostaCerta);
+       legendaPainel.repaint();
     }
 
     /**
@@ -220,17 +221,7 @@ public class ScenarioManager {
             }
         }
     }
-
-    private void acionarThreadLog() {
-        synchronized (threadLog) {
-            try {
-                threadLog.wait();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(ScenarioManager.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
+  
     private void acionarControleThreads() {
         try {
             synchronized (t1) {
@@ -261,6 +252,16 @@ public class ScenarioManager {
         return perguntaAtual;
     }
 
+    public Legendas getLegendaPainel() {
+        return legendaPainel;
+    }
+
+    public void setLegendaPainel(Legendas legendaPainel) {
+        this.legendaPainel = legendaPainel;
+    }
+
+  
+    
     /**
      * @param perguntaAtual the perguntaAtual to set
      */

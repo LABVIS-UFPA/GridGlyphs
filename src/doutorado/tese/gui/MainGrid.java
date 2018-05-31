@@ -6,6 +6,7 @@
 package doutorado.tese.gui;
 
 import doutorado.tese.cenarios.ScenarioManager;
+import doutorado.tese.legenda.Legendas;
 import doutorado.tese.util.Constantes;
 import doutorado.tese.util.Metadados;
 import doutorado.tese.util.coluna.Coluna;
@@ -48,6 +49,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private String[] variaveisVisuaisEscolhidas;
     public float porcentagem = 1f;
     public ScenarioManager scenarioManager;
+    
 
     /**
      * Creates new form MainGrid
@@ -63,7 +65,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         gridPanel = new Grid();
         gridPanel.setPorcetagem(porcentagem);
         painelEsquerda.add(gridPanel);
-        gridPanel.setDoubleBuffered(true);
+        //painel_legenda.add();
         habilitarRadiosOpcoesGrid(true);
         msgFeedback.setVisible(false);
         loadGlyphModel();
@@ -973,9 +975,13 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 
     private void configCenario() {
         scenarioManager = new ScenarioManager(gridPanel, painelQuestoes_jTextPane, painel_legenda);
-        
+        Legendas legenda = new Legendas();
+        painel_legenda.removeAll();
+        painel_legenda.add(legenda);
+        scenarioManager.setLegendaPainel(legenda);
         if (cenario1_RadioButtonMenuItem.isSelected()) {
             scenarioManager.carregarCenarios("cenario1");
+            
         } else if (cenario2_RadioButtonMenuItem.isSelected()) {
             System.out.println("Cenário 2 escolhido.");
         } else if (cenario3_RadioButtonMenuItem.isSelected()) {

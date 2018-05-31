@@ -184,6 +184,7 @@ public class GlyphManager {
             corSorteada = random;
             cor.setGlyphResposta(true);
             System.out.println("Sorteada:" + Constantes.getCorGlyphs()[corSorteada].toString());
+        
         }
         cor.setCor(Color.decode(Constantes.getCorGlyphs()[random]));
         cor.setPectSobreposicao(perctOverlap);
