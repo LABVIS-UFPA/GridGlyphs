@@ -38,7 +38,7 @@ public class ScenarioManager {
     private Resposta respostaAtual;
     private Resposta respostaCerta;
     private long inicioTempo, fimTempo;
-    private JPanel painelValoresVarVisuais;
+//    private JPanel painelValoresVarVisuais;
     private Thread t1;
     private Thread threadTime;
     private Legenda legendaPainel;
@@ -49,12 +49,12 @@ public class ScenarioManager {
     public ScenarioManager() {
     }
 
-    public ScenarioManager(Grid gridPanel, JTextPane painelPergunta, JPanel painelValoresVarVisuais) {
+    public ScenarioManager(Grid gridPanel, JTextPane painelPergunta) {
         this.taskTime = 30 * 1000;
         this.gridPanel = gridPanel;
         this.perguntaAtual_TextPanel = painelPergunta;
-        this.painelValoresVarVisuais = painelValoresVarVisuais;
-        linhaLog = new String[10];
+//        this.painelValoresVarVisuais = painelValoresVarVisuais;
+        linhaLog = new String[11];
         bufferLog = new StringBuilder();
         bufferLog.append("ID_USER, ID_CONJ_VAR_VIS, ID_VAR_VIS, HAS_OVERLAP, ID_OVERLAP, ID_GRID, AREA_ITEM, TIPO_TAREFA, ACURACIA, TEMP_RES");
         bufferLog.append("\n");
@@ -122,6 +122,7 @@ public class ScenarioManager {
         linhaLog[5] = vetorTamGridVertical[0] + "x" + vetorTamGridHorizontal[0];
         linhaLog[6] = area + "";
         linhaLog[7] = vetorTipoTarefa[0];
+        linhaLog[10]= getPerguntaAtual().getRespostaCerta().getListItens().get(0).getGlyph().getChild().getVarValue();
     }
 
     private void carregarCenario1() {

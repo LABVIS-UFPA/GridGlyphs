@@ -130,4 +130,9 @@ public class FormaGeometrica extends Glyph {
         }
     }
 
+    @Override
+    public String getVarValue() {
+        return getDrawBehavior().toString();
+    }
+
 }

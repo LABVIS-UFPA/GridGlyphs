@@ -120,4 +120,10 @@ public class Losango implements DrawBehavior {
             return this;
         }
     }
+    
+    @Override
+    public String toString() {
+        super.toString();
+        return Losango.class.getSimpleName();
+    }
 }

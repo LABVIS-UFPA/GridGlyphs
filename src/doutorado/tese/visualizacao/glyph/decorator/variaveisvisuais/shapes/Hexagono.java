@@ -131,4 +131,10 @@ public class Hexagono implements DrawBehavior {
             return this;
         }
     }
+    
+    @Override
+    public String toString() {
+        super.toString();
+        return Hexagono.class.getSimpleName();
+    }
 }

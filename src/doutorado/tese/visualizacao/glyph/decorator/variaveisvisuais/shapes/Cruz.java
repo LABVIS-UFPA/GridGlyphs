@@ -156,4 +156,11 @@ public class Cruz implements DrawBehavior {
             return this;
         }
     }
+
+    @Override
+    public String toString() {
+        super.toString();
+        return Cruz.class.getSimpleName();
+    }
+    
 }

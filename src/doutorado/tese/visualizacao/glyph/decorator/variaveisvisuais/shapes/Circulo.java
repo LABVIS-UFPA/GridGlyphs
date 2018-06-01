@@ -1,6 +1,5 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
-import doutorado.tese.visualizacao.glyph.Glyph;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -99,5 +98,11 @@ public class Circulo implements DrawBehavior{
             System.err.println("Cloning not allowed.");
             return this;
         }
+    }
+
+    @Override
+    public String toString() {
+        super.toString();
+        return Circulo.class.getSimpleName();
     }
 }

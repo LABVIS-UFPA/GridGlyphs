@@ -974,7 +974,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     }
 
     private void configCenario() {
-        scenarioManager = new ScenarioManager(gridPanel, painelQuestoes_jTextPane, painel_legenda);
+        scenarioManager = new ScenarioManager(gridPanel, painelQuestoes_jTextPane);
         Legenda legenda = new Legenda(painel_legenda.getBounds());
         painel_legenda.removeAll();
         painel_legenda.add(legenda);

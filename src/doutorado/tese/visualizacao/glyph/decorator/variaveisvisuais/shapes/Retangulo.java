@@ -99,4 +99,10 @@ public class Retangulo implements DrawBehavior {
             return this;
         }
     }
+    
+    @Override
+    public String toString() {
+        super.toString();
+        return Retangulo.class.getSimpleName();
+    }
 }

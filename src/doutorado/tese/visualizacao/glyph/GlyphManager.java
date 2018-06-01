@@ -9,7 +9,6 @@ import doutorado.tese.util.Constantes;
 import doutorado.tese.visualizacao.glyph.decorator.overlap.Overlap;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.DrawBehavior;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.FormaGeometrica;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.GeometryFactory;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;

@@ -128,4 +128,10 @@ public class Pentagono implements DrawBehavior {
             return this;
         }
     }
+    
+    @Override
+    public String toString() {
+        super.toString();
+        return Pentagono.class.getSimpleName();
+    }
 }

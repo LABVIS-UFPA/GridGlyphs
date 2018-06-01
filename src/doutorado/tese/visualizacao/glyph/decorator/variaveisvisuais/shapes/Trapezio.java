@@ -109,4 +109,10 @@ public class Trapezio implements DrawBehavior {
             return this;
         }
     }
+    
+    @Override
+    public String toString() {
+        super.toString();
+        return Trapezio.class.getSimpleName();
+    }
 }

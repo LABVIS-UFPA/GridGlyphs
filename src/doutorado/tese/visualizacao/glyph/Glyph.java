@@ -123,6 +123,8 @@ public abstract class Glyph implements Cloneable{
     public String toString() {
         return this.getClass().getSimpleName();
     }
+    
+    public abstract String getVarValue();
 
     /**
      * @return the overlappingActivated
@@ -166,4 +168,6 @@ public abstract class Glyph implements Cloneable{
             return this;
         }
     }
+    
+    
 }

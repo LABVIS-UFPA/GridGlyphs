@@ -9,7 +9,6 @@ import doutorado.tese.visualizacao.glyph.Glyph;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Point;
@@ -184,5 +183,10 @@ public class Numeral extends Glyph {
     @Override
     public Paint getTexturePaint() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getVarValue() {
+        return getNumero();
     }
 }

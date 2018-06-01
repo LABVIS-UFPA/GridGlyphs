@@ -6,9 +6,7 @@
 package doutorado.tese.visualizacao.glyph.decorator.overlap;
 
 import doutorado.tese.visualizacao.glyph.Glyph;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.DrawBehavior;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Polygon;
@@ -82,5 +80,16 @@ public class Overlap extends Glyph {
     @Override
     public Paint getTexturePaint() {
         return null;
+    }
+
+    @Override
+    public String toString() {
+        super.toString();
+        return Overlap.class.getSimpleName();
+    }
+
+    @Override
+    public String getVarValue() {
+        return "";
     }
 }

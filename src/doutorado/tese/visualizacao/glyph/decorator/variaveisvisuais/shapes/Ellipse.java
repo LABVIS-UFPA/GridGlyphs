@@ -92,4 +92,10 @@ public class Ellipse implements DrawBehavior {
             return this;
         }
     }
+
+    @Override
+    public String toString() {
+        super.toString();
+        return Ellipse.class.getSimpleName();
+    }
 }

@@ -163,4 +163,9 @@ public class Letra extends Glyph {
     public Paint getTexturePaint() {
         return null;
     }
+
+    @Override
+    public String getVarValue() {
+        return getLetra();
+    }
 }

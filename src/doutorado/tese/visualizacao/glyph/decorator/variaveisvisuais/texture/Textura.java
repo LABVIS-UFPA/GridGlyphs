@@ -138,4 +138,9 @@ public class Textura extends Glyph {
         g.dispose();
         return b;
     }
+
+    @Override
+    public String getVarValue() {
+        return getNomeTextura();
+    }
 }
