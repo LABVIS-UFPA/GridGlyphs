@@ -31,7 +31,7 @@ public class ScenarioManager {
     private int[] vetorQuantConjVarVisuais = {3, 4, 5};
     private String[] vetorVarVisuais = {"Texture", "Color", "Shape", "Color2", "Overlap"};
     private String[] vetorTipoTarefa = {"Localização"};//, "Identificação"
-    private String[] vetorQuestoes = {"Find the element above in the visualization:"};
+    private String[] vetorQuestoes = {"Find the element below in the visualization:"};
 //            , "Encontre o grupo de elementos abaixo na visualização:"};
     private JTextPane perguntaAtual_TextPanel;
     private Pergunta perguntaAtual;
@@ -151,6 +151,7 @@ public class ScenarioManager {
                     }
                 }
                 JOptionPane.showMessageDialog(null, "Thanks for participate!", "Thanks!", JOptionPane.INFORMATION_MESSAGE);
+                System.exit(0);
             }
         });
         t1.start();
@@ -196,7 +197,11 @@ public class ScenarioManager {
         fimTempo = System.currentTimeMillis();
         linhaLog[9] = (fimTempo - inicioTempo) + "";
         analisarRespostas();
-        linhaLog[11] = getPerguntaAtual().getRespostaUsuario().getListItens().get(0).getGlyph().getChild().getVarValue();
+        if (!getPerguntaAtual().getRespostaUsuario().getListItens().isEmpty()) {
+            linhaLog[11] = getPerguntaAtual().getRespostaUsuario().getListItens().get(0).getGlyph().getChild().getVarValue();
+        }else{
+            linhaLog[11] = "null-TIME_OVER";
+        }
         gridPanel.getGlyphManager().resetValoresSorteados();
         String linha = Arrays.toString(linhaLog).replace("[", "").replace("]", "");
         bufferLog.append(linha).append("\n");
@@ -205,9 +210,6 @@ public class ScenarioManager {
             threadTime.interrupt();
             t1.notify();
         }
-//        synchronized (threadLog) {
-//            threadLog.notify();
-//        }
     }
 
     public void analisarRespostas() {

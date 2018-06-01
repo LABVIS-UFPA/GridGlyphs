@@ -5,10 +5,8 @@
  */
 package doutorado.tese.util.io;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -20,7 +18,7 @@ public class Escritor {
 
     public static void escreverArquivo(String nomeArquivo, String texto) {
         try {
-            File file = new File(nomeArquivo); // Criação do arquivo
+            File file = new File(System.getProperty("user.name")+"_"+nomeArquivo); // Criação do arquivo
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw); // BufferedWriter 
             bw.write(texto); // Inserção bufferizada da String texto1 no arquivo file.txt
