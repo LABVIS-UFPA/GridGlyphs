@@ -115,8 +115,20 @@ public class ScenarioManager {
         linhaLog[5] = vetorTamGridVertical[0] + "x" + vetorTamGridHorizontal[0];
         linhaLog[6] = area + "";
         linhaLog[7] = vetorTipoTarefa[0];
-        linhaLog[10]= getPerguntaAtual().getRespostaCerta().getListItens().get(0).getGlyph().getChild().getVarValue();
-        linhaLog[12]= "...";
+        linhaLog[10] = getPerguntaAtual().getRespostaCerta().getListItens().get(0).getGlyph().getChild().getVarValue();
+        switch (varEscolhida) {
+            case "Texture":
+                linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getTexturas()).replace(",", ";");
+                break;
+            case "Color":
+                linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getCores()).replace("java.awt.Color", "").replace(",", ";");
+                break;
+            case "Shape":
+                linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getFormaGeometricas()).replace(",", ";");
+                break;
+            default:
+                throw new AssertionError();
+        }
     }
 
     private void carregarCenario1() {
@@ -184,7 +196,7 @@ public class ScenarioManager {
         fimTempo = System.currentTimeMillis();
         linhaLog[9] = (fimTempo - inicioTempo) + "";
         analisarRespostas();
-        linhaLog[11]= getPerguntaAtual().getRespostaUsuario().getListItens().get(0).getGlyph().getChild().getVarValue();
+        linhaLog[11] = getPerguntaAtual().getRespostaUsuario().getListItens().get(0).getGlyph().getChild().getVarValue();
         gridPanel.getGlyphManager().resetValoresSorteados();
         String linha = Arrays.toString(linhaLog).replace("[", "").replace("]", "");
         bufferLog.append(linha).append("\n");

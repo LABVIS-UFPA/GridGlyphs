@@ -163,7 +163,7 @@ public class GlyphManager {
     }
 
     private Glyph defineRandomTexture() {
-        if (texturas == null) {
+        if (getTexturas() == null) {
             definirConjuntoTexturas(quantValoresVarVisuais);
         }
         int random = (int) (Math.random() * quantValoresVarVisuais);
@@ -232,7 +232,7 @@ public class GlyphManager {
     }
 
     private Glyph defineRandomShape() {
-        if (formaGeometricas == null) {
+        if (getFormaGeometricas() == null) {
             definirConjuntoFormas(quantValoresVarVisuais);
         }
         int random = (int) (Math.random() * quantValoresVarVisuais);
@@ -245,7 +245,7 @@ public class GlyphManager {
             formaSorteada = random;
             forma.setGlyphResposta(true);
         }
-        forma.setDrawBehavior(GeometryFactory.create(formaGeometricas[random]));
+        forma.setDrawBehavior(GeometryFactory.create(getFormaGeometricas()[random]));
         forma.setPectSobreposicao(perctOverlap);
         forma.setOverlappingActivated(overlappingActivated);
         return glyph;
@@ -308,5 +308,19 @@ public class GlyphManager {
      */
     public void setCores(Color[] cores) {
         this.cores = cores;
+    }
+
+    /**
+     * @return the texturas
+     */
+    public String[] getTexturas() {
+        return texturas;
+    }
+
+    /**
+     * @return the formaGeometricas
+     */
+    public GeometryFactory.FORMAS.GLYPH_FORMAS[] getFormaGeometricas() {
+        return formaGeometricas;
     }
 }
