@@ -98,7 +98,7 @@ public class Cor extends Glyph {
 
     @Override
     public String getVarValue() {
-        return getCor().getRed()+"-"+getCor().getGreen()+"-"+getCor().getBlue();
+        return "R:"+getCor().getRed()+" G:"+getCor().getGreen()+" B:"+getCor().getBlue();
     }
 
 }

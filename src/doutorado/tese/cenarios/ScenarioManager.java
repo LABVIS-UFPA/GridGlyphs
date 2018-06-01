@@ -54,21 +54,14 @@ public class ScenarioManager {
         this.gridPanel = gridPanel;
         this.perguntaAtual_TextPanel = painelPergunta;
 //        this.painelValoresVarVisuais = painelValoresVarVisuais;
-        linhaLog = new String[11];
+        linhaLog = new String[13];
         bufferLog = new StringBuilder();
-        bufferLog.append("ID_USER, ID_CONJ_VAR_VIS, ID_VAR_VIS, HAS_OVERLAP, ID_OVERLAP, ID_GRID, AREA_ITEM, TIPO_TAREFA, ACURACIA, TEMP_RES");
+        bufferLog.append("ID_USER, ID_CONJ_VAR_VIS, ID_VAR_VIS, HAS_OVERLAP, ID_OVERLAP, ID_GRID, AREA_ITEM, TIPO_TAREFA, ACURACIA, TEMP_RES, RESPOSTA_CERTA, RESPOSTA_USER, CONJ_VAR_VIS");
         bufferLog.append("\n");
     }
 
     public void carregarCenarios(String nomeCenario) {
         this.gridPanel.setScenarioManager(this);
-//        threadLog = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                Escritor.escreverArquivo("log_GRID_Glyphs_"+nomeCenario+".csv", bufferLog.toString());
-//            }
-//        });
-//        threadLog.start();
         switch (nomeCenario) {
             case "cenario1":
                 carregarCenario1();
@@ -123,6 +116,7 @@ public class ScenarioManager {
         linhaLog[6] = area + "";
         linhaLog[7] = vetorTipoTarefa[0];
         linhaLog[10]= getPerguntaAtual().getRespostaCerta().getListItens().get(0).getGlyph().getChild().getVarValue();
+        linhaLog[12]= "...";
     }
 
     private void carregarCenario1() {
@@ -190,6 +184,7 @@ public class ScenarioManager {
         fimTempo = System.currentTimeMillis();
         linhaLog[9] = (fimTempo - inicioTempo) + "";
         analisarRespostas();
+        linhaLog[11]= getPerguntaAtual().getRespostaUsuario().getListItens().get(0).getGlyph().getChild().getVarValue();
         gridPanel.getGlyphManager().resetValoresSorteados();
         String linha = Arrays.toString(linhaLog).replace("[", "").replace("]", "");
         bufferLog.append(linha).append("\n");
