@@ -5,13 +5,6 @@
  */
 package doutorado.tese.cenarios;
 
-import doutorado.tese.visualizacao.glyph.Glyph;
-import doutorado.tese.visualizacao.glyph.decorator.overlap.Overlap;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.numbers.Numeral;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.FormaGeometrica;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
 import doutorado.tese.visualizacao.grid.ItemGrid;
 import java.util.ArrayList;
 

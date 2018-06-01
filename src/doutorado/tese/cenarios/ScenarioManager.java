@@ -205,7 +205,7 @@ public class ScenarioManager {
         gridPanel.getGlyphManager().resetValoresSorteados();
         String linha = Arrays.toString(linhaLog).replace("[", "").replace("]", "");
         bufferLog.append(linha).append("\n");
-        Escritor.escreverArquivo("log_GRID_Glyphs.csv", bufferLog.toString());
+        Escritor.escreverArquivo("log_GRID_Glyphs", bufferLog.toString());
         synchronized (t1) {
             threadTime.interrupt();
             t1.notify();
