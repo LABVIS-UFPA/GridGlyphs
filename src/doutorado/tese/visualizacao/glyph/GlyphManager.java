@@ -35,11 +35,12 @@ public class GlyphManager {
     private int letraSorteada = -1;
     private int quantValoresVarVisuais;
     private Color[] cores;
-    private String[] texturas;
+    private Integer[] texturas;
     private GeometryFactory.FORMAS.GLYPH_FORMAS[] formaGeometricas;
 
     public GlyphManager() {
         activeLayers = new HashMap<>();
+        quantValoresVarVisuais = 5;
         resetActiveLayers();
     }
 
@@ -65,7 +66,8 @@ public class GlyphManager {
             case "Overlap":
                 glyph = new Overlap();
                 Overlap overlap = (Overlap) glyph;
-                overlap.setCor(Color.WHITE);
+//                overlap.setCor(Color.WHITE);
+                overlap.setCor(Color.decode("#f0f8ff"));
                 overlap.setPectSobreposicao(getPerctOverlap());
                 overlap.setOverlappingActivated(overlappingActivated);
                 break;
@@ -170,28 +172,28 @@ public class GlyphManager {
         while (random == texturaSorteada) {
             random = (int) (Math.random() * quantValoresVarVisuais);
         }
-        Glyph glyph = new Textura(Color.gray, new Color(255, 0, 0, 0));
+        Glyph glyph = new Textura(Color.GRAY, new Color(0, 0, 0, 0));
         Textura textura = (Textura) glyph;
         if (texturaSorteada == -1) {
             texturaSorteada = random;
             textura.setGlyphResposta(true);
         }
-        textura.setNomeTextura(Constantes.TIPO_TEXTURA[random]);
+        textura.setNomeTextura(Constantes.TIPO_TEXTURA[texturas[random]]);
         textura.setPectSobreposicao(perctOverlap);
         textura.setOverlappingActivated(overlappingActivated);
         return glyph;
     }
-    
+
     public void definirConjuntoTexturas(int quantValoresVarVisuais) {
-        ArrayList<String> sorteados = new ArrayList<>();
+        ArrayList<Integer> sorteados = new ArrayList<>();
         for (int i = 0; i < quantValoresVarVisuais; i++) {
             int random;
             do {
                 random = (int) (Math.random() * Constantes.TIPO_TEXTURA.length);
-            } while (sorteados.contains(Constantes.TIPO_TEXTURA[random]));
-            sorteados.add(Constantes.TIPO_TEXTURA[random]);
+            } while (sorteados.contains(random));
+            sorteados.add(random);
         }
-        texturas = sorteados.toArray(new String[]{});
+        texturas = sorteados.toArray(new Integer[]{});
     }
 
     private Glyph defineRandomColor() {
@@ -208,6 +210,7 @@ public class GlyphManager {
             corSorteada = random;
             cor.setGlyphResposta(true);
         }
+        
         cor.setCor(getCores()[random]);
         cor.setPectSobreposicao(perctOverlap);
         cor.setOverlappingActivated(overlappingActivated);
@@ -245,12 +248,18 @@ public class GlyphManager {
             formaSorteada = random;
             forma.setGlyphResposta(true);
         }
-        forma.setDrawBehavior(GeometryFactory.create(getFormaGeometricas()[random]));
+        if (getFormaGeometricas().length != 0) {
+            forma.setDrawBehavior(GeometryFactory.create(getFormaGeometricas()[random]));
+        }else{
+            quantValoresVarVisuais = 8;
+            random = (int) (Math.random() * quantValoresVarVisuais);
+            forma.setDrawBehavior(GeometryFactory.create(GeometryFactory.FORMAS.GLYPH_FORMAS.values()[random]));            
+        }
         forma.setPectSobreposicao(perctOverlap);
         forma.setOverlappingActivated(overlappingActivated);
         return glyph;
     }
-    
+
     public void definirConjuntoFormas(int quantValoresVarVisuais) {
         ArrayList<GeometryFactory.FORMAS.GLYPH_FORMAS> sorteados = new ArrayList<>();
         for (int i = 0; i < quantValoresVarVisuais; i++) {
@@ -283,9 +292,10 @@ public class GlyphManager {
     public void setQuantValoresVarVisuais(int quantValoresVarVisuais) {
         this.quantValoresVarVisuais = quantValoresVarVisuais;
     }
-    
+
     public void definirConjuntoCores(int quantValoresVarVisuais) {
         ArrayList<Color> sorteados = new ArrayList<>();
+        
         for (int i = 0; i < quantValoresVarVisuais; i++) {
             int random;
             do {
@@ -295,7 +305,7 @@ public class GlyphManager {
         }
         setCores(sorteados.toArray(new Color[]{}));
     }
-    
+
     /**
      * @return the cores
      */
@@ -313,7 +323,7 @@ public class GlyphManager {
     /**
      * @return the texturas
      */
-    public String[] getTexturas() {
+    public Integer[] getTexturas() {
         return texturas;
     }
 

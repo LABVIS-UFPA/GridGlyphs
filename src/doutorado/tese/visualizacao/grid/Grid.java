@@ -61,6 +61,7 @@ public class Grid extends JPanel {
             }
         });
         this.rect = new Rectangle(0, 0, 0, 0);
+        quantValoresVarVisuais = 5;
     }
 
     private void ancestorResizedHierarchyBoundsListener() {
@@ -123,7 +124,8 @@ public class Grid extends JPanel {
             return;
         }
         Graphics2D g2d = (Graphics2D) g.create();
-        g2d.setColor(Color.decode("#f0f8ff"));
+//        g2d.setColor(Color.decode("#f0f8ff"));
+        g2d.setColor(Color.decode("#dddddd"));
         g2d.fillRect(0, 0, getSize().width, getSize().height);
         g2d.setColor(Color.BLACK);
 

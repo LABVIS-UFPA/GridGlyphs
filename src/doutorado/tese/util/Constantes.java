@@ -45,11 +45,18 @@ public class Constantes {
         "#FF95C9", "#62354C"
     };
 
+//    private static String[] corGlyphs = {
+//        "#FF0101", "#174580",
+//        "#0A8300", "#8C8589",
+//        "#F8D930", "#00A1D7",
+//        "#FF3797", "#000000"
+//    };
+    
     private static String[] corGlyphs = {
-        "#FF0101", "#174580",
-        "#0A8300", "#8C8589",
-        "#F8D930", "#00A1D7",
-        "#FF3797", "#000000"
+        "#B40000", "#F8D930",
+        "#174580", "#00A1D7",
+        "#2CB01C", "#FF95C9",
+        "#636066", "#000000"
     };
 
     public final static String[] TIPO_TEXTURA = {

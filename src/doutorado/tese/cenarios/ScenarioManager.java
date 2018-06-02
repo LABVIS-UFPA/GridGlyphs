@@ -23,7 +23,7 @@ import javax.swing.JTextPane;
 public class ScenarioManager {
 
     private Grid gridPanel;
-    private int numVisualizacoes = 4;
+    private int numVisualizacoes = 1;
     private int[] vetorTamGridVertical = {10, 5, 5};
     private int[] vetorTamGridHorizontal = {16, 10, 10};
     private double[] vetorTamScala = {1.5, 1.25, 1};

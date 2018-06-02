@@ -27,3 +27,5 @@ private/*
 private
 log_GRID_Glyphs.csv
 build/built-jar.properties
+*.csv
+*.properties
