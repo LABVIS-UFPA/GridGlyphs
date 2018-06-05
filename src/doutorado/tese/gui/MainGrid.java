@@ -116,12 +116,12 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         texturaComboBox = new javax.swing.JComboBox<>();
         corComboBox = new javax.swing.JComboBox<>();
         formaComboBox = new javax.swing.JComboBox<>();
-        letraComboBox = new javax.swing.JComboBox<>();
         viewGlyphsButton = new javax.swing.JButton();
+        detalhes_jPanel = new javax.swing.JPanel();
+        filter_jPanel = new javax.swing.JPanel();
         questions_jScrollPane = new javax.swing.JScrollPane();
         painelQuestoes_jTextPane = new javax.swing.JTextPane();
         painel_legenda = new javax.swing.JPanel();
@@ -265,7 +265,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 
         jLabel8.setText("Grid:");
 
-        radio5x10.setText("Grande");
+        radio5x10.setText("Large");
         radio5x10.setEnabled(false);
         radio5x10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,7 +273,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
             }
         });
 
-        radio10x27.setText("Medio");
+        radio10x27.setText("Medium");
         radio10x27.setEnabled(false);
         radio10x27.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -281,7 +281,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
             }
         });
 
-        radio10x30.setText("Pequeno");
+        radio10x30.setText("Small");
         radio10x30.setEnabled(false);
         radio10x30.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -427,7 +427,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Set Up", setUP_jPanel);
+        jTabbedPane1.addTab("Setup", setUP_jPanel);
 
         jLabel3.setText("Texture:");
 
@@ -435,15 +435,11 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 
         jLabel5.setText("Shape:");
 
-        jLabel6.setText("Letter:");
-
         texturaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
 
         corComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
 
         formaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
-
-        letraComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
 
         viewGlyphsButton.setText("View Glyphs");
         viewGlyphsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -458,23 +454,21 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
             glyphs_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(glyphs_jPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(glyphs_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(glyphs_jPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(viewGlyphsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(glyphs_jPanelLayout.createSequentialGroup()
+                .addGroup(glyphs_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, glyphs_jPanelLayout.createSequentialGroup()
                         .addGroup(glyphs_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(glyphs_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(letraComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(formaComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(formaComboBox, 0, 144, Short.MAX_VALUE)
                             .addComponent(corComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(texturaComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(0, 154, Short.MAX_VALUE))
+                            .addComponent(texturaComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(105, 105, 105))
+                    .addGroup(glyphs_jPanelLayout.createSequentialGroup()
+                        .addComponent(viewGlyphsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         glyphs_jPanelLayout.setVerticalGroup(
             glyphs_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -487,36 +481,51 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                         .addGroup(glyphs_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(corComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(formaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(glyphs_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(formaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(glyphs_jPanelLayout.createSequentialGroup()
-                        .addGroup(glyphs_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(glyphs_jPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(57, 57, 57))
-                            .addGroup(glyphs_jPanelLayout.createSequentialGroup()
-                                .addGap(60, 60, 60)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(6, 6, 6)))
-                .addGroup(glyphs_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(glyphs_jPanelLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE))
-                    .addComponent(letraComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(83, 83, 83)))
+                .addGap(18, 18, 18)
                 .addComponent(viewGlyphsButton)
-                .addContainerGap())
+                .addGap(87, 87, 87))
         );
 
         jTabbedPane1.addTab("Glyphs", glyphs_jPanel);
+
+        javax.swing.GroupLayout detalhes_jPanelLayout = new javax.swing.GroupLayout(detalhes_jPanel);
+        detalhes_jPanel.setLayout(detalhes_jPanelLayout);
+        detalhes_jPanelLayout.setHorizontalGroup(
+            detalhes_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 320, Short.MAX_VALUE)
+        );
+        detalhes_jPanelLayout.setVerticalGroup(
+            detalhes_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 218, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Details", detalhes_jPanel);
+
+        javax.swing.GroupLayout filter_jPanelLayout = new javax.swing.GroupLayout(filter_jPanel);
+        filter_jPanel.setLayout(filter_jPanelLayout);
+        filter_jPanelLayout.setHorizontalGroup(
+            filter_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 320, Short.MAX_VALUE)
+        );
+        filter_jPanelLayout.setVerticalGroup(
+            filter_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 218, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Filter", filter_jPanel);
 
         painelQuestoes_jTextPane.setEditable(false);
         painelQuestoes_jTextPane.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         questions_jScrollPane.setViewportView(painelQuestoes_jTextPane);
 
         jTabbedPane1.addTab("Questions", questions_jScrollPane);
-
-        jTabbedPane1.setSelectedIndex(2);
 
         painel_legenda.setBackground(new java.awt.Color(255, 255, 255));
         painel_legenda.setBorder(javax.swing.BorderFactory.createTitledBorder("Visual variable values"));
@@ -893,6 +902,8 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JRadioButtonMenuItem cenario3_RadioButtonMenuItem;
     private javax.swing.JButton cimaButton;
     private javax.swing.JComboBox<String> corComboBox;
+    private javax.swing.JPanel detalhes_jPanel;
+    private javax.swing.JPanel filter_jPanel;
     private javax.swing.JComboBox<String> formaComboBox;
     private javax.swing.JMenu glyphModelMenu;
     private javax.swing.ButtonGroup glyphModelRadioGroup;
@@ -905,7 +916,6 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -914,7 +924,6 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JComboBox<String> letraComboBox;
     private javax.swing.JRadioButtonMenuItem maskInclusionRadioButtonMenuItem;
     private javax.swing.JLabel msgFeedback;
     private javax.swing.JMenuItem openFileMenuItem;
@@ -1003,7 +1012,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         } else {
             vetor = new String[]{};
             loadVariaveisEscolhidasList(vetor, varVisuaisEscolidasList);
-            vetor = new String[]{"Texture", "Color", "Shape", "Letter", "Overlap"};
+            vetor = new String[]{"Texture", "Color", "Shape", "Letter", "Overlap"};//, "Letter", "Overlap"
             loadVarVisuais(vetor);
             glyphModelMenu.setText("Glyph Model: Overlapping");
         }
@@ -1120,7 +1129,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         texturaComboBox.setEnabled(false);
         corComboBox.setEnabled(false);
         formaComboBox.setEnabled(false);
-        letraComboBox.setEnabled(false);
+//        letraComboBox.setEnabled(false);
 //        numeroComboBox.setEnabled(false);
         for (String classe : variaveisVisuaisEscolhidas) {
             switch (classe) {
@@ -1128,7 +1137,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                     corComboBox.setEnabled(true);
                     break;
                 case "Letter":
-                    letraComboBox.setEnabled(true);
+//                    letraComboBox.setEnabled(true);
                     break;
                 case "Number":
 //                    numeroComboBox.setEnabled(true);
@@ -1148,7 +1157,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         atributosEscolhidosGlyph.add(texturaComboBox.getSelectedItem());
         atributosEscolhidosGlyph.add(corComboBox.getSelectedItem());
         atributosEscolhidosGlyph.add(formaComboBox.getSelectedItem());
-        atributosEscolhidosGlyph.add(letraComboBox.getSelectedItem());
+//        atributosEscolhidosGlyph.add(letraComboBox.getSelectedItem());
 //        atributosEscolhidosGlyph.add(numeroComboBox.getSelectedItem());
         return atributosEscolhidosGlyph;
     }
@@ -1265,7 +1274,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                 loadVariaveisGlyph(getListaAtributosCategoricos(Constantes.NivelGlyph.NIVEL_1, true), texturaComboBox);
                 loadVariaveisGlyph(getListaAtributosCategoricos(Constantes.NivelGlyph.NIVEL_2, true), corComboBox);
                 loadVariaveisGlyph(getListaAtributosCategoricos(Constantes.NivelGlyph.NIVEL_3, true), formaComboBox);
-                loadVariaveisGlyph(getListaAtributosCategoricos(Constantes.NivelGlyph.NIVEL_4, true), letraComboBox);
+//                loadVariaveisGlyph(getListaAtributosCategoricos(Constantes.NivelGlyph.NIVEL_4, true), letraComboBox);
 //                loadVariaveisGlyph(getListaAtributosCategoricos(Constantes.NivelGlyph.NIVEL_5, true), numeroComboBox);
                 porcentagem = (ordem * 100) / tarefas;
                 break;
