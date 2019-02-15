@@ -313,7 +313,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
             }
         });
 
-        radio70.setText("60%");
+        radio70.setText("65%");
         radio70.setActionCommand("");
         radio70.setEnabled(false);
         radio70.addActionListener(new java.awt.event.ActionListener() {
@@ -972,7 +972,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         } else if (radio60.isSelected()) {
             gridPanel.setQuantOlverlap(0.7f);
         } else if (radio70.isSelected()) {
-            gridPanel.setQuantOlverlap(0.6f);
+            gridPanel.setQuantOlverlap(0.65f);
         }
         if (!varVisuaisList.isEnabled()) {
             varVisuaisList.setEnabled(true);
@@ -989,8 +989,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         painel_legenda.add(legenda);
         scenarioManager.setLegendaPainel(legenda);
         if (cenario1_RadioButtonMenuItem.isSelected()) {
-            scenarioManager.carregarCenarios("cenario1");
-            
+            scenarioManager.carregarCenarios("cenario1");            
         } else if (cenario2_RadioButtonMenuItem.isSelected()) {
             System.out.println("Cenário 2 escolhido.");
         } else if (cenario3_RadioButtonMenuItem.isSelected()) {
@@ -1228,6 +1227,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 //                LOGGER.info("Leitura do arquivo.");
                 progressoBarra.setToolTipText("Tratando arquivo.");
                 manipulador = new ManipuladorArquivo();
+                System.out.println(selectedFile.getName());
                 manipulador.getExtensionFile(selectedFile.getName());
                 manipulador.lerArquivo(selectedFile);
                 porcentagem = (ordem * 100) / tarefas;
