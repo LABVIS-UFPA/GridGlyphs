@@ -15,13 +15,14 @@ public class GeometryFactory {
 
         public enum GLYPH_FORMAS {
             CRUZ("CRUZ"),
-            ELLIPSE("ELLIPSE"),
-            HEXAGONO("HEXAGONO"),
+//            ELLIPSE("ELLIPSE"),
+//            HEXAGONO("HEXAGONO"),
             LOSANGO("LOSANGO"),
-            PENTAGONO("PENTAGONO"),
-            TRAPEZIO("TRAPEZIO"),
+//            PENTAGONO("PENTAGONO"),
+//            TRAPEZIO("TRAPEZIO"),
             RETANGULO("RETANGULO"),
-            CIRCULO("CIRCULO");
+            CIRCULO("CIRCULO"),
+            ESTRELA("ESTRELA");
 
             private final String nome;
 
@@ -42,20 +43,23 @@ public class GeometryFactory {
         switch (forma) {
             case RETANGULO:
                 return new Retangulo();
+             case ESTRELA:
+                return new Estrela();
             case CRUZ:
                 return new Cruz();
-            case ELLIPSE:
-                return new Ellipse();
             case CIRCULO:
                 return new Circulo();
-            case HEXAGONO:
-                return new Hexagono();
             case LOSANGO:
                 return new Losango();
-            case PENTAGONO:
-                return new Pentagono();
-            case TRAPEZIO:
-                return new Trapezio();
+//            case ELLIPSE:
+//                return new Ellipse();
+//            case HEXAGONO:
+//                return new Hexagono();
+//            case PENTAGONO:
+//                return new Pentagono();
+//            case TRAPEZIO:
+//                return new Trapezio();
+        
             default:
                 return null;
         }

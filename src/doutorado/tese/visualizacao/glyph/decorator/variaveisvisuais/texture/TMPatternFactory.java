@@ -87,8 +87,14 @@ public class TMPatternFactory {
 //        buildPatternSquareC();
 //        buildPatternLightGray();
 //        buildPatternDots();
-//        buildPatternPlus();
+        buldPatternCirlce1();
+        buildPatternCirlce2();
+        buildPatternCirlce3();
+        buildPatternCirlce4();
+        buildPatternCirlce5();
+       
     }
+    
 
     /**
      * Call this method if anyting change in textures, e.g: color
@@ -112,7 +118,11 @@ public class TMPatternFactory {
 //        buildPatternSquareC();
 //        buildPatternLightGray();
 //        buildPatternDots();
-//        buildPatternPlus();
+        buldPatternCirlce1();
+        buildPatternCirlce2();
+        buildPatternCirlce3();
+        buildPatternCirlce4();
+        buildPatternCirlce5();
     }
 
     /* --- Singleton pattern --- */
@@ -319,7 +329,7 @@ public class TMPatternFactory {
         BufferedImage image
                 = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
-        g.setStroke(new BasicStroke(2.1f));
+        g.setStroke(new BasicStroke(3f));
         g.setColor(backgroungColor);
         g.fillRect(0, 0, 16, 16);
         g.setColor(textureColor);
@@ -339,7 +349,7 @@ public class TMPatternFactory {
         BufferedImage image
                 = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
-        g.setStroke(new BasicStroke(1.8f));
+        g.setStroke(new BasicStroke(3f));
         g.setColor(backgroungColor);
         g.fillRect(0, 0, 16, 16);
         g.setColor(textureColor);
@@ -436,21 +446,83 @@ public class TMPatternFactory {
     /**
      * Builds and adds the PATTERN_PLUS in patterns.
      */
-    private void buildPatternPlus() {
+    private void buldPatternCirlce1() {
         BufferedImage image
                 = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(Color.white);
         g.fillRect(0, 0, 10, 10);
         g.setColor(Color.black);
-        g.drawLine(3, 5, 8, 5);
-        g.drawLine(3, 6, 8, 6);
-        g.drawLine(5, 3, 5, 8);
-        g.drawLine(6, 3, 6, 8);
+        g.fillOval(3, 3, 5, 5);
         Rectangle r = new Rectangle(0, 0, 10, 10);
         Paint pattern = new TexturePaint(image, r);
-        textures.put("PATTERN_PLUS", pattern);
+        textures.put("PATTERN_CIRCLE_1", pattern);
     }
+    
+       private void buildPatternCirlce2() {
+        BufferedImage image
+                = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = image.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setColor(Color.white);
+        g.fillRect(0, 0, 10, 10);
+        g.setColor(Color.black);
+        g.drawOval(0,0, 8, 8);
+        Rectangle r = new Rectangle(0, 0, 10, 10);
+        Paint pattern = new TexturePaint(image, r);
+        textures.put("PATTERN_CIRCLE_2", pattern);
+    }
+       
+       private void buildPatternCirlce3() {
+        BufferedImage image
+                = new BufferedImage(20, 20, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = image.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//        g.setStroke(new BasicStroke(3f));
+        g.setColor(Color.white);
+        g.fillRect(0, 0, 20, 20);
+        g.setColor(Color.black);
+        g.drawOval(0,0, 18, 18);
+        Rectangle r = new Rectangle(0, 0, 20, 20);
+        Paint pattern = new TexturePaint(image, r);
+        textures.put("PATTERN_CIRCLE_3", pattern);
+    }
+       
+       
+    private void buildPatternCirlce4() {
+        BufferedImage image
+                = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = image.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//        g.setStroke(new BasicStroke(3f));
+        g.setColor(Color.white);
+        g.fillRect(0, 0, 40, 40);
+        g.setColor(Color.black);
+        g.drawOval(0,0, 30, 30);
+        Rectangle r = new Rectangle(0, 0, 40, 40);
+        Paint pattern = new TexturePaint(image, r);
+        textures.put("PATTERN_CIRCLE_4", pattern);
+    }
+    
+        private void buildPatternCirlce5() {
+        BufferedImage image
+                = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = image.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//        g.setStroke(new BasicStroke(3f));
+        g.setColor(Color.white);
+        g.fillRect(0, 0, 50, 50);
+        g.setColor(Color.black);
+        g.drawOval(0,0, 40, 40);
+        Rectangle r = new Rectangle(0, 0, 50, 50);
+        Paint pattern = new TexturePaint(image, r);
+        textures.put("PATTERN_CIRCLE_5", pattern);
+    }
+       
+       
+       
+       
 
     /**
      * Builds and adds the PATTERN_TUILES in patterns.

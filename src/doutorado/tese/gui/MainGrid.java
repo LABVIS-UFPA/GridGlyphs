@@ -207,7 +207,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         jScrollPane2.setViewportView(varVisuaisEscolidasList);
 
         varVisuaisList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Texture", "Color", "Shape", "Letter", "Overlap" };
+            String[] strings = { "Texture", "Color", "Shape", "Letter", "Overlap", "Saturation", "Oritentation" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -1011,7 +1011,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         } else {
             vetor = new String[]{};
             loadVariaveisEscolhidasList(vetor, varVisuaisEscolidasList);
-            vetor = new String[]{"Texture", "Color", "Shape", "Letter", "Overlap"};//, "Letter", "Overlap"
+            vetor = new String[]{"Texture", "Color", "Shape", "Letter", "Overlap","Saturation","Orientation"};//, "Letter", "Overlap"
             loadVarVisuais(vetor);
             glyphModelMenu.setText("Glyph Model: Overlapping");
         }
@@ -1062,13 +1062,13 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         ArrayList<String> list = new ArrayList<>();
         switch (nivel) {
             case NIVEL_1:
-                analisarQuantAtributosCategoricos(list, Constantes.TIPO_TEXTURA);
+                analisarQuantAtributosCategoricos(list, Constantes.TIPO_ORIENTATION );
                 break;
             case NIVEL_2:
                 if (glyph) {
                     analisarQuantAtributosCategoricos(list, Constantes.getCorGlyphs());
                 } else {
-                    analisarQuantAtributosCategoricos(list, Constantes.getCorOverlap());
+                    analisarQuantAtributosCategoricos(list, Constantes.getCorSaturation());
                 }
                 break;
             case NIVEL_3:

@@ -38,37 +38,43 @@ public class Constantes {
     public static final int PRESENTE = 1;
     public static final int AUSENTE = 0;
 
-    private static String[] corOverlap = {
-        "#B40000", "#3B70A2",
-        "#2CB01C", "#D1D0CA",
-        "#CDB5", "#70C2E8",
-        "#FF95C9", "#62354C"
+    private static String[] corSaturation = {
+        "#EDC9E5",
+        "#D2A1C1",
+        "#C48EB2",
+        "#9D6D97",
+        "#7C4D79"
     };
 
-//    private static String[] corGlyphs = {
-//        "#FF0101", "#174580",
-//        "#0A8300", "#8C8589",
-//        "#F8D930", "#00A1D7",
-//        "#FF3797", "#000000"
-//    };
-    
+
     private static String[] corGlyphs = {
-        "#B40000", "#F8D930",
-        "#174580", "#00A1D7",
-        "#2CB01C", "#FF95C9",
-        "#636066", "#000000"
+        "#41BA2F",
+        "#FFFF01",
+        "#FF0101",
+        "#2C2CFF",
+        "#EBC089"
     };
+    
 
-    public final static String[] TIPO_TEXTURA = {
-        "PATTERN_DIAG_RIGHT_LEFT",
+    public final static String[] TIPO_ORIENTATION = {
         "PATTERN_HORIZONTAL",
+        "PATTERN_DIAG_RIGHT_LEFT",
         "PATTERN_VERTICAL",
-        "PATTERN_UP",
         "PATTERN_DIAG_LEFT_RIGHT",
-        "PATTERN_RIGHT",
         "PATTERN_DIAG_CROSS_LINES",
-        "PATTERN_CROSS_LINES"
+//        "PATTERN_UP",
+//        "PATTERN_RIGHT",
+//        "PATTERN_CROSS_LINES"
     };
+    
+        public final static String[] TIPO_TEXTURE = {
+            "PATTERN_CIRCLE_1",
+            "PATTERN_CIRCLE_2",
+            "PATTERN_CIRCLE_3",
+            "PATTERN_CIRCLE_4",
+            "PATTERN_CIRCLE_5"      
+    };
+    
 
     public final static String[] LETRAS_ALFABETO = {
         "A", "B", "C", "D", "E", "F", "G", "H"
@@ -121,14 +127,18 @@ public class Constantes {
         showStarGlyph = aShowStarGlyph;
     }
 
+    public static int getAREA_CIRCULO_COLORIDO() {
+        return AREA_CIRCULO_COLORIDO;
+    }
+
     /**
      * Vetor de cores usado no segundo nivel de glyphs e na dimensao cores do
      * treemap
      *
      * @return
      */
-    public static String[] getCorOverlap() {
-        return corOverlap;
+    public static String[] getCorSaturation() {
+        return corSaturation;
     }
 
     /**
