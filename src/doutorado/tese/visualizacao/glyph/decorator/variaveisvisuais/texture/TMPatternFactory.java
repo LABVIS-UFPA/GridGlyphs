@@ -315,18 +315,13 @@ public class TMPatternFactory {
              g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
         g.setColor(backgroungColor);
-        g.fillRect(0, 0, 16, 16);
-
-        
+        g.fillRect(0, 0, 16, 16); 
         
         g.setColor(textureColor);
-//        g.drawLine(0, 8, 4, 16);
-//        g.drawLine(0, 0, 8, 16);
         g.drawLine(4, 0, 12, 16);
-//        g.drawLine(8, 0, 16, 16);
         g.drawLine(12, 0, 16, 8);
-     
- 
+        g.drawLine(0, 8, 4, 16);
+
         Rectangle r = new Rectangle(0, 0, 16,16);
         
         
@@ -350,12 +345,10 @@ public class TMPatternFactory {
         
         
         g.setColor(textureColor);
-//        g.drawLine(16, 8, 12, 16);
-//        g.drawLine(16, 0, 8, 16);
+
+        g.drawLine(4, 0, 0, 8); 
+        g.drawLine(16, 8, 12, 16);        
         g.drawLine(12, 0, 4, 16);
-//        g.drawLine(8, 0, 0, 16);
-        g.drawLine(4, 0, 0, 8);
-     
  
         Rectangle r = new Rectangle(0, 0, 16,16);
         
