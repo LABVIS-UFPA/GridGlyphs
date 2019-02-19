@@ -251,9 +251,8 @@ public class TMPatternFactory {
     private void buildPatternHorizontal() {
         BufferedImage image = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
-        g.setStroke(new BasicStroke(3f));
+//        g.setStroke(new BasicStroke(3f));
         g.setColor(backgroungColor);
-        
         g.fillRect(0, 0, 16, 16);
         g.setColor(textureColor);
 //        g.drawLine(0, 1, 16, 1);
@@ -314,13 +313,10 @@ public class TMPatternFactory {
                 = new BufferedImage(16,16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
              g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//        g.setStroke(new BasicStroke(2f));
-//        BasicStroke dashed =new BasicStroke(1.0f,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,1.0f);
-//        g.setStroke(dashed);
-       
-        g.setColor(textureColor);
-        g.setColor(Color.BLACK);
-//        g.drawRect(0, 0, 16, 16);
+        
+        g.setColor(backgroungColor);
+        g.fillRect(0, 0, 16, 16);
+
         
         
         g.setColor(textureColor);
