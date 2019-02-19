@@ -14,6 +14,7 @@ import java.awt.RenderingHints;
 import java.awt.TexturePaint;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import java.util.Enumeration;
@@ -92,6 +93,8 @@ public class TMPatternFactory {
         buildPatternCirlce3();
         buildPatternCirlce4();
         buildPatternCirlce5();
+        orientation_1();
+        orientation_2();
        
     }
     
@@ -123,6 +126,8 @@ public class TMPatternFactory {
         buildPatternCirlce3();
         buildPatternCirlce4();
         buildPatternCirlce5();
+        orientation_1();
+        orientation_2();
     }
 
     /* --- Singleton pattern --- */
@@ -268,7 +273,7 @@ public class TMPatternFactory {
         BufferedImage image
                 = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
-        g.setStroke(new BasicStroke(3f));
+//        g.setStroke(new BasicStroke(3f));
         g.setColor(backgroungColor);
         g.fillRect(0, 0, 16, 16);
         g.setColor(textureColor);
@@ -302,6 +307,66 @@ public class TMPatternFactory {
 //        patterns.put("PATTERN_CROSS_LINES", pattern);
         textures.put("PATTERN_CROSS_LINES", pattern);
     }
+    
+    
+    private void orientation_1() {
+         BufferedImage image
+                = new BufferedImage(16,16, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = image.createGraphics();
+             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//        g.setStroke(new BasicStroke(2f));
+//        BasicStroke dashed =new BasicStroke(1.0f,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,1.0f);
+//        g.setStroke(dashed);
+       
+        g.setColor(textureColor);
+        g.setColor(Color.BLACK);
+//        g.drawRect(0, 0, 16, 16);
+        
+        
+        g.setColor(textureColor);
+//        g.drawLine(0, 8, 4, 16);
+//        g.drawLine(0, 0, 8, 16);
+        g.drawLine(4, 0, 12, 16);
+//        g.drawLine(8, 0, 16, 16);
+        g.drawLine(12, 0, 16, 8);
+     
+ 
+        Rectangle r = new Rectangle(0, 0, 16,16);
+        
+        
+        Paint pattern = new TexturePaint(image, r);  
+        textures.put("ORIENTATION_1", pattern);
+    }
+    
+    
+     private void orientation_2() {
+         BufferedImage image
+                = new BufferedImage(16,16, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = image.createGraphics();
+             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//        g.setStroke(new BasicStroke(2f));
+//        BasicStroke dashed =new BasicStroke(1.0f,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,1.0f);
+//        g.setStroke(dashed);
+       
+        g.setColor(backgroungColor);
+
+        g.fillRect(0, 0, 16, 16);
+        
+        
+        g.setColor(textureColor);
+//        g.drawLine(16, 8, 12, 16);
+//        g.drawLine(16, 0, 8, 16);
+        g.drawLine(12, 0, 4, 16);
+//        g.drawLine(8, 0, 0, 16);
+        g.drawLine(4, 0, 0, 8);
+     
+ 
+        Rectangle r = new Rectangle(0, 0, 16,16);
+        
+        
+        Paint pattern = new TexturePaint(image, r);  
+        textures.put("ORIENTATION_2", pattern);
+    }
 
     /**
      * Builds and adds the PATTERN_DIAG_CROSS_LINES in patterns.
@@ -329,7 +394,7 @@ public class TMPatternFactory {
         BufferedImage image
                 = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
-        g.setStroke(new BasicStroke(3f));
+//        g.setStroke(new BasicStroke(3f));
         g.setColor(backgroungColor);
         g.fillRect(0, 0, 16, 16);
         g.setColor(textureColor);

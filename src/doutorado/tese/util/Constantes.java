@@ -58,10 +58,10 @@ public class Constantes {
 
     public final static String[] TIPO_ORIENTATION = {
         "PATTERN_HORIZONTAL",
-        "PATTERN_DIAG_RIGHT_LEFT",
-        "PATTERN_VERTICAL",
+        "ORIENTATION_1",
         "PATTERN_DIAG_LEFT_RIGHT",
-        "PATTERN_DIAG_CROSS_LINES",
+        "ORIENTATION_2",
+        "PATTERN_DIAG_RIGHT_LEFT",
 //        "PATTERN_UP",
 //        "PATTERN_RIGHT",
 //        "PATTERN_CROSS_LINES"
