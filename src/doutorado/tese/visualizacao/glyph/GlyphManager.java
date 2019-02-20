@@ -7,6 +7,8 @@ package doutorado.tese.visualizacao.glyph;
 
 import doutorado.tese.util.Constantes;
 import doutorado.tese.visualizacao.glyph.decorator.overlap.Overlap;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.Textures.TexturaGeometrica;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.Textures.TexturesFactory;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.FormaGeometrica;
@@ -37,6 +39,7 @@ public class GlyphManager {
     private Color[] cores;
     private Integer[] texturas;
     private GeometryFactory.FORMAS.GLYPH_FORMAS[] formaGeometricas;
+    private TexturesFactory.FORMAS.GLYPH_FORMAS[] texturasGeometricas;
 
     public GlyphManager() {
         activeLayers = new HashMap<>();
@@ -166,6 +169,7 @@ public class GlyphManager {
         cores = null;
         texturas = null;
         formaGeometricas = null;
+        texturasGeometricas = null;
     }
 
     private Glyph defineRandomOrientation() {
@@ -189,22 +193,29 @@ public class GlyphManager {
     }
     
      private Glyph defineRandomTexture() {
-        if (getTexturas() == null) {
-            definirConjuntoTextura(quantValoresVarVisuais);
+          if (getTexturasGeometricas()== null) {
+            definirConjuntoTexturas(quantValoresVarVisuais);
         }
         int random = (int) (Math.random() * quantValoresVarVisuais);
-        while (random == texturaSorteada) {
+        while (random == formaSorteada) {
             random = (int) (Math.random() * quantValoresVarVisuais);
         }
-        Glyph glyph = new Textura(Color.GRAY, new Color(0, 0, 0, 0));
-        Textura textura = (Textura) glyph;
+        Glyph glyph = new TexturaGeometrica();
+        TexturaGeometrica forma = (TexturaGeometrica) glyph;
         if (texturaSorteada == -1) {
             texturaSorteada = random;
-            textura.setGlyphResposta(true);
+            forma.setGlyphResposta(true);
         }
-        textura.setNomeTextura(Constantes.TIPO_TEXTURE[texturas[random]]);
-        textura.setPectSobreposicao(perctOverlap);
-        textura.setOverlappingActivated(overlappingActivated);
+         System.out.println(texturasGeometricas);
+        if (getTexturasGeometricas().length != 0) {
+            forma.setDrawBehavior(TexturesFactory.create(getTexturasGeometricas()[random]));
+        }else{
+            quantValoresVarVisuais = 8;
+            random = (int) (Math.random() * quantValoresVarVisuais);
+            forma.setDrawBehavior(TexturesFactory.create(TexturesFactory.FORMAS.GLYPH_FORMAS.values()[random]));            
+        }
+        forma.setPectSobreposicao(perctOverlap);
+        forma.setOverlappingActivated(overlappingActivated);
         return glyph;
     }
   
@@ -296,6 +307,18 @@ public class GlyphManager {
         forma.setOverlappingActivated(overlappingActivated);
         return glyph;
     }
+    
+    public void definirConjuntoTexturas(int quantValoresVarVisuais) {
+        ArrayList<TexturesFactory.FORMAS.GLYPH_FORMAS> sorteados = new ArrayList<>();
+        for (int i = 0; i < quantValoresVarVisuais; i++) {
+            int random;
+            do {
+                random = (int) (Math.random() * TexturesFactory.FORMAS.GLYPH_FORMAS.values().length);
+            } while (sorteados.contains(TexturesFactory.FORMAS.GLYPH_FORMAS.values()[random]));
+            sorteados.add(TexturesFactory.FORMAS.GLYPH_FORMAS.values()[random]);
+        }
+        texturasGeometricas = sorteados.toArray(new TexturesFactory.FORMAS.GLYPH_FORMAS[]{});
+    }
 
     public void definirConjuntoFormas(int quantValoresVarVisuais) {
         ArrayList<GeometryFactory.FORMAS.GLYPH_FORMAS> sorteados = new ArrayList<>();
@@ -370,4 +393,12 @@ public class GlyphManager {
     public GeometryFactory.FORMAS.GLYPH_FORMAS[] getFormaGeometricas() {
         return formaGeometricas;
     }
+
+    public TexturesFactory.FORMAS.GLYPH_FORMAS[] getTexturasGeometricas() {
+        return texturasGeometricas;
+    }
+    
+    
+    
+    
 }
