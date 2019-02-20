@@ -16,15 +16,11 @@ public class TexturesFactory {
     public static final class FORMAS {
 
         public enum GLYPH_FORMAS {
-            CRUZ("CRUZ"),
-//            ELLIPSE("ELLIPSE"),
-//            HEXAGONO("HEXAGONO"),
-            LOSANGO("LOSANGO"),
-//            PENTAGONO("PENTAGONO"),
-//            TRAPEZIO("TRAPEZIO"),
-            RETANGULO("RETANGULO"),
-            CIRCULO("CIRCULO"),
-            ESTRELA("ESTRELA");
+            CIRCULO_10X10("CIRCULO_10X10"),
+            CIRCULO_8X8("CIRCULO_8X8"),
+            CIRCULO_5X5("CIRCULO_5X5"),
+            CIRCULO_3X3("CIRCULO_3X3"),
+            CIRCULO_4X4("CIRCULO_4X4");
 
             private final String nome;
 
@@ -43,24 +39,16 @@ public class TexturesFactory {
 
     public static DrawBehavior create(FORMAS.GLYPH_FORMAS forma) {
         switch (forma) {
-            case RETANGULO:
-                return new Retangulo();
-             case ESTRELA:
-                return new Estrela();
-            case CRUZ:
-                return new Cruz();
-            case CIRCULO:
+            case CIRCULO_10X10:
                 return new CirculoTextura_10x10();
-            case LOSANGO:
-                return new Losango();
-//            case ELLIPSE:
-//                return new Ellipse();
-//            case HEXAGONO:
-//                return new Hexagono();
-//            case PENTAGONO:
-//                return new Pentagono();
-//            case TRAPEZIO:
-//                return new Trapezio();
+            case CIRCULO_8X8:
+                return new CirculoTextura_5x5();
+            case CIRCULO_5X5:
+                return new CirculoTextura_5x5();
+             case CIRCULO_3X3:
+                return new CirculoTextura_8x8();
+            case CIRCULO_4X4:
+                return new CirculoTextura_4x4();
         
             default:
                 return null;

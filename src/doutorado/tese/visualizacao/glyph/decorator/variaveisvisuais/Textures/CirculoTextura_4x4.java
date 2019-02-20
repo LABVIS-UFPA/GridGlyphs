@@ -13,7 +13,7 @@ import java.awt.geom.Path2D;
  * 
  * @author Anderson Soares
  */
-public class CirculoTextura_10x10 implements DrawBehavior{
+public class CirculoTextura_4x4 implements DrawBehavior{
 
     private int[] xPoints;
     private int[] yPoints;
@@ -23,7 +23,7 @@ public class CirculoTextura_10x10 implements DrawBehavior{
     private Path2D p;
 
 
-    public CirculoTextura_10x10() {
+    public CirculoTextura_4x4() {
     }
 
     @Override
@@ -32,12 +32,11 @@ public class CirculoTextura_10x10 implements DrawBehavior{
         
      
     
-//        g2d.fill(p);
         g2d.setColor(Color.WHITE);
         g2d.fillRect(bounds.x,bounds.y,bounds.width,bounds.height);
         
-        g2d.setColor(Color.black);
-        g2d.draw(p);
+        g2d.setColor(Color.BLACK);
+        g2d.draw(p);    
     }
     
     //função para deixar os glyphs quadrados
@@ -61,28 +60,26 @@ public class CirculoTextura_10x10 implements DrawBehavior{
         points[0] = getBounds().width;
         points[1] = getBounds().height;
 
-        int width = (int) Math.round(points[0] * 0.95);
-        int height = (int) Math.round(points[1] * 0.95);
+        int width = (int) Math.round(points[0] );
+        int height = (int) Math.round(points[1] );
 
         
         int x,y;
-        int spacex = (int) Math.round(points[0]/8);
-        int spacey = (int) Math.round(points[1]/8);
+        int spacex = width/16;
+        int spacey = height/16;
 
         x = rect.x;
         y = rect.y;
         p = new Path2D.Double();   
         
         
-            for (int j = 0; j <8; j++) {               
-                for (int i = 0; i <9 ; i++) {     
-                    p.append(new Ellipse2D.Double(x +spacex*i,y + spacey*j, width/20, height/20), false);   
-                    
-                     
-                }
-                
-                
-            }
+ 
+        p.append(new Ellipse2D.Double(x, y , width/2.2, height/2.2), false);   
+        p.append(new Ellipse2D.Double(spacex+x+width/2, y , width/2.2, height/2.2), false);   
+        p.append(new Ellipse2D.Double(x,spacey+ y+height/2 , width/2.2, height/2.2), false);   
+        p.append(new Ellipse2D.Double(spacex+ x+width/2,spacey+ y +height/2, width/2.2, height/2.2), false);   
+    
+
              
 
     }
@@ -109,16 +106,18 @@ public class CirculoTextura_10x10 implements DrawBehavior{
 
     @Override
     public void drawForeground(Graphics2D g2d) {
-        g2d.setColor(Color.black);
+        g2d.setColor(Color.WHITE);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.fill(p);
+        g2d.setColor(Color.BLACK);
+        g2d.draw(p);
     }
     
     @Override
-    public CirculoTextura_10x10 clone() throws CloneNotSupportedException {
+    public CirculoTextura_4x4 clone() throws CloneNotSupportedException {
         try {
             // call clone in Object.
-            return (CirculoTextura_10x10) super.clone();
+            return (CirculoTextura_4x4) super.clone();
         } catch (CloneNotSupportedException e) {
             System.err.println("Cloning not allowed.");
             return this;
@@ -128,6 +127,6 @@ public class CirculoTextura_10x10 implements DrawBehavior{
     @Override
     public String toString() {
         super.toString();
-        return CirculoTextura_10x10.class.getSimpleName();
+        return CirculoTextura_4x4.class.getSimpleName();
     }
 }

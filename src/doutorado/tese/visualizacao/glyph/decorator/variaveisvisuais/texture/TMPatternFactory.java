@@ -251,7 +251,7 @@ public class TMPatternFactory {
     private void buildPatternHorizontal() {
         BufferedImage image = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
-//        g.setStroke(new BasicStroke(3f));
+        g.setStroke(new BasicStroke(2f));
         g.setColor(backgroungColor);
         g.fillRect(0, 0, 16, 16);
         g.setColor(textureColor);
@@ -272,8 +272,10 @@ public class TMPatternFactory {
         BufferedImage image
                 = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
-//        g.setStroke(new BasicStroke(3f));
+
+        g.setStroke(new BasicStroke(2f));
         g.setColor(backgroungColor);
+
         g.fillRect(0, 0, 16, 16);
         g.setColor(textureColor);
         g.drawLine(8, 0, 16, 8);
@@ -313,7 +315,7 @@ public class TMPatternFactory {
                 = new BufferedImage(16,16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
              g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        
+        g.setStroke(new BasicStroke(2f));
         g.setColor(backgroungColor);
         g.fillRect(0, 0, 16, 16); 
         
@@ -334,8 +336,8 @@ public class TMPatternFactory {
          BufferedImage image
                 = new BufferedImage(16,16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
-             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//        g.setStroke(new BasicStroke(2f));
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setStroke(new BasicStroke(2f));
 //        BasicStroke dashed =new BasicStroke(1.0f,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,1.0f);
 //        g.setStroke(dashed);
        
@@ -364,7 +366,7 @@ public class TMPatternFactory {
         BufferedImage image
                 = new BufferedImage(14, 14, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
-        g.setStroke(new BasicStroke(2.2f));
+        g.setStroke(new BasicStroke(2f));
         g.setColor(backgroungColor);
         g.fillRect(0, 0, 14, 14);
         g.setColor(textureColor);
@@ -383,7 +385,7 @@ public class TMPatternFactory {
         BufferedImage image
                 = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
-//        g.setStroke(new BasicStroke(3f));
+        g.setStroke(new BasicStroke(2.2f));
         g.setColor(backgroungColor);
         g.fillRect(0, 0, 16, 16);
         g.setColor(textureColor);
