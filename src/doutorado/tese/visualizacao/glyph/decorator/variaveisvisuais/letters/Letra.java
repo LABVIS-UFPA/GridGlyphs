@@ -42,7 +42,7 @@ public class Letra extends Glyph {
     @Override
     public void paint(Graphics2D g2d) {
         int fontSize = Math.round(getBounds().height * 1.2f);
-        setFonte(new Font("Arial black", Font.PLAIN, fontSize));
+        setFonte(new Font("Arial", Font.PLAIN, fontSize));
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setFont(getFonte());
 

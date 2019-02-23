@@ -74,7 +74,7 @@ public class GlyphManager {
                 glyph = new Overlap();
                 Overlap overlap = (Overlap) glyph;
 //                overlap.setCor(Color.WHITE);
-                overlap.setCor(Color.decode("#f0f8ff"));
+                overlap.setCor(Color.decode("#d3d3d3"));
                 overlap.setPectSobreposicao(getPerctOverlap());
                 overlap.setOverlappingActivated(overlappingActivated);
                 break;
@@ -180,7 +180,7 @@ public class GlyphManager {
         while (random == texturaSorteada) {
             random = (int) (Math.random() * quantValoresVarVisuais);
         }
-        Glyph glyph = new Textura(Color.GRAY, new Color(0, 0, 0, 0));
+        Glyph glyph = new Textura(Color.BLACK, new Color(0, 0, 0, 0));
         Textura textura = (Textura) glyph;
         if (texturaSorteada == -1) {
             texturaSorteada = random;
@@ -206,6 +206,7 @@ public class GlyphManager {
             texturaSorteada = random;
             forma.setGlyphResposta(true);
         }
+        
          System.out.println(texturasGeometricas);
         if (getTexturasGeometricas().length != 0) {
             forma.setDrawBehavior(TexturesFactory.create(getTexturasGeometricas()[random]));
@@ -397,7 +398,6 @@ public class GlyphManager {
     public TexturesFactory.FORMAS.GLYPH_FORMAS[] getTexturasGeometricas() {
         return texturasGeometricas;
     }
-    
     
     
     
