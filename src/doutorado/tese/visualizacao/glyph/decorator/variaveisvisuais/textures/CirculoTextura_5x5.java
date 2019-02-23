@@ -60,25 +60,30 @@ public class CirculoTextura_5x5 implements DrawBehavior{
         points[0] = getBounds().width;
         points[1] = getBounds().height;
 
-        int width = (int) Math.round(points[0] );
-        int height = (int) Math.round(points[1] );
+        int width = (int) Math.round(points[0]);
+        int height = (int) Math.round(points[1]);
 
         
         int x,y;
-        int spacex = width/16;
-        int spacey = height/16;
+        int spacex = width/5;
+        int spacey = height/5;
 
         x = rect.x;
         y = rect.y;
         p = new Path2D.Double();   
         
         
- 
-        p.append(new Ellipse2D.Double(x, y , width/2.2, height/2.2), false);   
-        p.append(new Ellipse2D.Double(spacex+x+width/2, y , width/2.2, height/2.2), false);   
-        p.append(new Ellipse2D.Double(x,spacey+ y+height/2 , width/2.2, height/2.2), false);   
-        p.append(new Ellipse2D.Double(spacex+ x+width/2,spacey+ y +height/2, width/2.2, height/2.2), false);   
-    
+        int textureWidth = points[0];
+        int textureHeight = points[1];
+
+   
+        p = new Path2D.Double();   
+        
+        for (int j = rect.y; j < rect.y+rect.height-spacey/2; j=j+spacey) {          
+            for(int i = rect.x; i < rect.x + rect.width-spacex/2; i=i+spacex) {   
+                p.append(new Ellipse2D.Double(width*0.025+i,height*0.025+j, textureWidth/5, textureHeight/5), false);   
+                }
+        }
 
              
 
