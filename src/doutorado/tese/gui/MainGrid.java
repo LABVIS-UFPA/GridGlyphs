@@ -957,7 +957,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         if (radio10x30.isSelected()) {//pequeno
             gridPanel.setScala(1);
         } else if (radio10x27.isSelected()) {//medio
-            gridPanel.setScala(1.25);
+            gridPanel.setScala(1.32);
         } else {//grande
             gridPanel.setScala(1.5);
         }
