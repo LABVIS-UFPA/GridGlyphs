@@ -1,4 +1,4 @@
-package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.Textures;
+package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.textures;
 
 import java.awt.Color;
 import java.awt.Graphics2D;

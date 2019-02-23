@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.Textures;
-
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.*;
+package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.textures;
 
 /**
  *
@@ -13,9 +11,9 @@ import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.*;
  */
 public class TexturesFactory {
 
-    public static final class FORMAS {
+    public static final class TextuteAsShape {
 
-        public enum GLYPH_FORMAS {
+        public enum GLYPH_TEXTURAS {
             CIRCULO_10X10("CIRCULO_10X10"),
             CIRCULO_8X8("CIRCULO_8X8"),
             CIRCULO_5X5("CIRCULO_5X5"),
@@ -24,7 +22,7 @@ public class TexturesFactory {
 
             private final String nome;
 
-            GLYPH_FORMAS(String nome) {
+            GLYPH_TEXTURAS(String nome) {
                 this.nome = nome;
             }
 
@@ -37,7 +35,7 @@ public class TexturesFactory {
     private TexturesFactory() {
     }
 
-    public static DrawBehavior create(FORMAS.GLYPH_FORMAS forma) {
+    public static DrawBehavior create(TextuteAsShape.GLYPH_TEXTURAS forma) {
         switch (forma) {
             case CIRCULO_10X10:
                 return new CirculoTextura_10x10();

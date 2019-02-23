@@ -1,4 +1,4 @@
-package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.Textures;
+package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.textures;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -13,7 +13,7 @@ import java.awt.geom.Path2D;
  * 
  * @author Anderson Soares
  */
-public class CirculoTextura_4x4 implements DrawBehavior{
+public class CirculoTextura_8x8 implements DrawBehavior{
 
     private int[] xPoints;
     private int[] yPoints;
@@ -23,7 +23,7 @@ public class CirculoTextura_4x4 implements DrawBehavior{
     private Path2D p;
 
 
-    public CirculoTextura_4x4() {
+    public CirculoTextura_8x8() {
     }
 
     @Override
@@ -60,25 +60,23 @@ public class CirculoTextura_4x4 implements DrawBehavior{
         points[0] = getBounds().width;
         points[1] = getBounds().height;
 
-        int width = (int) Math.round(points[0] );
-        int height = (int) Math.round(points[1] );
+        int width = points[0];
+        int height = points[1];
 
+        int spacex = width/8;
+        int spacey = height/8;
         
-        int x,y;
-        int spacex = width/16;
-        int spacey = height/16;
+        int textureWidth = points[0];
+        int textureHeight = points[1];
 
-        x = rect.x;
-        y = rect.y;
+   
         p = new Path2D.Double();   
         
-        
- 
-        p.append(new Ellipse2D.Double(x, y , width/2.2, height/2.2), false);   
-        p.append(new Ellipse2D.Double(spacex+x+width/2, y , width/2.2, height/2.2), false);   
-        p.append(new Ellipse2D.Double(x,spacey+ y+height/2 , width/2.2, height/2.2), false);   
-        p.append(new Ellipse2D.Double(spacex+ x+width/2,spacey+ y +height/2, width/2.2, height/2.2), false);   
-    
+        for (int j = rect.y; j < rect.y+rect.height; j=j+spacey) {          
+            for(int i = rect.x; i < rect.x + rect.width; i=i+spacex) {   
+                p.append(new Ellipse2D.Double(i,j, textureWidth/8, textureHeight/8), false);   
+                }
+        }
 
              
 
@@ -114,10 +112,10 @@ public class CirculoTextura_4x4 implements DrawBehavior{
     }
     
     @Override
-    public CirculoTextura_4x4 clone() throws CloneNotSupportedException {
+    public CirculoTextura_8x8 clone() throws CloneNotSupportedException {
         try {
             // call clone in Object.
-            return (CirculoTextura_4x4) super.clone();
+            return (CirculoTextura_8x8) super.clone();
         } catch (CloneNotSupportedException e) {
             System.err.println("Cloning not allowed.");
             return this;
@@ -127,6 +125,6 @@ public class CirculoTextura_4x4 implements DrawBehavior{
     @Override
     public String toString() {
         super.toString();
-        return CirculoTextura_4x4.class.getSimpleName();
+        return CirculoTextura_8x8.class.getSimpleName();
     }
 }

@@ -1,4 +1,4 @@
-package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.Orientacao;
+package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.orientation;
 
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.GeometryFactory;
 import java.awt.BasicStroke;

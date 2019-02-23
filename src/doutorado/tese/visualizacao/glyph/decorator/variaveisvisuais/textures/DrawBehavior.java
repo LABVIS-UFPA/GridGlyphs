@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.Textures;
+package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.textures;
 
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.*;
 import java.awt.Graphics2D;

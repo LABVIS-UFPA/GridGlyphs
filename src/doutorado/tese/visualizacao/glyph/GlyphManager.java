@@ -7,13 +7,13 @@ package doutorado.tese.visualizacao.glyph;
 
 import doutorado.tese.util.Constantes;
 import doutorado.tese.visualizacao.glyph.decorator.overlap.Overlap;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.Textures.TexturaGeometrica;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.Textures.TexturesFactory;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.textures.TexturaGeometrica;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.textures.TexturesFactory;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.FormaGeometrica;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.GeometryFactory;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.Orientacao.Orientacao;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.orientation.Orientacao;
 import doutorado.tese.visualizacao.grid.ItemGrid;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class GlyphManager {
     private Color[] cores;
     private Integer[] texturas;
     private GeometryFactory.FORMAS.GLYPH_FORMAS[] formaGeometricas;
-    private TexturesFactory.FORMAS.GLYPH_FORMAS[] texturasGeometricas;
+    private TexturesFactory.TextuteAsShape.GLYPH_TEXTURAS[] texturasGeometricas;
 
     public GlyphManager() {
         activeLayers = new HashMap<>();
@@ -74,7 +74,8 @@ public class GlyphManager {
                 glyph = new Overlap();
                 Overlap overlap = (Overlap) glyph;
 //                overlap.setCor(Color.WHITE);
-                overlap.setCor(Color.decode("#d3d3d3"));
+//                overlap.setCor(Color.decode("#d3d3d3"));
+                overlap.setCor(Color.decode("#A9A9A9"));//darkgray
                 overlap.setPectSobreposicao(getPerctOverlap());
                 overlap.setOverlappingActivated(overlappingActivated);
                 break;
@@ -173,7 +174,7 @@ public class GlyphManager {
     }
 
     private Glyph defineRandomOrientation() {
-        if (getTexturas() == null) {
+        if (getOrientacoes() == null) {
             definirConjuntoOrientation(quantValoresVarVisuais);
         }
         int random = (int) (Math.random() * quantValoresVarVisuais);
@@ -207,13 +208,13 @@ public class GlyphManager {
             forma.setGlyphResposta(true);
         }
         
-         System.out.println(texturasGeometricas);
+//         System.out.println(texturasGeometricas);
         if (getTexturasGeometricas().length != 0) {
             forma.setDrawBehavior(TexturesFactory.create(getTexturasGeometricas()[random]));
         }else{
             quantValoresVarVisuais = 8;
             random = (int) (Math.random() * quantValoresVarVisuais);
-            forma.setDrawBehavior(TexturesFactory.create(TexturesFactory.FORMAS.GLYPH_FORMAS.values()[random]));            
+            forma.setDrawBehavior(TexturesFactory.create(TexturesFactory.TextuteAsShape.GLYPH_TEXTURAS.values()[random]));            
         }
         forma.setPectSobreposicao(perctOverlap);
         forma.setOverlappingActivated(overlappingActivated);
@@ -310,15 +311,15 @@ public class GlyphManager {
     }
     
     public void definirConjuntoTexturas(int quantValoresVarVisuais) {
-        ArrayList<TexturesFactory.FORMAS.GLYPH_FORMAS> sorteados = new ArrayList<>();
+        ArrayList<TexturesFactory.TextuteAsShape.GLYPH_TEXTURAS> sorteados = new ArrayList<>();
         for (int i = 0; i < quantValoresVarVisuais; i++) {
             int random;
             do {
-                random = (int) (Math.random() * TexturesFactory.FORMAS.GLYPH_FORMAS.values().length);
-            } while (sorteados.contains(TexturesFactory.FORMAS.GLYPH_FORMAS.values()[random]));
-            sorteados.add(TexturesFactory.FORMAS.GLYPH_FORMAS.values()[random]);
+                random = (int) (Math.random() * TexturesFactory.TextuteAsShape.GLYPH_TEXTURAS.values().length);
+            } while (sorteados.contains(TexturesFactory.TextuteAsShape.GLYPH_TEXTURAS.values()[random]));
+            sorteados.add(TexturesFactory.TextuteAsShape.GLYPH_TEXTURAS.values()[random]);
         }
-        texturasGeometricas = sorteados.toArray(new TexturesFactory.FORMAS.GLYPH_FORMAS[]{});
+        texturasGeometricas = sorteados.toArray(new TexturesFactory.TextuteAsShape.GLYPH_TEXTURAS[]{});
     }
 
     public void definirConjuntoFormas(int quantValoresVarVisuais) {
@@ -384,7 +385,7 @@ public class GlyphManager {
     /**
      * @return the texturas
      */
-    public Integer[] getTexturas() {
+    public Integer[] getOrientacoes() {
         return texturas;
     }
 
@@ -395,7 +396,7 @@ public class GlyphManager {
         return formaGeometricas;
     }
 
-    public TexturesFactory.FORMAS.GLYPH_FORMAS[] getTexturasGeometricas() {
+    public TexturesFactory.TextuteAsShape.GLYPH_TEXTURAS[] getTexturasGeometricas() {
         return texturasGeometricas;
     }
     

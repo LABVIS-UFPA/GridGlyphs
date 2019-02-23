@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextPane;  
 
 /**
@@ -118,7 +117,7 @@ public class ScenarioManager {
         linhaLog[10] = getPerguntaAtual().getRespostaCerta().getListItens().get(0).getGlyph().getChild().getVarValue();
         switch (varEscolhida) {
             case "Texture":
-                linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getTexturas()).replace(",", ";");
+                linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getOrientacoes()).replace(",", ";");
                 break;
             case "Color":
                 linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getCores()).replace("java.awt.Color", "").replace(",", ";");
