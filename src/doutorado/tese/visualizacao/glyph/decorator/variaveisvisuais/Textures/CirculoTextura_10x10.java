@@ -61,29 +61,23 @@ public class CirculoTextura_10x10 implements DrawBehavior{
         points[0] = getBounds().width;
         points[1] = getBounds().height;
 
-        int width = (int) Math.round(points[0] * 0.95);
-        int height = (int) Math.round(points[1] * 0.95);
+        int width = (int) Math.round(points[0]);
+        int height = (int) Math.round(points[1]);
 
-        
-        int x,y;
-        int spacex = (int) Math.round(points[0]/8);
-        int spacey = (int) Math.round(points[1]/8);
+        int textureWidth = points[0];
+        int textureHeight = points[1];
 
-        x = rect.x;
-        y = rect.y;
+        int spacex = (int) Math.round(points[0]/10);
+        int spacey = (int) Math.round(points[1]/10);
+
         p = new Path2D.Double();   
+ 
         
-        
-            for (int j = 0; j <8; j++) {               
-                for (int i = 0; i <9 ; i++) {     
-                    p.append(new Ellipse2D.Double(x +spacex*i,y + spacey*j, width/20, height/20), false);   
-                    
-                     
-                }
-                
-                
-            }
-             
+                for (int j = rect.y; j < rect.y+rect.height; j=j+spacey) {          
+                    for(int i = rect.x; i < rect.x + rect.width; i=i+spacex) {   
+                        p.append(new Ellipse2D.Double(i,j, textureWidth/20, textureHeight/20), false);   
+                        }
+        }
 
     }
 
@@ -112,6 +106,7 @@ public class CirculoTextura_10x10 implements DrawBehavior{
         g2d.setColor(Color.black);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.fill(p);
+        g2d.draw(p);
     }
     
     @Override

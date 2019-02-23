@@ -60,24 +60,23 @@ public class CirculoTextura_8x8 implements DrawBehavior{
         points[0] = getBounds().width;
         points[1] = getBounds().height;
 
-        int width = (int) Math.round(points[0] );
-        int height = (int) Math.round(points[1] );
+        int width = points[0];
+        int height = points[1];
 
-        
-        int x,y;
         int spacex = width/8;
         int spacey = height/8;
+        
+        int textureWidth = points[0];
+        int textureHeight = points[1];
 
-        x = rect.x;
-        y = rect.y;
+   
         p = new Path2D.Double();   
         
-        for (int j = 0; j < 8; j++) { 
-            for (int i = 0; i < 8; i++) {
-                p.append(new Ellipse2D.Double(x+spacex*j, y+spacey*i , width/8, height/8), false);   
-             }
+        for (int j = rect.y; j < rect.y+rect.height; j=j+spacey) {          
+            for(int i = rect.x; i < rect.x + rect.width; i=i+spacex) {   
+                p.append(new Ellipse2D.Double(i,j, textureWidth/8, textureHeight/8), false);   
+                }
         }
-     
 
              
 

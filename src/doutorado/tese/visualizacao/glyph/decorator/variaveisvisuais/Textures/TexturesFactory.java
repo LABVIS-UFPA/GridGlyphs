@@ -42,11 +42,11 @@ public class TexturesFactory {
             case CIRCULO_10X10:
                 return new CirculoTextura_10x10();
             case CIRCULO_8X8:
-                return new CirculoTextura_5x5();
+                return new CirculoTextura_8x8();
             case CIRCULO_5X5:
                 return new CirculoTextura_5x5();
              case CIRCULO_3X3:
-                return new CirculoTextura_8x8();
+                return new CirculoTextura_3x3();
             case CIRCULO_4X4:
                 return new CirculoTextura_4x4();
         

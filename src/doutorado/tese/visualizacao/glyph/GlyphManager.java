@@ -13,7 +13,7 @@ import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.letters.Letra;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.FormaGeometrica;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.GeometryFactory;
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture.Textura;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.Orientacao.Orientacao;
 import doutorado.tese.visualizacao.grid.ItemGrid;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -180,8 +180,8 @@ public class GlyphManager {
         while (random == texturaSorteada) {
             random = (int) (Math.random() * quantValoresVarVisuais);
         }
-        Glyph glyph = new Textura(Color.BLACK, new Color(0, 0, 0, 0));
-        Textura textura = (Textura) glyph;
+        Glyph glyph = new Orientacao(Color.BLACK, new Color(0, 0, 0, 0));
+        Orientacao textura = (Orientacao) glyph;
         if (texturaSorteada == -1) {
             texturaSorteada = random;
             textura.setGlyphResposta(true);

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.texture;
+package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.Orientacao;
 
 import doutorado.tese.visualizacao.glyph.Glyph;
 import java.awt.Color;
@@ -21,7 +21,7 @@ import java.awt.image.WritableRaster;
  *
  * @author Anderson Soares
  */
-public class Textura extends Glyph {
+public class Orientacao extends Glyph {
 
     private int[] xPoints;
     private int[] yPoints;
@@ -31,7 +31,7 @@ public class Textura extends Glyph {
     private Color backgroundColor;
     BufferedImage clone;
 
-    public Textura(Color cor, Color backgroundColor) {
+    public Orientacao(Color cor, Color backgroundColor) {
         textura = TMPatternFactory.getInstance(cor, backgroundColor);
     }
 
