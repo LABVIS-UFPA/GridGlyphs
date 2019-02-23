@@ -32,12 +32,14 @@ public class GlyphManager {
     private boolean overlappingActivated;
     private int orientacaoSorteada = -1;
     private int corSorteada = -1;
-    private int cor2Sorteada = -1;
+    private int corSaturadaSorteada = -1;
     private int formaSorteada = -1;
     private int letraSorteada = -1;
     private int texturaSorteada = -1;
+    private int saturacaoSorteada = -1;
     private int quantValoresVarVisuais;
     private Color[] cores;
+    private Color[] saturacoes;
     private Integer[] orientacoes;
     private GeometryFactory.FORMAS.GLYPH_FORMAS[] formaGeometricas;
     private TexturesFactory.Textute.GLYPH_TEXTURAS[] texturas;
@@ -167,10 +169,11 @@ public class GlyphManager {
         corSorteada = -1;
         formaSorteada = -1;
         letraSorteada = -1;
-        cor2Sorteada = -1;
+        corSaturadaSorteada = -1;
         texturaSorteada = -1;
-        
+        saturacaoSorteada = -1;
         cores = null;
+        setSaturacoes(null);
         orientacoes = null;
         formaGeometricas = null;
         texturas = null;
@@ -233,18 +236,7 @@ public class GlyphManager {
         }
         texturas = sorteados.toArray(new TexturesFactory.Textute.GLYPH_TEXTURAS[]{});
     }
-//    public void definirConjuntoTextura(int quantValoresVarVisuais) {
-//        ArrayList<Integer> sorteados = new ArrayList<>();
-//        for (int i = 0; i < quantValoresVarVisuais; i++) {
-//            int random;
-//            do {
-//                random = (int) (Math.random() * Constantes.TIPO_TEXTURE.length);
-//            } while (sorteados.contains(random));
-//            sorteados.add(random);
-//        }
-//        orientacoes = sorteados.toArray(new Integer[]{});
-//    }
-
+    
     public void definirConjuntoOrientation(int quantValoresVarVisuais) {
         ArrayList<Integer> sorteados = new ArrayList<>();
         for (int i = 0; i < quantValoresVarVisuais; i++) {
@@ -279,19 +271,23 @@ public class GlyphManager {
     }
 
     private Glyph defineRandomColorSaturation() {
+        if(getSaturacoes() == null){
+            definirConjuntoCoresSaturacao(quantValoresVarVisuais);
+        }
         int random = (int) (Math.random() * quantValoresVarVisuais);
-        while (random == cor2Sorteada) {
+        while (random == corSaturadaSorteada) {
             random = (int) (Math.random() * quantValoresVarVisuais);
         }
         Glyph glyph = new Cor();
-        Cor cor = (Cor) glyph;
-        if (cor2Sorteada == -1) {
-            cor2Sorteada = random;
-            cor.setGlyphResposta(true);
+        Cor saturacaoCor = (Cor) glyph;
+        if (corSaturadaSorteada == -1) {
+            corSaturadaSorteada = random;
+            saturacaoCor.setGlyphResposta(true);
         }
-        cor.setCor(Color.decode(Constantes.getCorSaturation()[random]));
-        cor.setPectSobreposicao(perctOverlap);
-        cor.setOverlappingActivated(overlappingActivated);
+//        saturacaoCor.setCor(Color.decode(Constantes.getCorSaturation()[random]));
+        saturacaoCor.setCor(getSaturacoes()[random]);
+        saturacaoCor.setPectSobreposicao(perctOverlap);
+        saturacaoCor.setOverlappingActivated(overlappingActivated);
         return glyph;
     }
 
@@ -353,6 +349,19 @@ public class GlyphManager {
     public void setQuantValoresVarVisuais(int quantValoresVarVisuais) {
         this.quantValoresVarVisuais = quantValoresVarVisuais;
     }
+    
+    public void definirConjuntoCoresSaturacao(int quantValoresVarVisuais) {
+        ArrayList<Color> sorteados = new ArrayList<>();
+
+        for (int i = 0; i < quantValoresVarVisuais; i++) {
+            int random;
+            do {
+                random = (int) (Math.random() * Constantes.getCorSaturation().length);
+            } while (sorteados.contains(Color.decode(Constantes.getCorSaturation()[random])));
+            sorteados.add(Color.decode(Constantes.getCorSaturation()[random]));
+        }
+        setSaturacoes(sorteados.toArray(new Color[]{}));
+    }
 
     public void definirConjuntoCores(int quantValoresVarVisuais) {
         ArrayList<Color> sorteados = new ArrayList<>();
@@ -397,6 +406,20 @@ public class GlyphManager {
 
     public TexturesFactory.Textute.GLYPH_TEXTURAS[] getTexturas() {
         return texturas;
+    }
+
+    /**
+     * @return the saturacoes
+     */
+    public Color[] getSaturacoes() {
+        return saturacoes;
+    }
+
+    /**
+     * @param saturacoes the saturacoes to set
+     */
+    public void setSaturacoes(Color[] saturacoes) {
+        this.saturacoes = saturacoes;
     }
 
 }

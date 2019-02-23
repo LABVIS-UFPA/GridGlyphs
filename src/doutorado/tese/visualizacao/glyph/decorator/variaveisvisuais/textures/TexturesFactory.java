@@ -46,7 +46,7 @@ public class TexturesFactory {
              case CIRCULO_3X3:
                 return new CirculoTextura_3x3();
             case CIRCULO_4X4:
-                return new CirculoTextura_4x4();
+                return new CirculoTextura_2x2();
         
             default:
                 return null;

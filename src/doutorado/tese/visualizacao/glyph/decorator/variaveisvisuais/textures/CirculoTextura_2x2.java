@@ -13,7 +13,7 @@ import java.awt.geom.Path2D;
  * 
  * @author Anderson Soares
  */
-public class CirculoTextura_4x4 implements DrawBehavior{
+public class CirculoTextura_2x2 implements DrawBehavior{
 
     private int[] xPoints;
     private int[] yPoints;
@@ -23,7 +23,7 @@ public class CirculoTextura_4x4 implements DrawBehavior{
     private Path2D p;
 
 
-    public CirculoTextura_4x4() {
+    public CirculoTextura_2x2() {
     }
 
     @Override
@@ -114,10 +114,10 @@ public class CirculoTextura_4x4 implements DrawBehavior{
     }
     
     @Override
-    public CirculoTextura_4x4 clone() throws CloneNotSupportedException {
+    public CirculoTextura_2x2 clone() throws CloneNotSupportedException {
         try {
             // call clone in Object.
-            return (CirculoTextura_4x4) super.clone();
+            return (CirculoTextura_2x2) super.clone();
         } catch (CloneNotSupportedException e) {
             System.err.println("Cloning not allowed.");
             return this;
@@ -127,6 +127,6 @@ public class CirculoTextura_4x4 implements DrawBehavior{
     @Override
     public String toString() {
         super.toString();
-        return CirculoTextura_4x4.class.getSimpleName();
+        return CirculoTextura_2x2.class.getSimpleName();
     }
 }

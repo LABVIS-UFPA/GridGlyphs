@@ -125,7 +125,18 @@ public class ScenarioManager {
             case "Shape":
                 linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getFormaGeometricas()).replace(",", ";");
                 break;
+            case "Saturation":
+                linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getSaturacoes()).replace("java.awt.Color", "").replace(",", ";");
+                break;
+            case "Orientation":
+                linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getTexturas()).replace(",", ";");
+                break;
+            case "Letter":
+                //TODO add saida no log para a letter
+                System.err.println("Opcao de variavel visual incorreta!");
+                throw new AssertionError();
             default:
+                System.err.println("Opcao de variavel visual incorreta!");
                 throw new AssertionError();
         }
     }
