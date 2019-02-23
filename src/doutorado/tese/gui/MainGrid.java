@@ -132,6 +132,12 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         cenario1_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         cenario2_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         cenario3_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem3 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem4 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem5 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem6 = new javax.swing.JRadioButtonMenuItem();
         glyphModelMenu = new javax.swing.JMenu();
         overlappingRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         maskInclusionRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
@@ -599,6 +605,30 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         });
         jMenu2.add(cenario3_RadioButtonMenuItem);
 
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("0%");
+        jMenu2.add(jRadioButtonMenuItem1);
+
+        jRadioButtonMenuItem2.setSelected(true);
+        jRadioButtonMenuItem2.setText("50%");
+        jMenu2.add(jRadioButtonMenuItem2);
+
+        jRadioButtonMenuItem3.setSelected(true);
+        jRadioButtonMenuItem3.setText("55%");
+        jMenu2.add(jRadioButtonMenuItem3);
+
+        jRadioButtonMenuItem4.setSelected(true);
+        jRadioButtonMenuItem4.setText("60%");
+        jMenu2.add(jRadioButtonMenuItem4);
+
+        jRadioButtonMenuItem5.setSelected(true);
+        jRadioButtonMenuItem5.setText("65%");
+        jMenu2.add(jRadioButtonMenuItem5);
+
+        jRadioButtonMenuItem6.setSelected(true);
+        jRadioButtonMenuItem6.setText("70%");
+        jMenu2.add(jRadioButtonMenuItem6);
+
         jMenuBar1.add(jMenu2);
 
         glyphModelMenu.setText("Glyph Model");
@@ -920,6 +950,12 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem3;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem4;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem5;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSplitPane jSplitPane1;

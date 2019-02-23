@@ -18,13 +18,13 @@ import java.awt.Shape;
  *
  * @author Anderson Soares
  */
-public class TexturaGeometrica extends Glyph {
+public class Textura extends Glyph {
 
     private Rectangle bounds;
     private Color cor;
     private DrawBehavior drawBehavior;
 
-    public TexturaGeometrica() {
+    public Textura() {
         this.drawBehavior = new DrawBehavior() {
             @Override
             public void paint(Graphics2D g) {
@@ -121,7 +121,7 @@ public class TexturaGeometrica extends Glyph {
     public Glyph clone() throws CloneNotSupportedException {
         try {
             DrawBehavior drawBehaviorClone = this.getDrawBehavior().clone();
-            TexturaGeometrica formaClonada = ((TexturaGeometrica) super.clone());
+            Textura formaClonada = ((Textura) super.clone());
             formaClonada.setDrawBehavior(drawBehaviorClone);
             formaClonada.killAllChild();
             return (Glyph) formaClonada;

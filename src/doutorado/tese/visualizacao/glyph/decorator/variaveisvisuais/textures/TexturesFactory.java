@@ -11,7 +11,7 @@ package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.textures;
  */
 public class TexturesFactory {
 
-    public static final class TextuteAsShape {
+    public static final class Textute {
 
         public enum GLYPH_TEXTURAS {
             CIRCULO_10X10("CIRCULO_10X10"),
@@ -35,7 +35,7 @@ public class TexturesFactory {
     private TexturesFactory() {
     }
 
-    public static DrawBehavior create(TextuteAsShape.GLYPH_TEXTURAS forma) {
+    public static DrawBehavior create(Textute.GLYPH_TEXTURAS forma) {
         switch (forma) {
             case CIRCULO_10X10:
                 return new CirculoTextura_10x10();

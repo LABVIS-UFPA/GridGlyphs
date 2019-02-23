@@ -26,9 +26,9 @@ public class ScenarioManager {
     private int[] vetorTamGridVertical = {10, 5, 5};
     private int[] vetorTamGridHorizontal = {16, 10, 10};
     private double[] vetorTamScala = {1.5, 1.25, 1};
-    private float[] vetorQuantPercentOverlapping = {0.65f, 0.8f, 0f};
+    private float[] vetorQuantPercentOverlapping = {0.5f, 0.55f, 0.6f, 0.65f, 0.7f, 0f};//0%, 50%, 60%, 70%
     private int[] vetorQuantConjVarVisuais = {3, 4, 5};
-    private String[] vetorVarVisuais = {"Texture", "Color", "Shape", "Color2", "Overlap"};
+    private String[] vetorVarVisuais = {"Texture", "Color", "Shape", "Saturation", "Orientation", "Color2", "Overlap"};
     private String[] vetorTipoTarefa = {"Localização"};//, "Identificação"
     private String[] vetorQuestoes = {"Find the element below in the visualization:"};
 //            , "Encontre o grupo de elementos abaixo na visualização:"};
@@ -137,7 +137,7 @@ public class ScenarioManager {
             @Override
             public void run() {
                 for (int t = 0; t < vetorTamScala.length; t++) {
-                    for (int p = 0; p < vetorQuantPercentOverlapping.length; p++) {
+                    for (int p = 0; p < vetorQuantPercentOverlapping.length; p++) {//TODO mudar aqui para criar os grupos por porcentagem de oclusao
                         for (int questao = 0; questao < vetorQuestoes.length; questao++) {
                             for (int i = 0; i < vetorVarVisuais.length - 2; i++) {
                                 for (int q = 0; q < vetorQuantConjVarVisuais.length; q++) {
