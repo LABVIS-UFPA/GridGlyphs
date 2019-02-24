@@ -221,6 +221,7 @@ public class Grid extends JPanel {
     public void shufflePosition() {
         int n = getQuantHoriz() * getQuantVert() * 10;
         int cont = 0;
+        
         while (cont < n) {
             int x1 = (int) (Math.random() * getQuantHoriz()), x2 = (int) (Math.random() * getQuantHoriz()),
                     y1 = (int) (Math.random() * getQuantVert()), y2 = (int) (Math.random() * getQuantVert());

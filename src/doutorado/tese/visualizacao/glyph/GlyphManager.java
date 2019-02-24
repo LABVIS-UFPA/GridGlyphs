@@ -41,6 +41,7 @@ public class GlyphManager {
     private Color[] cores;
     private Color[] saturacoes;
     private Integer[] orientacoes;
+    private Letra[] letras;
     private GeometryFactory.FORMAS.GLYPH_FORMAS[] formaGeometricas;
     private TexturesFactory.Textute.GLYPH_TEXTURAS[] texturas;
 
@@ -362,6 +363,7 @@ public class GlyphManager {
         }
         setSaturacoes(sorteados.toArray(new Color[]{}));
     }
+    
 
     public void definirConjuntoCores(int quantValoresVarVisuais) {
         ArrayList<Color> sorteados = new ArrayList<>();
@@ -407,6 +409,16 @@ public class GlyphManager {
     public TexturesFactory.Textute.GLYPH_TEXTURAS[] getTexturas() {
         return texturas;
     }
+
+    public Letra[] getLetras() {
+        return letras;
+    }
+
+    public void setLetras(Letra[] letras) {
+        this.letras = letras;
+    }
+    
+    
 
     /**
      * @return the saturacoes

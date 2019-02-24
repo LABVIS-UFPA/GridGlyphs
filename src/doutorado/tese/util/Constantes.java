@@ -77,7 +77,7 @@ public class Constantes {
     
 
     public final static String[] LETRAS_ALFABETO = {
-        "A", "B", "C", "D", "E", "F", "G", "H"
+        "A", "B", "C", "D", "E"//, "F", "G", "H"
     };
 
     public final static String[] NUMEROS = {
