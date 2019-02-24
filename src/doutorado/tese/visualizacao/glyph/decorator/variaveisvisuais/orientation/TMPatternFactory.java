@@ -1,6 +1,5 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.orientation;
 
-import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes.GeometryFactory;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -8,14 +7,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Paint;
-import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.TexturePaint;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -56,7 +52,7 @@ public class TMPatternFactory {
     private static TMPatternFactory instance = null;
     // Singleton design pattern
 
-    private HashMap<String, Object> textures = null;// set of patterns 
+    private HashMap<String, Object> orientation = null;// set of patterns 
     private Color textureColor;
     private Color backgroungColor;
 
@@ -67,18 +63,20 @@ public class TMPatternFactory {
      * @param backgroundColor
      */
     public TMPatternFactory(Color color, Color backgroundColor) {
-        textures = new HashMap<>();
+        orientation = new HashMap<>();
         textureColor = color;
         this.backgroungColor = backgroundColor;
+        buildPattern180Graus();
+        buildPattern45graus();
+        buildPattern72Graus();
+        buildPattern108Graus();
+        buildPattern135Graus();
 //        buildPatternHorizontalPolygon();
-        buildPatternHorizontal();
-        buildPatternVertical();
-        buildPatternDiag_Right2Left();
-        buildPatternDiag_Left2Right();
-        buildPattern_CrossLines();
-        buildPatternDiag_CrossLines();
-        buildPatternRight();
-        buildPatternUp();
+//        buildPatternVertical();
+//        buildPattern_CrossLines();
+//        buildPatternDiag_CrossLines();
+//        buildPatternRight();
+//        buildPatternUp();
 //        buildPatternLeft();
 //        buildPatternDiagDots();
 //        buildPatternDiagDots2();
@@ -88,14 +86,11 @@ public class TMPatternFactory {
 //        buildPatternSquareC();
 //        buildPatternLightGray();
 //        buildPatternDots();
-        buldPatternCirlce1();
-        buildPatternCirlce2();
-        buildPatternCirlce3();
-        buildPatternCirlce4();
-        buildPatternCirlce5();
-        orientation_1();
-        orientation_2();
-       
+//        buldPatternCirlce1();
+//        buildPatternCirlce2();
+//        buildPatternCirlce3();
+//        buildPatternCirlce4();
+//        buildPatternCirlce5();
     }
     
 
@@ -104,14 +99,16 @@ public class TMPatternFactory {
      */
     public void resetTextures(){
         //        buildPatternHorizontalPolygon();
-        buildPatternHorizontal();
-        buildPatternVertical();
-        buildPatternDiag_Right2Left();
-        buildPatternDiag_Left2Right();
-        buildPattern_CrossLines();
-        buildPatternDiag_CrossLines();
-        buildPatternRight();
-        buildPatternUp();
+        buildPattern180Graus();
+        buildPattern45graus();
+        buildPattern72Graus();
+        buildPattern108Graus();
+        buildPattern135Graus();
+//        buildPatternVertical();
+//        buildPattern_CrossLines();
+//        buildPatternDiag_CrossLines();
+//        buildPatternRight();
+//        buildPatternUp();
 //        buildPatternLeft();
 //        buildPatternDiagDots();
 //        buildPatternDiagDots2();
@@ -121,13 +118,11 @@ public class TMPatternFactory {
 //        buildPatternSquareC();
 //        buildPatternLightGray();
 //        buildPatternDots();
-        buldPatternCirlce1();
-        buildPatternCirlce2();
-        buildPatternCirlce3();
-        buildPatternCirlce4();
-        buildPatternCirlce5();
-        orientation_1();
-        orientation_2();
+//        buldPatternCirlce1();
+//        buildPatternCirlce2();
+//        buildPatternCirlce3();
+//        buildPatternCirlce4();
+//        buildPatternCirlce5();
     }
 
     /* --- Singleton pattern --- */
@@ -158,7 +153,7 @@ public class TMPatternFactory {
      */
     public Paint get(String patternName) {
 //        Paint pattern = (Paint) patterns.get(patternName);
-        Paint pattern = (Paint) textures.get(patternName);
+        Paint pattern = (Paint) orientation.get(patternName);
         return pattern;
     }
 
@@ -189,7 +184,7 @@ public class TMPatternFactory {
     }
 
     public Set<String> getTexturesNames() {
-        return textures.keySet();
+        return orientation.keySet();
     }
 
     /* --- Patterns testing --- */
@@ -248,7 +243,7 @@ public class TMPatternFactory {
     /**
      * Builds and adds the PATTERN_HORIZONTAL in patterns.
      */
-    private void buildPatternHorizontal() {
+    private void buildPattern180Graus() {
         BufferedImage image = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setStroke(new BasicStroke(2f));
@@ -262,13 +257,13 @@ public class TMPatternFactory {
         Rectangle r = new Rectangle(0, 0, 16, 16);
         Paint pattern = new TexturePaint(image, r);
 //        patterns.put("PATTERN_HORIZONTAL", pattern);
-        textures.put("PATTERN_HORIZONTAL", pattern);
+        orientation.put("180graus", pattern);
     }
 
     /**
      * Builds and adds the PATTERN_DIAG_RIGHT_LEFT in patterns.
      */
-    private void buildPatternDiag_Right2Left() {
+    private void buildPattern45graus() {
         BufferedImage image
                 = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
@@ -284,7 +279,7 @@ public class TMPatternFactory {
         Rectangle r = new Rectangle(0, 0, 16, 16);
         Paint pattern = new TexturePaint(image, r);
 //        patterns.put("PATTERN_DIAG_RIGHT_LEFT", pattern);
-        textures.put("PATTERN_DIAG_RIGHT_LEFT", pattern);
+        orientation.put("45graus", pattern);
     }
 
     /**
@@ -306,11 +301,11 @@ public class TMPatternFactory {
         Rectangle r = new Rectangle(0, 0, 16, 16);
         Paint pattern = new TexturePaint(image, r);
 //        patterns.put("PATTERN_CROSS_LINES", pattern);
-        textures.put("PATTERN_CROSS_LINES", pattern);
+        orientation.put("PATTERN_CROSS_LINES", pattern);
     }
     
     
-    private void orientation_1() {
+    private void buildPattern72Graus() {
          BufferedImage image
                 = new BufferedImage(16,16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
@@ -328,11 +323,11 @@ public class TMPatternFactory {
         
         
         Paint pattern = new TexturePaint(image, r);  
-        textures.put("ORIENTATION_1", pattern);
+        orientation.put("72graus", pattern);
     }
     
     
-     private void orientation_2() {
+     private void buildPattern108Graus() {
          BufferedImage image
                 = new BufferedImage(16,16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
@@ -356,7 +351,7 @@ public class TMPatternFactory {
         
         
         Paint pattern = new TexturePaint(image, r);  
-        textures.put("ORIENTATION_2", pattern);
+        orientation.put("108graus", pattern);
     }
 
     /**
@@ -375,13 +370,13 @@ public class TMPatternFactory {
         Rectangle r = new Rectangle(0, 0, 14, 14);
         Paint pattern = new TexturePaint(image, r);
 //        patterns.put("PATTERN_DIAG_CROSS_LINES", pattern);
-        textures.put("PATTERN_DIAG_CROSS_LINES", pattern);
+        orientation.put("PATTERN_DIAG_CROSS_LINES", pattern);
     }
 
     /**
      * Builds and adds the PATTERN_DIAG4 in patterns.
      */
-    private void buildPatternDiag_Left2Right() {
+    private void buildPattern135Graus() {
         BufferedImage image
                 = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
@@ -395,7 +390,7 @@ public class TMPatternFactory {
         Rectangle r = new Rectangle(0, 0, 16, 16);
         Paint pattern = new TexturePaint(image, r);
 //        patterns.put("PATTERN_DIAG_LEFT_RIGHT", pattern);
-        textures.put("PATTERN_DIAG_LEFT_RIGHT", pattern);
+        orientation.put("135graus", pattern);
     }
 
     /**
@@ -416,7 +411,7 @@ public class TMPatternFactory {
         Rectangle r = new Rectangle(0, 0, 16, 16);
         Paint pattern = new TexturePaint(image, r);
 //        patterns.put("PATTERN_VERTICAL", pattern);
-        textures.put("PATTERN_VERTICAL", pattern);
+        orientation.put("PATTERN_VERTICAL", pattern);
     }
 
     /**
@@ -437,7 +432,7 @@ public class TMPatternFactory {
         Rectangle r = new Rectangle(0, 0, 16, 16);
         Paint pattern = new TexturePaint(image, r);
 //        patterns.put("PATTERN_DIAGS", pattern);
-        textures.put("PATTERN_UP", pattern);
+        orientation.put("PATTERN_UP", pattern);
     }
 
     /**
@@ -460,7 +455,7 @@ public class TMPatternFactory {
         g.drawLine(0, 11, 2, 13);
         Rectangle r = new Rectangle(0, 0, 13, 13);
         Paint pattern = new TexturePaint(image, r);
-        textures.put("PATTERN_DIAGDOTS", pattern);
+        orientation.put("PATTERN_DIAGDOTS", pattern);
     }
 
     /**
@@ -480,7 +475,7 @@ public class TMPatternFactory {
         g.fillOval(8, 0, 4, 4);
         Rectangle r = new Rectangle(0, 0, 16, 16);
         Paint pattern = new TexturePaint(image, r);
-        textures.put("PATTERN_DIAGDOTS2", pattern);
+        orientation.put("PATTERN_DIAGDOTS2", pattern);
     }
 
     /**
@@ -496,7 +491,7 @@ public class TMPatternFactory {
         g.fillOval(1, 1, 3, 3);
         Rectangle r = new Rectangle(0, 0, 5, 5);
         Paint pattern = new TexturePaint(image, r);
-        textures.put("PATTERN_DOTS", pattern);
+        orientation.put("PATTERN_DOTS", pattern);
     }
 
     /**
@@ -513,7 +508,7 @@ public class TMPatternFactory {
         g.fillOval(3, 3, 5, 5);
         Rectangle r = new Rectangle(0, 0, 10, 10);
         Paint pattern = new TexturePaint(image, r);
-        textures.put("PATTERN_CIRCLE_1", pattern);
+        orientation.put("PATTERN_CIRCLE_1", pattern);
     }
     
        private void buildPatternCirlce2() {
@@ -527,7 +522,7 @@ public class TMPatternFactory {
         g.drawOval(0,0, 8, 8);
         Rectangle r = new Rectangle(0, 0, 10, 10);
         Paint pattern = new TexturePaint(image, r);
-        textures.put("PATTERN_CIRCLE_2", pattern);
+        orientation.put("PATTERN_CIRCLE_2", pattern);
     }
        
        private void buildPatternCirlce3() {
@@ -542,7 +537,7 @@ public class TMPatternFactory {
         g.drawOval(0,0, 18, 18);
         Rectangle r = new Rectangle(0, 0, 20, 20);
         Paint pattern = new TexturePaint(image, r);
-        textures.put("PATTERN_CIRCLE_3", pattern);
+        orientation.put("PATTERN_CIRCLE_3", pattern);
     }
        
        
@@ -558,7 +553,7 @@ public class TMPatternFactory {
         g.drawOval(0,0, 30, 30);
         Rectangle r = new Rectangle(0, 0, 40, 40);
         Paint pattern = new TexturePaint(image, r);
-        textures.put("PATTERN_CIRCLE_4", pattern);
+        orientation.put("PATTERN_CIRCLE_4", pattern);
     }
     
         private void buildPatternCirlce5() {
@@ -573,7 +568,7 @@ public class TMPatternFactory {
         g.drawOval(0,0, 40, 40);
         Rectangle r = new Rectangle(0, 0, 50, 50);
         Paint pattern = new TexturePaint(image, r);
-        textures.put("PATTERN_CIRCLE_5", pattern);
+        orientation.put("PATTERN_CIRCLE_5", pattern);
     }
        
        
@@ -618,7 +613,7 @@ public class TMPatternFactory {
         Rectangle r = new Rectangle(0, 0, 14, 14);
         Paint pattern = new TexturePaint(image, r);
 //        patterns.put("PATTERN_LEFT", pattern);
-        textures.put("PATTERN_LEFT", pattern);
+        orientation.put("PATTERN_LEFT", pattern);
     }
 
     /**
@@ -663,7 +658,7 @@ public class TMPatternFactory {
         Rectangle r = new Rectangle(0, 0, 10, 10);
         Paint pattern = new TexturePaint(image, r);
 
-        textures.put("PATTERN_DOWN", pattern);
+        orientation.put("PATTERN_DOWN", pattern);
     }
 
     /**
@@ -684,7 +679,7 @@ public class TMPatternFactory {
         g.drawLine(15, 8, 11, 12);
         Rectangle r = new Rectangle(0, 0, 16, 16);
         Paint pattern = new TexturePaint(image, r);
-        textures.put("PATTERN_RIGHT", pattern);
+        orientation.put("PATTERN_RIGHT", pattern);
     }
 
     /**
@@ -701,7 +696,7 @@ public class TMPatternFactory {
         g.fillRect(7, 7, 7, 7);
         Rectangle r = new Rectangle(0, 0, 14, 14);
         Paint pattern = new TexturePaint(image, r);
-        textures.put("PATTERN_CHESS", pattern);
+        orientation.put("PATTERN_CHESS", pattern);
     }
 
 }

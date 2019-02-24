@@ -49,7 +49,6 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private String[] variaveisVisuaisEscolhidas;
     public float porcentagem = 1f;
     public ScenarioManager scenarioManager;
-    
 
     /**
      * Creates new form MainGrid
@@ -86,6 +85,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         overlapButtonGroup = new javax.swing.ButtonGroup();
         scenariosButtonGroup = new javax.swing.ButtonGroup();
         glyphModelRadioGroup = new javax.swing.ButtonGroup();
+        occlusionTestesButtonGroup = new javax.swing.ButtonGroup();
         jSplitPane1 = new javax.swing.JSplitPane();
         painelEsquerda = new javax.swing.JPanel();
         painelDireita = new javax.swing.JPanel();
@@ -132,12 +132,13 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         cenario1_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         cenario2_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         cenario3_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem3 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem4 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem5 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem6 = new javax.swing.JRadioButtonMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        zeroRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        cinquentaRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        cinquentaCincoRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        sessentaRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        sessentaCincojRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        setentaRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         glyphModelMenu = new javax.swing.JMenu();
         overlappingRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         maskInclusionRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
@@ -180,6 +181,13 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 
         glyphModelRadioGroup.add(overlappingRadioButtonMenuItem);
         glyphModelRadioGroup.add(maskInclusionRadioButtonMenuItem);
+
+        occlusionTestesButtonGroup.add(zeroRadioButtonMenuItem);
+        occlusionTestesButtonGroup.add(cinquentaRadioButtonMenuItem);
+        occlusionTestesButtonGroup.add(cinquentaCincoRadioButtonMenuItem);
+        occlusionTestesButtonGroup.add(sessentaRadioButtonMenuItem);
+        occlusionTestesButtonGroup.add(sessentaCincojRadioButtonMenuItem);
+        occlusionTestesButtonGroup.add(setentaRadioButtonMenuItem);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -605,31 +613,59 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         });
         jMenu2.add(cenario3_RadioButtonMenuItem);
 
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("0%");
-        jMenu2.add(jRadioButtonMenuItem1);
-
-        jRadioButtonMenuItem2.setSelected(true);
-        jRadioButtonMenuItem2.setText("50%");
-        jMenu2.add(jRadioButtonMenuItem2);
-
-        jRadioButtonMenuItem3.setSelected(true);
-        jRadioButtonMenuItem3.setText("55%");
-        jMenu2.add(jRadioButtonMenuItem3);
-
-        jRadioButtonMenuItem4.setSelected(true);
-        jRadioButtonMenuItem4.setText("60%");
-        jMenu2.add(jRadioButtonMenuItem4);
-
-        jRadioButtonMenuItem5.setSelected(true);
-        jRadioButtonMenuItem5.setText("65%");
-        jMenu2.add(jRadioButtonMenuItem5);
-
-        jRadioButtonMenuItem6.setSelected(true);
-        jRadioButtonMenuItem6.setText("70%");
-        jMenu2.add(jRadioButtonMenuItem6);
-
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Occlusion Tests");
+
+        zeroRadioButtonMenuItem.setText("0%");
+        zeroRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zeroRadioButtonMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu3.add(zeroRadioButtonMenuItem);
+
+        cinquentaRadioButtonMenuItem.setText("50%");
+        cinquentaRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cinquentaRadioButtonMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu3.add(cinquentaRadioButtonMenuItem);
+
+        cinquentaCincoRadioButtonMenuItem.setText("55%");
+        cinquentaCincoRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cinquentaCincoRadioButtonMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu3.add(cinquentaCincoRadioButtonMenuItem);
+
+        sessentaRadioButtonMenuItem.setText("60%");
+        sessentaRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sessentaRadioButtonMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu3.add(sessentaRadioButtonMenuItem);
+
+        sessentaCincojRadioButtonMenuItem.setText("65%");
+        sessentaCincojRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sessentaCincojRadioButtonMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu3.add(sessentaCincojRadioButtonMenuItem);
+
+        setentaRadioButtonMenuItem.setText("70%");
+        setentaRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setentaRadioButtonMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu3.add(setentaRadioButtonMenuItem);
+
+        jMenuBar1.add(jMenu3);
 
         glyphModelMenu.setText("Glyph Model");
 
@@ -885,6 +921,30 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         }
     }//GEN-LAST:event_varVisuaisEscolidasListValueChanged
 
+    private void setentaRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setentaRadioButtonMenuItemActionPerformed
+        configTesteOclusao();
+    }//GEN-LAST:event_setentaRadioButtonMenuItemActionPerformed
+
+    private void zeroRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zeroRadioButtonMenuItemActionPerformed
+        configTesteOclusao();
+    }//GEN-LAST:event_zeroRadioButtonMenuItemActionPerformed
+
+    private void cinquentaRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cinquentaRadioButtonMenuItemActionPerformed
+        configTesteOclusao();
+    }//GEN-LAST:event_cinquentaRadioButtonMenuItemActionPerformed
+
+    private void cinquentaCincoRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cinquentaCincoRadioButtonMenuItemActionPerformed
+        configTesteOclusao();
+    }//GEN-LAST:event_cinquentaCincoRadioButtonMenuItemActionPerformed
+
+    private void sessentaRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessentaRadioButtonMenuItemActionPerformed
+        configTesteOclusao();
+    }//GEN-LAST:event_sessentaRadioButtonMenuItemActionPerformed
+
+    private void sessentaCincojRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessentaCincojRadioButtonMenuItemActionPerformed
+        configTesteOclusao();
+    }//GEN-LAST:event_sessentaCincojRadioButtonMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -931,6 +991,8 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JRadioButtonMenuItem cenario2_RadioButtonMenuItem;
     private javax.swing.JRadioButtonMenuItem cenario3_RadioButtonMenuItem;
     private javax.swing.JButton cimaButton;
+    private javax.swing.JRadioButtonMenuItem cinquentaCincoRadioButtonMenuItem;
+    private javax.swing.JRadioButtonMenuItem cinquentaRadioButtonMenuItem;
     private javax.swing.JComboBox<String> corComboBox;
     private javax.swing.JPanel detalhes_jPanel;
     private javax.swing.JPanel filter_jPanel;
@@ -949,19 +1011,15 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem3;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem4;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem5;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JRadioButtonMenuItem maskInclusionRadioButtonMenuItem;
     private javax.swing.JLabel msgFeedback;
+    private javax.swing.ButtonGroup occlusionTestesButtonGroup;
     private javax.swing.JMenuItem openFileMenuItem;
     private javax.swing.ButtonGroup overlapButtonGroup;
     private javax.swing.JRadioButtonMenuItem overlappingRadioButtonMenuItem;
@@ -981,11 +1039,15 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JRadioButton radio80;
     private javax.swing.JButton removerButton;
     private javax.swing.ButtonGroup scenariosButtonGroup;
+    private javax.swing.JRadioButtonMenuItem sessentaCincojRadioButtonMenuItem;
+    private javax.swing.JRadioButtonMenuItem sessentaRadioButtonMenuItem;
     private javax.swing.JPanel setUP_jPanel;
+    private javax.swing.JRadioButtonMenuItem setentaRadioButtonMenuItem;
     private javax.swing.JComboBox<String> texturaComboBox;
     private javax.swing.JList<String> varVisuaisEscolidasList;
     private javax.swing.JList<String> varVisuaisList;
     private javax.swing.JButton viewGlyphsButton;
+    private javax.swing.JRadioButtonMenuItem zeroRadioButtonMenuItem;
     // End of variables declaration//GEN-END:variables
 
     public void configGrid() {
@@ -1018,20 +1080,41 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         }
     }
 
-    private void configCenario() {
+    private void configInicioTestes() {
         scenarioManager = new ScenarioManager(gridPanel, painelQuestoes_jTextPane);
         Legenda legenda = new Legenda(painel_legenda.getBounds());
         painel_legenda.removeAll();
         painel_legenda.add(legenda);
         scenarioManager.setLegendaPainel(legenda);
+    }
+
+    private void configCenario() {
+        configInicioTestes();
         if (cenario1_RadioButtonMenuItem.isSelected()) {
-            scenarioManager.carregarCenarios("cenario1");            
+            scenarioManager.carregarCenarios("cenario1");
         } else if (cenario2_RadioButtonMenuItem.isSelected()) {
             System.out.println("Cenário 2 escolhido.");
         } else if (cenario3_RadioButtonMenuItem.isSelected()) {
             scenarioManager.carregarCenarios("cenario3");
         } else {
             System.out.println("Cenário 4 escolhido.");
+        }
+    }
+
+    private void configTesteOclusao() {
+        configInicioTestes();
+        if (zeroRadioButtonMenuItem.isSelected()) {
+            scenarioManager.carregarCenarios("0%");
+        } else if (cinquentaRadioButtonMenuItem.isSelected()) {
+            scenarioManager.carregarCenarios("50%");
+        } else if (cinquentaCincoRadioButtonMenuItem.isSelected()) {
+            scenarioManager.carregarCenarios("55%");
+        } else if (sessentaRadioButtonMenuItem.isSelected()) {
+            scenarioManager.carregarCenarios("60%");
+        } else if (sessentaCincojRadioButtonMenuItem.isSelected()) {
+            scenarioManager.carregarCenarios("65%");
+        } else {
+            scenarioManager.carregarCenarios("70%");
         }
     }
 
@@ -1047,7 +1130,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         } else {
             vetor = new String[]{};
             loadVariaveisEscolhidasList(vetor, varVisuaisEscolidasList);
-            vetor = new String[]{"Texture", "Color", "Shape", "Letter", "Overlap","Saturation","Orientation"};//, "Letter", "Overlap"
+            vetor = new String[]{"Texture", "Color", "Shape", "Letter", "Overlap", "Saturation", "Orientation"};//, "Letter", "Overlap"
             loadVarVisuais(vetor);
             glyphModelMenu.setText("Glyph Model: Overlapping");
         }
@@ -1098,7 +1181,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         ArrayList<String> list = new ArrayList<>();
         switch (nivel) {
             case NIVEL_1:
-                analisarQuantAtributosCategoricos(list, Constantes.TIPO_ORIENTATION );
+                analisarQuantAtributosCategoricos(list, Constantes.TIPO_ORIENTATION);
                 break;
             case NIVEL_2:
                 if (glyph) {

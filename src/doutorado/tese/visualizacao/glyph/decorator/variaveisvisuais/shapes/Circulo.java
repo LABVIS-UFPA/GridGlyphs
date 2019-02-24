@@ -23,13 +23,14 @@ public class Circulo implements DrawBehavior{
     private Path2D p;
 
     public Circulo() {
+        cor = Color.WHITE;
     }
 
     @Override
     public void paint(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                
-        g2d.setColor(Color.white);
+        g2d.setColor(this.cor);
         g2d.fill(p);
         g2d.setColor(Color.black);
         g2d.draw(p);
@@ -77,6 +78,11 @@ public class Circulo implements DrawBehavior{
     public int getArea() {
         return xPoints[1]*yPoints[1];
     }
+    
+    @Override
+    public void setColor(Color cor) {
+        this.cor = cor;
+    }
 
     @Override
     public Shape getClipShape() {
@@ -85,7 +91,8 @@ public class Circulo implements DrawBehavior{
 
     @Override
     public void drawForeground(Graphics2D g2d) {
-        g2d.setColor(Color.black);
+//        g2d.setColor(Color.black);
+        g2d.setColor(this.cor);
         g2d.draw(p);
     }
     
@@ -105,4 +112,5 @@ public class Circulo implements DrawBehavior{
         super.toString();
         return Circulo.class.getSimpleName();
     }
+
 }

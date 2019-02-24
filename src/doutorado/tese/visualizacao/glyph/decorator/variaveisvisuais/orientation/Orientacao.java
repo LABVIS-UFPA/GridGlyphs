@@ -38,7 +38,7 @@ public class Orientacao extends Glyph {
     @Override
     public void paint(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setPaint(textura.get(getNomeTextura()));
+        g2d.setPaint(textura.get(getNomeOrientacao()));
 
         g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
         g2d.setColor(Color.BLACK);
@@ -78,14 +78,14 @@ public class Orientacao extends Glyph {
     /**
      * @return the nomeTextura
      */
-    public String getNomeTextura() {
+    public String getNomeOrientacao() {
         return nomeTextura;
     }
 
     /**
      * @param nomeTextura the nomeTextura to set
      */
-    public void setNomeTextura(String nomeTextura) {
+    public void setNomeOrientacao(String nomeTextura) {
         this.nomeTextura = nomeTextura;
     }
 
@@ -115,7 +115,7 @@ public class Orientacao extends Glyph {
     @Override
     public Paint getTexturePaint() {
         Rectangle r = new Rectangle(0, 0, 16, 16);
-        BufferedImage original = ((TexturePaint) textura.get(getNomeTextura())).getImage();
+        BufferedImage original = ((TexturePaint) textura.get(getNomeOrientacao())).getImage();
         if (clone == null) {
             clone = deepCopy(original);
         }
@@ -141,6 +141,6 @@ public class Orientacao extends Glyph {
 
     @Override
     public String getVarValue() {
-        return getNomeTextura();
+        return getNomeOrientacao();
     }
 }

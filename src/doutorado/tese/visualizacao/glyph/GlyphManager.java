@@ -18,6 +18,7 @@ import doutorado.tese.visualizacao.grid.ItemGrid;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -41,9 +42,10 @@ public class GlyphManager {
     private Color[] cores;
     private Color[] saturacoes;
     private Integer[] orientacoes;
-    private Letra[] letras;
+    private String[] letras;
     private GeometryFactory.FORMAS.GLYPH_FORMAS[] formaGeometricas;
     private TexturesFactory.Textute.GLYPH_TEXTURAS[] texturas;
+    private List<String> listNomeOrientacoesSorteada;
 
     public GlyphManager() {
         activeLayers = new HashMap<>();
@@ -79,7 +81,8 @@ public class GlyphManager {
                 Overlap overlap = (Overlap) glyph;
 //                overlap.setCor(Color.WHITE);
 //                overlap.setCor(Color.decode("#d3d3d3"));
-                overlap.setCor(Color.decode("#A9A9A9"));//darkgray
+//                overlap.setCor(Color.decode("#A9A9A9"));//darkgray
+                overlap.setCor(Color.decode("#dddddd"));//darkgray
                 overlap.setPectSobreposicao(getPerctOverlap());
                 overlap.setOverlappingActivated(overlappingActivated);
                 break;
@@ -178,6 +181,7 @@ public class GlyphManager {
         orientacoes = null;
         formaGeometricas = null;
         texturas = null;
+        setLetras(null);
     }
 
     private Glyph defineRandomOrientation() {
@@ -188,13 +192,14 @@ public class GlyphManager {
         while (random == orientacaoSorteada) {
             random = (int) (Math.random() * quantValoresVarVisuais);
         }
-        Glyph glyph = new Orientacao(Color.BLACK, new Color(0, 0, 0, 0));
+//        Glyph glyph = new Orientacao(Color.BLACK, new Color(0, 0, 0, 0));
+        Glyph glyph = new Orientacao(Color.BLACK, Color.WHITE);
         Orientacao orientacao = (Orientacao) glyph;
         if (orientacaoSorteada == -1) {
             orientacaoSorteada = random;
             orientacao.setGlyphResposta(true);
         }
-        orientacao.setNomeTextura(Constantes.TIPO_ORIENTATION[orientacoes[random]]);
+        orientacao.setNomeOrientacao(Constantes.TIPO_ORIENTATION[orientacoes[random]]);
         orientacao.setPectSobreposicao(perctOverlap);
         orientacao.setOverlappingActivated(overlappingActivated);
         return glyph;
@@ -240,12 +245,14 @@ public class GlyphManager {
     
     public void definirConjuntoOrientation(int quantValoresVarVisuais) {
         ArrayList<Integer> sorteados = new ArrayList<>();
+        listNomeOrientacoesSorteada = new ArrayList<>();
         for (int i = 0; i < quantValoresVarVisuais; i++) {
             int random;
             do {
                 random = (int) (Math.random() * Constantes.TIPO_ORIENTATION.length);
             } while (sorteados.contains(random));
             sorteados.add(random);
+            getListNomeOrientacoesSorteada().add(Constantes.TIPO_ORIENTATION[random]);
         }
         orientacoes = sorteados.toArray(new Integer[]{});
     }
@@ -315,26 +322,19 @@ public class GlyphManager {
         }
         forma.setPectSobreposicao(perctOverlap);
         forma.setOverlappingActivated(overlappingActivated);
+        forma.setColor(Color.BLACK);
         return glyph;
     }
-
-    public void definirConjuntoFormas(int quantValoresVarVisuais) {
-        ArrayList<GeometryFactory.FORMAS.GLYPH_FORMAS> sorteados = new ArrayList<>();
-        for (int i = 0; i < quantValoresVarVisuais; i++) {
-            int random;
-            do {
-                random = (int) (Math.random() * GeometryFactory.FORMAS.GLYPH_FORMAS.values().length);
-            } while (sorteados.contains(GeometryFactory.FORMAS.GLYPH_FORMAS.values()[random]));
-            sorteados.add(GeometryFactory.FORMAS.GLYPH_FORMAS.values()[random]);
-        }
-        formaGeometricas = sorteados.toArray(new GeometryFactory.FORMAS.GLYPH_FORMAS[]{});
-    }
-
+    
     private Glyph defineRandomLetter() {
+        if(getLetras() == null){
+            definirConjuntoLetras(quantValoresVarVisuais);
+        }
         int random = (int) (Math.random() * quantValoresVarVisuais);
         while (random == letraSorteada) {
             random = (int) (Math.random() * quantValoresVarVisuais);
         }
+        
         Glyph glyph = new Letra();
         letra = (Letra) glyph;
         if (letraSorteada == -1) {
@@ -345,6 +345,30 @@ public class GlyphManager {
         letra.setPectSobreposicao(perctOverlap);
         letra.setOverlappingActivated(overlappingActivated);
         return glyph;
+    }
+
+    public void definirConjuntoLetras(int quantValoresVarVisuais){
+        ArrayList<String> sorteados = new ArrayList<>();
+        for (int i = 0; i < quantValoresVarVisuais; i++) {
+            int random;
+            do {
+                random = (int) (Math.random() * Constantes.LETRAS_ALFABETO.length);
+            } while (sorteados.contains(Constantes.LETRAS_ALFABETO[random]));
+            sorteados.add(Constantes.LETRAS_ALFABETO[random]);
+        }
+        setLetras(sorteados.toArray(new String[]{}));
+    }
+    
+    public void definirConjuntoFormas(int quantValoresVarVisuais) {
+        ArrayList<GeometryFactory.FORMAS.GLYPH_FORMAS> sorteados = new ArrayList<>();
+        for (int i = 0; i < quantValoresVarVisuais; i++) {
+            int random;
+            do {
+                random = (int) (Math.random() * GeometryFactory.FORMAS.GLYPH_FORMAS.values().length);
+            } while (sorteados.contains(GeometryFactory.FORMAS.GLYPH_FORMAS.values()[random]));
+            sorteados.add(GeometryFactory.FORMAS.GLYPH_FORMAS.values()[random]);
+        }
+        formaGeometricas = sorteados.toArray(new GeometryFactory.FORMAS.GLYPH_FORMAS[]{});
     }
 
     public void setQuantValoresVarVisuais(int quantValoresVarVisuais) {
@@ -410,16 +434,14 @@ public class GlyphManager {
         return texturas;
     }
 
-    public Letra[] getLetras() {
+    public String[] getLetras() {
         return letras;
     }
 
-    public void setLetras(Letra[] letras) {
+    public void setLetras(String[] letras) {
         this.letras = letras;
     }
-    
-    
-
+       
     /**
      * @return the saturacoes
      */
@@ -432,6 +454,13 @@ public class GlyphManager {
      */
     public void setSaturacoes(Color[] saturacoes) {
         this.saturacoes = saturacoes;
+    }
+
+    /**
+     * @return the listNomeOrientacoesSorteada
+     */
+    public List<String> getListNomeOrientacoesSorteada() {
+        return listNomeOrientacoesSorteada;
     }
 
 }

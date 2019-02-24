@@ -5,6 +5,7 @@
  */
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -18,6 +19,8 @@ public interface DrawBehavior extends Cloneable{
     public void paint(Graphics2D g2d);
 
     public int getArea();
+    
+    public void setColor(Color cor);
 
     public void setBounds(Rectangle bounds);
 

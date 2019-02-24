@@ -18,16 +18,18 @@ public class Losango implements DrawBehavior {
     private int[] yPoints;
     private Rectangle bounds;
     private Polygon p;
+    private Color cor;
 
     public Losango() {
+        cor = Color.WHITE;
     }
 
     @Override
     public void paint(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setPaint(Color.BLACK);
+//        g2d.setPaint(Color.BLACK);
 
-        g2d.setColor(Color.white);
+        g2d.setColor(this.cor);
         g2d.fillPolygon(p);
         g2d.setColor(Color.BLACK);
         g2d.drawPolygon(p);
@@ -105,6 +107,11 @@ public class Losango implements DrawBehavior {
     }
 
     @Override
+    public void setColor(Color cor) {
+        this.cor = cor;
+    }
+    
+    @Override
     public void drawForeground(Graphics2D g2d) {
         g2d.setColor(Color.black);
         g2d.draw(p);
@@ -126,4 +133,5 @@ public class Losango implements DrawBehavior {
         super.toString();
         return Losango.class.getSimpleName();
     }
+
 }

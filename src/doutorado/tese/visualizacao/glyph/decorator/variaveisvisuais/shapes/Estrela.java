@@ -18,16 +18,18 @@ public class Estrela implements DrawBehavior {
     private int[] yPoints;
     private Polygon p;
     private Rectangle bounds;
+    private Color cor;
 
     public Estrela() {
+        cor = Color.BLUE;
     }
 
     @Override
     public void paint(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setPaint(Color.BLACK);
+//        g2d.setPaint(Color.BLACK);
 
-        g2d.setColor(Color.white);
+        g2d.setColor(this.cor);
         g2d.fillPolygon(p);
         g2d.setColor(Color.BLACK);
         g2d.drawPolygon(p);
@@ -125,6 +127,11 @@ public class Estrela implements DrawBehavior {
     }
 
     @Override
+    public void setColor(Color cor) {
+        this.cor = cor;
+    }
+
+    @Override
     public int getArea() {
         return (xPoints[4] - xPoints[1]) * (yPoints[3] - yPoints[0]);
     }
@@ -136,7 +143,8 @@ public class Estrela implements DrawBehavior {
 
     @Override
     public void drawForeground(Graphics2D g2d) {
-        g2d.setColor(Color.black);
+//        g2d.setColor(Color.black);
+        g2d.setColor(this.cor);
         g2d.draw(p);
     }
     

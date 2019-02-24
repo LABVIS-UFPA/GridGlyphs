@@ -125,7 +125,8 @@ public class Grid extends JPanel {
         }
         Graphics2D g2d = (Graphics2D) g.create();
 //        g2d.setColor(Color.decode("#f0f8ff"));
-        g2d.setColor(Color.decode("#dddddd"));
+//        g2d.setColor(Color.decode("#dddddd"));//cinza
+        g2d.setColor(Color.decode("#A9A9A9"));
         g2d.fillRect(0, 0, getSize().width, getSize().height);
         g2d.setColor(Color.BLACK);
 

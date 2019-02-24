@@ -18,15 +18,17 @@ public class Trapezio implements DrawBehavior {
     private int[] yPoints;
     private Rectangle bounds;
     private Polygon polygon;
+    private Color cor;
 
     public Trapezio() {
+        cor = Color.WHITE;
     }
 
     @Override
     public void paint(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g2d.setColor(Color.white);
+        g2d.setColor(this.cor);
         g2d.fillPolygon(polygon);
         g2d.setColor(Color.BLACK);
         g2d.drawPolygon(polygon);
@@ -94,8 +96,13 @@ public class Trapezio implements DrawBehavior {
     }
 
     @Override
+    public void setColor(Color cor) {
+        this.cor = cor;
+    }
+    
+    @Override
     public void drawForeground(Graphics2D g2d) {
-        g2d.setColor(Color.BLACK);
+        g2d.setColor(this.cor);
         g2d.drawPolygon(polygon);
     }
     
@@ -115,4 +122,5 @@ public class Trapezio implements DrawBehavior {
         super.toString();
         return Trapezio.class.getSimpleName();
     }
+
 }

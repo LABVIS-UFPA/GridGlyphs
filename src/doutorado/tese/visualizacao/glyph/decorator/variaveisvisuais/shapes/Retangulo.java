@@ -14,15 +14,15 @@ public class Retangulo implements DrawBehavior {
     private Rectangle bounds;
 
     public Retangulo() {
+        cor = Color.WHITE;
     }
 
     @Override
     public void paint(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g2d.setPaint(Color.WHITE);
-        
-        g2d.setColor(cor);
+//        g2d.setPaint(Color.WHITE);        
+        g2d.setColor(this.cor);
         g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
         g2d.setColor(Color.BLACK);
         g2d.drawRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
@@ -84,8 +84,13 @@ public class Retangulo implements DrawBehavior {
     }
 
     @Override
+    public void setColor(Color cor) {
+        this.cor = cor;
+    }
+    
+    @Override
     public void drawForeground(Graphics2D g2d) {
-        g2d.setColor(Color.BLACK);
+        g2d.setColor(this.cor);
         g2d.drawRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
     }
 
@@ -105,4 +110,5 @@ public class Retangulo implements DrawBehavior {
         super.toString();
         return Retangulo.class.getSimpleName();
     }
+
 }

@@ -60,6 +60,11 @@ public class FormaGeometrica extends Glyph {
                     return this;
                 }
             }
+
+            @Override
+            public void setColor(Color cor) {
+                
+            }
         };
     }
 
@@ -76,7 +81,11 @@ public class FormaGeometrica extends Glyph {
     }
 
     public void setColor(Color cor) {
-        this.cor = cor;
+        this.drawBehavior.setColor(cor);
+    }
+    
+    public Color getColor(){
+        return this.cor;
     }
 
     @Override

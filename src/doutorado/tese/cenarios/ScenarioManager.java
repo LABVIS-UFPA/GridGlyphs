@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTextPane;  
+import javax.swing.JTextPane;
 
 /**
  *
@@ -22,13 +22,13 @@ import javax.swing.JTextPane;
 public class ScenarioManager {
 
     private Grid gridPanel;
-    private int numVisualizacoes = 1;
+    private int numVisualizacoes = 3;
     private int[] vetorTamGridVertical = {10, 5, 5};
     private int[] vetorTamGridHorizontal = {16, 10, 10};
     private double[] vetorTamScala = {1.5, 1.25, 1};
     private float[] vetorQuantPercentOverlapping = {0.5f, 0.55f, 0.6f, 0.65f, 0.7f, 0f};//0%, 50%, 60%, 70%
     private int[] vetorQuantConjVarVisuais = {3, 4, 5};
-    private String[] vetorVarVisuais = {"Texture", "Color", "Shape", "Saturation", "Orientation","Letter" ,"Color2", "Overlap"};
+    private String[] vetorVarVisuais = {"Texture", "Color", "Shape", "Saturation", "Orientation", "Letter", "Color2", "Overlap"};
     private String[] vetorTipoTarefa = {"Localização"};//, "Identificação"
     private String[] vetorQuestoes = {"Find the element below in the visualization:"};
 //            , "Encontre o grupo de elementos abaixo na visualização:"};
@@ -70,6 +70,24 @@ public class ScenarioManager {
                 break;
             case "cenario3":
                 carregarCenario3();
+                break;
+            case "0%":
+                carregarCenarioOclusao(vetorQuantPercentOverlapping.length - 1);//{0.5f, 0.55f, 0.6f, 0.65f, 0.7f, 0f}
+                break;
+            case "50%":
+                carregarCenarioOclusao(vetorQuantPercentOverlapping.length - 6);
+                break;
+            case "55%":
+                carregarCenarioOclusao(vetorQuantPercentOverlapping.length - 5);
+                break;
+            case "60%":
+                carregarCenarioOclusao(vetorQuantPercentOverlapping.length - 4);
+                break;
+            case "65%":
+                carregarCenarioOclusao(vetorQuantPercentOverlapping.length - 3);
+                break;
+            case "70%":
+                carregarCenarioOclusao(vetorQuantPercentOverlapping.length - 2);
                 break;
             default:
                 throw new AssertionError();
@@ -117,7 +135,7 @@ public class ScenarioManager {
         linhaLog[10] = getPerguntaAtual().getRespostaCerta().getListItens().get(0).getGlyph().getChild().getVarValue();
         switch (varEscolhida) {
             case "Texture":
-                linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getOrientacoes()).replace(",", ";");
+                linhaLog[12] = Arrays.asList(gridPanel.getGlyphManager().getTexturas()).toString().replace(",", ";");
                 break;
             case "Color":
                 linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getCores()).replace("java.awt.Color", "").replace(",", ";");
@@ -129,11 +147,11 @@ public class ScenarioManager {
                 linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getSaturacoes()).replace("java.awt.Color", "").replace(",", ";");
                 break;
             case "Orientation":
-                linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getTexturas()).replace(",", ";");
+                linhaLog[12] = Arrays.asList(gridPanel.getGlyphManager().getListNomeOrientacoesSorteada()).toString().replace(",", ";");
                 break;
             case "Letter":
+                System.out.println(Arrays.asList(gridPanel.getGlyphManager().getLetras()));
                 linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getLetras()).replace(",", ";");
- 
                 break;
             default:
                 System.err.println("Opcao de variavel visual incorreta!");
@@ -148,13 +166,36 @@ public class ScenarioManager {
             @Override
             public void run() {
                 for (int t = 0; t < vetorTamScala.length; t++) {
-                    for (int p = 0; p < vetorQuantPercentOverlapping.length; p++) {//TODO mudar aqui para criar os grupos por porcentagem de oclusao
+                    for (int p = 0; p < vetorQuantPercentOverlapping.length; p++) {
                         for (int questao = 0; questao < vetorQuestoes.length; questao++) {
                             for (int i = 0; i < vetorVarVisuais.length - 2; i++) {
                                 for (int q = 0; q < vetorQuantConjVarVisuais.length; q++) {
                                     for (int j = 0; j < numVisualizacoes; j++) {
                                         setConfigCenario(t, p, questao, q, new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
                                     }
+                                }
+                            }
+                        }
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "Thanks for participate!", "Thanks!", JOptionPane.INFORMATION_MESSAGE);
+                System.exit(0);
+            }
+        });
+        t1.start();
+    }
+
+    private void carregarCenarioOclusao(int posicaoVetorPorcentagemOclusao) {
+        gridPanel.setGlyphOverlappingModel(true);//definir glyph model
+        t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int t = 0; t < vetorTamScala.length; t++) {
+                    for (int questao = 0; questao < vetorQuestoes.length; questao++) {
+                        for (int i = 0; i < vetorVarVisuais.length - 2; i++) {
+                            for (int q = 0; q < vetorQuantConjVarVisuais.length; q++) {
+                                for (int j = 0; j < numVisualizacoes; j++) {
+                                    setConfigCenario(t, posicaoVetorPorcentagemOclusao, questao, q, new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
                                 }
                             }
                         }
@@ -209,8 +250,8 @@ public class ScenarioManager {
         analisarRespostas();
         if (!getPerguntaAtual().getRespostaUsuario().getListItens().isEmpty()) {
             linhaLog[11] = getPerguntaAtual().getRespostaUsuario().getListItens().get(0).getGlyph().getChild().getVarValue();
-        }else{
-            linhaLog[9] = ""+30 * 1000;
+        } else {
+            linhaLog[9] = "" + 30 * 1000;
             linhaLog[11] = "null-TIME_OVER";
         }
         gridPanel.getGlyphManager().resetValoresSorteados();

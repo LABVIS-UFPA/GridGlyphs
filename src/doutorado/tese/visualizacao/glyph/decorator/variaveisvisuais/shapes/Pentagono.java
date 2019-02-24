@@ -18,17 +18,19 @@ public class Pentagono implements DrawBehavior {
     private int[] yPoints;
     private Polygon p;
     private Rectangle bounds;
+    private Color cor;
 
     public Pentagono() {
+        cor = Color.WHITE;
     }
 
     @Override
     public void paint(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g2d.setPaint(Color.BLACK);
+//        g2d.setPaint(Color.BLACK);
 
-        g2d.setColor(Color.white);
+        g2d.setColor(this.cor);
         g2d.fillPolygon(p);
         g2d.setColor(Color.BLACK);
         g2d.drawPolygon(p);
@@ -113,8 +115,13 @@ public class Pentagono implements DrawBehavior {
     }
 
     @Override
+    public void setColor(Color cor) {
+        this.cor = cor;
+    }
+    
+    @Override
     public void drawForeground(Graphics2D g2d) {
-        g2d.setColor(Color.black);
+        g2d.setColor(this.cor);
         g2d.draw(p);
     }
     
@@ -134,4 +141,5 @@ public class Pentagono implements DrawBehavior {
         super.toString();
         return Pentagono.class.getSimpleName();
     }
+
 }

@@ -57,14 +57,11 @@ public class Constantes {
     
 
     public final static String[] TIPO_ORIENTATION = {
-        "PATTERN_HORIZONTAL",
-        "ORIENTATION_1",
-        "PATTERN_DIAG_LEFT_RIGHT",
-        "ORIENTATION_2",
-        "PATTERN_DIAG_RIGHT_LEFT",
-//        "PATTERN_UP",
-//        "PATTERN_RIGHT",
-//        "PATTERN_CROSS_LINES"
+        "180graus",
+        "72graus",
+        "135graus",
+        "108graus",
+        "45graus",
     };
     
         public final static String[] TIPO_TEXTURE = {
