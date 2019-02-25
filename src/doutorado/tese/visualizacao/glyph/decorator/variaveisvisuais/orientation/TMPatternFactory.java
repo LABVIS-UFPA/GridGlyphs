@@ -267,15 +267,21 @@ public class TMPatternFactory {
         BufferedImage image
                 = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g.setStroke(new BasicStroke(2f));
+        g.setStroke(new BasicStroke(2.5f));
         g.setColor(backgroungColor);
 
         g.fillRect(0, 0, 16, 16);
         g.setColor(textureColor);
-        g.drawLine(8, 0, 16, 8);
-//        g.drawLine(0, 0, 16, 16);
-        g.drawLine(0, 8, 8, 16);
+//        g.drawLine(8, 0, 16, 8);
+////      g.drawLine(0, 0, 16, 16);
+//        g.drawLine(0, 8, 8, 16);
+          g.drawLine(0, 3, 16, 11);          
+          g.drawLine(0, 11, 10, 16);
+          g.drawLine(10, 0, 16, 3);
+
+
         Rectangle r = new Rectangle(0, 0, 16, 16);
         Paint pattern = new TexturePaint(image, r);
 //        patterns.put("PATTERN_DIAG_RIGHT_LEFT", pattern);
@@ -381,12 +387,18 @@ public class TMPatternFactory {
                 = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setStroke(new BasicStroke(2.2f));
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
         g.setColor(backgroungColor);
         g.fillRect(0, 0, 16, 16);
         g.setColor(textureColor);
-        g.drawLine(8, 0, 0, 8);
-//        g.drawLine(0, 13, 13, 0);
-        g.drawLine(16, 8, 8, 16);
+//        g.drawLine(8, 0, 0, 8);
+////        g.drawLine(0, 13, 13, 0);
+//        g.drawLine(16, 8, 8, 16);
+          g.drawLine(16, 3, 0, 11);          
+          g.drawLine(16, 11, 6, 16);
+          g.drawLine(6, 0, 0, 3);
+
         Rectangle r = new Rectangle(0, 0, 16, 16);
         Paint pattern = new TexturePaint(image, r);
 //        patterns.put("PATTERN_DIAG_LEFT_RIGHT", pattern);
