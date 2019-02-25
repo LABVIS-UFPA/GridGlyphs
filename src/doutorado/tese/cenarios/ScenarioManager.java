@@ -190,17 +190,17 @@ public class ScenarioManager {
         t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int t = 0; t < vetorTamScala.length; t++) {
+//                for (int t = 0; t < vetorTamScala.length - 2; t++) {
                     for (int questao = 0; questao < vetorQuestoes.length; questao++) {
                         for (int i = 0; i < vetorVarVisuais.length - 2; i++) {
                             for (int q = 0; q < vetorQuantConjVarVisuais.length; q++) {
                                 for (int j = 0; j < numVisualizacoes; j++) {
-                                    setConfigCenario(t, posicaoVetorPorcentagemOclusao, questao, q, new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
+                                    setConfigCenario(2, posicaoVetorPorcentagemOclusao, questao, q, new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
                                 }
                             }
                         }
                     }
-                }
+//                }
                 JOptionPane.showMessageDialog(null, "Thanks for participate!", "Thanks!", JOptionPane.INFORMATION_MESSAGE);
                 System.exit(0);
             }

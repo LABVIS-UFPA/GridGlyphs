@@ -140,7 +140,7 @@ public class Grid extends JPanel {
                         int y = matrizGlyph[i][j].getBounds().y;
                         int w = matrizGlyph[i][j].getBounds().width;
                         int h = matrizGlyph[i][j].getBounds().height;
-
+//                        System.out.println("x: "+x+"\ty: "+y+"\tw: "+w+"\th: "+h);
                         ArrayList<Glyph> list = new ArrayList<>();
                         matrizGlyph[i][j].paint(g2d);
                         matrizGlyph[i][j].getChildren(list);
