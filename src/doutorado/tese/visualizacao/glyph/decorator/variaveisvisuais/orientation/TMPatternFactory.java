@@ -244,17 +244,17 @@ public class TMPatternFactory {
      * Builds and adds the PATTERN_HORIZONTAL in patterns.
      */
     private void buildPattern180Graus() {
-        BufferedImage image = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage image = new BufferedImage(11, 11, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
-        g.setStroke(new BasicStroke(2f));
+        g.setStroke(new BasicStroke(3f));
         g.setColor(backgroungColor);
-        g.fillRect(0, 0, 16, 16);
+        g.fillRect(0, 0, 11, 11);
         g.setColor(textureColor);
-//        g.drawLine(0, 1, 16, 1);
-        g.drawLine(0, 6, 16, 6);
-//        g.drawLine(0, 8, 16, 8);
-        g.drawLine(0, 14, 16, 14);
-        Rectangle r = new Rectangle(0, 0, 16, 16);
+
+        g.drawLine(0, 4, 11, 4);
+       
+        
+        Rectangle r = new Rectangle(0, 0, 11, 11);
         Paint pattern = new TexturePaint(image, r);
 //        patterns.put("PATTERN_HORIZONTAL", pattern);
         orientation.put("180graus", pattern);
@@ -265,24 +265,20 @@ public class TMPatternFactory {
      */
     private void buildPattern45graus() {
         BufferedImage image
-                = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+                = new BufferedImage(19, 14, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g.setStroke(new BasicStroke(2.5f));
+        g.setStroke(new BasicStroke(3f));
         g.setColor(backgroungColor);
 
-        g.fillRect(0, 0, 16, 16);
+        g.fillRect(0, 0, 19, 14);
         g.setColor(textureColor);
-//        g.drawLine(8, 0, 16, 8);
-////      g.drawLine(0, 0, 16, 16);
-//        g.drawLine(0, 8, 8, 16);
-          g.drawLine(0, 3, 16, 11);          
-          g.drawLine(0, 11, 10, 16);
-          g.drawLine(10, 0, 16, 3);
+        g.drawLine(7,0, 19, 9);
+        g.drawLine(0,9, 7, 14);
+//        g.drawLine(0,7, 7, 16);
 
-
-        Rectangle r = new Rectangle(0, 0, 16, 16);
+        Rectangle r = new Rectangle(0, 0, 19, 14);
         Paint pattern = new TexturePaint(image, r);
 //        patterns.put("PATTERN_DIAG_RIGHT_LEFT", pattern);
         orientation.put("45graus", pattern);
@@ -313,19 +309,23 @@ public class TMPatternFactory {
     
     private void buildPattern72Graus() {
          BufferedImage image
-                = new BufferedImage(16,16, BufferedImage.TYPE_INT_ARGB);
+                = new BufferedImage(12,36, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
              g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setStroke(new BasicStroke(2f));
+        g.setStroke(new BasicStroke(3f));
         g.setColor(backgroungColor);
-        g.fillRect(0, 0, 16, 16); 
+        g.fillRect(0, 0, 12, 36); 
         
         g.setColor(textureColor);
-        g.drawLine(4, 0, 12, 16);
-        g.drawLine(12, 0, 16, 8);
-        g.drawLine(0, 8, 4, 16);
+//        g.drawLine(4, 0, 12, 16);
+//        g.drawLine(12, 0, 16, 8);
+//        g.drawLine(0, 8, 4, 16);
 
-        Rectangle r = new Rectangle(0, 0, 16,16);
+         g.drawLine(11, 0, 12, 2);
+         g.drawLine(0, 2, 11, 36);
+
+
+        Rectangle r = new Rectangle(0, 0, 12,36);
         
         
         Paint pattern = new TexturePaint(image, r);  
@@ -335,25 +335,29 @@ public class TMPatternFactory {
     
      private void buildPattern108Graus() {
          BufferedImage image
-                = new BufferedImage(16,16, BufferedImage.TYPE_INT_ARGB);
+                = new BufferedImage(12,36, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setStroke(new BasicStroke(2f));
+        g.setStroke(new BasicStroke(3f));
 //        BasicStroke dashed =new BasicStroke(1.0f,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,1.0f);
 //        g.setStroke(dashed);
        
         g.setColor(backgroungColor);
 
-        g.fillRect(0, 0, 16, 16);
+        g.fillRect(0, 0, 12, 36);
         
         
         g.setColor(textureColor);
 
-        g.drawLine(4, 0, 0, 8); 
-        g.drawLine(16, 8, 12, 16);        
-        g.drawLine(12, 0, 4, 16);
- 
-        Rectangle r = new Rectangle(0, 0, 16,16);
+//        g.drawLine(4, 0, 0, 8); 
+//        g.drawLine(16, 8, 12, 16);        
+//        g.drawLine(12, 0, 4, 16);
+
+          g.drawLine(1, 0, 0, 2);
+         g.drawLine(12, 2, 1, 36);
+
+// 
+        Rectangle r = new Rectangle(0, 0, 12,36);
         
         
         Paint pattern = new TexturePaint(image, r);  
@@ -384,22 +388,31 @@ public class TMPatternFactory {
      */
     private void buildPattern135Graus() {
         BufferedImage image
-                = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+                = new BufferedImage(19, 14, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
-        g.setStroke(new BasicStroke(2.2f));
+      
+        g.setStroke(new BasicStroke(3f));
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g.setColor(backgroungColor);
-        g.fillRect(0, 0, 16, 16);
+        g.fillRect(0, 0, 19, 14);
         g.setColor(textureColor);
-//        g.drawLine(8, 0, 0, 8);
-////        g.drawLine(0, 13, 13, 0);
-//        g.drawLine(16, 8, 8, 16);
-          g.drawLine(16, 3, 0, 11);          
-          g.drawLine(16, 11, 6, 16);
-          g.drawLine(6, 0, 0, 3);
+//        
+        g.drawLine(12,0, 0, 9);
+        g.drawLine(19,9, 12, 14);
+        
+        g.fillRect(13, 14, 1, 1);
+        g.fillRect(13, 1, 1, 1);
 
-        Rectangle r = new Rectangle(0, 0, 16, 16);
+        g.fillRect(1, 9, 1, 1);
+        g.fillRect(19, 11, 1, 1);
+        g.fillRect(12, 0, 3, 1);
+
+
+//        g.setStroke(new BasicStroke(1f));
+//        g.drawRect(0, 0, 19, 14);
+
+        Rectangle r = new Rectangle(0, 0, 19, 14);
         Paint pattern = new TexturePaint(image, r);
 //        patterns.put("PATTERN_DIAG_LEFT_RIGHT", pattern);
         orientation.put("135graus", pattern);
