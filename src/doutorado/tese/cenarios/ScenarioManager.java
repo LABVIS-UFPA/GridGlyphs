@@ -59,6 +59,53 @@ public class ScenarioManager {
         bufferLog.append("\n");
     }
 
+    public void carregarCenariosTreinamento(String nomeCenario) {
+        this.gridPanel.setScenarioManager(this);
+        switch (nomeCenario) {
+            case "0%":
+                carregarTreinamentoOclusao(vetorQuantPercentOverlapping.length - 1);//{0.5f, 0.55f, 0.6f, 0.65f, 0.7f, 0f}
+                break;
+            case "50%":
+                carregarTreinamentoOclusao(vetorQuantPercentOverlapping.length - 6);
+                break;
+            case "55%":
+                carregarTreinamentoOclusao(vetorQuantPercentOverlapping.length - 5);
+                break;
+            case "60%":
+                carregarTreinamentoOclusao(vetorQuantPercentOverlapping.length - 4);
+                break;
+            case "65%":
+                carregarTreinamentoOclusao(vetorQuantPercentOverlapping.length - 3);
+                break;
+            case "70%":
+                carregarTreinamentoOclusao(vetorQuantPercentOverlapping.length - 2);
+                break;
+            default:
+                throw new AssertionError();
+        }
+    }
+
+    private void carregarTreinamentoOclusao(int posicaoVetorPorcentagemOclusao) {
+        boolean treinamento = true;
+        gridPanel.setGlyphOverlappingModel(true);//definir glyph model
+        t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int posicaoVetorTamanho = 2;//posicao 2 do vetor indica grade pequena
+                int posicaoVetorQuestoes = 0;
+                int posicaoVetorQuantConjVarVisuais = 0;
+                for (int i = 0; i < vetorVarVisuais.length - 2; i++) {
+                    setConfigCenario(treinamento, posicaoVetorTamanho, posicaoVetorPorcentagemOclusao,
+                            posicaoVetorQuestoes, posicaoVetorQuantConjVarVisuais,
+                            new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
+                }
+                JOptionPane.showMessageDialog(null, "Thanks for participate!", "Thanks!", JOptionPane.INFORMATION_MESSAGE);
+                System.exit(0);
+            }
+        });
+        t1.start();
+    }
+
     public void carregarCenarios(String nomeCenario) {
         this.gridPanel.setScenarioManager(this);
         switch (nomeCenario) {
@@ -94,7 +141,7 @@ public class ScenarioManager {
         }
     }
 
-    private void setConfigCenario(int escala, int perctOverlapping, int questao, int quantValoresVar, String... varEscolhidas) {
+    private void setConfigCenario(boolean treinamento, int escala, int perctOverlapping, int questao, int quantValoresVar, String... varEscolhidas) {
         setPerguntaAtual(new Pergunta(vetorQuestoes[questao]));
         respostaCerta = new Resposta();
 
@@ -116,7 +163,9 @@ public class ScenarioManager {
         perguntaAtual_TextPanel.setText(getPerguntaAtual().getQuestao());
 
         inicioTempo = System.currentTimeMillis();
-        preencherLinhaLog(quantValoresVar, varEscolhidas[0], perctOverlapping);
+        if (!treinamento) {
+            preencherLinhaLog(quantValoresVar, varEscolhidas[0], perctOverlapping);
+        }
         showLegend();
         acionarControleThreads();
     }
@@ -171,7 +220,7 @@ public class ScenarioManager {
                             for (int i = 0; i < vetorVarVisuais.length - 2; i++) {
                                 for (int q = 0; q < vetorQuantConjVarVisuais.length; q++) {
                                     for (int j = 0; j < numVisualizacoes; j++) {
-                                        setConfigCenario(t, p, questao, q, new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
+                                        setConfigCenario(false, t, p, questao, q, new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
                                     }
                                 }
                             }
@@ -191,15 +240,16 @@ public class ScenarioManager {
             @Override
             public void run() {
 //                for (int t = 0; t < vetorTamScala.length - 2; t++) {
-                    for (int questao = 0; questao < vetorQuestoes.length; questao++) {
-                        for (int i = 0; i < vetorVarVisuais.length - 2; i++) {
-                            for (int q = 0; q < vetorQuantConjVarVisuais.length; q++) {
-                                for (int j = 0; j < numVisualizacoes; j++) {
-                                    setConfigCenario(2, posicaoVetorPorcentagemOclusao, questao, q, new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
-                                }
+                int posicaoVetorTamanho = 2;
+                for (int questao = 0; questao < vetorQuestoes.length; questao++) {
+                    for (int i = 0; i < vetorVarVisuais.length - 2; i++) {
+                        for (int q = 0; q < vetorQuantConjVarVisuais.length; q++) {
+                            for (int j = 0; j < numVisualizacoes; j++) {
+                                setConfigCenario(false, posicaoVetorTamanho, posicaoVetorPorcentagemOclusao, questao, q, new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
                             }
                         }
                     }
+                }
 //                }
                 JOptionPane.showMessageDialog(null, "Thanks for participate!", "Thanks!", JOptionPane.INFORMATION_MESSAGE);
                 System.exit(0);
@@ -219,7 +269,7 @@ public class ScenarioManager {
                         for (int tarefa = 0; tarefa < vetorTipoTarefa.length; tarefa++) {
                             for (int q = 0; q < vetorQuantConjVarVisuais.length; q++) {
                                 for (int j = 0; j < numVisualizacoes; j++) {
-                                    setConfigCenario(t, p, tarefa, vetorQuantConjVarVisuais[q], new String[]{vetorVarVisuais[1], vetorVarVisuais[vetorVarVisuais.length - 2]});
+                                    setConfigCenario(false, t, p, tarefa, vetorQuantConjVarVisuais[q], new String[]{vetorVarVisuais[1], vetorVarVisuais[vetorVarVisuais.length - 2]});
                                 }
                             }
                         }

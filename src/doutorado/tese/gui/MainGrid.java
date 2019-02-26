@@ -85,11 +85,16 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         overlapButtonGroup = new javax.swing.ButtonGroup();
         scenariosButtonGroup = new javax.swing.ButtonGroup();
         glyphModelRadioGroup = new javax.swing.ButtonGroup();
-        occlusionTestesButtonGroup = new javax.swing.ButtonGroup();
+        zeroOcclusionButtonGroup = new javax.swing.ButtonGroup();
+        cinquentaOcclusionButtonGroup = new javax.swing.ButtonGroup();
+        cinquentaCincoOcclusionButtonGroup = new javax.swing.ButtonGroup();
+        sessentaOcclusionButtonGroup = new javax.swing.ButtonGroup();
+        sessentaCincoOcclusionButtonGroup = new javax.swing.ButtonGroup();
+        setentaOcclusionButtonGroup = new javax.swing.ButtonGroup();
         jSplitPane1 = new javax.swing.JSplitPane();
         painelEsquerda = new javax.swing.JPanel();
         painelDireita = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        abaConfigTabbedPane = new javax.swing.JTabbedPane();
         setUP_jPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         varVisuaisEscolidasList = new javax.swing.JList<>();
@@ -126,19 +131,31 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         painelQuestoes_jTextPane = new javax.swing.JTextPane();
         painel_legenda = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        fileMenu = new javax.swing.JMenu();
         openFileMenuItem = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        scenariosMenu = new javax.swing.JMenu();
         cenario1_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         cenario2_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         cenario3_RadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        zeroRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
-        cinquentaRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
-        cinquentaCincoRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
-        sessentaRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
-        sessentaCincojRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
-        setentaRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        occlusionTestsMenu = new javax.swing.JMenu();
+        zeroMenu = new javax.swing.JMenu();
+        zeroTestRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        zeroTrainingRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        cinquentaMenu = new javax.swing.JMenu();
+        cinquentaTestRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        cinquentaTrainingRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        cinquentaCincoMenu = new javax.swing.JMenu();
+        cinquentaCincoTestRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        cinquentaCincoTrainingRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        sessentaMenu = new javax.swing.JMenu();
+        sessentaTestRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        sessentaTrainingRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        sessentaCincoMenu = new javax.swing.JMenu();
+        sessentaCincoTestRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        sessentaCincoTrainingRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        setentaMenu = new javax.swing.JMenu();
+        setentaTestRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        setentaTrainingRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         glyphModelMenu = new javax.swing.JMenu();
         overlappingRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         maskInclusionRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
@@ -182,12 +199,23 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         glyphModelRadioGroup.add(overlappingRadioButtonMenuItem);
         glyphModelRadioGroup.add(maskInclusionRadioButtonMenuItem);
 
-        occlusionTestesButtonGroup.add(zeroRadioButtonMenuItem);
-        occlusionTestesButtonGroup.add(cinquentaRadioButtonMenuItem);
-        occlusionTestesButtonGroup.add(cinquentaCincoRadioButtonMenuItem);
-        occlusionTestesButtonGroup.add(sessentaRadioButtonMenuItem);
-        occlusionTestesButtonGroup.add(sessentaCincojRadioButtonMenuItem);
-        occlusionTestesButtonGroup.add(setentaRadioButtonMenuItem);
+        zeroOcclusionButtonGroup.add(zeroTestRadioButtonMenuItem);
+        zeroOcclusionButtonGroup.add(zeroTrainingRadioButtonMenuItem);
+
+        cinquentaOcclusionButtonGroup.add(cinquentaTestRadioButtonMenuItem);
+        cinquentaOcclusionButtonGroup.add(cinquentaTrainingRadioButtonMenuItem);
+
+        cinquentaCincoOcclusionButtonGroup.add(cinquentaCincoTestRadioButtonMenuItem);
+        cinquentaCincoOcclusionButtonGroup.add(cinquentaCincoTrainingRadioButtonMenuItem);
+
+        sessentaOcclusionButtonGroup.add(sessentaTestRadioButtonMenuItem);
+        sessentaOcclusionButtonGroup.add(sessentaTrainingRadioButtonMenuItem);
+
+        sessentaCincoOcclusionButtonGroup.add(sessentaTestRadioButtonMenuItem);
+        sessentaCincoOcclusionButtonGroup.add(sessentaTrainingRadioButtonMenuItem);
+
+        setentaOcclusionButtonGroup.add(setentaTestRadioButtonMenuItem);
+        setentaOcclusionButtonGroup.add(setentaTrainingRadioButtonMenuItem);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -441,7 +469,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Setup", setUP_jPanel);
+        abaConfigTabbedPane.addTab("Setup", setUP_jPanel);
 
         jLabel3.setText("Texture:");
 
@@ -507,7 +535,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                 .addGap(87, 87, 87))
         );
 
-        jTabbedPane1.addTab("Glyphs", glyphs_jPanel);
+        abaConfigTabbedPane.addTab("Glyphs", glyphs_jPanel);
 
         javax.swing.GroupLayout detalhes_jPanelLayout = new javax.swing.GroupLayout(detalhes_jPanel);
         detalhes_jPanel.setLayout(detalhes_jPanelLayout);
@@ -520,7 +548,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
             .addGap(0, 218, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Details", detalhes_jPanel);
+        abaConfigTabbedPane.addTab("Details", detalhes_jPanel);
 
         javax.swing.GroupLayout filter_jPanelLayout = new javax.swing.GroupLayout(filter_jPanel);
         filter_jPanel.setLayout(filter_jPanelLayout);
@@ -533,13 +561,13 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
             .addGap(0, 218, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Filter", filter_jPanel);
+        abaConfigTabbedPane.addTab("Filter", filter_jPanel);
 
         painelQuestoes_jTextPane.setEditable(false);
         painelQuestoes_jTextPane.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         questions_jScrollPane.setViewportView(painelQuestoes_jTextPane);
 
-        jTabbedPane1.addTab("Questions", questions_jScrollPane);
+        abaConfigTabbedPane.addTab("Questions", questions_jScrollPane);
 
         painel_legenda.setBackground(new java.awt.Color(255, 255, 255));
         painel_legenda.setBorder(javax.swing.BorderFactory.createTitledBorder("Visual variable values"));
@@ -561,21 +589,21 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
             painelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelDireitaLayout.createSequentialGroup()
                 .addGroup(painelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, Short.MAX_VALUE)
+                    .addComponent(abaConfigTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 325, Short.MAX_VALUE)
                     .addComponent(painel_legenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         painelDireitaLayout.setVerticalGroup(
             painelDireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelDireitaLayout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(abaConfigTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(painel_legenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jSplitPane1.setRightComponent(painelDireita);
 
-        jMenu1.setText("File");
+        fileMenu.setText("File");
 
         openFileMenuItem.setText("Open File");
         openFileMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -583,11 +611,11 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                 openFileMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(openFileMenuItem);
+        fileMenu.add(openFileMenuItem);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(fileMenu);
 
-        jMenu2.setText("Scenarios");
+        scenariosMenu.setText("Scenarios");
 
         cenario1_RadioButtonMenuItem.setText("Scenario 1");
         cenario1_RadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -595,7 +623,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                 cenario1_RadioButtonMenuItemActionPerformed(evt);
             }
         });
-        jMenu2.add(cenario1_RadioButtonMenuItem);
+        scenariosMenu.add(cenario1_RadioButtonMenuItem);
 
         cenario2_RadioButtonMenuItem.setText("Scenario 2");
         cenario2_RadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -603,7 +631,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                 cenario2_RadioButtonMenuItemActionPerformed(evt);
             }
         });
-        jMenu2.add(cenario2_RadioButtonMenuItem);
+        scenariosMenu.add(cenario2_RadioButtonMenuItem);
 
         cenario3_RadioButtonMenuItem.setText("Scenario 3");
         cenario3_RadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -611,61 +639,133 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                 cenario3_RadioButtonMenuItemActionPerformed(evt);
             }
         });
-        jMenu2.add(cenario3_RadioButtonMenuItem);
+        scenariosMenu.add(cenario3_RadioButtonMenuItem);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(scenariosMenu);
 
-        jMenu3.setText("Occlusion Tests");
+        occlusionTestsMenu.setText("Occlusion Tests");
 
-        zeroRadioButtonMenuItem.setText("0%");
-        zeroRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        zeroMenu.setText("0%");
+
+        zeroTestRadioButtonMenuItem.setText("Test - 0%");
+        zeroTestRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zeroRadioButtonMenuItemActionPerformed(evt);
+                zeroTestRadioButtonMenuItemActionPerformed(evt);
             }
         });
-        jMenu3.add(zeroRadioButtonMenuItem);
+        zeroMenu.add(zeroTestRadioButtonMenuItem);
 
-        cinquentaRadioButtonMenuItem.setText("50%");
-        cinquentaRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        zeroTrainingRadioButtonMenuItem.setText("Training - 0%");
+        zeroTrainingRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cinquentaRadioButtonMenuItemActionPerformed(evt);
+                zeroTrainingRadioButtonMenuItemActionPerformed(evt);
             }
         });
-        jMenu3.add(cinquentaRadioButtonMenuItem);
+        zeroMenu.add(zeroTrainingRadioButtonMenuItem);
 
-        cinquentaCincoRadioButtonMenuItem.setText("55%");
-        cinquentaCincoRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        occlusionTestsMenu.add(zeroMenu);
+
+        cinquentaMenu.setText("50%");
+
+        cinquentaTestRadioButtonMenuItem.setText("Test - 50%");
+        cinquentaTestRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cinquentaCincoRadioButtonMenuItemActionPerformed(evt);
+                cinquentaTestRadioButtonMenuItemActionPerformed(evt);
             }
         });
-        jMenu3.add(cinquentaCincoRadioButtonMenuItem);
+        cinquentaMenu.add(cinquentaTestRadioButtonMenuItem);
 
-        sessentaRadioButtonMenuItem.setText("60%");
-        sessentaRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        cinquentaTrainingRadioButtonMenuItem.setText("Training - 50%");
+        cinquentaTrainingRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sessentaRadioButtonMenuItemActionPerformed(evt);
+                cinquentaTrainingRadioButtonMenuItemActionPerformed(evt);
             }
         });
-        jMenu3.add(sessentaRadioButtonMenuItem);
+        cinquentaMenu.add(cinquentaTrainingRadioButtonMenuItem);
 
-        sessentaCincojRadioButtonMenuItem.setText("65%");
-        sessentaCincojRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        occlusionTestsMenu.add(cinquentaMenu);
+
+        cinquentaCincoMenu.setText("55%");
+
+        cinquentaCincoTestRadioButtonMenuItem.setText("Test - 55%");
+        cinquentaCincoTestRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sessentaCincojRadioButtonMenuItemActionPerformed(evt);
+                cinquentaCincoTestRadioButtonMenuItemActionPerformed(evt);
             }
         });
-        jMenu3.add(sessentaCincojRadioButtonMenuItem);
+        cinquentaCincoMenu.add(cinquentaCincoTestRadioButtonMenuItem);
 
-        setentaRadioButtonMenuItem.setText("70%");
-        setentaRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        cinquentaCincoTrainingRadioButtonMenuItem.setText("Training - 55%");
+        cinquentaCincoTrainingRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                setentaRadioButtonMenuItemActionPerformed(evt);
+                cinquentaCincoTrainingRadioButtonMenuItemActionPerformed(evt);
             }
         });
-        jMenu3.add(setentaRadioButtonMenuItem);
+        cinquentaCincoMenu.add(cinquentaCincoTrainingRadioButtonMenuItem);
 
-        jMenuBar1.add(jMenu3);
+        occlusionTestsMenu.add(cinquentaCincoMenu);
+
+        sessentaMenu.setText("60%");
+
+        sessentaTestRadioButtonMenuItem.setText("Test - 60%");
+        sessentaTestRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sessentaTestRadioButtonMenuItemActionPerformed(evt);
+            }
+        });
+        sessentaMenu.add(sessentaTestRadioButtonMenuItem);
+
+        sessentaTrainingRadioButtonMenuItem.setText("Training - 60%");
+        sessentaTrainingRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sessentaTrainingRadioButtonMenuItemActionPerformed(evt);
+            }
+        });
+        sessentaMenu.add(sessentaTrainingRadioButtonMenuItem);
+
+        occlusionTestsMenu.add(sessentaMenu);
+
+        sessentaCincoMenu.setText("65%");
+
+        sessentaCincoTestRadioButtonMenuItem.setText("Test - 65%");
+        sessentaCincoTestRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sessentaCincoTestRadioButtonMenuItemActionPerformed(evt);
+            }
+        });
+        sessentaCincoMenu.add(sessentaCincoTestRadioButtonMenuItem);
+
+        sessentaCincoTrainingRadioButtonMenuItem.setText("Training - 65%");
+        sessentaCincoTrainingRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sessentaCincoTrainingRadioButtonMenuItemActionPerformed(evt);
+            }
+        });
+        sessentaCincoMenu.add(sessentaCincoTrainingRadioButtonMenuItem);
+
+        occlusionTestsMenu.add(sessentaCincoMenu);
+
+        setentaMenu.setText("70%");
+
+        setentaTestRadioButtonMenuItem.setText("Test - 70%");
+        setentaTestRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setentaTestRadioButtonMenuItemActionPerformed(evt);
+            }
+        });
+        setentaMenu.add(setentaTestRadioButtonMenuItem);
+
+        setentaTrainingRadioButtonMenuItem.setText("Training - 70%");
+        setentaTrainingRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setentaTrainingRadioButtonMenuItemActionPerformed(evt);
+            }
+        });
+        setentaMenu.add(setentaTrainingRadioButtonMenuItem);
+
+        occlusionTestsMenu.add(setentaMenu);
+
+        jMenuBar1.add(occlusionTestsMenu);
 
         glyphModelMenu.setText("Glyph Model");
 
@@ -921,29 +1021,65 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         }
     }//GEN-LAST:event_varVisuaisEscolidasListValueChanged
 
-    private void setentaRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setentaRadioButtonMenuItemActionPerformed
+    private void zeroTestRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zeroTestRadioButtonMenuItemActionPerformed
+        abaConfigTabbedPane.setSelectedIndex(abaConfigTabbedPane.getTabCount() - 1);//ultima aba
         configTesteOclusao();
-    }//GEN-LAST:event_setentaRadioButtonMenuItemActionPerformed
+    }//GEN-LAST:event_zeroTestRadioButtonMenuItemActionPerformed
 
-    private void zeroRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zeroRadioButtonMenuItemActionPerformed
+    private void cinquentaTestRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cinquentaTestRadioButtonMenuItemActionPerformed
+        abaConfigTabbedPane.setSelectedIndex(abaConfigTabbedPane.getTabCount() - 1);//ultima aba
         configTesteOclusao();
-    }//GEN-LAST:event_zeroRadioButtonMenuItemActionPerformed
+    }//GEN-LAST:event_cinquentaTestRadioButtonMenuItemActionPerformed
 
-    private void cinquentaRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cinquentaRadioButtonMenuItemActionPerformed
+    private void cinquentaCincoTestRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cinquentaCincoTestRadioButtonMenuItemActionPerformed
+        abaConfigTabbedPane.setSelectedIndex(abaConfigTabbedPane.getTabCount() - 1);//ultima aba
         configTesteOclusao();
-    }//GEN-LAST:event_cinquentaRadioButtonMenuItemActionPerformed
+    }//GEN-LAST:event_cinquentaCincoTestRadioButtonMenuItemActionPerformed
 
-    private void cinquentaCincoRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cinquentaCincoRadioButtonMenuItemActionPerformed
+    private void sessentaTestRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessentaTestRadioButtonMenuItemActionPerformed
+        abaConfigTabbedPane.setSelectedIndex(abaConfigTabbedPane.getTabCount() - 1);//ultima aba
         configTesteOclusao();
-    }//GEN-LAST:event_cinquentaCincoRadioButtonMenuItemActionPerformed
+    }//GEN-LAST:event_sessentaTestRadioButtonMenuItemActionPerformed
 
-    private void sessentaRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessentaRadioButtonMenuItemActionPerformed
+    private void sessentaCincoTestRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessentaCincoTestRadioButtonMenuItemActionPerformed
+        abaConfigTabbedPane.setSelectedIndex(abaConfigTabbedPane.getTabCount() - 1);//ultima aba
         configTesteOclusao();
-    }//GEN-LAST:event_sessentaRadioButtonMenuItemActionPerformed
+    }//GEN-LAST:event_sessentaCincoTestRadioButtonMenuItemActionPerformed
 
-    private void sessentaCincojRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessentaCincojRadioButtonMenuItemActionPerformed
+    private void setentaTestRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setentaTestRadioButtonMenuItemActionPerformed
+        abaConfigTabbedPane.setSelectedIndex(abaConfigTabbedPane.getTabCount() - 1);//ultima aba
         configTesteOclusao();
-    }//GEN-LAST:event_sessentaCincojRadioButtonMenuItemActionPerformed
+    }//GEN-LAST:event_setentaTestRadioButtonMenuItemActionPerformed
+
+    private void zeroTrainingRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zeroTrainingRadioButtonMenuItemActionPerformed
+        abaConfigTabbedPane.setSelectedIndex(abaConfigTabbedPane.getTabCount() - 1);//ultima aba
+        configTreinamentoOclusao();
+    }//GEN-LAST:event_zeroTrainingRadioButtonMenuItemActionPerformed
+
+    private void cinquentaTrainingRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cinquentaTrainingRadioButtonMenuItemActionPerformed
+        abaConfigTabbedPane.setSelectedIndex(abaConfigTabbedPane.getTabCount() - 1);//ultima aba
+        configTreinamentoOclusao();
+    }//GEN-LAST:event_cinquentaTrainingRadioButtonMenuItemActionPerformed
+
+    private void cinquentaCincoTrainingRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cinquentaCincoTrainingRadioButtonMenuItemActionPerformed
+        abaConfigTabbedPane.setSelectedIndex(abaConfigTabbedPane.getTabCount() - 1);//ultima aba
+        configTreinamentoOclusao();
+    }//GEN-LAST:event_cinquentaCincoTrainingRadioButtonMenuItemActionPerformed
+
+    private void sessentaTrainingRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessentaTrainingRadioButtonMenuItemActionPerformed
+        abaConfigTabbedPane.setSelectedIndex(abaConfigTabbedPane.getTabCount() - 1);//ultima aba
+        configTreinamentoOclusao();
+    }//GEN-LAST:event_sessentaTrainingRadioButtonMenuItemActionPerformed
+
+    private void sessentaCincoTrainingRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessentaCincoTrainingRadioButtonMenuItemActionPerformed
+        abaConfigTabbedPane.setSelectedIndex(abaConfigTabbedPane.getTabCount() - 1);//ultima aba
+        configTreinamentoOclusao();
+    }//GEN-LAST:event_sessentaCincoTrainingRadioButtonMenuItemActionPerformed
+
+    private void setentaTrainingRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setentaTrainingRadioButtonMenuItemActionPerformed
+        abaConfigTabbedPane.setSelectedIndex(abaConfigTabbedPane.getTabCount() - 1);//ultima aba
+        configTreinamentoOclusao(); 
+    }//GEN-LAST:event_setentaTrainingRadioButtonMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -985,16 +1121,24 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane abaConfigTabbedPane;
     private javax.swing.JButton baixoButton;
     private javax.swing.JButton botaoConfiVarVisuais;
     private javax.swing.JRadioButtonMenuItem cenario1_RadioButtonMenuItem;
     private javax.swing.JRadioButtonMenuItem cenario2_RadioButtonMenuItem;
     private javax.swing.JRadioButtonMenuItem cenario3_RadioButtonMenuItem;
     private javax.swing.JButton cimaButton;
-    private javax.swing.JRadioButtonMenuItem cinquentaCincoRadioButtonMenuItem;
-    private javax.swing.JRadioButtonMenuItem cinquentaRadioButtonMenuItem;
+    private javax.swing.JMenu cinquentaCincoMenu;
+    private javax.swing.ButtonGroup cinquentaCincoOcclusionButtonGroup;
+    private javax.swing.JRadioButtonMenuItem cinquentaCincoTestRadioButtonMenuItem;
+    private javax.swing.JRadioButtonMenuItem cinquentaCincoTrainingRadioButtonMenuItem;
+    private javax.swing.JMenu cinquentaMenu;
+    private javax.swing.ButtonGroup cinquentaOcclusionButtonGroup;
+    private javax.swing.JRadioButtonMenuItem cinquentaTestRadioButtonMenuItem;
+    private javax.swing.JRadioButtonMenuItem cinquentaTrainingRadioButtonMenuItem;
     private javax.swing.JComboBox<String> corComboBox;
     private javax.swing.JPanel detalhes_jPanel;
+    private javax.swing.JMenu fileMenu;
     private javax.swing.JPanel filter_jPanel;
     private javax.swing.JComboBox<String> formaComboBox;
     private javax.swing.JMenu glyphModelMenu;
@@ -1009,17 +1153,13 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JRadioButtonMenuItem maskInclusionRadioButtonMenuItem;
     private javax.swing.JLabel msgFeedback;
-    private javax.swing.ButtonGroup occlusionTestesButtonGroup;
+    private javax.swing.JMenu occlusionTestsMenu;
     private javax.swing.JMenuItem openFileMenuItem;
     private javax.swing.ButtonGroup overlapButtonGroup;
     private javax.swing.JRadioButtonMenuItem overlappingRadioButtonMenuItem;
@@ -1039,15 +1179,28 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
     private javax.swing.JRadioButton radio80;
     private javax.swing.JButton removerButton;
     private javax.swing.ButtonGroup scenariosButtonGroup;
-    private javax.swing.JRadioButtonMenuItem sessentaCincojRadioButtonMenuItem;
-    private javax.swing.JRadioButtonMenuItem sessentaRadioButtonMenuItem;
+    private javax.swing.JMenu scenariosMenu;
+    private javax.swing.JMenu sessentaCincoMenu;
+    private javax.swing.ButtonGroup sessentaCincoOcclusionButtonGroup;
+    private javax.swing.JRadioButtonMenuItem sessentaCincoTestRadioButtonMenuItem;
+    private javax.swing.JRadioButtonMenuItem sessentaCincoTrainingRadioButtonMenuItem;
+    private javax.swing.JMenu sessentaMenu;
+    private javax.swing.ButtonGroup sessentaOcclusionButtonGroup;
+    private javax.swing.JRadioButtonMenuItem sessentaTestRadioButtonMenuItem;
+    private javax.swing.JRadioButtonMenuItem sessentaTrainingRadioButtonMenuItem;
     private javax.swing.JPanel setUP_jPanel;
-    private javax.swing.JRadioButtonMenuItem setentaRadioButtonMenuItem;
+    private javax.swing.JMenu setentaMenu;
+    private javax.swing.ButtonGroup setentaOcclusionButtonGroup;
+    private javax.swing.JRadioButtonMenuItem setentaTestRadioButtonMenuItem;
+    private javax.swing.JRadioButtonMenuItem setentaTrainingRadioButtonMenuItem;
     private javax.swing.JComboBox<String> texturaComboBox;
     private javax.swing.JList<String> varVisuaisEscolidasList;
     private javax.swing.JList<String> varVisuaisList;
     private javax.swing.JButton viewGlyphsButton;
-    private javax.swing.JRadioButtonMenuItem zeroRadioButtonMenuItem;
+    private javax.swing.JMenu zeroMenu;
+    private javax.swing.ButtonGroup zeroOcclusionButtonGroup;
+    private javax.swing.JRadioButtonMenuItem zeroTestRadioButtonMenuItem;
+    private javax.swing.JRadioButtonMenuItem zeroTrainingRadioButtonMenuItem;
     // End of variables declaration//GEN-END:variables
 
     public void configGrid() {
@@ -1103,18 +1256,35 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 
     private void configTesteOclusao() {
         configInicioTestes();
-        if (zeroRadioButtonMenuItem.isSelected()) {
+        if (zeroTestRadioButtonMenuItem.isSelected()) {
             scenarioManager.carregarCenarios("0%");
-        } else if (cinquentaRadioButtonMenuItem.isSelected()) {
+        } else if (cinquentaTestRadioButtonMenuItem.isSelected()) {
             scenarioManager.carregarCenarios("50%");
-        } else if (cinquentaCincoRadioButtonMenuItem.isSelected()) {
+        } else if (cinquentaCincoTestRadioButtonMenuItem.isSelected()) {
             scenarioManager.carregarCenarios("55%");
-        } else if (sessentaRadioButtonMenuItem.isSelected()) {
+        } else if (sessentaTestRadioButtonMenuItem.isSelected()) {
             scenarioManager.carregarCenarios("60%");
-        } else if (sessentaCincojRadioButtonMenuItem.isSelected()) {
+        } else if (sessentaCincoTestRadioButtonMenuItem.isSelected()) {
             scenarioManager.carregarCenarios("65%");
         } else {
             scenarioManager.carregarCenarios("70%");
+        }
+    }
+    
+    private void configTreinamentoOclusao(){
+        configInicioTestes();
+        if (zeroTrainingRadioButtonMenuItem.isSelected()) {
+            scenarioManager.carregarCenariosTreinamento("0%");
+        } else if (cinquentaTrainingRadioButtonMenuItem.isSelected()) {
+            scenarioManager.carregarCenariosTreinamento("50%");
+        } else if (cinquentaCincoTrainingRadioButtonMenuItem.isSelected()) {
+            scenarioManager.carregarCenariosTreinamento("55%");
+        } else if (sessentaTrainingRadioButtonMenuItem.isSelected()) {
+            scenarioManager.carregarCenariosTreinamento("60%");
+        } else if (sessentaCincoTrainingRadioButtonMenuItem.isSelected()) {
+            scenarioManager.carregarCenariosTreinamento("65%");
+        } else {
+            scenarioManager.carregarCenariosTreinamento("70%");
         }
     }
 

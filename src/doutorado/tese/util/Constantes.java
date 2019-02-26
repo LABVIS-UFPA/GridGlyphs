@@ -39,10 +39,15 @@ public class Constantes {
     public static final int AUSENTE = 0;
 
     private static String[] corSaturation = {
-        "#EDC9E5",
-        "#D2A1C1",
-        "#C48EB2",
-        "#9D6D97",
+//        "#EDC9E5",
+//        "#D2A1C1",
+//        "#C48EB2",
+//        "#9D6D97",
+//        "#7C4D79"
+        "#EEC9E5",
+        "#D6A6C6",
+        "#BC86A9",
+        "#986995",
         "#7C4D79"
     };
 
@@ -74,7 +79,7 @@ public class Constantes {
     
 
     public final static String[] LETRAS_ALFABETO = {
-        "A", "B", "C", "D", "E"//, "F", "G", "H"
+        "A", "C", "E", "K", "J"//, "F", "G", "H"
     };
 
     public final static String[] NUMEROS = {

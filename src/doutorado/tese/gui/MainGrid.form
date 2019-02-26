@@ -58,14 +58,39 @@
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="glyphModelRadioGroup.add(overlappingRadioButtonMenuItem);&#xa;glyphModelRadioGroup.add(maskInclusionRadioButtonMenuItem);"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="occlusionTestesButtonGroup">
+    <Component class="javax.swing.ButtonGroup" name="zeroOcclusionButtonGroup">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="occlusionTestesButtonGroup.add(zeroRadioButtonMenuItem);&#xa;occlusionTestesButtonGroup.add(cinquentaRadioButtonMenuItem);&#xa;occlusionTestesButtonGroup.add(cinquentaCincoRadioButtonMenuItem);&#xa;occlusionTestesButtonGroup.add(sessentaRadioButtonMenuItem);&#xa;occlusionTestesButtonGroup.add(sessentaCincojRadioButtonMenuItem);&#xa;occlusionTestesButtonGroup.add(setentaRadioButtonMenuItem);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="zeroOcclusionButtonGroup.add(zeroTestRadioButtonMenuItem);&#xa;zeroOcclusionButtonGroup.add(zeroTrainingRadioButtonMenuItem);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="cinquentaOcclusionButtonGroup">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="cinquentaOcclusionButtonGroup.add(cinquentaTestRadioButtonMenuItem);&#xa;cinquentaOcclusionButtonGroup.add(cinquentaTrainingRadioButtonMenuItem);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="cinquentaCincoOcclusionButtonGroup">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="cinquentaCincoOcclusionButtonGroup.add(cinquentaCincoTestRadioButtonMenuItem);&#xa;cinquentaCincoOcclusionButtonGroup.add(cinquentaCincoTrainingRadioButtonMenuItem);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="sessentaOcclusionButtonGroup">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="sessentaOcclusionButtonGroup.add(sessentaTestRadioButtonMenuItem);&#xa;sessentaOcclusionButtonGroup.add(sessentaTrainingRadioButtonMenuItem);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="sessentaCincoOcclusionButtonGroup">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="sessentaCincoOcclusionButtonGroup.add(sessentaTestRadioButtonMenuItem);&#xa;sessentaCincoOcclusionButtonGroup.add(sessentaTrainingRadioButtonMenuItem);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="setentaOcclusionButtonGroup">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="setentaOcclusionButtonGroup.add(setentaTestRadioButtonMenuItem);&#xa;setentaOcclusionButtonGroup.add(setentaTrainingRadioButtonMenuItem);"/>
       </AuxValues>
     </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu1">
+        <Menu class="javax.swing.JMenu" name="fileMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
@@ -80,7 +105,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
+        <Menu class="javax.swing.JMenu" name="scenariosMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Scenarios"/>
           </Properties>
@@ -111,59 +136,149 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu3">
+        <Menu class="javax.swing.JMenu" name="occlusionTestsMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Occlusion Tests"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="zeroRadioButtonMenuItem">
+            <Menu class="javax.swing.JMenu" name="zeroMenu">
               <Properties>
                 <Property name="text" type="java.lang.String" value="0%"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="zeroRadioButtonMenuItemActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="cinquentaRadioButtonMenuItem">
+              <SubComponents>
+                <MenuItem class="javax.swing.JRadioButtonMenuItem" name="zeroTestRadioButtonMenuItem">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Test - 0%"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="zeroTestRadioButtonMenuItemActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JRadioButtonMenuItem" name="zeroTrainingRadioButtonMenuItem">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Training - 0%"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="zeroTrainingRadioButtonMenuItemActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="cinquentaMenu">
               <Properties>
                 <Property name="text" type="java.lang.String" value="50%"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cinquentaRadioButtonMenuItemActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="cinquentaCincoRadioButtonMenuItem">
+              <SubComponents>
+                <MenuItem class="javax.swing.JRadioButtonMenuItem" name="cinquentaTestRadioButtonMenuItem">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Test - 50%"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cinquentaTestRadioButtonMenuItemActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JRadioButtonMenuItem" name="cinquentaTrainingRadioButtonMenuItem">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Training - 50%"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cinquentaTrainingRadioButtonMenuItemActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="cinquentaCincoMenu">
               <Properties>
                 <Property name="text" type="java.lang.String" value="55%"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cinquentaCincoRadioButtonMenuItemActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="sessentaRadioButtonMenuItem">
+              <SubComponents>
+                <MenuItem class="javax.swing.JRadioButtonMenuItem" name="cinquentaCincoTestRadioButtonMenuItem">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Test - 55%"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cinquentaCincoTestRadioButtonMenuItemActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JRadioButtonMenuItem" name="cinquentaCincoTrainingRadioButtonMenuItem">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Training - 55%"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cinquentaCincoTrainingRadioButtonMenuItemActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="sessentaMenu">
               <Properties>
                 <Property name="text" type="java.lang.String" value="60%"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sessentaRadioButtonMenuItemActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="sessentaCincojRadioButtonMenuItem">
+              <SubComponents>
+                <MenuItem class="javax.swing.JRadioButtonMenuItem" name="sessentaTestRadioButtonMenuItem">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Test - 60%"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sessentaTestRadioButtonMenuItemActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JRadioButtonMenuItem" name="sessentaTrainingRadioButtonMenuItem">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Training - 60%"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sessentaTrainingRadioButtonMenuItemActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="sessentaCincoMenu">
               <Properties>
                 <Property name="text" type="java.lang.String" value="65%"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sessentaCincojRadioButtonMenuItemActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="setentaRadioButtonMenuItem">
+              <SubComponents>
+                <MenuItem class="javax.swing.JRadioButtonMenuItem" name="sessentaCincoTestRadioButtonMenuItem">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Test - 65%"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sessentaCincoTestRadioButtonMenuItemActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JRadioButtonMenuItem" name="sessentaCincoTrainingRadioButtonMenuItem">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Training - 65%"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sessentaCincoTrainingRadioButtonMenuItemActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="setentaMenu">
               <Properties>
                 <Property name="text" type="java.lang.String" value="70%"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="setentaRadioButtonMenuItemActionPerformed"/>
-              </Events>
-            </MenuItem>
+              <SubComponents>
+                <MenuItem class="javax.swing.JRadioButtonMenuItem" name="setentaTestRadioButtonMenuItem">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Test - 70%"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="setentaTestRadioButtonMenuItemActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JRadioButtonMenuItem" name="setentaTrainingRadioButtonMenuItem">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Training - 70%"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="setentaTrainingRadioButtonMenuItemActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="glyphModelMenu">
@@ -279,7 +394,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTabbedPane1" pref="325" max="32767" attributes="0"/>
+                          <Component id="abaConfigTabbedPane" pref="325" max="32767" attributes="0"/>
                           <Component id="painel_legenda" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -289,7 +404,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jTabbedPane1" min="-2" pref="246" max="-2" attributes="0"/>
+                      <Component id="abaConfigTabbedPane" min="-2" pref="246" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="painel_legenda" max="32767" attributes="0"/>
                   </Group>
@@ -297,7 +412,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+            <Container class="javax.swing.JTabbedPane" name="abaConfigTabbedPane">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
               <SubComponents>
