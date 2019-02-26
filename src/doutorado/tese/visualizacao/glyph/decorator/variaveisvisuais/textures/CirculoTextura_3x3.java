@@ -1,5 +1,6 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.textures;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -105,11 +106,13 @@ public class CirculoTextura_3x3 implements DrawBehavior{
 
     @Override
     public void drawForeground(Graphics2D g2d) {
-        g2d.setColor(Color.WHITE);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.fill(p);
-        g2d.setColor(Color.BLACK);
+        g2d.setColor(Color.WHITE);
+        g2d.setStroke(new BasicStroke(1.5f));
         g2d.draw(p);
+        g2d.setColor(Color.BLACK);
+        g2d.fill(p);
+        g2d.setStroke(new BasicStroke(1));
     }
     
     @Override

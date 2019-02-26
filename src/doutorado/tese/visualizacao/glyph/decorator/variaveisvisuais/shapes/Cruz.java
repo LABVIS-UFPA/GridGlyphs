@@ -5,6 +5,7 @@
  */
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
@@ -32,8 +33,10 @@ public class Cruz implements DrawBehavior {
 
         g2d.setColor(this.cor);
         g2d.fillPolygon(p);
-        g2d.setColor(Color.BLACK);
+        g2d.setStroke(new BasicStroke(1.5f));
+        g2d.setColor(Color.WHITE);
         g2d.drawPolygon(p);
+        g2d.setStroke(new BasicStroke(1f));
     }
 
     //função para deixar os glyphs quadrados

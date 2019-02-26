@@ -1,5 +1,6 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -32,8 +33,10 @@ public class Circulo implements DrawBehavior{
                
         g2d.setColor(this.cor);
         g2d.fill(p);
+//        g2d.setStroke(new BasicStroke(2f));
         g2d.setColor(Color.black);
         g2d.draw(p);
+//        g2d.setStroke(new BasicStroke(1f));
     }
     
     //função para deixar os glyphs quadrados

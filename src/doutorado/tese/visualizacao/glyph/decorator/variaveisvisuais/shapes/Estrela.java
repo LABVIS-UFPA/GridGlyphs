@@ -5,6 +5,7 @@
  */
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.shapes;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
@@ -31,8 +32,10 @@ public class Estrela implements DrawBehavior {
 
         g2d.setColor(this.cor);
         g2d.fillPolygon(p);
-        g2d.setColor(Color.BLACK);
+//        g2d.setStroke(new BasicStroke(2f));
+        g2d.setColor(Color.black);
         g2d.drawPolygon(p);
+//        g2d.setStroke(new BasicStroke(1f));
     }
 
     private int[] verificarRetangulo(int[] point) {
