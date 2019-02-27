@@ -9,7 +9,9 @@ import doutorado.tese.legenda.Legenda;
 import doutorado.tese.util.io.Escritor;
 import doutorado.tese.visualizacao.grid.Grid;
 import doutorado.tese.visualizacao.grid.ItemGrid;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -83,6 +85,20 @@ public class ScenarioManager {
             default:
                 throw new AssertionError();
         }
+    }
+
+    private String[] shufflerVarVisuais() {
+        String[] vetor = new String[vetorVarVisuais.length - 2];
+        List<Integer> listaRejeitados = new ArrayList();
+        int indiceSorteado = -1;
+        for (int i = 0; i < vetor.length; i++) {
+            do {
+                indiceSorteado = (int) (Math.random() * vetor.length);
+            } while (listaRejeitados.contains(indiceSorteado));
+            listaRejeitados.add(indiceSorteado);
+            vetor[i] = vetorVarVisuais[indiceSorteado];
+        }
+        return vetor;
     }
 
     private void carregarTreinamentoOclusao(int posicaoVetorPorcentagemOclusao) {
@@ -199,7 +215,7 @@ public class ScenarioManager {
                 linhaLog[12] = Arrays.asList(gridPanel.getGlyphManager().getListNomeOrientacoesSorteada()).toString().replace(",", ";");
                 break;
             case "Letter":
-                System.out.println(Arrays.asList(gridPanel.getGlyphManager().getLetras()));
+//                System.out.println(Arrays.asList(gridPanel.getGlyphManager().getLetras()));
                 linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getLetras()).replace(",", ";");
                 break;
             default:
@@ -236,16 +252,19 @@ public class ScenarioManager {
 
     private void carregarCenarioOclusao(int posicaoVetorPorcentagemOclusao) {
         gridPanel.setGlyphOverlappingModel(true);//definir glyph model
+        String[] shufflerVarVisuais = shufflerVarVisuais();
+        System.out.println(Arrays.asList(shufflerVarVisuais));
         t1 = new Thread(new Runnable() {
             @Override
             public void run() {
 //                for (int t = 0; t < vetorTamScala.length - 2; t++) {
                 int posicaoVetorTamanho = 2;
                 for (int questao = 0; questao < vetorQuestoes.length; questao++) {
-                    for (int i = 0; i < vetorVarVisuais.length - 2; i++) {
+                    for (int i = 0; i < shufflerVarVisuais.length; i++) {
                         for (int q = 0; q < vetorQuantConjVarVisuais.length; q++) {
                             for (int j = 0; j < numVisualizacoes; j++) {
-                                setConfigCenario(false, posicaoVetorTamanho, posicaoVetorPorcentagemOclusao, questao, q, new String[]{vetorVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
+                                setConfigCenario(false, posicaoVetorTamanho, posicaoVetorPorcentagemOclusao, questao, q, 
+                                        new String[]{shufflerVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
                             }
                         }
                     }
