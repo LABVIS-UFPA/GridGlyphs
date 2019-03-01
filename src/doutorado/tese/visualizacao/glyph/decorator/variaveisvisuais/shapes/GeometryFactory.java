@@ -14,15 +14,15 @@ public class GeometryFactory {
     public static final class FORMAS {
 
         public enum GLYPH_FORMAS {
-            CRUZ("CRUZ"),
+            RETANGULO("RETANGULO"), //0
+            CIRCULO("CIRCULO"),     //1
+            LOSANGO("LOSANGO"),     //2
+            ESTRELA("ESTRELA"),     //3
+            CRUZ("CRUZ");           //4
 //            ELLIPSE("ELLIPSE"),
 //            HEXAGONO("HEXAGONO"),
-            LOSANGO("LOSANGO"),
 //            PENTAGONO("PENTAGONO"),
 //            TRAPEZIO("TRAPEZIO"),
-            RETANGULO("RETANGULO"),
-            CIRCULO("CIRCULO"),
-            ESTRELA("ESTRELA");
 
             private final String nome;
 

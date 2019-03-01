@@ -44,42 +44,49 @@ public class Constantes {
 //        "#C48EB2",
 //        "#9D6D97",
 //        "#7C4D79"
-        "#EEC9E5",
-        "#D6A6C6",
-        "#BC86A9",
-        "#986995",
-        "#7C4D79"
-    };
-
-
-    private static String[] corGlyphs = {
-        "#41BA2F",
-        "#FFFF01",
-        "#FF0101",
-        "#2C2CFF",
-        "#EBC089"
+        "#EEC9E5",//0
+        "#D6A6C6",//1
+        "#BC86A9",//2
+        "#986995",//3
+        "#7C4D79" //4
     };
     
+    private static String[] corGlyphs3 = {
+        "#FF0101",//vermelho 0
+        "#2C2CFF",//azul     1
+        "#EBC089"//beje      2
+    };
 
+    private static String[] corGlyphs4 = {
+        "#FF0101",//vermelho 0
+        "#2C2CFF",//azul     1
+        "#EBC089",//beje     2
+        "#FFFF01"//amarelo   3
+    };
+
+    private static String[] corGlyphs5 = {
+        "#FF0101",//vermelho - 1
+        "#2C2CFF",//azul     - 2
+        "#EBC089",//beje     - 3
+        "#FFFF01",//amarelo  - 4
+        "#41BA2F"//verde     - 5
+    };
+    
     public final static String[] TIPO_ORIENTATION = {
-        "180graus",
-        "72graus",
-        "135graus",
-        "108graus",
-        "45graus",
+        "180graus",//0
+        "45graus" ,//1
+        "72graus" ,//2
+        "108graus",//3
+        "135graus" //4
     };
     
-        public final static String[] TIPO_TEXTURE = {
-            "PATTERN_CIRCLE_1",
-            "PATTERN_CIRCLE_2",
-            "PATTERN_CIRCLE_3",
-            "PATTERN_CIRCLE_4",
-            "PATTERN_CIRCLE_5"      
-    };
-    
-
     public final static String[] LETRAS_ALFABETO = {
-        "A", "C", "E", "K", "J"//, "F", "G", "H"
+        "C", 
+        "E", 
+        "K", 
+        "A", 
+        "J"
+//, "F", "G", "H"
     };
 
     public final static String[] NUMEROS = {
@@ -144,10 +151,10 @@ public class Constantes {
     }
 
     /**
-     * @return the corGlyphs
+     * @return the corGlyphs5
      */
     public static String[] getCorGlyphs() {
-        return corGlyphs;
+        return corGlyphs5;
     }
 
 }

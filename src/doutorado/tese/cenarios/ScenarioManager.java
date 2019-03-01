@@ -253,23 +253,44 @@ public class ScenarioManager {
     private void carregarCenarioOclusao(int posicaoVetorPorcentagemOclusao) {
         gridPanel.setGlyphOverlappingModel(true);//definir glyph model
         String[] shufflerVarVisuais = shufflerVarVisuais();
-        System.out.println(Arrays.asList(shufflerVarVisuais));
+
         t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-//                for (int t = 0; t < vetorTamScala.length - 2; t++) {
                 int posicaoVetorTamanho = 2;
                 for (int questao = 0; questao < vetorQuestoes.length; questao++) {
                     for (int i = 0; i < shufflerVarVisuais.length; i++) {
                         for (int q = 0; q < vetorQuantConjVarVisuais.length; q++) {
+                            switch (shufflerVarVisuais[i]) {
+                                case "Texture":
+
+                                    break;
+                                case "Color":
+
+                                    break;
+                                case "Shape":
+
+                                    break;
+                                case "Saturation":
+
+                                    break;
+                                case "Orientation":
+
+                                    break;
+                                case "Letter":
+
+                                    break;
+                                default:
+                                    throw new AssertionError();
+                            }
+
                             for (int j = 0; j < numVisualizacoes; j++) {
-                                setConfigCenario(false, posicaoVetorTamanho, posicaoVetorPorcentagemOclusao, questao, q, 
+                                setConfigCenario(false, posicaoVetorTamanho, posicaoVetorPorcentagemOclusao, questao, q,
                                         new String[]{shufflerVarVisuais[i], vetorVarVisuais[vetorVarVisuais.length - 1]});
                             }
                         }
                     }
                 }
-//                }
                 JOptionPane.showMessageDialog(null, "Thanks for participate!", "Thanks!", JOptionPane.INFORMATION_MESSAGE);
                 System.exit(0);
             }

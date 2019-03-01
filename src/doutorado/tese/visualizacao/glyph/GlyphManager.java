@@ -186,7 +186,19 @@ public class GlyphManager {
 
     private Glyph defineRandomOrientation() {
         if (getOrientacoes() == null) {
-            definirConjuntoOrientation(quantValoresVarVisuais);
+            switch (quantValoresVarVisuais) {
+                case 3:
+                    orientacoes = new Integer[]{0, 3, 1};
+                    break;
+                case 4:
+                    orientacoes = new Integer[]{0, 1, 3, 4};
+                    break;
+                case 5:
+                    orientacoes = new Integer[]{0, 1, 2, 3, 4};
+                    break;
+                default:
+                    definirConjuntoOrientation(quantValoresVarVisuais);
+            }
         }
         int random = (int) (Math.random() * quantValoresVarVisuais);
         while (random == orientacaoSorteada) {
@@ -204,10 +216,45 @@ public class GlyphManager {
         orientacao.setOverlappingActivated(overlappingActivated);
         return glyph;
     }
+    
+    public void definirConjuntoOrientation(int quantValoresVarVisuais) {
+        ArrayList<Integer> sorteados = new ArrayList<>();
+        listNomeOrientacoesSorteada = new ArrayList<>();
+        for (int i = 0; i < quantValoresVarVisuais; i++) {
+            int random;
+            do {
+                random = (int) (Math.random() * Constantes.TIPO_ORIENTATION.length);
+            } while (sorteados.contains(random));
+            sorteados.add(random);
+            getListNomeOrientacoesSorteada().add(Constantes.TIPO_ORIENTATION[random]);
+        }
+        orientacoes = sorteados.toArray(new Integer[]{});
+    }
 
     private Glyph defineRandomTexture() {
         if (getTexturas() == null) {
-            definirConjuntoTexturas(quantValoresVarVisuais);
+            switch (quantValoresVarVisuais) {
+                case 3:
+                    texturas = new TexturesFactory.Textute.GLYPH_TEXTURAS[]{TexturesFactory.Textute.GLYPH_TEXTURAS.values()[0],
+                                                                            TexturesFactory.Textute.GLYPH_TEXTURAS.values()[2],
+                                                                            TexturesFactory.Textute.GLYPH_TEXTURAS.values()[4]};
+                    break;
+                case 4:
+                    texturas = new TexturesFactory.Textute.GLYPH_TEXTURAS[]{TexturesFactory.Textute.GLYPH_TEXTURAS.values()[0],
+                                                                            TexturesFactory.Textute.GLYPH_TEXTURAS.values()[2],
+                                                                            TexturesFactory.Textute.GLYPH_TEXTURAS.values()[3],
+                                                                            TexturesFactory.Textute.GLYPH_TEXTURAS.values()[4]};
+                    break;
+                case 5:
+                    texturas = new TexturesFactory.Textute.GLYPH_TEXTURAS[]{TexturesFactory.Textute.GLYPH_TEXTURAS.values()[0],
+                                                                            TexturesFactory.Textute.GLYPH_TEXTURAS.values()[1],
+                                                                            TexturesFactory.Textute.GLYPH_TEXTURAS.values()[2],
+                                                                            TexturesFactory.Textute.GLYPH_TEXTURAS.values()[3],
+                                                                            TexturesFactory.Textute.GLYPH_TEXTURAS.values()[4]};
+                    break;
+                default:
+                    definirConjuntoTexturas(quantValoresVarVisuais);
+            }
         }
         int random = (int) (Math.random() * quantValoresVarVisuais);
         while (random == texturaSorteada) {
@@ -242,24 +289,31 @@ public class GlyphManager {
         }
         texturas = sorteados.toArray(new TexturesFactory.Textute.GLYPH_TEXTURAS[]{});
     }
-    
-    public void definirConjuntoOrientation(int quantValoresVarVisuais) {
-        ArrayList<Integer> sorteados = new ArrayList<>();
-        listNomeOrientacoesSorteada = new ArrayList<>();
-        for (int i = 0; i < quantValoresVarVisuais; i++) {
-            int random;
-            do {
-                random = (int) (Math.random() * Constantes.TIPO_ORIENTATION.length);
-            } while (sorteados.contains(random));
-            sorteados.add(random);
-            getListNomeOrientacoesSorteada().add(Constantes.TIPO_ORIENTATION[random]);
-        }
-        orientacoes = sorteados.toArray(new Integer[]{});
-    }
 
     private Glyph defineRandomColor() {
         if (getCores() == null) {
-            definirConjuntoCores(quantValoresVarVisuais);
+            switch (quantValoresVarVisuais) {
+                case 3:
+                    cores = new Color[]{Color.decode(Constantes.getCorGlyphs()[0]),
+                                        Color.decode(Constantes.getCorGlyphs()[1]),
+                                        Color.decode(Constantes.getCorGlyphs()[2])};
+                    break;
+                case 4:
+                    cores = new Color[]{Color.decode(Constantes.getCorGlyphs()[0]),
+                                        Color.decode(Constantes.getCorGlyphs()[1]),
+                                        Color.decode(Constantes.getCorGlyphs()[2]),
+                                        Color.decode(Constantes.getCorGlyphs()[3])};
+                    break;
+                case 5:
+                    cores = new Color[]{Color.decode(Constantes.getCorGlyphs()[0]),
+                                        Color.decode(Constantes.getCorGlyphs()[1]),
+                                        Color.decode(Constantes.getCorGlyphs()[2]),
+                                        Color.decode(Constantes.getCorGlyphs()[3]),
+                                        Color.decode(Constantes.getCorGlyphs()[4])};
+                    break;
+                default:
+                    definirConjuntoCores(quantValoresVarVisuais);
+            }
         }
         int random = (int) (Math.random() * quantValoresVarVisuais);
         while (random == corSorteada) {
@@ -279,8 +333,29 @@ public class GlyphManager {
     }
 
     private Glyph defineRandomColorSaturation() {
-        if(getSaturacoes() == null){
-            definirConjuntoCoresSaturacao(quantValoresVarVisuais);
+        if (getSaturacoes() == null) {
+            switch (quantValoresVarVisuais) {
+                case 3:
+                    saturacoes = new Color[]{Color.decode(Constantes.getCorSaturation()[0]),
+                                        Color.decode(Constantes.getCorSaturation()[2]),
+                                        Color.decode(Constantes.getCorSaturation()[4])};
+                    break;
+                case 4:
+                    saturacoes = new Color[]{Color.decode(Constantes.getCorSaturation()[0]),
+                                        Color.decode(Constantes.getCorSaturation()[1]),
+                                        Color.decode(Constantes.getCorSaturation()[2]),
+                                        Color.decode(Constantes.getCorSaturation()[4])};
+                    break;
+                case 5:
+                    saturacoes = new Color[]{Color.decode(Constantes.getCorSaturation()[0]),
+                                        Color.decode(Constantes.getCorSaturation()[1]),
+                                        Color.decode(Constantes.getCorSaturation()[2]),
+                                        Color.decode(Constantes.getCorSaturation()[3]),
+                                        Color.decode(Constantes.getCorSaturation()[4])};
+                    break;
+                default:
+                    definirConjuntoCoresSaturacao(quantValoresVarVisuais);
+            }
         }
         int random = (int) (Math.random() * quantValoresVarVisuais);
         while (random == corSaturadaSorteada) {
@@ -301,7 +376,28 @@ public class GlyphManager {
 
     private Glyph defineRandomShape() {
         if (getFormaGeometricas() == null) {
-            definirConjuntoFormas(quantValoresVarVisuais);
+            switch (quantValoresVarVisuais) {
+                case 3:
+                    formaGeometricas = new GeometryFactory.FORMAS.GLYPH_FORMAS[]{GeometryFactory.FORMAS.GLYPH_FORMAS.values()[0],
+                                                                                 GeometryFactory.FORMAS.GLYPH_FORMAS.values()[1],
+                                                                                 GeometryFactory.FORMAS.GLYPH_FORMAS.values()[2]};
+                    break;
+                case 4:
+                    formaGeometricas = new GeometryFactory.FORMAS.GLYPH_FORMAS[]{GeometryFactory.FORMAS.GLYPH_FORMAS.values()[0],
+                                                                                 GeometryFactory.FORMAS.GLYPH_FORMAS.values()[1],
+                                                                                 GeometryFactory.FORMAS.GLYPH_FORMAS.values()[2],
+                                                                                 GeometryFactory.FORMAS.GLYPH_FORMAS.values()[3]};
+                    break;
+                case 5:
+                    formaGeometricas = new GeometryFactory.FORMAS.GLYPH_FORMAS[]{GeometryFactory.FORMAS.GLYPH_FORMAS.values()[0],
+                                                                                 GeometryFactory.FORMAS.GLYPH_FORMAS.values()[1],
+                                                                                 GeometryFactory.FORMAS.GLYPH_FORMAS.values()[2],
+                                                                                 GeometryFactory.FORMAS.GLYPH_FORMAS.values()[3],
+                                                                                 GeometryFactory.FORMAS.GLYPH_FORMAS.values()[4]};
+                    break;
+                default:
+                    definirConjuntoFormas(quantValoresVarVisuais);
+            }
         }
         int random = (int) (Math.random() * quantValoresVarVisuais);
         while (random == formaSorteada) {
@@ -325,16 +421,37 @@ public class GlyphManager {
         forma.setColor(Color.BLACK);
         return glyph;
     }
-    
+
     private Glyph defineRandomLetter() {
-        if(getLetras() == null){
-            definirConjuntoLetras(quantValoresVarVisuais);
+        if (getLetras() == null) {
+            switch (quantValoresVarVisuais) {
+                case 3:
+                    letras = new String[]{Constantes.LETRAS_ALFABETO[0],
+                                          Constantes.LETRAS_ALFABETO[1],
+                                          Constantes.LETRAS_ALFABETO[2]};
+                    break;
+                case 4:
+                    letras = new String[]{Constantes.LETRAS_ALFABETO[0],
+                                          Constantes.LETRAS_ALFABETO[1],
+                                          Constantes.LETRAS_ALFABETO[2],
+                                          Constantes.LETRAS_ALFABETO[3]};
+                    break;
+                case 5:
+                    letras = new String[]{Constantes.LETRAS_ALFABETO[0],
+                                          Constantes.LETRAS_ALFABETO[1],
+                                          Constantes.LETRAS_ALFABETO[2],
+                                          Constantes.LETRAS_ALFABETO[3],
+                                          Constantes.LETRAS_ALFABETO[4]};
+                    break;
+                default:
+                    definirConjuntoLetras(quantValoresVarVisuais);
+            }
         }
         int random = (int) (Math.random() * quantValoresVarVisuais);
         while (random == letraSorteada) {
             random = (int) (Math.random() * quantValoresVarVisuais);
         }
-        
+
         Glyph glyph = new Letra();
         letra = (Letra) glyph;
         if (letraSorteada == -1) {
@@ -347,7 +464,7 @@ public class GlyphManager {
         return glyph;
     }
 
-    public void definirConjuntoLetras(int quantValoresVarVisuais){
+    public void definirConjuntoLetras(int quantValoresVarVisuais) {
         ArrayList<String> sorteados = new ArrayList<>();
         for (int i = 0; i < quantValoresVarVisuais; i++) {
             int random;
@@ -358,7 +475,7 @@ public class GlyphManager {
         }
         setLetras(sorteados.toArray(new String[]{}));
     }
-    
+
     public void definirConjuntoFormas(int quantValoresVarVisuais) {
         ArrayList<GeometryFactory.FORMAS.GLYPH_FORMAS> sorteados = new ArrayList<>();
         for (int i = 0; i < quantValoresVarVisuais; i++) {
@@ -374,7 +491,7 @@ public class GlyphManager {
     public void setQuantValoresVarVisuais(int quantValoresVarVisuais) {
         this.quantValoresVarVisuais = quantValoresVarVisuais;
     }
-    
+
     public void definirConjuntoCoresSaturacao(int quantValoresVarVisuais) {
         ArrayList<Color> sorteados = new ArrayList<>();
 
@@ -387,7 +504,6 @@ public class GlyphManager {
         }
         setSaturacoes(sorteados.toArray(new Color[]{}));
     }
-    
 
     public void definirConjuntoCores(int quantValoresVarVisuais) {
         ArrayList<Color> sorteados = new ArrayList<>();
@@ -441,7 +557,7 @@ public class GlyphManager {
     public void setLetras(String[] letras) {
         this.letras = letras;
     }
-       
+
     /**
      * @return the saturacoes
      */

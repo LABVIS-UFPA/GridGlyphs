@@ -65,8 +65,8 @@ public class Cruz implements DrawBehavior {
 
         int halfWidth = width / 2;
         int halfHeight = height / 2;
-        int innerWidth = width / 4;
-        int innerHeight = height / 4;
+        int innerWidth = width / 5;
+        int innerHeight = height / 5;
 
         halfWidth += rect.x + rect.width / 2 - width / 2;
         halfHeight += rect.y + rect.height / 2 - height / 2;
