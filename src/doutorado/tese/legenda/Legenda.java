@@ -56,7 +56,7 @@ public class Legenda extends JPanel {
                     paiClone.appendChild(filhoClone);
 //                }
             }
-            paiClone.setBounds(new Rectangle(getBounds().x, 6, 75, 75));
+            paiClone.setBounds(new Rectangle(getBounds().x, 6, 48, 48));
         } catch (CloneNotSupportedException ex) {
             Logger.getLogger(Legenda.class.getName()).log(Level.SEVERE, null, ex);
         }

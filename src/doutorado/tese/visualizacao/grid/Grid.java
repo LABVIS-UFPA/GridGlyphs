@@ -133,8 +133,9 @@ public class Grid extends JPanel {
         if (matrizGlyph != null) {
             for (int i = 0; i < getQuantHoriz(); i++) {
                 for (int j = 0; j < getQuantVert(); j++) {
-                    if(matrizGlyph[i] == null || matrizGlyph[i][j] == null)
-                        return ;
+                    if (matrizGlyph[i] == null || matrizGlyph[i][j] == null) {
+                        return;
+                    }
                     if (matrizGlyph[i][j].getBounds() != null) {
                         int x = matrizGlyph[i][j].getBounds().x;
                         int y = matrizGlyph[i][j].getBounds().y;
@@ -214,7 +215,8 @@ public class Grid extends JPanel {
             for (int j = 0; j < getQuantVert(); j++) {
                 int x = i * size;
                 int y = j * size;
-                matrizGlyph[i][j].setBounds(new Rectangle(x, y, size, size));
+                matrizGlyph[i][j].setBounds(new Rectangle(x + (size * 8), y + (size * 5), size, size));
+//                matrizGlyph[i][j].setBounds(new Rectangle(x, y, size, size));
             }
         }
     }
@@ -222,7 +224,7 @@ public class Grid extends JPanel {
     public void shufflePosition() {
         int n = getQuantHoriz() * getQuantVert() * 10;
         int cont = 0;
-        
+
         while (cont < n) {
             int x1 = (int) (Math.random() * getQuantHoriz()), x2 = (int) (Math.random() * getQuantHoriz()),
                     y1 = (int) (Math.random() * getQuantVert()), y2 = (int) (Math.random() * getQuantVert());
