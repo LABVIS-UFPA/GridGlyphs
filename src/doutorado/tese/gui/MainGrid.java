@@ -1300,7 +1300,7 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         } else {
             vetor = new String[]{};
             loadVariaveisEscolhidasList(vetor, varVisuaisEscolidasList);
-            vetor = new String[]{"Texture", "Color", "Shape", "Letter", "Overlap", "Saturation", "Orientation"};//, "Letter", "Overlap"
+            vetor = new String[]{"Arrows","Texture", "Color", "Shape", "Letter", "Overlap", "Saturation", "Orientation"};//, "Letter", "Overlap"
             loadVarVisuais(vetor);
             glyphModelMenu.setText("Glyph Model: Overlapping");
         }
@@ -1365,6 +1365,8 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
                 for (int i = 0; i < formas.length; i++) {
                     formas[i] = GeometryFactory.FORMAS.GLYPH_FORMAS.values()[i];
                 }
+                
+                
                 analisarQuantAtributosCategoricos(list, formas);
                 break;
             case NIVEL_4:

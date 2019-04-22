@@ -1,12 +1,14 @@
-package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.textures;
+package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.arrows;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
 
 /**
@@ -14,17 +16,17 @@ import java.awt.geom.Path2D;
  * 
  * @author Anderson Soares
  */
-public class CirculoTextura_2x2 implements DrawBehavior{
+public class Arrow90 implements DrawBehavior{
 
     private int[] xPoints;
     private int[] yPoints;
     private int numberColor;
     private Color cor;
     private Rectangle bounds;
-    private Path2D p;
+    private Polygon p;
 
 
-    public CirculoTextura_2x2() {
+    public Arrow90() {
     }
 
     @Override
@@ -35,7 +37,41 @@ public class CirculoTextura_2x2 implements DrawBehavior{
         g2d.fillRect(bounds.x,bounds.y,bounds.width,bounds.height);
         
         g2d.setColor(Color.BLACK);
-        g2d.draw(p);    
+//        g2d.draw(p);    
+        int slice = bounds.height/5;
+               
+        int scalewidth = (int) (bounds.width*0.2);
+        int scaleheight = (int) (bounds.height*0.2);
+
+
+      
+        for (int i = 0; i < 4; i++) {
+            
+            
+            
+            p = new Polygon();
+            //left
+            p.addPoint((int) ((i*slice)+bounds.x+scalewidth*0.6),  bounds.y+ scaleheight);
+            
+            //right
+            p.addPoint((int) ((i*slice)+bounds.x+scalewidth*1.4),  bounds.y+scaleheight );
+           
+            //center
+            p.addPoint((i*slice)+bounds.x+scalewidth,bounds.y );
+      
+            g2d.draw(p);
+            g2d.fill(p);
+        }
+        
+         for (int i = 0; i < 5; i++) {
+              g2d.draw ( new Line2D.Float ( 
+                    bounds.x+(i*slice),
+                    bounds.y,
+                    bounds.x+(i*slice),
+                    bounds.y+bounds.height
+            ));
+    
+         }
     }
     
     //função para deixar os glyphs quadrados
@@ -51,32 +87,8 @@ public class CirculoTextura_2x2 implements DrawBehavior{
         return null;
     }
 
-    private void montarCirculo() {
-        Rectangle rect = getBounds();
-        
-        int[] points = new int[2];
-
-        points[0] = getBounds().width;
-        points[1] = getBounds().height;
-
-        int width = (int) Math.round(points[0] );
-        int height = (int) Math.round(points[1] );
-
-        
-        int x,y;
-        int spacex = width/16;
-        int spacey = height/16;
-
-        x = rect.x;
-        y = rect.y;
-        p = new Path2D.Double();   
- 
-        p.append(new Ellipse2D.Double(x, y , width/2.2, height/2.2), false);   
-        p.append(new Ellipse2D.Double(spacex+x+width/2, y , width/2.2, height/2.2), false);   
-        p.append(new Ellipse2D.Double(x,spacey+ y+height/2 , width/2.2, height/2.2), false);   
-        p.append(new Ellipse2D.Double(spacex+ x+width/2,spacey+ y +height/2, width/2.2, height/2.2), false);   
-    
-
+    private void montarSetas90() {
+      
              
 
     }
@@ -88,7 +100,7 @@ public class CirculoTextura_2x2 implements DrawBehavior{
     @Override
     public void setBounds(Rectangle bounds){
         this.bounds = bounds;
-        montarCirculo();
+        montarSetas90();
     }
     
     @Override
@@ -104,19 +116,19 @@ public class CirculoTextura_2x2 implements DrawBehavior{
     @Override
     public void drawForeground(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setColor(Color.WHITE);
-        g2d.setStroke(new BasicStroke(1.5f));
-        g2d.draw(p);
-        g2d.setColor(Color.BLACK);
-        g2d.fill(p);
-        g2d.setStroke(new BasicStroke(1f));
+//        g2d.setColor(Color.WHITE);
+//        g2d.setStroke(new BasicStroke(1.5f));
+//        g2d.draw(p);
+//        g2d.setColor(Color.BLACK);
+//        g2d.fill(p);
+//        g2d.setStroke(new BasicStroke(1f));
     }
     
     @Override
-    public CirculoTextura_2x2 clone() throws CloneNotSupportedException {
+    public Arrow90 clone() throws CloneNotSupportedException {
         try {
             // call clone in Object.
-            return (CirculoTextura_2x2) super.clone();
+            return (Arrow90) super.clone();
         } catch (CloneNotSupportedException e) {
             System.err.println("Cloning not allowed.");
             return this;
@@ -126,6 +138,6 @@ public class CirculoTextura_2x2 implements DrawBehavior{
     @Override
     public String toString() {
         super.toString();
-        return CirculoTextura_2x2.class.getSimpleName();
+        return Arrow90.class.getSimpleName();
     }
 }

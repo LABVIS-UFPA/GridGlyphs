@@ -7,6 +7,8 @@ package doutorado.tese.visualizacao.glyph;
 
 import doutorado.tese.util.Constantes;
 import doutorado.tese.visualizacao.glyph.decorator.overlap.Overlap;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.arrows.Arrow;
+import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.arrows.ArrowFactory;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.textures.Textura;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.textures.TexturesFactory;
 import doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color.Cor;
@@ -37,6 +39,7 @@ public class GlyphManager {
     private int formaSorteada = -1;
     private int letraSorteada = -1;
     private int texturaSorteada = -1;
+    private int setaSorteada = -1;
     private int saturacaoSorteada = -1;
     private int quantValoresVarVisuais;
     private Color[] cores;
@@ -46,6 +49,7 @@ public class GlyphManager {
     private GeometryFactory.FORMAS.GLYPH_FORMAS[] formaGeometricas;
     private TexturesFactory.Textute.GLYPH_TEXTURAS[] texturas;
     private List<String> listNomeOrientacoesSorteada;
+    private ArrowFactory.Arrow.GLYPH_ARROWS[] setas;
 
     public GlyphManager() {
         activeLayers = new HashMap<>();
@@ -59,6 +63,10 @@ public class GlyphManager {
         switch (varVisual) {
             case "Color":
                 glyph = defineRandomColor();
+                break;
+            case "Arrows":
+                glyph = defineRandomArrows();
+               
                 break;
             case "Saturation":
                 glyph = defineRandomColorSaturation();
@@ -231,6 +239,54 @@ public class GlyphManager {
         orientacoes = sorteados.toArray(new Integer[]{});
     }
 
+    private Glyph defineRandomArrows() {
+        if (getArrows()== null) {
+            switch (quantValoresVarVisuais) {
+                case 3:
+                    setas= new ArrowFactory.Arrow.GLYPH_ARROWS[]{ArrowFactory.Arrow.GLYPH_ARROWS.values()[0],
+                                                                            ArrowFactory.Arrow.GLYPH_ARROWS.values()[2],
+                                                                            ArrowFactory.Arrow.GLYPH_ARROWS.values()[4]};
+                    break;
+                case 4:
+                    setas= new ArrowFactory.Arrow.GLYPH_ARROWS[]{ArrowFactory.Arrow.GLYPH_ARROWS.values()[0],
+                                                                            ArrowFactory.Arrow.GLYPH_ARROWS.values()[2],
+                                                                            ArrowFactory.Arrow.GLYPH_ARROWS.values()[3],
+                                                                            ArrowFactory.Arrow.GLYPH_ARROWS.values()[4]};
+                    break;
+                case 5:
+                    setas= new ArrowFactory.Arrow.GLYPH_ARROWS[]{ArrowFactory.Arrow.GLYPH_ARROWS.values()[0],
+                                                                            ArrowFactory.Arrow.GLYPH_ARROWS.values()[1],
+                                                                            ArrowFactory.Arrow.GLYPH_ARROWS.values()[2],
+                                                                            ArrowFactory.Arrow.GLYPH_ARROWS.values()[3],
+                                                                            ArrowFactory.Arrow.GLYPH_ARROWS.values()[4]};
+                    break;
+                default:
+                    definirConjuntoSetas(quantValoresVarVisuais);
+            }
+        }
+        int random = (int) (Math.random() * quantValoresVarVisuais);
+        while (random == setaSorteada) {
+            random = (int) (Math.random() * quantValoresVarVisuais);
+        }
+        Glyph glyph = new Arrow();
+        Arrow arrow = (Arrow) glyph;
+        if (setaSorteada == -1) {
+            setaSorteada = random;
+            arrow.setGlyphResposta(true);
+        }
+        if (getArrows().length != 0) {
+            arrow.setDrawBehavior(ArrowFactory.create(getArrows()[random]));
+        } else {
+            quantValoresVarVisuais = 8;
+            random = (int) (Math.random() * quantValoresVarVisuais);
+            arrow.setDrawBehavior(ArrowFactory.create(ArrowFactory.Arrow.GLYPH_ARROWS.values()[random]));
+        }
+        arrow.setPectSobreposicao(perctOverlap);
+        arrow.setOverlappingActivated(overlappingActivated);
+        return glyph;
+    }
+
+    
     private Glyph defineRandomTexture() {
         if (getTexturas() == null) {
             switch (quantValoresVarVisuais) {
@@ -276,6 +332,19 @@ public class GlyphManager {
         textura.setPectSobreposicao(perctOverlap);
         textura.setOverlappingActivated(overlappingActivated);
         return glyph;
+    }
+    
+    
+    public void definirConjuntoSetas(int quantValoresVarVisuais) {
+        ArrayList<ArrowFactory.Arrow.GLYPH_ARROWS> sorteados = new ArrayList<>();
+        for (int i = 0; i < quantValoresVarVisuais; i++) {
+            int random;
+            do {
+                random = (int) (Math.random() * ArrowFactory.Arrow.GLYPH_ARROWS.values().length);
+            } while (sorteados.contains(ArrowFactory.Arrow.GLYPH_ARROWS.values()[random]));
+            sorteados.add(ArrowFactory.Arrow.GLYPH_ARROWS.values()[random]);
+        }
+        setas = sorteados.toArray(new ArrowFactory.Arrow.GLYPH_ARROWS[]{});
     }
 
     public void definirConjuntoTexturas(int quantValoresVarVisuais) {
@@ -549,6 +618,11 @@ public class GlyphManager {
     public TexturesFactory.Textute.GLYPH_TEXTURAS[] getTexturas() {
         return texturas;
     }
+    
+    public ArrowFactory.Arrow.GLYPH_ARROWS[] getArrows() {
+        return setas;
+    }
+    
 
     public String[] getLetras() {
         return letras;
