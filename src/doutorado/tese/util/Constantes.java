@@ -38,17 +38,12 @@ public class Constantes {
     public static final int PRESENTE = 1;
     public static final int AUSENTE = 0;
 
-    private static String[] corSaturation = {
-//        "#EDC9E5",
-//        "#D2A1C1",
-//        "#C48EB2",
-//        "#9D6D97",
-//        "#7C4D79"
-        "#EEC9E5",//0
-        "#D6A6C6",//1
-        "#BC86A9",//2
-        "#986995",//3
-        "#7C4D79" //4
+    private static String[] corSaturation = {  
+        "#808080",//1
+        "#9F6060",//2
+        "#BF4040",//3
+        "#DF2020",//4
+        "#FF0000"//5
     };
     
     private static String[] corGlyphs3 = {
@@ -65,11 +60,12 @@ public class Constantes {
     };
 
     private static String[] corGlyphs5 = {
-        "#FF0101",//vermelho - 1
-        "#2C2CFF",//azul     - 2
-        "#EBC089",//beje     - 3
-        "#FFFF01",//amarelo  - 4
-        "#41BA2F"//verde     - 5
+        "#000000",
+        "#800000",
+        "#FF0000",
+        "#FF8080",
+        "#FFFFFF"
+       
     };
     
     public final static String[] TIPO_ORIENTATION = {
@@ -82,11 +78,10 @@ public class Constantes {
     
     public final static String[] LETRAS_ALFABETO = {
         "C", 
-        "E", 
+        "M", 
         "K", 
         "A", 
         "J"
-//, "F", "G", "H"
     };
 
     public final static String[] NUMEROS = {

@@ -40,8 +40,8 @@ public class Arrow180 implements DrawBehavior{
 //        g2d.draw(p);    
         int slice = bounds.height/6;
                
-        int scalewidth = (int) (bounds.width*0.15);
-        int scaleheight = (int) (bounds.height*0.15);
+        int scalewidth = (int) (bounds.width*0.17);
+        int scaleheight = (int) (bounds.height*0.17);
 
         int polygon[][] = new int[3][3];
         //center    
@@ -137,10 +137,10 @@ public class Arrow180 implements DrawBehavior{
     @Override
     public void drawForeground(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//        g2d.setColor(Color.BLACK);
 //        g2d.setColor(Color.WHITE);
 //        g2d.setStroke(new BasicStroke(1.5f));
 //        g2d.draw(p);
-//        g2d.setColor(Color.BLACK);
 //        g2d.fill(p);
 //        g2d.setStroke(new BasicStroke(1f));
     }

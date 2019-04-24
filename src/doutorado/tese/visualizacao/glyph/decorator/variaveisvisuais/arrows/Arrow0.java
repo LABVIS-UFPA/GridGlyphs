@@ -37,11 +37,11 @@ public class Arrow0 implements DrawBehavior{
         g2d.fillRect(bounds.x,bounds.y,bounds.width,bounds.height);
         
         g2d.setColor(Color.BLACK);
-//        g2d.draw(p);    
-        int slice = bounds.height/5;
+        int slicewidth = bounds.width/6;
+        int sliceheight = bounds.height/6;
                
-        int scalewidth = (int) (bounds.width*0.2);
-        int scaleheight = (int) (bounds.height*0.2);
+        int scalewidth = (int) (bounds.width*0.16);
+        int scaleheight = (int) (bounds.height*0.16);
 
         int polygon[][] = new int[3][3];
         //center    
@@ -56,17 +56,17 @@ public class Arrow0 implements DrawBehavior{
         polygon[2][1] = (int) (bounds.y+scaleheight*1.4);
         
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             
             p = new Polygon();
             //center
-            p.addPoint(polygon[0][0],(i*slice)+polygon[0][1] );
+            p.addPoint(polygon[0][0],(i*slicewidth)+polygon[0][1] );
        
             //top
-            p.addPoint(polygon[1][0], (i*slice)+polygon[1][1]);
+            p.addPoint(polygon[1][0], (i*slicewidth)+polygon[1][1]);
             
             //botton
-            p.addPoint(polygon[2][0], (i*slice)+polygon[2][1] );
+            p.addPoint(polygon[2][0], (i*slicewidth)+polygon[2][1] );
            
       
             g2d.draw(p);
@@ -79,12 +79,12 @@ public class Arrow0 implements DrawBehavior{
         arrow[2] = bounds.x+bounds.width;
         arrow[3] = bounds.y;
 
-         for (int i = 0; i < 5; i++) {
+         for (int i = 0; i < 6; i++) {
               g2d.draw ( new Line2D.Float ( 
                     arrow[0],
-                    arrow[1]+(i*slice),
+                    arrow[1]+(i*sliceheight),
                     arrow[2],
-                    arrow[3]+(i*slice)
+                    arrow[3]+(i*sliceheight)
             ));
     
          }
@@ -132,10 +132,10 @@ public class Arrow0 implements DrawBehavior{
     @Override
     public void drawForeground(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setColor(Color.BLACK);
 //        g2d.setColor(Color.WHITE);
 //        g2d.setStroke(new BasicStroke(1.5f));
 //        g2d.draw(p);
-//        g2d.setColor(Color.BLACK);
 //        g2d.fill(p);
 //        g2d.setStroke(new BasicStroke(1f));
     }

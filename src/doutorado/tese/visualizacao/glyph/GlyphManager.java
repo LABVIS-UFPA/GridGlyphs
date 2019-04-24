@@ -146,6 +146,7 @@ public class GlyphManager {
         activeLayers.put("Shape", false);
         activeLayers.put("Color", false);
         activeLayers.put("Texture", false);
+        activeLayers.put("Arrows", false);
         activeLayers.put("Overlap", false);
 
     }
@@ -184,9 +185,11 @@ public class GlyphManager {
         corSaturadaSorteada = -1;
         texturaSorteada = -1;
         saturacaoSorteada = -1;
+        setaSorteada = -1;
         cores = null;
         setSaturacoes(null);
         orientacoes = null;
+        setas =null;
         formaGeometricas = null;
         texturas = null;
         setLetras(null);

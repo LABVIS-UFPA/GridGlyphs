@@ -37,37 +37,38 @@ public class Arrow90 implements DrawBehavior{
         g2d.fillRect(bounds.x,bounds.y,bounds.width,bounds.height);
         
         g2d.setColor(Color.BLACK);
-//        g2d.draw(p);    
-        int slice = bounds.height/5;
+  
+        int slicewidth = bounds.width/6;
+        int sliceheight = bounds.height/6;
                
-        int scalewidth = (int) (bounds.width*0.2);
-        int scaleheight = (int) (bounds.height*0.2);
+        int scalewidth = (int) (bounds.width*0.16);
+        int scaleheight = (int) (bounds.height*0.16);
 
 
       
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             
             
             
             p = new Polygon();
             //left
-            p.addPoint((int) ((i*slice)+bounds.x+scalewidth*0.6),  bounds.y+ scaleheight);
+            p.addPoint((int) ((i*slicewidth+1)+bounds.x+scalewidth*0.6),  bounds.y+ scaleheight);
             
             //right
-            p.addPoint((int) ((i*slice)+bounds.x+scalewidth*1.4),  bounds.y+scaleheight );
+            p.addPoint((int) ((i*slicewidth+1)+bounds.x+scalewidth*1.4),  bounds.y+scaleheight );
            
             //center
-            p.addPoint((i*slice)+bounds.x+scalewidth,bounds.y );
+            p.addPoint((i*slicewidth+1)+bounds.x+scalewidth,bounds.y );
       
             g2d.draw(p);
             g2d.fill(p);
         }
         
-         for (int i = 0; i < 5; i++) {
+         for (int i = 0; i < 6; i++) {
               g2d.draw ( new Line2D.Float ( 
-                    bounds.x+(i*slice),
+                    bounds.x+(i*slicewidth),
                     bounds.y,
-                    bounds.x+(i*slice),
+                    bounds.x+(i*slicewidth),
                     bounds.y+bounds.height
             ));
     
@@ -116,7 +117,7 @@ public class Arrow90 implements DrawBehavior{
     @Override
     public void drawForeground(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//        g2d.setColor(Color.WHITE);
+        g2d.setColor(Color.BLACK);
 //        g2d.setStroke(new BasicStroke(1.5f));
 //        g2d.draw(p);
 //        g2d.setColor(Color.BLACK);

@@ -73,7 +73,7 @@ public class CirculoTextura_8x8 implements DrawBehavior{
         
         for (int j = rect.y; j < rect.y+rect.height; j=j+spacey) {          
             for(int i = rect.x; i < rect.x + rect.width; i=i+spacex) {   
-                p.append(new Ellipse2D.Double(i,j, textureWidth/8, textureHeight/8), false);   
+                p.append(new Ellipse2D.Double(width*0.025+i,height*0.025+j, textureWidth/8, textureHeight/8), false);   
                 }
         }
 

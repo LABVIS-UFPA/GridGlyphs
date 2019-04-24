@@ -30,7 +30,7 @@ public class ScenarioManager {
     private double[] vetorTamScala = {1.5, 1.25, 1};
     private float[] vetorQuantPercentOverlapping = {0.5f, 0.55f, 0.6f, 0.65f, 0.7f, 0f};//0%, 50%, 60%, 70%
     private int[] vetorQuantConjVarVisuais = {3, 4, 5};
-    private String[] vetorVarVisuais = {"Texture", "Color", "Shape", "Saturation", "Orientation", "Letter", "Color2", "Overlap"};
+    private String[] vetorVarVisuais = {"Texture", "Color", "Shape", "Saturation", "Arrows", "Letter", "Color2", "Overlap"};
     private String[] vetorTipoTarefa = {"Localização"};//, "Identificação"
     private String[] vetorQuestoes = {"Find the element below in the visualization:"};
 //            , "Encontre o grupo de elementos abaixo na visualização:"};
@@ -211,8 +211,8 @@ public class ScenarioManager {
             case "Saturation":
                 linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getSaturacoes()).replace("java.awt.Color", "").replace(",", ";");
                 break;
-            case "Orientation":
-                linhaLog[12] = Arrays.asList(gridPanel.getGlyphManager().getListNomeOrientacoesSorteada()).toString().replace(",", ";");
+            case "Arrows":
+                linhaLog[12] = Arrays.asList(gridPanel.getGlyphManager().getArrows()).toString().replace(",", ";");
                 break;
             case "Letter":
 //                System.out.println(Arrays.asList(gridPanel.getGlyphManager().getLetras()));
@@ -274,7 +274,7 @@ public class ScenarioManager {
                                 case "Saturation":
 
                                     break;
-                                case "Orientation":
+                                case "Arrows":
 
                                     break;
                                 case "Letter":
