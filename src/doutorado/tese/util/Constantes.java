@@ -39,11 +39,12 @@ public class Constantes {
     public static final int AUSENTE = 0;
 
     private static String[] corSaturation = {  
-        "#808080",//1
-        "#9F6060",//2
-        "#BF4040",//3
-        "#DF2020",//4
-        "#FF0000"//5
+        "#808080",
+        "#9F8F60",
+        "#BF9F40",
+        "#DFAF20",
+        "#FFC000"
+
     };
     
     private static String[] corGlyphs3 = {
@@ -59,13 +60,14 @@ public class Constantes {
         "#FFFF01"//amarelo   3
     };
 
+    //aqui
     private static String[] corGlyphs5 = {
-        "#000000",
-        "#800000",
-        "#FF0000",
-        "#FF8080",
-        "#FFFFFF"
-       
+      "#000000",
+      "#7F007F",
+      "#FF00FF",
+      "#FF80FF",
+      "#FFFFFF"
+              
     };
     
     public final static String[] TIPO_ORIENTATION = {

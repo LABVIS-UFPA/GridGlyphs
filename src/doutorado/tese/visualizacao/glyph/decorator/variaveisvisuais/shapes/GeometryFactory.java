@@ -16,7 +16,7 @@ public class GeometryFactory {
         public enum GLYPH_FORMAS {
             RETANGULO("RETANGULO"), //0
             CIRCULO("CIRCULO"),     //1
-            LOSANGO("LOSANGO"),     //2
+            SERINHADO("SERINHADO"),     //2
             ESTRELA("ESTRELA"),     //3
             CRUZ("CRUZ");           //4
 //            ELLIPSE("ELLIPSE"),
@@ -49,8 +49,8 @@ public class GeometryFactory {
                 return new Cruz();
             case CIRCULO:
                 return new Circulo();
-            case LOSANGO:
-                return new Losango();
+            case SERINHADO:
+                return new Serrinhado();
 //            case ELLIPSE:
 //                return new Ellipse();
 //            case HEXAGONO:
