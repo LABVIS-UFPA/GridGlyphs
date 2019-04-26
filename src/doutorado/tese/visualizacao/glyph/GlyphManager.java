@@ -247,14 +247,14 @@ public class GlyphManager {
             switch (quantValoresVarVisuais) {
                 case 3:
                     setas= new ArrowFactory.Arrow.GLYPH_ARROWS[]{ArrowFactory.Arrow.GLYPH_ARROWS.values()[0],
-                                                                            ArrowFactory.Arrow.GLYPH_ARROWS.values()[2],
-                                                                            ArrowFactory.Arrow.GLYPH_ARROWS.values()[4]};
+                                                                            ArrowFactory.Arrow.GLYPH_ARROWS.values()[1],
+                                                                            ArrowFactory.Arrow.GLYPH_ARROWS.values()[2]};
                     break;
                 case 4:
                     setas= new ArrowFactory.Arrow.GLYPH_ARROWS[]{ArrowFactory.Arrow.GLYPH_ARROWS.values()[0],
+                                                                            ArrowFactory.Arrow.GLYPH_ARROWS.values()[1],
                                                                             ArrowFactory.Arrow.GLYPH_ARROWS.values()[2],
-                                                                            ArrowFactory.Arrow.GLYPH_ARROWS.values()[3],
-                                                                            ArrowFactory.Arrow.GLYPH_ARROWS.values()[4]};
+                                                                            ArrowFactory.Arrow.GLYPH_ARROWS.values()[3]};
                     break;
                 case 5:
                     setas= new ArrowFactory.Arrow.GLYPH_ARROWS[]{ArrowFactory.Arrow.GLYPH_ARROWS.values()[0],

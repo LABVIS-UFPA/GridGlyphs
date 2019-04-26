@@ -38,6 +38,8 @@ public class Constantes {
     public static final int PRESENTE = 1;
     public static final int AUSENTE = 0;
 
+    
+    //tons de amarelo
     private static String[] corSaturation = {  
         "#808080",
         "#9F8F60",
@@ -60,13 +62,13 @@ public class Constantes {
         "#FFFF01"//amarelo   3
     };
 
-    //aqui
+    //luminosidade tons de roxo
     private static String[] corGlyphs5 = {
       "#000000",
-      "#7F007F",
       "#FF00FF",
-      "#FF80FF",
-      "#FFFFFF"
+      "#FFFFFF",
+      "#7F007F",
+      "#FF80FF"
               
     };
     

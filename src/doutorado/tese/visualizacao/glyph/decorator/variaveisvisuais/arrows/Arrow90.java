@@ -64,7 +64,7 @@ public class Arrow90 implements DrawBehavior{
             g2d.fill(p);
         }
         
-         for (int i = 0; i < 6; i++) {
+         for (int i = 1; i < 6; i++) {
               g2d.draw ( new Line2D.Float ( 
                     bounds.x+(i*slicewidth),
                     bounds.y,

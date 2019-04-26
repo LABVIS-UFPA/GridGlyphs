@@ -41,7 +41,7 @@ public class Arrow0 implements DrawBehavior{
         int sliceheight = bounds.height/6;
                
         int scalewidth = (int) (bounds.width*0.16);
-        int scaleheight = (int) (bounds.height*0.16);
+        int scaleheight = (int) (bounds.height*0.16d);
 
         int polygon[][] = new int[3][3];
         //center    
@@ -79,7 +79,7 @@ public class Arrow0 implements DrawBehavior{
         arrow[2] = bounds.x+bounds.width;
         arrow[3] = bounds.y;
 
-         for (int i = 0; i < 6; i++) {
+         for (int i =1; i < 6; i++) {
               g2d.draw ( new Line2D.Float ( 
                     arrow[0],
                     arrow[1]+(i*sliceheight),

@@ -97,9 +97,9 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         abaConfigTabbedPane = new javax.swing.JTabbedPane();
         setUP_jPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        varVisuaisEscolidasList = new javax.swing.JList<>();
+        varVisuaisEscolidasList = new javax.swing.JList<String>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        varVisuaisList = new javax.swing.JList<>();
+        varVisuaisList = new javax.swing.JList<String>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         inserirButton = new javax.swing.JButton();
@@ -121,9 +121,9 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        texturaComboBox = new javax.swing.JComboBox<>();
-        corComboBox = new javax.swing.JComboBox<>();
-        formaComboBox = new javax.swing.JComboBox<>();
+        texturaComboBox = new javax.swing.JComboBox<String>();
+        corComboBox = new javax.swing.JComboBox<String>();
+        formaComboBox = new javax.swing.JComboBox<String>();
         viewGlyphsButton = new javax.swing.JButton();
         detalhes_jPanel = new javax.swing.JPanel();
         filter_jPanel = new javax.swing.JPanel();
@@ -248,10 +248,10 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
         });
         jScrollPane2.setViewportView(varVisuaisEscolidasList);
 
-        varVisuaisList.setModel(new javax.swing.AbstractListModel<String>() {
+        varVisuaisList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Texture", "Color", "Shape", "Letter", "Overlap", "Saturation", "Oritentation" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         varVisuaisList.setEnabled(false);
         varVisuaisList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -477,11 +477,11 @@ public class MainGrid extends javax.swing.JFrame implements PropertyChangeListen
 
         jLabel5.setText("Shape:");
 
-        texturaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
+        texturaComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "---" }));
 
-        corComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
+        corComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "---" }));
 
-        formaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
+        formaComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "---" }));
 
         viewGlyphsButton.setText("View Glyphs");
         viewGlyphsButton.addActionListener(new java.awt.event.ActionListener() {

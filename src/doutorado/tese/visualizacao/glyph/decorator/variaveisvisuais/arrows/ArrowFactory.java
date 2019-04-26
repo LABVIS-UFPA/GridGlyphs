@@ -19,11 +19,11 @@ public class ArrowFactory {
         }
 
         public enum GLYPH_ARROWS {
-            ARROW0("ARROW0"),//0
-            ARROW45("ARROW45"),    //1
-            ARROW90("ARROW90"),    //2
-            ARROW135("ARROW135"),    //3
-            ARROW180("ARROW180");    //4
+            ARROW180("ARROW180"),    //4
+            ARROW135("ARROW135"),//135
+            ARROW90("ARROW90"),//90
+            ARROW45("ARROW45"),//45
+            ARROW0("ARROW0");//0
 
             private final String nome;
 

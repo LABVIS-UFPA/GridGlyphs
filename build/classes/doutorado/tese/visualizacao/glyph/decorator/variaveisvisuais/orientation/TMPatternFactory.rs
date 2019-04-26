@@ -1,2 +1,0 @@
-doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.orientation.TMPatternFactory
-doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.orientation.JPatternPanel

@@ -82,7 +82,7 @@ public class Arrow180 implements DrawBehavior{
 //          g2d.setStroke(new BasicStroke(1.5f));
 
 
-         for (int i = 0; i < 6; i++) {
+         for (int i = 1; i < 6; i++) {
               g2d.draw ( new Line2D.Float ( 
                     arrow[0],
                     arrow[1]+(i*slice),

@@ -6,6 +6,7 @@
 package doutorado.tese.visualizacao.glyph.decorator.variaveisvisuais.color;
 
 import doutorado.tese.visualizacao.glyph.Glyph;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Paint;
@@ -44,6 +45,10 @@ public class Cor extends Glyph {
         }
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
+        g2d.setColor(Color.BLACK);
+        g2d.setStroke(new BasicStroke(0.3f));
+        g2d.drawRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
+        g2d.setStroke(new BasicStroke(1f));
         super.paint(g2d);
     }
 

@@ -31,7 +31,7 @@ public class Serrinhado implements DrawBehavior {
         g2d.setColor(this.cor);
         g2d.fillRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
         g2d.setStroke(new BasicStroke(1.5f));
-        g2d.setColor(Color.WHITE);
+        g2d.setColor(Color.decode("#A9A9A9"));
         g2d.drawRect(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
         
         g2d.setColor(Color.decode("#A9A9A9"));
@@ -99,6 +99,8 @@ public class Serrinhado implements DrawBehavior {
             
             g2d.draw(p4);
             g2d.fill(p4);
+            
+            
             
             
         }
