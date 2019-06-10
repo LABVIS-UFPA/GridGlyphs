@@ -38,6 +38,15 @@ public class Constantes {
     public static final int PRESENTE = 1;
     public static final int AUSENTE = 0;
 
+  
+    //matiz
+    private static String[] corMatiz = {  
+        "#FF0101",
+        "#2C2CFF",
+        "#EBC089",
+        "#FFFF01",
+        "#41BA2F"
+    };
     
     //tons de amarelo
     private static String[] corSaturation = {  
@@ -63,7 +72,7 @@ public class Constantes {
     };
 
     //luminosidade tons de roxo
-    private static String[] corGlyphs5 = {
+    private static String[] corLuninosit = {
       "#000000",
       "#FF00FF",
       "#FFFFFF",
@@ -153,7 +162,16 @@ public class Constantes {
      * @return the corGlyphs5
      */
     public static String[] getCorGlyphs() {
-        return corGlyphs5;
+        return corMatiz;
     }
+
+    public static String[] getCorLuninosit() {
+        return corLuninosit;
+    }
+
+   
+    
+    
+    
 
 }

@@ -28,9 +28,9 @@ public class ScenarioManager {
     private int[] vetorTamGridVertical = {10, 5, 5};
     private int[] vetorTamGridHorizontal = {16, 10, 10};
     private double[] vetorTamScala = {1.5, 1.25, 1};
-    private float[] vetorQuantPercentOverlapping = {0.5f, 0.55f, 0.6f, 0.65f, 0.7f, 0f};//0%, 50%, 60%, 70%
+    private float[] vetorQuantPercentOverlapping = {0.8f, 0.75f, 0.5f, 0.55f, 0.6f, 0.65f, 0.7f, 0f};//0%, 50%, 60%, 70%
     private int[] vetorQuantConjVarVisuais = {3, 4, 5};
-    private String[] vetorVarVisuais = {"Texture", "Color", "Shape", "Saturation", "Arrows", "Letter", "Color2", "Overlap"};
+    private String[] vetorVarVisuais = {"Texture", "Color","luminosity","Shape", "Saturation", "Arrows", "Letter", "Color2", "Overlap"};
     private String[] vetorTipoTarefa = {"Localização"};//, "Identificação"
     private String[] vetorQuestoes = {"Find the element below in the visualization:"};
 //            , "Encontre o grupo de elementos abaixo na visualização:"};
@@ -65,7 +65,7 @@ public class ScenarioManager {
         this.gridPanel.setScenarioManager(this);
         switch (nomeCenario) {
             case "0%":
-                carregarTreinamentoOclusao(vetorQuantPercentOverlapping.length - 1);//{0.5f, 0.55f, 0.6f, 0.65f, 0.7f, 0f}
+                carregarTreinamentoOclusao(vetorQuantPercentOverlapping.length - 1);//{0.8f,0.75f,0.5f, 0.55f, 0.6f, 0.65f, 0.7f, 0f}
                 break;
             case "50%":
                 carregarTreinamentoOclusao(vetorQuantPercentOverlapping.length - 6);
@@ -81,6 +81,12 @@ public class ScenarioManager {
                 break;
             case "70%":
                 carregarTreinamentoOclusao(vetorQuantPercentOverlapping.length - 2);
+                break;
+            case "75%":
+                carregarTreinamentoOclusao(vetorQuantPercentOverlapping.length - 7);
+                break;
+            case "80%":
+                carregarTreinamentoOclusao(vetorQuantPercentOverlapping.length - 8);
                 break;
             default:
                 throw new AssertionError();
@@ -152,6 +158,12 @@ public class ScenarioManager {
             case "70%":
                 carregarCenarioOclusao(vetorQuantPercentOverlapping.length - 2);
                 break;
+            case "75%":
+                carregarCenarioOclusao(vetorQuantPercentOverlapping.length - 7);
+                break;
+            case "80%":
+                carregarCenarioOclusao(vetorQuantPercentOverlapping.length - 8);
+                break;
             default:
                 throw new AssertionError();
         }
@@ -205,6 +217,9 @@ public class ScenarioManager {
             case "Color":
                 linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getCores()).replace("java.awt.Color", "").replace(",", ";");
                 break;
+            case "luminosity":
+                linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getLuminosity()).replace("java.awt.Color", "").replace(",", ";");
+                break;           
             case "Shape":
                 linhaLog[12] = Arrays.toString(gridPanel.getGlyphManager().getFormaGeometricas()).replace(",", ";");
                 break;
@@ -266,6 +281,9 @@ public class ScenarioManager {
 
                                     break;
                                 case "Color":
+
+                                    break;
+                                case "luminosity":
 
                                     break;
                                 case "Shape":

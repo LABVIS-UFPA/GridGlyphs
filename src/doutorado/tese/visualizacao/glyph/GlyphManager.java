@@ -36,14 +36,17 @@ public class GlyphManager {
     private int orientacaoSorteada = -1;
     private int corSorteada = -1;
     private int corSaturadaSorteada = -1;
+    private int corLuminositySorteada = -1;
     private int formaSorteada = -1;
     private int letraSorteada = -1;
     private int texturaSorteada = -1;
     private int setaSorteada = -1;
     private int saturacaoSorteada = -1;
+    private int luminositySorteada = -1;
     private int quantValoresVarVisuais;
     private Color[] cores;
     private Color[] saturacoes;
+    private Color[] luminosity;
     private Integer[] orientacoes;
     private String[] letras;
     private GeometryFactory.FORMAS.GLYPH_FORMAS[] formaGeometricas;
@@ -64,12 +67,14 @@ public class GlyphManager {
             case "Color":
                 glyph = defineRandomColor();
                 break;
-            case "Arrows":
-                glyph = defineRandomArrows();
-               
+            case "luminosity":
+                glyph = defineRandomColorLuminosity();
                 break;
             case "Saturation":
                 glyph = defineRandomColorSaturation();
+                break;
+            case "Arrows":
+                glyph = defineRandomArrows();
                 break;
             case "Letter":
                 glyph = defineRandomLetter();
@@ -83,7 +88,6 @@ public class GlyphManager {
             case "Orientation":
                 glyph = defineRandomOrientation();//aqui era a antiga textura
                 break;
-
             case "Overlap":
                 glyph = new Overlap();
                 Overlap overlap = (Overlap) glyph;
@@ -144,6 +148,7 @@ public class GlyphManager {
         activeLayers.put("Number", false);
         activeLayers.put("Letter", false);
         activeLayers.put("Shape", false);
+        activeLayers.put("luminosity", false);
         activeLayers.put("Color", false);
         activeLayers.put("Texture", false);
         activeLayers.put("Arrows", false);
@@ -183,10 +188,13 @@ public class GlyphManager {
         formaSorteada = -1;
         letraSorteada = -1;
         corSaturadaSorteada = -1;
+        corLuminositySorteada = -1;
         texturaSorteada = -1;
         saturacaoSorteada = -1;
+        luminositySorteada = -1;
         setaSorteada = -1;
         cores = null;
+        setLuminosity(null);
         setSaturacoes(null);
         orientacoes = null;
         setas =null;
@@ -446,6 +454,50 @@ public class GlyphManager {
         return glyph;
     }
 
+    
+    private Glyph defineRandomColorLuminosity() {
+        if (getLuminosity()== null) {
+            switch (quantValoresVarVisuais) {
+                case 3:
+                    luminosity = new Color[]{Color.decode(Constantes.getCorLuninosit()[0]),
+                                        Color.decode(Constantes.getCorLuninosit()[2]),
+                                        Color.decode(Constantes.getCorLuninosit()[4])};
+                    break;
+                case 4:
+                    luminosity = new Color[]{Color.decode(Constantes.getCorLuninosit()[0]),
+                                        Color.decode(Constantes.getCorLuninosit()[1]),
+                                        Color.decode(Constantes.getCorLuninosit()[2]),
+                                        Color.decode(Constantes.getCorLuninosit()[4])};
+                    break;
+                case 5:
+                    luminosity = new Color[]{Color.decode(Constantes.getCorLuninosit()[0]),
+                                        Color.decode(Constantes.getCorLuninosit()[1]),
+                                        Color.decode(Constantes.getCorLuninosit()[2]),
+                                        Color.decode(Constantes.getCorLuninosit()[3]),
+                                        Color.decode(Constantes.getCorLuninosit()[4])};
+                    break;
+                default:
+                    definirConjuntoCoresLuminosity(quantValoresVarVisuais);
+            }
+        }
+        int random = (int) (Math.random() * quantValoresVarVisuais);
+        while (random == corLuminositySorteada) {
+            random = (int) (Math.random() * quantValoresVarVisuais);
+        }
+        Glyph glyph = new Cor();
+        Cor saturacaoLum = (Cor) glyph;
+        if (corLuminositySorteada == -1) {
+            corLuminositySorteada = random;
+            saturacaoLum.setGlyphResposta(true);
+        }
+//        saturacaoCor.setCor(Color.decode(Constantes.getCorSaturation()[random]));
+        saturacaoLum.setCor(getLuminosity()[random]);
+        saturacaoLum.setPectSobreposicao(perctOverlap);
+        saturacaoLum.setOverlappingActivated(overlappingActivated);
+        return glyph;
+    }
+
+    
     private Glyph defineRandomShape() {
         if (getFormaGeometricas() == null) {
             switch (quantValoresVarVisuais) {
@@ -576,7 +628,21 @@ public class GlyphManager {
         }
         setSaturacoes(sorteados.toArray(new Color[]{}));
     }
+    
+       public void definirConjuntoCoresLuminosity(int quantValoresVarVisuais) {
+        ArrayList<Color> sorteados = new ArrayList<>();
 
+        for (int i = 0; i < quantValoresVarVisuais; i++) {
+            int random;
+            do {
+                random = (int) (Math.random() * Constantes.getCorLuninosit().length);
+            } while (sorteados.contains(Color.decode(Constantes.getCorLuninosit()[random])));
+            sorteados.add(Color.decode(Constantes.getCorLuninosit()[random]));
+        }
+        setLuminosity(sorteados.toArray(new Color[]{}));
+    }
+
+    
     public void definirConjuntoCores(int quantValoresVarVisuais) {
         ArrayList<Color> sorteados = new ArrayList<>();
 
@@ -649,6 +715,15 @@ public class GlyphManager {
         this.saturacoes = saturacoes;
     }
 
+    public Color[] getLuminosity() {
+        return luminosity;
+    }
+
+    public void setLuminosity(Color[] luminosity) {
+        this.luminosity = luminosity;
+    }
+
+    
     /**
      * @return the listNomeOrientacoesSorteada
      */
